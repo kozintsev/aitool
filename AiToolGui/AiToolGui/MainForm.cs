@@ -22,21 +22,25 @@ namespace AiToolGui
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            Form childForm = new Form();
-            childForm.MdiParent = this;
-            childForm.Text = "Window " + childFormNumber++;
-            childForm.Show();
+            
+            Form ProjectManager = new ProjectManager();
+            ProjectManager.Show();
+
+            //Form childForm = new Form();
+            //childForm.MdiParent = this;
+            //childForm.Text = "Window " + childFormNumber++;
+            //childForm.Show();
         }
 
         private void OpenFile(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = openFileDialog.FileName;
-            }
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            //openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            //if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+            //{
+            //    string FileName = openFileDialog.FileName;
+            //}
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,7 +112,8 @@ namespace AiToolGui
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox = new AboutBox();
-            AboutBox.Show();
+            if (!AboutBox.Visible) AboutBox.Show();
+            else AboutBox.Activate();
         }
     }
 }
