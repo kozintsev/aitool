@@ -33,9 +33,11 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.documentManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,8 +82,6 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.documentManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -129,6 +129,13 @@
             this.newToolStripMenuItem.Text = "&Project Manger";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.ShowNewForm);
             // 
+            // documentManagerToolStripMenuItem
+            // 
+            this.documentManagerToolStripMenuItem.Name = "documentManagerToolStripMenuItem";
+            this.documentManagerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.documentManagerToolStripMenuItem.Text = "Document Manager";
+            this.documentManagerToolStripMenuItem.Click += new System.EventHandler(this.documentManagerToolStripMenuItem_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -149,6 +156,12 @@
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.closeToolStripMenuItem.Text = "Close";
             // 
             // toolStripSeparator4
             // 
@@ -507,18 +520,6 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel.Text = "Status";
-            // 
-            // documentManagerToolStripMenuItem
-            // 
-            this.documentManagerToolStripMenuItem.Name = "documentManagerToolStripMenuItem";
-            this.documentManagerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.documentManagerToolStripMenuItem.Text = "Document Manager";
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.closeToolStripMenuItem.Text = "Close";
             // 
             // AITool
             // 

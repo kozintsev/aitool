@@ -14,6 +14,7 @@ namespace AiToolGui
         private int childFormNumber = 0;
 
         Form AboutBox;
+        Form ProjectManager;
 
         public AITool()
         {
@@ -23,7 +24,7 @@ namespace AiToolGui
         private void ShowNewForm(object sender, EventArgs e)
         {
             
-            Form ProjectManager = new ProjectManager();
+            ProjectManager = new ProjectManager();
             ProjectManager.Show();
 
             //Form childForm = new Form();
@@ -114,6 +115,12 @@ namespace AiToolGui
             AboutBox = new AboutBox();
             if (!AboutBox.Visible) AboutBox.Show();
             else AboutBox.Activate();
+        }
+
+        private void documentManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form DocumentManager = new DocumentManager();
+            DocumentManager.Show();
         }
     }
 }
