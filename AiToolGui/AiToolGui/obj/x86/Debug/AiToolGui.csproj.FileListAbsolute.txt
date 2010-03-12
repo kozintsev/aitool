@@ -6,3 +6,11 @@ C:\Documents and Settings\kov\Мои документы\SharpDevelop Projects\Ai
 C:\Documents and Settings\kov\Мои документы\SharpDevelop Projects\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.exe
 C:\Documents and Settings\kov\Мои документы\SharpDevelop Projects\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.pdb
 C:\Documents and Settings\kov\Мои документы\SharpDevelop Projects\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.AboutForm.resources
+D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.exe
+D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.pdb
+D:\svn\aitool\AiToolGui\AiToolGui\bin\Debug\AiToolGui.exe
+D:\svn\aitool\AiToolGui\AiToolGui\bin\Debug\AiToolGui.pdb
+D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.AboutBox.resources
+D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.csproj.GenerateResource.Cache
+D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.AITool.resources

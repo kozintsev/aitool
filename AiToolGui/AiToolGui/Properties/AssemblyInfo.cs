@@ -9,11 +9,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AiToolGui")]
+[assembly: AssemblyTitle("AITool.NET")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AiToolGui")]
+[assembly: AssemblyProduct("AITool.NET")]
 [assembly: AssemblyCopyright("Copyright 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
