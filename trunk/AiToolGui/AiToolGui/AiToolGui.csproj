@@ -59,6 +59,12 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="ProjectManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectManager.Designer.cs">
+      <DependentUpon>ProjectManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +73,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectManager.resx">
+      <DependentUpon>ProjectManager.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
