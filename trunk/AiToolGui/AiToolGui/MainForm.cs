@@ -13,8 +13,10 @@ namespace AiToolGui
     {
         private int childFormNumber = 0;
 
+        Form childForm;
         Form AboutBox;
         Form ProjectManager;
+        Form DocumentManager;
 
         public AITool()
         {
@@ -23,14 +25,10 @@ namespace AiToolGui
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            
-            ProjectManager = new ProjectManager();
-            ProjectManager.Show();
-
-            //Form childForm = new Form();
-            //childForm.MdiParent = this;
-            //childForm.Text = "Window " + childFormNumber++;
-            //childForm.Show();
+            childForm = new Form();
+            childForm.MdiParent = this;
+            childForm.Text = "Project " + childFormNumber++;
+            childForm.Show();
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -113,14 +111,26 @@ namespace AiToolGui
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox = new AboutBox();
-            if (!AboutBox.Visible) AboutBox.Show();
-            else AboutBox.Activate();
+            AboutBox.Show();
         }
 
         private void documentManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form DocumentManager = new DocumentManager();
-            DocumentManager.Show();
+            DocumentManager = new DocumentManager();
+            //DocumentManager.Show();
+            childForm = new Form();
+            childForm = DocumentManager;
+            childForm.MdiParent = this;
+            childForm.Show();
+        }
+
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProjectManager = new ProjectManager();
+            childForm = new Form();
+            childForm = ProjectManager;
+            childForm.MdiParent = this;
+            childForm.Show();
         }
     }
 }
