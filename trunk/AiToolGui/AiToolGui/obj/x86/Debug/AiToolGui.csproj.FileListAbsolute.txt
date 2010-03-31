@@ -15,3 +15,5 @@ D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.AboutBox.resources
 D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.csproj.GenerateResource.Cache
 D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.AITool.resources
 D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.ProjectManager.resources
+D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.DocumentManager.resources
+D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.ProjectViewer.resources
