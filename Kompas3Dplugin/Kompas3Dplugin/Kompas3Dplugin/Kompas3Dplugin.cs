@@ -6,7 +6,8 @@ using System.ComponentModel;
 
 namespace Kompas3Dplugin
 {
-    public class Kompas3D
+	public class Kompas3D : Component
     {
+    	
     }
 }
