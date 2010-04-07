@@ -1,0 +1,14 @@
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\bin\Debug\Control_Kompas.dll
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\bin\Debug\Control_Kompas.pdb
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\bin\Debug\Interop.KGAXLib.dll
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\bin\Debug\Interop.Kompas6API5.dll
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\bin\Debug\AxInterop.KGAXLib.dll
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\ResolveAssemblyReference.cache
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\Interop.KGAXLib.dll
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\Interop.Kompas6API5.dll
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\AxInterop.KGAXLib.dll
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\Control_Kompas.csproj.ResolveComReference.cache
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\Control_Kompas.UserControl1.resources
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\Control_Kompas.csproj.GenerateResource.Cache
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\Control_Kompas.dll
+E:\CODE\Poject VS\Projects\ActiveX_Kompas\Control_Kompas\obj\Debug\Control_Kompas.pdb
