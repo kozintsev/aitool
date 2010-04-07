@@ -126,5 +126,10 @@ namespace ActiveX_Kompas
         {
             axKGAX1.StopCurrentProcess(false);
         }
+        
+        void CloseToolStripMenuItemClick(object sender, EventArgs e)
+        {
+        	this.Close();
+        }
     }
 }
