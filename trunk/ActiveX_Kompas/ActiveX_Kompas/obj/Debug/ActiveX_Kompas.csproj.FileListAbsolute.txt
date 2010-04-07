@@ -31,3 +31,12 @@ G:\MAG\CODE\Kompas\C#\ActiveX_Kompas\ActiveX_Kompas\obj\Debug\ActiveX_Kompas.csp
 D:\coding\ActiveX_Kompas\ActiveX_Kompas\obj\Debug\ActiveX_Kompas.csproj.ResolveComReference.cache
 D:\coding\ActiveX_Kompas\ActiveX_Kompas\obj\Debug\ActiveX_Kompas.exe
 D:\coding\ActiveX_Kompas\ActiveX_Kompas\obj\Debug\ActiveX_Kompas.pdb
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\bin\Debug\ActiveX_Kompas.exe
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\bin\Debug\ActiveX_Kompas.pdb
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\bin\Debug\AxInterop.KGAXLib.dll
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\bin\Debug\Interop.KGAXLib.dll
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\bin\Debug\Interop.Kompas6API5.dll
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\obj\Debug\ResolveAssemblyReference.cache
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\obj\Debug\ActiveX_Kompas.Form1.resources
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\obj\Debug\ActiveX_Kompas.Properties.Resources.resources
+D:\coding\ActiveX_Kompas\ActiveX_Kompas\obj\Debug\ActiveX_Kompas.csproj.GenerateResource.Cache
