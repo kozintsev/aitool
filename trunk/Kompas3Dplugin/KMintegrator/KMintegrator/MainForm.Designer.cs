@@ -140,7 +140,6 @@
         	this.label2.Size = new System.Drawing.Size(236, 13);
         	this.label2.TabIndex = 3;
         	this.label2.Text = "Передача переменных из Kompas в MathCAD";
-        	this.label2.Click += new System.EventHandler(this.label2_Click);
         	// 
         	// KompasPath
         	// 

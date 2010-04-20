@@ -20,8 +20,6 @@ namespace KMintegrator
 
         private void MathParser(string MathPath)
         {
-       
-
             XmlDocument xd = new XmlDocument();
             xd.Load(@MathPath);
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
@@ -40,12 +38,7 @@ namespace KMintegrator
     
 
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void AddKompas_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
