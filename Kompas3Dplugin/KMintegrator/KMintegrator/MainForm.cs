@@ -23,22 +23,37 @@ namespace KMintegrator
             XmlDocument xd = new XmlDocument();
             xd.Load(@MathPath);
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
-            XmlNode ml_id, ml_real;
+            XmlNode ml_id, ml_real, result;
             foreach (XmlNode xn in xnl)
                 if (xn.Name == "regions")
                     foreach (XmlNode region in xn.ChildNodes)
                         foreach (XmlNode math in region.ChildNodes)
                             foreach(XmlNode ml_define in math.ChildNodes)
                             {
-                                ml_id = ml_define.FirstChild;
-                                ml_real = ml_define.LastChild;
-                                this.dataGridView2.Rows.Add(ml_id.InnerText, ml_real.InnerText);
-                            }
-                            
+            					
+            					if (ml_define.Name == "ml:define") // определение 
+            					{
+            						ml_id = ml_define.FirstChild;
+            						ml_real = ml_define.LastChild;
+            						if 	(ml_real.Name == "ml:real")
+            						{
+ 
+                                		this.dataGridView2.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная");
+            						}
+            					}
+            					
+            					if (ml_define.Name == "ml:eval") // вычисления
+            					{
+            						ml_id =  ml_define.FirstChild;
+            						result = ml_define.LastChild;
+            						//ml_real = result.FirstChild;
+            						this.dataGridView2.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная");
+            					}
+            						
+            				}
+            				                                            
+        }        
     
-
-        }
-        
         private void AddKompas_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -72,6 +87,5 @@ namespace KMintegrator
 
         }
 
- 
     }
 }
