@@ -34,9 +34,6 @@
         	this.NameMath = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	this.label1 = new System.Windows.Forms.Label();
         	this.dataGridView2 = new System.Windows.Forms.DataGridView();
-        	this.MathName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.KompasParam = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	this.label2 = new System.Windows.Forms.Label();
         	this.KompasPath = new System.Windows.Forms.TextBox();
         	this.MathPath = new System.Windows.Forms.TextBox();
@@ -52,6 +49,10 @@
         	this.button1 = new System.Windows.Forms.Button();
         	this.button3 = new System.Windows.Forms.Button();
         	this.button4 = new System.Windows.Forms.Button();
+        	this.MathName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.KompasParam = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
         	this.statusStrip1.SuspendLayout();
@@ -71,7 +72,7 @@
         	this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
         	this.dataGridView1.Location = new System.Drawing.Point(21, 25);
         	this.dataGridView1.Name = "dataGridView1";
-        	this.dataGridView1.Size = new System.Drawing.Size(432, 169);
+        	this.dataGridView1.Size = new System.Drawing.Size(454, 169);
         	this.dataGridView1.TabIndex = 0;
         	// 
         	// NameKompas
@@ -109,28 +110,14 @@
         	this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
         	        	        	this.MathName,
         	        	        	this.Value,
+        	        	        	this.Type,
         	        	        	this.KompasParam});
         	this.dataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
         	this.dataGridView2.Location = new System.Drawing.Point(21, 243);
         	this.dataGridView2.Name = "dataGridView2";
-        	this.dataGridView2.Size = new System.Drawing.Size(432, 168);
+        	this.dataGridView2.Size = new System.Drawing.Size(454, 168);
         	this.dataGridView2.TabIndex = 2;
-        	// 
-        	// MathName
-        	// 
-        	this.MathName.HeaderText = "MathName";
-        	this.MathName.Name = "MathName";
-        	this.MathName.ReadOnly = true;
-        	// 
-        	// Value
-        	// 
-        	this.Value.HeaderText = "Value";
-        	this.Value.Name = "Value";
-        	// 
-        	// KompasParam
-        	// 
-        	this.KompasParam.HeaderText = "KompasParam";
-        	this.KompasParam.Name = "KompasParam";
+   
         	// 
         	// label2
         	// 
@@ -268,6 +255,28 @@
         	this.button4.Text = "Обновить";
         	this.button4.UseVisualStyleBackColor = true;
         	// 
+        	// MathName
+        	// 
+        	this.MathName.HeaderText = "MathName";
+        	this.MathName.Name = "MathName";
+        	this.MathName.ReadOnly = true;
+        	// 
+        	// Value
+        	// 
+        	this.Value.HeaderText = "Value";
+        	this.Value.Name = "Value";
+        	// 
+        	// Type
+        	// 
+        	this.Type.HeaderText = "Type";
+        	this.Type.Name = "Type";
+        	this.Type.ReadOnly = true;
+        	// 
+        	// KompasParam
+        	// 
+        	this.KompasParam.HeaderText = "KompasParam";
+        	this.KompasParam.Name = "KompasParam";
+        	// 
         	// MainForm
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,6 +307,7 @@
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
 
         #endregion
 
