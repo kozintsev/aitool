@@ -1,8 +1,0 @@
-D:\svn\aitool\Kompas3Dplugin\KMintegrator\KMintegrator\bin\Debug\KMintegrator.exe
-D:\svn\aitool\Kompas3Dplugin\KMintegrator\KMintegrator\bin\Debug\KMintegrator.pdb
-D:\svn\aitool\Kompas3Dplugin\KMintegrator\KMintegrator\obj\Debug\ResolveAssemblyReference.cache
-D:\svn\aitool\Kompas3Dplugin\KMintegrator\KMintegrator\obj\Debug\KMintegrator.MainForm.resources
-D:\svn\aitool\Kompas3Dplugin\KMintegrator\KMintegrator\obj\Debug\KMintegrator.Properties.Resources.resources
-D:\svn\aitool\Kompas3Dplugin\KMintegrator\KMintegrator\obj\Debug\KMintegrator.csproj.GenerateResource.Cache
-D:\svn\aitool\Kompas3Dplugin\KMintegrator\KMintegrator\obj\Debug\KMintegrator.exe
-D:\svn\aitool\Kompas3Dplugin\KMintegrator\KMintegrator\obj\Debug\KMintegrator.pdb
