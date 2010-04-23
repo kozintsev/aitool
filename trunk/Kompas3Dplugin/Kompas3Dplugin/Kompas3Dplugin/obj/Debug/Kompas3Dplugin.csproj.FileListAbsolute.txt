@@ -1,5 +1,0 @@
-D:\svn\aitool\Kompas3Dplugin\Kompas3Dplugin\Kompas3Dplugin\bin\Debug\Kompas3Dplugin.dll
-D:\svn\aitool\Kompas3Dplugin\Kompas3Dplugin\Kompas3Dplugin\bin\Debug\Kompas3Dplugin.pdb
-D:\svn\aitool\Kompas3Dplugin\Kompas3Dplugin\Kompas3Dplugin\obj\Debug\ResolveAssemblyReference.cache
-D:\svn\aitool\Kompas3Dplugin\Kompas3Dplugin\Kompas3Dplugin\obj\Debug\Kompas3Dplugin.dll
-D:\svn\aitool\Kompas3Dplugin\Kompas3Dplugin\Kompas3Dplugin\obj\Debug\Kompas3Dplugin.pdb
