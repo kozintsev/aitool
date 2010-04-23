@@ -5,7 +5,7 @@ using System.Text;
 
 using Mathcad;
 
-
+//
 namespace ConsoleAppMathcad
 {
     class Program
