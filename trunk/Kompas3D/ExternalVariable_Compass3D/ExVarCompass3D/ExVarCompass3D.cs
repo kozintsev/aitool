@@ -96,16 +96,21 @@ namespace CC_Cdiez
             OpenFileCompass();            
 
         }
-
-        // Закрываем Компас-3D, закрываем форму
-        private void Exit_Click(object sender, EventArgs e)
+        
+        private void ExitKompas()
         {
-            if (kompas != null)
+        	if (kompas != null)
             {
                 kompas.Quit();
                 Marshal.ReleaseComObject(kompas);
             }
+        }
 
+        // Закрываем Компас-3D, закрываем форму
+        private void Exit_Click(object sender, EventArgs e)
+        {
+           
+        	ExitKompas();
             Close();
 
         }       
@@ -214,19 +219,11 @@ namespace CC_Cdiez
 
         
 
-              
-
-       
-
-        
-
-        
-
-
-
-
-
-
+             
+        void ExVarCompass3DFormClosing(object sender, FormClosingEventArgs e)
+        {
+        	ExitKompas();
+        }
   }
 }
 
