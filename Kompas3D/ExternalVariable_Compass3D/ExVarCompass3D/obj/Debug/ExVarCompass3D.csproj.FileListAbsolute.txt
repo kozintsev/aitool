@@ -1,0 +1,8 @@
+D:\svn\aitool\Kompas3D\ExternalVariable_Compass3D\ExVarCompass3D\obj\Debug\ResolveAssemblyReference.cache
+D:\svn\aitool\Kompas3D\ExternalVariable_Compass3D\ExVarCompass3D\obj\Debug\CC_Cdiez.ExVarCompass3D.resources
+D:\svn\aitool\Kompas3D\ExternalVariable_Compass3D\ExVarCompass3D\obj\Debug\ExVarCompass3D.Properties.Resources.resources
+D:\svn\aitool\Kompas3D\ExternalVariable_Compass3D\ExVarCompass3D\obj\Debug\ExVarCompass3D.csproj.GenerateResource.Cache
+D:\svn\aitool\Kompas3D\ExternalVariable_Compass3D\ExVarCompass3D\bin\Debug\ExVarCompass3D.exe
+D:\svn\aitool\Kompas3D\ExternalVariable_Compass3D\ExVarCompass3D\bin\Debug\ExVarCompass3D.pdb
+D:\svn\aitool\Kompas3D\ExternalVariable_Compass3D\ExVarCompass3D\obj\Debug\ExVarCompass3D.exe
+D:\svn\aitool\Kompas3D\ExternalVariable_Compass3D\ExVarCompass3D\obj\Debug\ExVarCompass3D.pdb
