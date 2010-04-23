@@ -40,16 +40,14 @@ namespace KMintegrator
  
                                 		this.dataGridView2.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная");
             						}
-            					}
-            					
+            					}     					
             					if (ml_define.Name == "ml:eval") // вычисления
             					{
             						ml_id =  ml_define.FirstChild;
             						result = ml_define.LastChild;
             						//ml_real = result.FirstChild;
-            						this.dataGridView2.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная");
-            					}
-            						
+										this.dataGridView2.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная");
+            					}	
             				}
             				                                            
         }        
