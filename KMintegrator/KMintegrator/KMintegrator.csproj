@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="interop.mathcad, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="KAPITypes, Version=0.0.0.0, Culture=neutral" />
+    <Reference Include="Kompas6API5, Version=1.0.0.0, Culture=neutral" />
+    <Reference Include="Kompas6Constants, Version=1.0.0.0, Culture=neutral" />
+    <Reference Include="Kompas6Constants3D, Version=1.0.0.0, Culture=neutral" />
+    <Reference Include="Kompas6LTAPI5, Version=1.0.0.0, Culture=neutral" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
