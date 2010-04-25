@@ -38,8 +38,8 @@
         	this.MathCadName = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.MathCadValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.MathCadType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.KompasName_ComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	this.ID_region_xml = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.KompasName_ComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	this.label2 = new System.Windows.Forms.Label();
         	this.KompasPath = new System.Windows.Forms.TextBox();
         	this.MathCadPath = new System.Windows.Forms.TextBox();
@@ -55,6 +55,7 @@
         	this.Save_Project = new System.Windows.Forms.Button();
         	this.label5 = new System.Windows.Forms.Label();
         	this.ProjectPath = new System.Windows.Forms.TextBox();
+        	this.statusStrip1 = new System.Windows.Forms.StatusStrip();
         	((System.ComponentModel.ISupportInitialize)(this.Table_ExVar_Compass3D)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.Table_ExVar_MathCad)).BeginInit();
         	this.SuspendLayout();
@@ -129,8 +130,8 @@
         	        	        	this.MathCadName,
         	        	        	this.MathCadValue,
         	        	        	this.MathCadType,
-        	        	        	this.KompasName_ComboBox,
-        	        	        	this.ID_region_xml});
+        	        	        	this.ID_region_xml,
+        	        	        	this.KompasName_ComboBox});
         	this.Table_ExVar_MathCad.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
         	this.Table_ExVar_MathCad.Location = new System.Drawing.Point(12, 29);
         	this.Table_ExVar_MathCad.Name = "Table_ExVar_MathCad";
@@ -162,6 +163,15 @@
         	this.MathCadType.ReadOnly = true;
         	this.MathCadType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	// 
+        	// ID_region_xml
+        	// 
+        	this.ID_region_xml.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+        	this.ID_region_xml.HeaderText = "ID_region_xml";
+        	this.ID_region_xml.Name = "ID_region_xml";
+        	this.ID_region_xml.ReadOnly = true;
+        	this.ID_region_xml.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.ID_region_xml.Width = 80;
+        	// 
         	// KompasName_ComboBox
         	// 
         	this.KompasName_ComboBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -169,14 +179,6 @@
         	this.KompasName_ComboBox.Name = "KompasName_ComboBox";
         	this.KompasName_ComboBox.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.KompasName_ComboBox.Width = 85;
-        	// 
-        	// ID_region_xml
-        	// 
-        	this.ID_region_xml.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-        	this.ID_region_xml.HeaderText = "ID_region_xml";
-        	this.ID_region_xml.Name = "ID_region_xml";
-        	this.ID_region_xml.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.ID_region_xml.Width = 80;
         	// 
         	// label2
         	// 
@@ -287,7 +289,7 @@
         	// 
         	// Exit
         	// 
-        	this.Exit.Location = new System.Drawing.Point(21, 624);
+        	this.Exit.Location = new System.Drawing.Point(18, 574);
         	this.Exit.Name = "Exit";
         	this.Exit.Size = new System.Drawing.Size(75, 23);
         	this.Exit.TabIndex = 16;
@@ -297,12 +299,13 @@
         	// 
         	// Open_Project
         	// 
-        	this.Open_Project.Location = new System.Drawing.Point(503, 545);
+        	this.Open_Project.Location = new System.Drawing.Point(503, 542);
         	this.Open_Project.Name = "Open_Project";
         	this.Open_Project.Size = new System.Drawing.Size(75, 23);
         	this.Open_Project.TabIndex = 17;
         	this.Open_Project.Text = "Открыть";
         	this.Open_Project.UseVisualStyleBackColor = true;
+        	this.Open_Project.Click += new System.EventHandler(this.Open_ProjectClick);
         	// 
         	// Save_Project
         	// 
@@ -317,7 +320,7 @@
         	// 
         	this.label5.AutoSize = true;
         	this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-        	this.label5.Location = new System.Drawing.Point(15, 528);
+        	this.label5.Location = new System.Drawing.Point(15, 507);
         	this.label5.Name = "label5";
         	this.label5.Size = new System.Drawing.Size(218, 17);
         	this.label5.TabIndex = 19;
@@ -325,16 +328,25 @@
         	// 
         	// ProjectPath
         	// 
-        	this.ProjectPath.Location = new System.Drawing.Point(18, 548);
+        	this.ProjectPath.Location = new System.Drawing.Point(18, 545);
         	this.ProjectPath.Name = "ProjectPath";
         	this.ProjectPath.Size = new System.Drawing.Size(460, 20);
         	this.ProjectPath.TabIndex = 20;
+        	// 
+        	// statusStrip1
+        	// 
+        	this.statusStrip1.Location = new System.Drawing.Point(0, 637);
+        	this.statusStrip1.Name = "statusStrip1";
+        	this.statusStrip1.Size = new System.Drawing.Size(587, 22);
+        	this.statusStrip1.TabIndex = 21;
+        	this.statusStrip1.Text = "statusStrip1";
         	// 
         	// MainForm
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         	this.ClientSize = new System.Drawing.Size(587, 659);
+        	this.Controls.Add(this.statusStrip1);
         	this.Controls.Add(this.ProjectPath);
         	this.Controls.Add(this.label5);
         	this.Controls.Add(this.Save_Project);
@@ -362,6 +374,7 @@
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.StatusStrip statusStrip1;
 
         #endregion
 
