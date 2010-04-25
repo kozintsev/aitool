@@ -364,6 +364,7 @@ namespace KMintegrator
                 LastPathKompas = KompasPath.Text;
                 // Открываем файл Компас-3D
                 OpenFile_Kompas(LastPathKompas);
+                Kompas_Refresh();
             }
 
         }
@@ -387,15 +388,15 @@ namespace KMintegrator
             // Записываем изменения из таблицы в файл Компас-3D, перестраиваем сборку
             Write_Kompas();
         }
-
-        private void Refresh_All_Click(object sender, EventArgs e)
+        
+        private bool TestOpen()
         {
-            // Проверяеме открыт ли файл Маткада
+        	// Проверяеме открыт ли файл Маткада
             if (MathCadPath.Text == "")
             {                
                 MessageBox.Show("Откройте файл Маткада", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;            
+                return false;            
             }
 
             // Проверяеме открыт ли файл Маткада
@@ -403,9 +404,14 @@ namespace KMintegrator
             {
                 MessageBox.Show("Откройте файл Компас-3D", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                return false;
             }
+        	return true;
+        }
 
+        private void Refresh_All_Click(object sender, EventArgs e)
+        {
+            
             // Полностью очищаем таблицы от предыдущих результатов
             Clear_All();
 
@@ -435,6 +441,18 @@ namespace KMintegrator
         void Apply_MathCadClick(object sender, EventArgs e)
         {
         	//
+        }
+        
+        void Save_ProjectClick(object sender, EventArgs e)
+        {
+        	//
+        	SaveFileDialog SaveFileDialog = new SaveFileDialog();
+        	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
+        	if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                ProjectPath.Text = SaveFileDialog.FileName;
+            }
         }
     }
 }

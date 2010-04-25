@@ -315,6 +315,7 @@
         	this.Save_Project.TabIndex = 18;
         	this.Save_Project.Text = "Сохранить";
         	this.Save_Project.UseVisualStyleBackColor = true;
+        	this.Save_Project.Click += new System.EventHandler(this.Save_ProjectClick);
         	// 
         	// label5
         	// 
