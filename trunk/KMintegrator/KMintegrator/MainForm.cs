@@ -135,70 +135,7 @@ namespace KMintegrator
                 }
             }
         }
-        private void Write_Kompas()
-        {
-            if (kompas != null)
-            {
-                if (doc3D != null)
-                {
-                    if (doc3D.IsDetail())
-                    {
-                        kompas.ksError("Текущий документ должен быть сборкой");
-                        return;
-                    }
-                    ksPart part = (ksPart)doc3D.GetPart(-1);    // Выбор компонента: -1 главный(сборка), 0 первый(деталь)
-                    if (part != null)
-                    {
-                        // Работа с массивом внешних переменных
-                        ksVariableCollection varCol = (ksVariableCollection)part.VariableCollection();
-                        if (varCol != null)
-                        {
-                            // Запись внешних переменных в Компас-3D
-                            ksVariable var = (ksVariable)kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
-                            if (var == null) return;
-
-                            string d;
-                            double g;
-
-
-
-                            for (int i = 0; i < varCol.GetCount(); i++)
-                            {
-                                if (this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[3].Value.ToString() == "empty")
-                                {
-                                    var = (ksVariable)varCol.GetByIndex(i);
-
-                                    d = (string)(this.Table_ExVar_Kompas3D.Rows[i].Cells[1].Value.ToString());
-                                    g = Convert.ToDouble(d);
-                                    var.value = g;
-
-                                    // Запись комментария в Компас-3D, проблемы с конвертацией форматов, на данный момент не работает
-                                    var.note = this.Table_ExVar_Kompas3D.Rows[i].Cells[2].Value.ToString();
-
-                                }
-                                else
-                                {
-
-
-                                }
-                            }
-
-                            // Простое перестроение сборки, на данный момент не работает
-                            part.RebuildModel();
-
-                            // Перестроение сборки хитрым способом
-                            doc3D.Save();
-                            doc3D.close();
-                            doc3D = (ksDocument3D)kompas.Document3D();
-                            if (doc3D != null) doc3D.Open(LastPathKompas, false);
-
-                        }
-                    }
-                }
-            }
-        }
-
-
+     
         private bool InitMathCad()
         {
             bool err = true;
@@ -353,7 +290,7 @@ namespace KMintegrator
             	finally
             	{
             	 // Вот тут ещё не разобрался !!!
-            	 if (reply == DialogResult.Yes) Marshal.ReleaseComObject(kompas);
+            	 Marshal.ReleaseComObject(kompas);
             	}
             }
         }
@@ -362,8 +299,22 @@ namespace KMintegrator
         {
             if (MC != null)
             {
-                MC.Quit(MCSaveOption.mcDiscardChanges);
-                Marshal.ReleaseComObject(MC);
+                DialogResult reply = MessageBox.Show("Закрыть MathCAD?",
+           				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            	try
+            	{
+            		if (reply == DialogResult.Yes) MC.Quit(MCSaveOption.mcDiscardChanges);
+            	}
+            	catch
+            	{
+            		MessageBox.Show("MathCAD уже закрыт или не может быть закрыт", "Сообщение",
+                   				 MessageBoxButtons.OK, MessageBoxIcon.Information);	
+            	}
+            	finally
+            	{
+            		Marshal.ReleaseComObject(MC);	
+            	}
+            	       
             }
         }
 
@@ -377,6 +328,7 @@ namespace KMintegrator
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Exit_Kompas();
+            Exit_MathCad();
             DialogResult reply = MessageBox.Show("Сохранить проект?",
            				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             //if (reply == DialogResult.Yes)
@@ -423,7 +375,65 @@ namespace KMintegrator
         private void Apply_Kompas_Click(object sender, EventArgs e)
         {
             // Записываем изменения из таблицы в файл Компас-3D, перестраиваем сборку
-            Write_Kompas();
+             if (kompas != null)
+            {
+                if (doc3D != null)
+                {
+                    if (doc3D.IsDetail())
+                    {
+                        kompas.ksError("Текущий документ должен быть сборкой");
+                        return;
+                    }
+                    ksPart part = (ksPart)doc3D.GetPart(-1);    // Выбор компонента: -1 главный(сборка), 0 первый(деталь)
+                    if (part != null)
+                    {
+                        // Работа с массивом внешних переменных
+                        ksVariableCollection varCol = (ksVariableCollection)part.VariableCollection();
+                        if (varCol != null)
+                        {
+                            // Запись внешних переменных в Компас-3D
+                            ksVariable var = (ksVariable)kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
+                            if (var == null) return;
+
+                            string d;
+                            double g;
+
+
+
+                            for (int i = 0; i < varCol.GetCount(); i++)
+                            {
+                                if (this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[3].Value.ToString() == "empty")
+                                {
+                                    var = (ksVariable)varCol.GetByIndex(i);
+
+                                    d = (string)(this.Table_ExVar_Kompas3D.Rows[i].Cells[1].Value.ToString());
+                                    g = Convert.ToDouble(d);
+                                    var.value = g;
+
+                                    // Запись комментария в Компас-3D, проблемы с конвертацией форматов, на данный момент не работает
+                                    var.note = this.Table_ExVar_Kompas3D.Rows[i].Cells[2].Value.ToString();
+
+                                }
+                                else
+                                {
+
+
+                                }
+                            }
+
+                            // Простое перестроение сборки, на данный момент не работает
+                            part.RebuildModel();
+
+                            // Перестроение сборки хитрым способом
+                            doc3D.Save();
+                            doc3D.close();
+                            doc3D = (ksDocument3D)kompas.Document3D();
+                            if (doc3D != null) doc3D.Open(LastPathKompas, false);
+
+                        }
+                    }
+                }
+            }
         }
         
 
@@ -474,6 +484,7 @@ namespace KMintegrator
         void Apply_MathCadClick(object sender, EventArgs e)
         {
         	//
+        	//Работаем с этой таблицей Table_ExVar_MathCad передаём значение из второй колонке в маткад
         }
         
         void Save_ProjectClick(object sender, EventArgs e)
