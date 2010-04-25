@@ -330,10 +330,19 @@ namespace KMintegrator
         {
             if (kompas != null)
             {
-            	DialogResult reply = MessageBox.Show("Закрыть Kompas?",
-           				 "Да или Нет",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             	try
             	{
+            	 kompas.Visible = true;
+            	}
+            	catch
+            	{
+            		return;
+            	}
+            	DialogResult reply = MessageBox.Show("Закрыть Kompas?",
+           				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            	try
+            	{
+            		
             		if (reply == DialogResult.Yes) kompas.Quit();
             	}
             	catch
@@ -368,6 +377,10 @@ namespace KMintegrator
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Exit_Kompas();
+            DialogResult reply = MessageBox.Show("Сохранить проект?",
+           				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            //if (reply == DialogResult.Yes)
+            	
         }
 
         #endregion
