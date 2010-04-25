@@ -330,8 +330,22 @@ namespace KMintegrator
         {
             if (kompas != null)
             {
-                kompas.Quit();
-                Marshal.ReleaseComObject(kompas);
+            	DialogResult reply = MessageBox.Show("Закрыть Kompas?",
+           				 "Да или Нет",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            	try
+            	{
+            		if (reply == DialogResult.Yes) kompas.Quit();
+            	}
+            	catch
+            	{
+            		MessageBox.Show("Kompas уже закрыт или не может быть закрыт", "Сообщение",
+                   				 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            	}
+            	finally
+            	{
+            	 // Вот тут ещё не разобрался !!!
+            	 if (reply == DialogResult.Yes) Marshal.ReleaseComObject(kompas);
+            	}
             }
         }
 
@@ -428,7 +442,7 @@ namespace KMintegrator
             MathCadParser(MathCadPath.Text);
 
             // Заполняем нулевыми элементами все ячейки в комбо-бокс-столбцах
-            Zero_Element();
+            //Zero_Element();
 
         }
         
