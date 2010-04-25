@@ -50,10 +50,12 @@ namespace KMintegrator
         #region Custom functions
 
 
-        private void Active_Kompas()
+        private bool Active_Kompas()
         {
-            if (kompas == null)
+            bool err = true;
+            try
             {
+        	
                 #region Alternative Type
                 #if __LIGHT_VERSION__
 			    Type t = System.Type.GetTypeFromProgID("KOMPASLT.Application.5");
@@ -64,6 +66,13 @@ namespace KMintegrator
 
                 kompas = (KompasObject)Activator.CreateInstance(t);
             }
+            catch
+            {
+            	MessageBox.Show("Компас не установлен", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            	err = false;
+            }
+            return err;
         }
         private void OpenFile_Kompas()
         {
@@ -196,12 +205,21 @@ namespace KMintegrator
         }
 
 
-        private void Active_MathCad()
+        private bool Active_MathCad()
         {
-            if (MC == null)
-            {
+            bool err = true;
+        	try
+        	{
                 MC = new Mathcad.Application();
+        	}
+            catch
+            {
+            	MessageBox.Show("MathCAD не установлен", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            	err = false;
             }
+            return err;
+            
         }
         private void LoadGraphics_MathCad()
         {
@@ -210,16 +228,6 @@ namespace KMintegrator
                 WK = MC.Worksheets;
                 WS = WK.Open(MathCadPath.Text);
                 MC.Visible = true;
-            }
-        }
-        private void OpenFile_MathCad()
-        {
-            OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Filter = "Файлы MathCAD 14 (*.xmcd)|*.xmcd";
-            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                MathCadPath.Text = OpenFileDialog.FileName;
-                LastMathCadPath = MathCadPath.Text;
             }
         }
         private void MathCad_Refresh(string MathPath)
@@ -348,7 +356,7 @@ namespace KMintegrator
         private void AddKompas_Click(object sender, EventArgs e)
         {
             // Активируем Компас-3D
-            Active_Kompas();
+            if (!Active_Kompas()) return;
 
             // Открываем файл Компас-3D
             OpenFile_Kompas();
@@ -357,7 +365,13 @@ namespace KMintegrator
         private void AddMathCad_Click(object sender, EventArgs e)
         {
             // Открываем файл Маткада
-            OpenFile_MathCad();
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.Filter = "Файлы MathCAD 14 (*.xmcd)|*.xmcd";
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                MathCadPath.Text = OpenFileDialog.FileName;
+                LastMathCadPath = MathCadPath.Text;
+            }
         }
 
         private void Apply_Kompas_Click(object sender, EventArgs e)
