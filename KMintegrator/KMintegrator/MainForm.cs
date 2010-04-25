@@ -228,7 +228,7 @@ namespace KMintegrator
         private void MathCadParser(string MathPath)
         {
             // Обновляем таблицу Маткада
-
+            string region_id;
             XmlDocument xd = new XmlDocument();
             xd.Load(MathPath);
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
@@ -236,6 +236,8 @@ namespace KMintegrator
             foreach (XmlNode xn in xnl)
                 if (xn.Name == "regions")
                     foreach (XmlNode region in xn.ChildNodes)
+            		{
+            		region_id = region.Attributes[0].Value;
                         foreach (XmlNode math in region.ChildNodes)
                             foreach (XmlNode ml_define in math.ChildNodes)
                             {
@@ -246,7 +248,7 @@ namespace KMintegrator
                                     if (ml_real.Name == "ml:real")
                                     {
 
-                                        this.Table_ExVar_MathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная");
+                                        this.Table_ExVar_MathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
 
                                         // Записываем имена внешних переменных Маткада в комбо-бокс-столбец в таблице внешних переменных Компас-3D
                                         this.MathCadName_ComboBox.Items.Add(ml_id.InnerText);
@@ -258,7 +260,7 @@ namespace KMintegrator
                                     ml_id = ml_define.FirstChild;
                                     result = ml_define.LastChild;
                                     //ml_real = result.FirstChild;
-                                    this.Table_ExVar_MathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная");
+                                    this.Table_ExVar_MathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная", region_id);
 
                                     // Записываем имена внешних переменных Маткада в комбо-бокс-столбец в таблице внешних переменных Компас-3D
                                     this.MathCadName_ComboBox.Items.Add(ml_id.InnerText);
@@ -267,6 +269,7 @@ namespace KMintegrator
                                 }
 
                             }
+            			}		
 
         }
 
@@ -374,7 +377,9 @@ namespace KMintegrator
             {
                 MathCadPath.Text = OpenFileDialog.FileName;
                 LastMathCadPath = MathCadPath.Text;
+                MathCadParser(LastMathCadPath);
             }
+            
         }
 
         private void Apply_Kompas_Click(object sender, EventArgs e)
@@ -414,8 +419,17 @@ namespace KMintegrator
             Zero_Element();
 
         }
-
         
+        void Open_ProjectClick(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.Filter = "Документ XML (*.xml)|*.xml;";
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
 
+                ProjectPath.Text = OpenFileDialog.FileName;
+            }
+        	
+        }
     }
 }
