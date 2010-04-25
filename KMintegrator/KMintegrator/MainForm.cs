@@ -126,7 +126,7 @@ namespace KMintegrator
                             {
                                 // Считывание внешних переменных Компас-3D с записью в таблицу
                                 var = (ksVariable)varCol.GetByIndex(i);
-                                this.Table_ExVar_Compass3D.Rows.Add(var.name, var.value, var.note);
+                                this.Table_ExVar_Kompas3D.Rows.Add(var.name, var.value, var.note);
                                 // Записываем имена внешних переменных Компас-3D в комбо-бокс-столбец в таблице внешних переменных Маткада
                                 this.KompasName_ComboBox.Items.Add(var.name);
                             }
@@ -168,12 +168,12 @@ namespace KMintegrator
                                 {
                                     var = (ksVariable)varCol.GetByIndex(i);
 
-                                    d = (string)(this.Table_ExVar_Compass3D.Rows[i].Cells[1].Value.ToString());
+                                    d = (string)(this.Table_ExVar_Kompas3D.Rows[i].Cells[1].Value.ToString());
                                     g = Convert.ToDouble(d);
                                     var.value = g;
 
                                     // Запись комментария в Компас-3D, проблемы с конвертацией форматов, на данный момент не работает
-                                    var.note = this.Table_ExVar_Compass3D.Rows[i].Cells[2].Value.ToString();
+                                    var.note = this.Table_ExVar_Kompas3D.Rows[i].Cells[2].Value.ToString();
 
                                 }
                                 else
@@ -277,7 +277,7 @@ namespace KMintegrator
         private void Clear_All()
         {
             // Очищаем таблицу внешних переменных Компас-3D от предыдущих результатов
-            this.Table_ExVar_Compass3D.Rows.Clear();
+            this.Table_ExVar_Kompas3D.Rows.Clear();
 
             // Очищаем таблицу внешних переменных Маткада от предыдущих результатов
             this.Table_ExVar_MathCad.Rows.Clear();
@@ -303,7 +303,7 @@ namespace KMintegrator
             }
 
             // Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Компас-3D
-            for (int i = 0; i < Table_ExVar_Compass3D.Rows.Count; i++)
+            for (int i = 0; i < Table_ExVar_Kompas3D.Rows.Count; i++)
             {
                 this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[3].Value = this.MathCadName_ComboBox.Items[0];
             }
@@ -430,6 +430,11 @@ namespace KMintegrator
                 ProjectPath.Text = OpenFileDialog.FileName;
             }
         	
+        }
+        
+        void Apply_MathCadClick(object sender, EventArgs e)
+        {
+        	//
         }
     }
 }
