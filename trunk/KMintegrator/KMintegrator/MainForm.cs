@@ -251,7 +251,8 @@ namespace KMintegrator
                                         this.Table_ExVar_MathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
 
                                         // Записываем имена внешних переменных Маткада в комбо-бокс-столбец в таблице внешних переменных Компас-3D
-                                        this.MathCadName_ComboBox.Items.Add(ml_id.InnerText);
+                                        this.MathCadName_ComboBox.Items.Add("empty");
+                                        //this.MathCadName_ComboBox.Items.Add(ml_id.InnerText);
                                     }
                                 }
 
@@ -263,7 +264,8 @@ namespace KMintegrator
                                     this.Table_ExVar_MathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная", region_id);
 
                                     // Записываем имена внешних переменных Маткада в комбо-бокс-столбец в таблице внешних переменных Компас-3D
-                                    this.MathCadName_ComboBox.Items.Add(ml_id.InnerText);
+                                    this.MathCadName_ComboBox.Items.Add("empty");
+                                    //this.MathCadName_ComboBox.Items.Add(ml_id.InnerText);
 
 
                                 }
@@ -299,13 +301,13 @@ namespace KMintegrator
             // Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Маткада
             for (int i = 0; i < Table_ExVar_MathCad.Rows.Count; i++)
             {
-                this.KompasName_ComboBox.DataGridView.Rows[i].Cells[3].Value = this.KompasName_ComboBox.Items[0];
+                this.KompasName_ComboBox.DataGridView.Rows[i].Cells[4].Value = this.KompasName_ComboBox.Items[0];
             }
 
             // Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Компас-3D
             for (int i = 0; i < Table_ExVar_Kompas3D.Rows.Count; i++)
             {
-                this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[3].Value = this.MathCadName_ComboBox.Items[0];
+                this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[4].Value = this.MathCadName_ComboBox.Items[0];
             }
         }
 
@@ -389,14 +391,15 @@ namespace KMintegrator
             Write_Kompas();
         }
         
-        private bool TestOpen()
+
+        private void Refresh_All_Click(object sender, EventArgs e)
         {
-        	// Проверяеме открыт ли файл Маткада
+            // Проверяеме открыт ли файл Маткада
             if (MathCadPath.Text == "")
             {                
                 MessageBox.Show("Откройте файл Маткада", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;            
+                return;            
             }
 
             // Проверяеме открыт ли файл Маткада
@@ -404,15 +407,10 @@ namespace KMintegrator
             {
                 MessageBox.Show("Откройте файл Компас-3D", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
+                return;
             }
-        	return true;
-        }
-
-        private void Refresh_All_Click(object sender, EventArgs e)
-        {
             
-            // Полностью очищаем таблицы от предыдущих результатов
+        	// Полностью очищаем таблицы от предыдущих результатов
             Clear_All();
 
             // Обновляем таблицу Компас-3D
