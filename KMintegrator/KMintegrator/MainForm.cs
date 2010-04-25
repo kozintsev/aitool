@@ -39,6 +39,8 @@ namespace KMintegrator
         private ksDocument3D doc3D;
         private string LastPathKompas;
         private string LastMathCadPath;
+        private bool InKompas;
+        private bool InMathcad;
 
         Mathcad.Application MC;
         Mathcad.Worksheets WK;
@@ -50,7 +52,7 @@ namespace KMintegrator
         #region Custom functions
 
 
-        private bool Active_Kompas()
+        private bool InitKompas()
         {
             bool err = true;
             try
@@ -72,30 +74,22 @@ namespace KMintegrator
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             	err = false;
             }
+            InKompas = err;
             return err;
         }
-        private void OpenFile_Kompas()
+        private void OpenFile_Kompas(string filename)
         {
             if (kompas != null)
             {
-                OpenFileDialog OpenFileDialog = new OpenFileDialog();
-
-                OpenFileDialog.Filter = "КОМПАС-3D Документы (*.m3d;*.a3d)|*.m3d;*.a3d";
-                if (OpenFileDialog.ShowDialog() == DialogResult.OK)
-                {
-
-                    KompasPath.Text = OpenFileDialog.FileName;
-                    LastPathKompas = KompasPath.Text;
-
                     doc3D = (ksDocument3D)kompas.Document3D();
-                    if (doc3D != null) doc3D.Open(OpenFileDialog.FileName, false);
+                    if (doc3D != null) doc3D.Open(filename, false);
 
                     kompas.Visible = true;
 
 
                     int err = kompas.ksReturnResult();
                     if (err != 0) kompas.ksResultNULL();
-                }
+                
             }
             else
             {
@@ -205,7 +199,7 @@ namespace KMintegrator
         }
 
 
-        private bool Active_MathCad()
+        private bool InitMathCad()
         {
             bool err = true;
         	try
@@ -218,6 +212,7 @@ namespace KMintegrator
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             	err = false;
             }
+            InMathcad = err;
             return err;
             
         }
@@ -230,7 +225,7 @@ namespace KMintegrator
                 MC.Visible = true;
             }
         }
-        private void MathCad_Refresh(string MathPath)
+        private void MathCadParser(string MathPath)
         {
             // Обновляем таблицу Маткада
 
@@ -356,10 +351,18 @@ namespace KMintegrator
         private void AddKompas_Click(object sender, EventArgs e)
         {
             // Активируем Компас-3D
-            if (!Active_Kompas()) return;
+            if (!InitKompas()) return; 
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.Filter = "КОМПАС-3D Документы (*.m3d;*.a3d)|*.m3d;*.a3d";
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
 
-            // Открываем файл Компас-3D
-            OpenFile_Kompas();
+                KompasPath.Text = OpenFileDialog.FileName;
+                LastPathKompas = KompasPath.Text;
+                // Открываем файл Компас-3D
+                OpenFile_Kompas(LastPathKompas);
+            }
+
         }
 
         private void AddMathCad_Click(object sender, EventArgs e)
@@ -405,7 +408,7 @@ namespace KMintegrator
             Kompas_Refresh();
 
             // Обновляем таблицу Маткада
-            MathCad_Refresh(MathCadPath.Text);
+            MathCadParser(MathCadPath.Text);
 
             // Заполняем нулевыми элементами все ячейки в комбо-бокс-столбцах
             Zero_Element();
