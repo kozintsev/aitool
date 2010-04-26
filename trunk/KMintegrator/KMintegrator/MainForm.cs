@@ -121,7 +121,11 @@ namespace KMintegrator
                         {
                             ksVariable var = (ksVariable)kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
                             if (var == null) return;
-
+							
+                            //this.KompasName_ComboBox.Items.Clear();
+                            //this.KompasName_ComboBox.Items.Add("");
+                            //this.KompasName_ComboBox.ToolTipText = "empty";
+                            
                             for (int i = 0; i < varCol.GetCount(); i++)
                             {
                                 // Считывание внешних переменных Компас-3D с записью в таблицу
@@ -130,6 +134,8 @@ namespace KMintegrator
                                 // Записываем имена внешних переменных Компас-3D в комбо-бокс-столбец в таблице внешних переменных Маткада
                                 this.KompasName_ComboBox.Items.Add(var.name);
                             }
+                            //if (this.KompasName_ComboBox.Items.Count >=0)
+                            //this.KompasName_ComboBox.DropDownWidth = 1;
                         }
                     }
                 }
@@ -398,12 +404,9 @@ namespace KMintegrator
                             string d;
                             double g;
 
-
-
                             for (int i = 0; i < varCol.GetCount(); i++)
                             {
-                                if (this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[3].Value.ToString() == "empty")
-                                {
+                              
                                     var = (ksVariable)varCol.GetByIndex(i);
 
                                     d = (string)(this.Table_ExVar_Kompas3D.Rows[i].Cells[1].Value.ToString());
@@ -412,13 +415,6 @@ namespace KMintegrator
 
                                     // Запись комментария в Компас-3D, проблемы с конвертацией форматов, на данный момент не работает
                                     var.note = this.Table_ExVar_Kompas3D.Rows[i].Cells[2].Value.ToString();
-
-                                }
-                                else
-                                {
-
-
-                                }
                             }
 
                             // Простое перестроение сборки, на данный момент не работает
