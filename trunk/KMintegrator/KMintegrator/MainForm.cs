@@ -32,8 +32,7 @@ namespace KMintegrator
         public MainForm()
         {
             InitializeComponent();
-            InKompas = false;
-            InMathcad = false;
+ 
         }
 
         #region Custom declarations
@@ -41,8 +40,6 @@ namespace KMintegrator
         private ksDocument3D doc3D;
         private string LastPathKompas;
         private string LastMathCadPath;
-        private bool InKompas = false;
-        private bool InMathcad = false;
 
         Mathcad.Application MC;
         Mathcad.Worksheets WK;
@@ -76,7 +73,6 @@ namespace KMintegrator
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             	err = false;
             }
-            InKompas = err;
             return err;
         }
         private void OpenFile_Kompas(string filename)
@@ -157,7 +153,6 @@ namespace KMintegrator
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             	err = false;
             }
-            InMathcad = err;
             return err;
             
         }
@@ -355,15 +350,15 @@ namespace KMintegrator
 
         private void AddKompas_Click(object sender, EventArgs e)
         {
-            // Активируем Компас-3D
-            if (InKompas != true) if (!InitKompas()) return;
-            InKompas = true; // компас уже инициализирован, но не видем 
+             
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "КОМПАС-3D Документы (*.m3d;*.a3d)|*.m3d;*.a3d";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
 
-                KompasPath.Text = OpenFileDialog.FileName;
+                // Активируем Компас-3D
+            	if (!InitKompas()) return;
+            	KompasPath.Text = OpenFileDialog.FileName;
                 LastPathKompas = KompasPath.Text;
                 // Открываем файл Компас-3D
                 OpenFile_Kompas(LastPathKompas);
