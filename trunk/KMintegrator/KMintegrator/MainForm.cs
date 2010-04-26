@@ -43,7 +43,9 @@ namespace KMintegrator
 
         Mathcad.Application MC;
         Mathcad.Worksheets WK;
+        
         Mathcad.Worksheet WS;
+       
         #endregion
 
 
@@ -327,8 +329,72 @@ namespace KMintegrator
         }
 
 
+        private void SaveProject()
+        {
+        	
+        	
+        	
+        	SaveFileDialog SaveFileDialog = new SaveFileDialog();
+        	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
+        	if (SaveFileDialog.ShowDialog() != DialogResult.OK)
+              return;
+            ProjectPath.Text = SaveFileDialog.FileName;
+            
+            // начинаем сохранять
+			XmlTextWriter writer = null;
+			try
+			{
+				// создаем класс для сохранения XML
+				writer = new XmlTextWriter(SaveFileDialog.FileName, System.Text.Encoding.UTF8);
+				// форматирование, чтобы файл не был вытянут в одну линию
+				writer.Formatting = Formatting.Indented;
 
-        private void Exit_Click(object sender, EventArgs e)
+				// пишем заголовок и корневой элемент
+				writer.WriteStartDocument();
+				writer.WriteStartElement("people");
+				
+				// проходим по всем пиплам и для каждого создаем свой элемент
+				/*
+				foreach (Person person in people)
+				{
+					writer.WriteStartElement("person");
+					
+					// аттрибуты элемента
+					writer.WriteAttributeString("birth", person.Birth.ToShortDateString());
+					writer.WriteAttributeString("death", person.Death.ToShortDateString());
+					// вложенный элемент first
+					writer.WriteStartElement("first");
+					writer.WriteString(person.FirstName);
+					writer.WriteEndElement();
+					// вложенный элемент last
+					writer.WriteStartElement("last");
+					writer.WriteString(person.LastName);
+					writer.WriteEndElement();
+					
+					writer.WriteEndElement();
+				}
+				*/
+				// закрываем корневой элемент и завершаем работу с документом
+				writer.WriteEndElement();
+				writer.WriteEndDocument();
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message, "Error!");
+			}
+			finally
+			{
+				// закрываем файл
+				if (writer != null) writer.Close();
+			}
+        	
+        }
+  
+
+        #endregion
+
+  		private void Exit_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -339,13 +405,10 @@ namespace KMintegrator
             Exit_MathCad();
             DialogResult reply = MessageBox.Show("Сохранить проект?",
            				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            //if (reply == DialogResult.Yes)
+            if (reply == DialogResult.Yes)
+            	SaveProject();
             	
-        }
-
-        #endregion
-
-        
+        }      
 
 
         private void AddKompas_Click(object sender, EventArgs e)
@@ -491,13 +554,8 @@ namespace KMintegrator
         void Save_ProjectClick(object sender, EventArgs e)
         {
         	//
-        	SaveFileDialog SaveFileDialog = new SaveFileDialog();
-        	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
-        	if (SaveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-
-                ProjectPath.Text = SaveFileDialog.FileName;
-            }
+        	SaveProject();
+            
         }
         
         
