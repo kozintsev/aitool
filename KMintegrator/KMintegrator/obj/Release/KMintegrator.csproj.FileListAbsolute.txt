@@ -1,0 +1,4 @@
+D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\ResolveAssemblyReference.cache
+D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.MainForm.resources
+D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.Properties.Resources.resources
+D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.csproj.GenerateResource.Cache
