@@ -31,7 +31,9 @@ namespace KMintegrator
     {
         public MainForm()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            InKompas = false;
+            InMathcad = false;
         }
 
         #region Custom declarations
@@ -39,8 +41,8 @@ namespace KMintegrator
         private ksDocument3D doc3D;
         private string LastPathKompas;
         private string LastMathCadPath;
-        private bool InKompas;
-        private bool InMathcad;
+        private bool InKompas = false;
+        private bool InMathcad = false;
 
         Mathcad.Application MC;
         Mathcad.Worksheets WK;
@@ -122,9 +124,8 @@ namespace KMintegrator
                             ksVariable var = (ksVariable)kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
                             if (var == null) return;
 							
-                            //this.KompasName_ComboBox.Items.Clear();
-                            //this.KompasName_ComboBox.Items.Add("");
-                            //this.KompasName_ComboBox.ToolTipText = "empty";
+                            this.KompasName_ComboBox.Items.Clear();
+                            this.KompasName_ComboBox.Items.Add("empty");
                             
                             for (int i = 0; i < varCol.GetCount(); i++)
                             {
@@ -132,8 +133,9 @@ namespace KMintegrator
                                 var = (ksVariable)varCol.GetByIndex(i);
                                 this.Table_ExVar_Kompas3D.Rows.Add(var.name, var.value, var.note);
                                 // Записываем имена внешних переменных Компас-3D в комбо-бокс-столбец в таблице внешних переменных Маткада
-                                this.KompasName_ComboBox.Items.Add(var.name);
+                               this.KompasName_ComboBox.Items.Add(var.name);
                             }
+                           
                             //if (this.KompasName_ComboBox.Items.Count >=0)
                             //this.KompasName_ComboBox.DropDownWidth = 1;
                         }
@@ -256,7 +258,12 @@ namespace KMintegrator
         private void AddKompasCombo()
         {
             
-            // Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Компас-3D
+        	for (int j = 0; j < Table_ExVar_MathCad.Rows.Count; j++)
+        	{
+        		this.KompasName_ComboBox.Items.Add(this.Table_ExVar_MathCad.Rows[j].Cells[1].Value.ToString());
+        	}
+        	
+        	// Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Компас-3D
             for (int i = 0; i < Table_ExVar_Kompas3D.Rows.Count; i++)
             {
                 this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[3].Value = this.MathCadName_ComboBox.Items[0];
@@ -349,7 +356,8 @@ namespace KMintegrator
         private void AddKompas_Click(object sender, EventArgs e)
         {
             // Активируем Компас-3D
-            if (!InitKompas()) return; 
+            if (InKompas != true) if (!InitKompas()) return;
+            InKompas = true; // компас уже инициализирован, но не видем 
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "КОМПАС-3D Документы (*.m3d;*.a3d)|*.m3d;*.a3d";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
@@ -360,6 +368,7 @@ namespace KMintegrator
                 // Открываем файл Компас-3D
                 OpenFile_Kompas(LastPathKompas);
                 Kompas_Refresh();
+                AddMathCadCombo();
             }
 
         }
@@ -374,6 +383,7 @@ namespace KMintegrator
                 MathCadPath.Text = OpenFileDialog.FileName;
                 LastMathCadPath = MathCadPath.Text;
                 MathCadParser(LastMathCadPath);
+                AddKompasCombo();
             }
             
         }
