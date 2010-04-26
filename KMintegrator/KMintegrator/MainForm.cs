@@ -257,10 +257,10 @@ namespace KMintegrator
         //заполняем комбобокс у нижней таблице
         private void AddKompasCombo()
         {
-            
+        	this.MathCadName_ComboBox.Items.Add("empty");
         	for (int j = 0; j < Table_ExVar_MathCad.Rows.Count; j++)
         	{
-        		this.KompasName_ComboBox.Items.Add(this.Table_ExVar_MathCad.Rows[j].Cells[1].Value.ToString());
+        		this.MathCadName_ComboBox.Items.Add(this.Table_ExVar_MathCad.Rows[j].Cells[0].Value.ToString());
         	}
         	
         	// Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Компас-3D
