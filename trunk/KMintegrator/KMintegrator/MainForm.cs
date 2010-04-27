@@ -337,9 +337,7 @@ namespace KMintegrator
 
         private void SaveProject()
         {
-        	
-        	
-        	
+        		
         	SaveFileDialog SaveFileDialog = new SaveFileDialog();
         	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
         	if (SaveFileDialog.ShowDialog() != DialogResult.OK)
@@ -357,29 +355,22 @@ namespace KMintegrator
 
 				// пишем заголовок и корневой элемент
 				writer.WriteStartDocument();
-				writer.WriteStartElement("people");
+				writer.WriteStartElement("project");
 				
-				// проходим по всем пиплам и для каждого создаем свой элемент
-				/*
-				foreach (Person person in people)
-				{
-					writer.WriteStartElement("person");
-					
-					// аттрибуты элемента
-					writer.WriteAttributeString("birth", person.Birth.ToShortDateString());
-					writer.WriteAttributeString("death", person.Death.ToShortDateString());
-					// вложенный элемент first
-					writer.WriteStartElement("first");
-					writer.WriteString(person.FirstName);
-					writer.WriteEndElement();
-					// вложенный элемент last
-					writer.WriteStartElement("last");
-					writer.WriteString(person.LastName);
-					writer.WriteEndElement();
-					
-					writer.WriteEndElement();
-				}
-				*/
+				 writer.WriteStartElement("kompas");
+			 	 // вложенный элемент first
+				 writer.WriteStartElement("path");
+				 writer.WriteString(LastPathKompas);
+				 writer.WriteEndElement();
+				 writer.WriteEndElement();
+				 
+				 writer.WriteStartElement("mcad");
+				 writer.WriteStartElement("path");
+				 writer.WriteString(LastMathCadPath);
+				  writer.WriteEndElement();
+				 writer.WriteEndElement();
+				
+			
 				// закрываем корневой элемент и завершаем работу с документом
 				writer.WriteEndElement();
 				writer.WriteEndDocument();
