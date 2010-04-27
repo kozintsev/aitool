@@ -2,3 +2,17 @@ D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\ResolveAssemblyReference.cac
 D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.MainForm.resources
 D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.Properties.Resources.resources
 D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.csproj.GenerateResource.Cache
+E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.exe
+E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.pdb
+E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\interop.mathcad.dll
+E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KAPITypes.dll
+E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\Kompas6API5.dll
+E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\Kompas6Constants.dll
+E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\Kompas6Constants3D.dll
+E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\Kompas6LTAPI5.dll
+E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\ResolveAssemblyReference.cache
+E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.MainForm.resources
+E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.Properties.Resources.resources
+E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.csproj.GenerateResource.Cache
+E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.exe
+E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.pdb
