@@ -122,8 +122,8 @@ namespace KMintegrator
                             ksVariable var = (ksVariable)kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
                             if (var == null) return;
 							
-                            this.KompasName_ComboBox.Items.Clear();
-                            this.KompasName_ComboBox.Items.Add("empty");
+                            //this.KompasName_ComboBox.Items.Clear();
+                            //this.KompasName_ComboBox.Items.Add("empty");
                             
                             for (int i = 0; i < varCol.GetCount(); i++)
                             {
@@ -131,7 +131,7 @@ namespace KMintegrator
                                 var = (ksVariable)varCol.GetByIndex(i);
                                 this.TableKompas3D.Rows.Add(var.name, var.value, var.note);
                                 // Записываем имена внешних переменных Компас-3D в комбо-бокс-столбец в таблице внешних переменных Маткада
-                               this.KompasName_ComboBox.Items.Add(var.name);
+                               //this.KompasName_ComboBox.Items.Add(var.name);
                             }
                            
                             //if (this.KompasName_ComboBox.Items.Count >=0)
@@ -244,6 +244,12 @@ namespace KMintegrator
 		//заполняем комбобокс у верхней таблицы
         private void AddMathCadCombo()
         {
+        	this.KompasName_ComboBox.Items.Add("empty");
+        	
+        	for (int j = 0; j < TableKompas3D.Rows.Count; j++)
+        	{
+        		this.KompasName_ComboBox.Items.Add(this.TableKompas3D.Rows[j].Cells[0].Value.ToString());
+        	} 	
         	// Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Маткада
             for (int i = 0; i < TableMathCad.Rows.Count; i++)
             {
