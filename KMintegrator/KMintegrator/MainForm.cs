@@ -554,6 +554,15 @@ namespace KMintegrator
         	SaveProject();
             
         }
+
+        private void EndEdit_TableKompas3D(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 3)
+
+                this.TableKompas3D.Rows[e.RowIndex].Cells[1].Value =
+                    this.TableMathCad.Rows[MathCadName_ComboBox.Items.IndexOf(
+                        this.TableKompas3D.Rows[e.RowIndex].Cells[3].Value) - 1].Cells[1].Value;
+        }
         
         
     }
