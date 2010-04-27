@@ -30,13 +30,13 @@
         {
         	System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         	System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-        	this.Table_ExVar_Kompas3D = new System.Windows.Forms.DataGridView();
+        	this.TableKompas3D = new System.Windows.Forms.DataGridView();
         	this.KompasName = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.KompasValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.KompasNote = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.MathCadName_ComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	this.label1 = new System.Windows.Forms.Label();
-        	this.Table_ExVar_MathCad = new System.Windows.Forms.DataGridView();
+        	this.TableMathCad = new System.Windows.Forms.DataGridView();
         	this.MathCadName = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.MathCadValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.MathCadType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,29 +58,29 @@
         	this.label5 = new System.Windows.Forms.Label();
         	this.ProjectPath = new System.Windows.Forms.TextBox();
         	this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-        	((System.ComponentModel.ISupportInitialize)(this.Table_ExVar_Kompas3D)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.Table_ExVar_MathCad)).BeginInit();
+        	((System.ComponentModel.ISupportInitialize)(this.TableKompas3D)).BeginInit();
+        	((System.ComponentModel.ISupportInitialize)(this.TableMathCad)).BeginInit();
         	this.SuspendLayout();
         	// 
-        	// Table_ExVar_Kompas3D
+        	// TableKompas3D
         	// 
-        	this.Table_ExVar_Kompas3D.AllowUserToAddRows = false;
-        	this.Table_ExVar_Kompas3D.AllowUserToDeleteRows = false;
-        	this.Table_ExVar_Kompas3D.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+        	this.TableKompas3D.AllowUserToAddRows = false;
+        	this.TableKompas3D.AllowUserToDeleteRows = false;
+        	this.TableKompas3D.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
         	        	        	| System.Windows.Forms.AnchorStyles.Right)));
-        	this.Table_ExVar_Kompas3D.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        	this.Table_ExVar_Kompas3D.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+        	this.TableKompas3D.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        	this.TableKompas3D.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
         	        	        	this.KompasName,
         	        	        	this.KompasValue,
         	        	        	this.KompasNote,
         	        	        	this.MathCadName_ComboBox});
-        	this.Table_ExVar_Kompas3D.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-        	this.Table_ExVar_Kompas3D.Location = new System.Drawing.Point(12, 226);
-        	this.Table_ExVar_Kompas3D.Name = "Table_ExVar_Kompas3D";
-        	this.Table_ExVar_Kompas3D.RowHeadersVisible = false;
-        	this.Table_ExVar_Kompas3D.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-        	this.Table_ExVar_Kompas3D.Size = new System.Drawing.Size(466, 164);
-        	this.Table_ExVar_Kompas3D.TabIndex = 0;
+        	this.TableKompas3D.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+        	this.TableKompas3D.Location = new System.Drawing.Point(12, 226);
+        	this.TableKompas3D.Name = "TableKompas3D";
+        	this.TableKompas3D.RowHeadersVisible = false;
+        	this.TableKompas3D.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+        	this.TableKompas3D.Size = new System.Drawing.Size(466, 164);
+        	this.TableKompas3D.TabIndex = 0;
         	// 
         	// KompasName
         	// 
@@ -120,26 +120,26 @@
         	this.label1.TabIndex = 1;
         	this.label1.Text = "Передача переменных их MathCAD в Kompas-3D";
         	// 
-        	// Table_ExVar_MathCad
+        	// TableMathCad
         	// 
-        	this.Table_ExVar_MathCad.AllowUserToAddRows = false;
-        	this.Table_ExVar_MathCad.AllowUserToDeleteRows = false;
-        	this.Table_ExVar_MathCad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+        	this.TableMathCad.AllowUserToAddRows = false;
+        	this.TableMathCad.AllowUserToDeleteRows = false;
+        	this.TableMathCad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
         	        	        	| System.Windows.Forms.AnchorStyles.Right)));
-        	this.Table_ExVar_MathCad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        	this.Table_ExVar_MathCad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+        	this.TableMathCad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        	this.TableMathCad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
         	        	        	this.MathCadName,
         	        	        	this.MathCadValue,
         	        	        	this.MathCadType,
         	        	        	this.ID_region_xml,
         	        	        	this.KompasName_ComboBox});
-        	this.Table_ExVar_MathCad.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-        	this.Table_ExVar_MathCad.Location = new System.Drawing.Point(12, 29);
-        	this.Table_ExVar_MathCad.Name = "Table_ExVar_MathCad";
-        	this.Table_ExVar_MathCad.RowHeadersVisible = false;
-        	this.Table_ExVar_MathCad.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-        	this.Table_ExVar_MathCad.Size = new System.Drawing.Size(466, 164);
-        	this.Table_ExVar_MathCad.TabIndex = 2;
+        	this.TableMathCad.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+        	this.TableMathCad.Location = new System.Drawing.Point(12, 29);
+        	this.TableMathCad.Name = "TableMathCad";
+        	this.TableMathCad.RowHeadersVisible = false;
+        	this.TableMathCad.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+        	this.TableMathCad.Size = new System.Drawing.Size(466, 164);
+        	this.TableMathCad.TabIndex = 2;
         	// 
         	// MathCadName
         	// 
@@ -367,26 +367,26 @@
         	this.Controls.Add(this.MathCadPath);
         	this.Controls.Add(this.KompasPath);
         	this.Controls.Add(this.label2);
-        	this.Controls.Add(this.Table_ExVar_MathCad);
+        	this.Controls.Add(this.TableMathCad);
         	this.Controls.Add(this.label1);
-        	this.Controls.Add(this.Table_ExVar_Kompas3D);
+        	this.Controls.Add(this.TableKompas3D);
         	this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
         	this.MinimumSize = new System.Drawing.Size(495, 615);
         	this.Name = "MainForm";
         	this.Text = "Kompas-MathCAD Integrator";
         	this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-        	((System.ComponentModel.ISupportInitialize)(this.Table_ExVar_Kompas3D)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.Table_ExVar_MathCad)).EndInit();
+        	((System.ComponentModel.ISupportInitialize)(this.TableKompas3D)).EndInit();
+        	((System.ComponentModel.ISupportInitialize)(this.TableMathCad)).EndInit();
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
-        private System.Windows.Forms.DataGridView Table_ExVar_Kompas3D;
+        private System.Windows.Forms.DataGridView TableMathCad;
+        private System.Windows.Forms.DataGridView TableKompas3D;
         private System.Windows.Forms.StatusStrip statusStrip1;
 
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView Table_ExVar_MathCad;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox KompasPath;
         private System.Windows.Forms.TextBox MathCadPath;
