@@ -129,7 +129,7 @@ namespace KMintegrator
                             {
                                 // Считывание внешних переменных Компас-3D с записью в таблицу
                                 var = (ksVariable)varCol.GetByIndex(i);
-                                this.Table_ExVar_Kompas3D.Rows.Add(var.name, var.value, var.note);
+                                this.TableKompas3D.Rows.Add(var.name, var.value, var.note);
                                 // Записываем имена внешних переменных Компас-3D в комбо-бокс-столбец в таблице внешних переменных Маткада
                                this.KompasName_ComboBox.Items.Add(var.name);
                             }
@@ -195,7 +195,7 @@ namespace KMintegrator
                                     if (ml_real.Name == "ml:real")
                                     {
 
-                                        this.Table_ExVar_MathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
+                                        this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
 
                                         // Записываем имена внешних переменных Маткада в комбо-бокс-столбец в таблице внешних переменных Компас-3D
   
@@ -207,7 +207,7 @@ namespace KMintegrator
                                     ml_id = ml_define.FirstChild;
                                     result = ml_define.LastChild;
                                     //ml_real = result.FirstChild;
-                                    this.Table_ExVar_MathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная", region_id);
+                                    this.TableMathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная", region_id);
 
 
 
@@ -222,10 +222,10 @@ namespace KMintegrator
         private void Clear_All()
         {
             // Очищаем таблицу внешних переменных Компас-3D от предыдущих результатов
-            this.Table_ExVar_Kompas3D.Rows.Clear();
+            this.TableKompas3D.Rows.Clear();
 
             // Очищаем таблицу внешних переменных Маткада от предыдущих результатов
-            this.Table_ExVar_MathCad.Rows.Clear();
+            this.TableMathCad.Rows.Clear();
 
             // Очищаем комбо-бокс-столбец в таблице внешних переменных Маткада
             this.KompasName_ComboBox.Items.Clear();
@@ -245,7 +245,7 @@ namespace KMintegrator
         private void AddMathCadCombo()
         {
         	// Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Маткада
-            for (int i = 0; i < Table_ExVar_MathCad.Rows.Count; i++)
+            for (int i = 0; i < TableMathCad.Rows.Count; i++)
             {
                 this.KompasName_ComboBox.DataGridView.Rows[i].Cells[4].Value = this.KompasName_ComboBox.Items[0];
             }
@@ -255,13 +255,13 @@ namespace KMintegrator
         private void AddKompasCombo()
         {
         	this.MathCadName_ComboBox.Items.Add("empty");
-        	for (int j = 0; j < Table_ExVar_MathCad.Rows.Count; j++)
+        	for (int j = 0; j < TableMathCad.Rows.Count; j++)
         	{
-        		this.MathCadName_ComboBox.Items.Add(this.Table_ExVar_MathCad.Rows[j].Cells[0].Value.ToString());
+        		this.MathCadName_ComboBox.Items.Add(this.TableMathCad.Rows[j].Cells[0].Value.ToString());
         	}
         	
         	// Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Компас-3D
-            for (int i = 0; i < Table_ExVar_Kompas3D.Rows.Count; i++)
+            for (int i = 0; i < TableKompas3D.Rows.Count; i++)
             {
                 this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[3].Value = this.MathCadName_ComboBox.Items[0];
             }
@@ -477,12 +477,12 @@ namespace KMintegrator
                               
                                     var = (ksVariable)varCol.GetByIndex(i);
 
-                                    d = (string)(this.Table_ExVar_Kompas3D.Rows[i].Cells[1].Value.ToString());
+                                    d = (string)(this.TableKompas3D.Rows[i].Cells[1].Value.ToString());
                                     g = Convert.ToDouble(d);
                                     var.value = g;
 
                                     // Запись комментария в Компас-3D, проблемы с конвертацией форматов, на данный момент не работает
-                                    var.note = this.Table_ExVar_Kompas3D.Rows[i].Cells[2].Value.ToString();
+                                    var.note = this.TableKompas3D.Rows[i].Cells[2].Value.ToString();
                             }
 
                             // Простое перестроение сборки, на данный момент не работает
