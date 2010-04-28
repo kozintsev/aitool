@@ -41,6 +41,7 @@ namespace KMintegrator
         private ksDocument3D doc3D;
         private string LastPathKompas = "";
         private string LastMathCadPath = "";
+        private string LastProjectPath = "";
 
         Mathcad.Application MC;
         Mathcad.Worksheets WK;
@@ -78,7 +79,7 @@ namespace KMintegrator
             }
             return err;
         }
-        private void OpenFile_Kompas(string filename)
+        private void OpenFileKompas(string filename)
         {
             if (kompas != null)
             {
@@ -97,7 +98,7 @@ namespace KMintegrator
                 MessageBox.Show(this, "Объект не захвачен", "Сообщение");
             }
         }
-        private void Kompas_Refresh()
+        private void KompasRefresh()
         {
             // Обновляем таблицу Компас-3D
 
@@ -355,7 +356,23 @@ namespace KMintegrator
             }
         }
 
-
+        private bool OpenProject(string path)
+        {
+        	XmlDocument xd = new XmlDocument();
+            xd.Load(path);
+            XmlNodeList xnl = xd.DocumentElement.ChildNodes;
+            //XmlNode ml_id, ml_real, result;
+            foreach (XmlNode xn in xnl)
+            {
+            	LastPathKompas = xn.SelectSingleNode("kompas").InnerText;
+				LastMathCadPath = xn.SelectSingleNode("mcad").InnerText;
+				
+            }
+            KompasPath.Text = LastPathKompas;
+            MathCadPath.Text = LastMathCadPath;
+            return true;
+        }
+        
         private bool SaveProject()
         {
         	
@@ -378,19 +395,20 @@ namespace KMintegrator
 				writer.WriteStartDocument();
 				writer.WriteStartElement("project");
 				
+				writer.WriteStartElement("file");
+				
 				 writer.WriteStartElement("kompas");
 			 	 // вложенный элемент first
-				 writer.WriteStartElement("path");
+				
 				 writer.WriteString(LastPathKompas);
 				 writer.WriteEndElement();
-				 writer.WriteEndElement();
+				
 				 
 				 writer.WriteStartElement("mcad");
-				 writer.WriteStartElement("path");
 				 writer.WriteString(LastMathCadPath);
-				  writer.WriteEndElement();
 				 writer.WriteEndElement();
 				
+				 writer.WriteEndElement();
 			
 				// закрываем корневой элемент и завершаем работу с документом
 				writer.WriteEndElement();
@@ -411,6 +429,8 @@ namespace KMintegrator
         	return true;
         }
   
+        
+        
 
         #endregion
 
@@ -447,8 +467,8 @@ namespace KMintegrator
             	KompasPath.Text = OpenFileDialog.FileName;
                 LastPathKompas = KompasPath.Text;
                 // Открываем файл Компас-3D
-                OpenFile_Kompas(LastPathKompas);
-                Kompas_Refresh();
+                OpenFileKompas(LastPathKompas);
+                KompasRefresh();
                 AddMathCadCombo();
             }
 
@@ -551,10 +571,12 @@ namespace KMintegrator
             Clear_All();
 
             // Обновляем таблицу Компас-3D
-            Kompas_Refresh();
+            KompasRefresh();
+            AddMathCadCombo();
 
             // Обновляем таблицу Маткада
             MathCadParser(MathCadPath.Text);
+            AddKompasCombo();
 
             // Заполняем нулевыми элементами все ячейки в комбо-бокс-столбцах
             //Zero_Element();
@@ -567,8 +589,19 @@ namespace KMintegrator
             OpenFileDialog.Filter = "Документ XML (*.xml)|*.xml;";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
+                LastProjectPath = OpenFileDialog.FileName;
+                ProjectPath.Text = LastProjectPath;
+                OpenProject(LastProjectPath);
+                
+                // Активируем Компас-3D
+ 				if (!InitKompas()) return;
+				// Открываем файл Компас-3D
+				OpenFileKompas(LastPathKompas);
+				KompasRefresh();
+				AddMathCadCombo();
 
-                ProjectPath.Text = OpenFileDialog.FileName;
+ 				MathCadParser(LastMathCadPath);
+ 				AddKompasCombo();
             }
         	
         }

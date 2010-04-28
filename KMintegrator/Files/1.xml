@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project>
-  <kompas>
-    <path>D:\svn\aitool\KMintegrator\Files\2Cilinder.a3d</path>
-  </kompas>
-  <mcad>
-    <path>D:\svn\aitool\KMintegrator\Files\calculation.xmcd</path>
-  </mcad>
+  <file>
+    <kompas>D:\svn\aitool\KMintegrator\Files\10\Cilinder.a3d</kompas>
+    <mcad>D:\svn\aitool\KMintegrator\Files\test.xmcd</mcad>
+  </file>
 </project>
