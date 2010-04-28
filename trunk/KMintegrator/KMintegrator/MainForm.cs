@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -107,11 +108,12 @@ namespace KMintegrator
 
                 if (doc3D != null)
                 {
-                    if (doc3D.IsDetail())
+                	if (doc3D.IsDetail())
                     {
-                        kompas.ksError("Текущий документ должен быть сборкой");
+                		kompas.ksError("Текущий документ должен быть сборкой");
                         return;
                     }
+
                     ksPart part = (ksPart)doc3D.GetPart(-1);	// Выбор компонента: -1 главный(сборка), 0 первый(деталь)
                     if (part != null)
                     {
@@ -121,21 +123,14 @@ namespace KMintegrator
                         {
                             ksVariable var = (ksVariable)kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
                             if (var == null) return;
-							
-                            //this.KompasName_ComboBox.Items.Clear();
-                            //this.KompasName_ComboBox.Items.Add("empty");
                             
                             for (int i = 0; i < varCol.GetCount(); i++)
                             {
                                 // Считывание внешних переменных Компас-3D с записью в таблицу
                                 var = (ksVariable)varCol.GetByIndex(i);
-                                this.TableKompas3D.Rows.Add(var.name, var.value, var.note);
-                                // Записываем имена внешних переменных Компас-3D в комбо-бокс-столбец в таблице внешних переменных Маткада
-                               //this.KompasName_ComboBox.Items.Add(var.name);
+                                this.TableKompas3D.Rows.Add(var.name, var.value, var.note);            
                             }
-                           
-                            //if (this.KompasName_ComboBox.Items.Count >=0)
-                            //this.KompasName_ComboBox.DropDownWidth = 1;
+                                                  
                         }
                     }
                 }
@@ -273,6 +268,30 @@ namespace KMintegrator
             {
                 this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[3].Value = this.MathCadName_ComboBox.Items[0];
             }
+        }
+       
+        private double ConverToDouble(string s)
+        {
+          	 string ns = "";
+			 int j = 0;
+			 bool start = false;
+        	 double d;
+        	 
+           	 NumberFormatInfo provider = new NumberFormatInfo( );
+    	  	 provider.NumberDecimalSeparator = ".";
+    	 	 //provider.NumberGroupSeparator = ".";
+         	 provider.NumberGroupSizes = new int[ ] { 2 };
+         	 
+			for (int i = 0; i< s.Length; i++)
+			{
+				if ( (s[i] == '.') || (s[i] == ',') ) start = true;
+				if (start) j++;
+				if (j > 3) break;
+				ns = ns + s[i];
+			}
+			
+			d = Convert.ToDouble(ns , provider);
+			return d;
         }
         
         #endregion
@@ -453,8 +472,9 @@ namespace KMintegrator
         private void Apply_Kompas_Click(object sender, EventArgs e)
         {
         	this.TableKompas3D.Update();
+        	
         	// Записываем изменения из таблицы в файл Компас-3D, перестраиваем сборку
-             if (kompas != null)
+            if (kompas != null)
             {
                 if (doc3D != null)
                 {
@@ -483,11 +503,14 @@ namespace KMintegrator
                                     var = (ksVariable)varCol.GetByIndex(i);
 
                                     d = (string)(this.TableKompas3D.Rows[i].Cells[1].Value.ToString());
-                                    g = Convert.ToDouble(d);
+                                    //g = Convert.ToDouble(d);
+                                    g = ConverToDouble(d);
+                                    //Convert.ToInt32(
+                                   
                                     var.value = g;
 
                                     // Запись комментария в Компас-3D, проблемы с конвертацией форматов, на данный момент не работает
-                                    var.note = this.TableKompas3D.Rows[i].Cells[2].Value.ToString();
+                                    //var.note = this.TableKompas3D.Rows[i].Cells[2].Value.ToString();
                             }
 
                             // Простое перестроение сборки, на данный момент не работает
@@ -568,13 +591,26 @@ namespace KMintegrator
 
         private void EndEdit_TableKompas3D(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 3)
-
+            try
+            {
+        	if (e.ColumnIndex == 3)
                 this.TableKompas3D.Rows[e.RowIndex].Cells[1].Value =
                     this.TableMathCad.Rows[MathCadName_ComboBox.Items.IndexOf(
                         this.TableKompas3D.Rows[e.RowIndex].Cells[3].Value) - 1].Cells[1].Value;
+            }
+            catch
+            {
+            	return;
+            }
+            finally
+            {
+            	this.TableKompas3D.Update();
+            }
         }
         
-        
+        void TableKompas3DCellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+        	
+        }
     }
 }
