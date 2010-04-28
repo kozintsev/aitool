@@ -608,9 +608,13 @@ namespace KMintegrator
             }
         }
         
-        void TableKompas3DCellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        
+        void LinkLabel1LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-        	
+        	try{
+        	 System.Diagnostics.Process.Start("mailto:o.kozintsev@googlemail.com");
+        	}
+        	catch{};
         }
     }
 }
