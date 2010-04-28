@@ -38,8 +38,8 @@ namespace KMintegrator
         #region Custom declarations
         private KompasObject kompas;
         private ksDocument3D doc3D;
-        private string LastPathKompas;
-        private string LastMathCadPath;
+        private string LastPathKompas = "";
+        private string LastMathCadPath = "";
 
         Mathcad.Application MC;
         Mathcad.Worksheets WK;
@@ -244,6 +244,7 @@ namespace KMintegrator
 		//заполняем комбобокс у верхней таблицы
         private void AddMathCadCombo()
         {
+        	this.KompasName_ComboBox.Items.Clear();
         	this.KompasName_ComboBox.Items.Add("empty");
         	
         	for (int j = 0; j < TableKompas3D.Rows.Count; j++)
@@ -260,6 +261,7 @@ namespace KMintegrator
         //заполняем комбобокс у нижней таблице
         private void AddKompasCombo()
         {
+        	this.MathCadName_ComboBox.Items.Clear();
         	this.MathCadName_ComboBox.Items.Add("empty");
         	for (int j = 0; j < TableMathCad.Rows.Count; j++)
         	{
@@ -335,13 +337,13 @@ namespace KMintegrator
         }
 
 
-        private void SaveProject()
+        private bool SaveProject()
         {
-        		
+        	
         	SaveFileDialog SaveFileDialog = new SaveFileDialog();
         	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
         	if (SaveFileDialog.ShowDialog() != DialogResult.OK)
-              return;
+              return false;
             ProjectPath.Text = SaveFileDialog.FileName;
             
             // начинаем сохранять
@@ -377,15 +379,17 @@ namespace KMintegrator
 			}
 			catch (Exception ex)
 			{
-
 				MessageBox.Show(ex.Message, "Error!");
+				//MessageBox.Show("Проект не сохранён!", "Ошибка",
+                //    MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return false;
 			}
 			finally
 			{
 				// закрываем файл
 				if (writer != null) writer.Close();
 			}
-        	
+        	return true;
         }
   
 
@@ -400,11 +404,14 @@ namespace KMintegrator
         {
             Exit_Kompas();
             Exit_MathCad();
-            DialogResult reply = MessageBox.Show("Сохранить проект?",
-           				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            if (reply == DialogResult.Yes)
-            	SaveProject();
-            	
+            //(this.LastPathKompas.Count == 1) & (this.LastMathCadPath.Count == 1)
+            if (  (this.LastPathKompas.Length > 2) && (this.LastMathCadPath.Length > 2) )
+        	{
+            	DialogResult reply = MessageBox.Show("Сохранить проект?",
+           					"Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            	if (reply == DialogResult.Yes) 
+       						SaveProject();
+            }
         }      
 
 
@@ -445,7 +452,8 @@ namespace KMintegrator
 
         private void Apply_Kompas_Click(object sender, EventArgs e)
         {
-            // Записываем изменения из таблицы в файл Компас-3D, перестраиваем сборку
+        	this.TableKompas3D.Update();
+        	// Записываем изменения из таблицы в файл Компас-3D, перестраиваем сборку
              if (kompas != null)
             {
                 if (doc3D != null)
@@ -550,9 +558,12 @@ namespace KMintegrator
         
         void Save_ProjectClick(object sender, EventArgs e)
         {
-        	//
-        	SaveProject();
-            
+        	if (  (this.LastPathKompas.Length > 2) && (this.LastMathCadPath.Length > 2) )
+        	 	SaveProject();
+        	else
+        		MessageBox.Show("Нет данных для сохранения", "Информация",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+        	
         }
 
         private void EndEdit_TableKompas3D(object sender, DataGridViewCellEventArgs e)
