@@ -59,6 +59,8 @@
         	this.label5 = new System.Windows.Forms.Label();
         	this.ProjectPath = new System.Windows.Forms.TextBox();
         	this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+        	this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+        	this.label6 = new System.Windows.Forms.Label();
         	((System.ComponentModel.ISupportInitialize)(this.TableKompas3D)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.TableMathCad)).BeginInit();
         	this.SuspendLayout();
@@ -82,7 +84,6 @@
         	this.TableKompas3D.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
         	this.TableKompas3D.Size = new System.Drawing.Size(466, 164);
         	this.TableKompas3D.TabIndex = 0;
-        	this.TableKompas3D.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.TableKompas3DCellBeginEdit);
         	this.TableKompas3D.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.EndEdit_TableKompas3D);
         	// 
         	// KompasName
@@ -288,9 +289,9 @@
         	// 
         	this.Refresh_All.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
         	        	        	| System.Windows.Forms.AnchorStyles.Right)));
-        	this.Refresh_All.Location = new System.Drawing.Point(503, 176);
+        	this.Refresh_All.Location = new System.Drawing.Point(503, 200);
         	this.Refresh_All.Name = "Refresh_All";
-        	this.Refresh_All.Size = new System.Drawing.Size(75, 26);
+        	this.Refresh_All.Size = new System.Drawing.Size(75, 23);
         	this.Refresh_All.TabIndex = 15;
         	this.Refresh_All.Text = "Обновить";
         	this.Refresh_All.UseVisualStyleBackColor = true;
@@ -351,11 +352,31 @@
         	this.statusStrip1.TabIndex = 21;
         	this.statusStrip1.Text = "statusStrip1";
         	// 
+        	// linkLabel1
+        	// 
+        	this.linkLabel1.Location = new System.Drawing.Point(18, 608);
+        	this.linkLabel1.Name = "linkLabel1";
+        	this.linkLabel1.Size = new System.Drawing.Size(181, 23);
+        	this.linkLabel1.TabIndex = 22;
+        	this.linkLabel1.TabStop = true;
+        	this.linkLabel1.Text = "mailto:o.kozintsev@googlemail.com";
+        	this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1LinkClicked);
+        	// 
+        	// label6
+        	// 
+        	this.label6.Location = new System.Drawing.Point(217, 608);
+        	this.label6.Name = "label6";
+        	this.label6.Size = new System.Drawing.Size(284, 23);
+        	this.label6.TabIndex = 23;
+        	this.label6.Text = "Разработчики: Козинцев Олег и Кожевников Михаил";
+        	// 
         	// MainForm
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         	this.ClientSize = new System.Drawing.Size(587, 653);
+        	this.Controls.Add(this.label6);
+        	this.Controls.Add(this.linkLabel1);
         	this.Controls.Add(this.statusStrip1);
         	this.Controls.Add(this.ProjectPath);
         	this.Controls.Add(this.label5);
@@ -385,6 +406,8 @@
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.DataGridView TableMathCad;
         private System.Windows.Forms.DataGridView TableKompas3D;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -416,6 +439,8 @@
         private System.Windows.Forms.Button Save_Project;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox ProjectPath;
+        
+  
     }
 }
 
