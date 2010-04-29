@@ -197,8 +197,6 @@ namespace KMintegrator
                                     		ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
                                     	else
                                         	this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
-
-                                        // Записываем имена внешних переменных Маткада в комбо-бокс-столбец в таблице внешних переменных Компас-3D
   
                                     }
                                 }
@@ -242,10 +240,10 @@ namespace KMintegrator
             this.MathCadName_ComboBox.Items.Clear();
 
             // Добавляем нулевой элемент в комбо-бокс-столбец в таблице внешних переменных Маткада
-            this.KompasName_ComboBox.Items.Add("empty");
+            //this.KompasName_ComboBox.Items.Add("empty");
 
             // Добавляем нулевой элемент в комбо-бокс-столбец в таблице внешних переменных Компас-3D 
-            this.MathCadName_ComboBox.Items.Add("empty");
+            //this.MathCadName_ComboBox.Items.Add("empty");
         }
         
         
