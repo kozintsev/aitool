@@ -380,6 +380,18 @@ namespace KMintegrator
 				LastMathCadPath = xn.SelectSingleNode("mcad").InnerText;
 				
             }
+            if (!File.Exists(LastPathKompas))
+            {
+            	MessageBox.Show("Файл Компаса не найден", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            	return false;
+            }
+            if (!File.Exists(LastPathKompas))
+            {
+            	MessageBox.Show("Файл MathCAD не найден", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            	return false;
+            }
             KompasPath.Text = LastPathKompas;
             MathCadPath.Text = LastMathCadPath;
             return true;
@@ -603,7 +615,7 @@ namespace KMintegrator
             {
                 LastProjectPath = OpenFileDialog.FileName;
                 ProjectPath.Text = LastProjectPath;
-                OpenProject(LastProjectPath);
+                if ( !OpenProject(LastProjectPath) ) return;
                 
                 // Активируем Компас-3D
  				if (!InitKompas()) return;
