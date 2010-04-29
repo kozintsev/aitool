@@ -168,14 +168,16 @@ namespace KMintegrator
             }
             
         }
-        private void MathCadParser(string MathPath)
+        private void MathCadParser(string MathPath, bool save)
         {
             // Обновляем таблицу Маткада
+            int i = 0;
             string region_id;
             XmlDocument xd = new XmlDocument();
             xd.Load(MathPath);
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
             XmlNode ml_id, ml_real, result;
+            if (!save) this.TableMathCad.Rows.Clear();
             foreach (XmlNode xn in xnl)
                 if (xn.Name == "regions")
                     foreach (XmlNode region in xn.ChildNodes)
@@ -184,14 +186,17 @@ namespace KMintegrator
                         foreach (XmlNode math in region.ChildNodes)
                             foreach (XmlNode ml_define in math.ChildNodes)
                             {
-                                if (ml_define.Name == "ml:define") // определения 
+                                
+                        		if (ml_define.Name == "ml:define") // определения
                                 {
                                     ml_id = ml_define.FirstChild;
                                     ml_real = ml_define.LastChild;
                                     if (ml_real.Name == "ml:real")
                                     {
-
-                                        this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
+                                    	if (save) 
+                                    		ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
+                                    	else
+                                        	this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
 
                                         // Записываем имена внешних переменных Маткада в комбо-бокс-столбец в таблице внешних переменных Компас-3D
   
@@ -203,14 +208,21 @@ namespace KMintegrator
                                     ml_id = ml_define.FirstChild;
                                     result = ml_define.LastChild;
                                     //ml_real = result.FirstChild;
-                                    this.TableMathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная", region_id);
+                                    if (!save) this.TableMathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная", region_id);
 
 
 
                                 }
-
+								i++;	
                             }
-            			}		
+            			}	
+            try{
+            if (save) xd.Save(MathPath);
+            }
+            catch{
+            	MessageBox.Show("Не могу сохранить! Возможно файл открыт только для чтения!", "Ошибка",
+                   				 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -483,7 +495,7 @@ namespace KMintegrator
             {
                 MathCadPath.Text = OpenFileDialog.FileName;
                 LastMathCadPath = MathCadPath.Text;
-                MathCadParser(LastMathCadPath);
+                MathCadParser(LastMathCadPath, false);
                 AddKompasCombo();
             }
             
@@ -575,7 +587,7 @@ namespace KMintegrator
             AddMathCadCombo();
 
             // Обновляем таблицу Маткада
-            MathCadParser(MathCadPath.Text);
+            MathCadParser(MathCadPath.Text, false);
             AddKompasCombo();
 
             // Заполняем нулевыми элементами все ячейки в комбо-бокс-столбцах
@@ -600,7 +612,7 @@ namespace KMintegrator
 				KompasRefresh();
 				AddMathCadCombo();
 
- 				MathCadParser(LastMathCadPath);
+ 				MathCadParser(LastMathCadPath, false);
  				AddKompasCombo();
             }
         	
@@ -608,8 +620,7 @@ namespace KMintegrator
         
         void Apply_MathCadClick(object sender, EventArgs e)
         {
-        	//
-        	//Работаем с этой таблицей Table_ExVar_MathCad передаём значение из второй колонке в маткад
+        	MathCadParser(LastMathCadPath, true);
         }
         
         void Save_ProjectClick(object sender, EventArgs e)
@@ -648,6 +659,25 @@ namespace KMintegrator
         	 System.Diagnostics.Process.Start("mailto:o.kozintsev@googlemail.com");
         	}
         	catch{};
+        }
+        
+        void TableMathCadCellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {      	
+        	try
+            {
+        	if (e.ColumnIndex == 4)
+                this.TableMathCad.Rows[e.RowIndex].Cells[1].Value =
+                    this.TableKompas3D.Rows[KompasName_ComboBox.Items.IndexOf(
+                        this.TableMathCad.Rows[e.RowIndex].Cells[4].Value) - 1].Cells[1].Value;
+            }
+            catch
+            {
+            	return;
+            }
+            finally
+            {
+            	this.TableKompas3D.Update();
+            }
         }
     }
 }
