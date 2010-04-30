@@ -44,8 +44,7 @@ namespace KMintegrator
         private string LastProjectPath = "";
 
         Mathcad.Application MC;
-        Mathcad.Worksheets WK;
-        
+        Mathcad.Worksheets WK;        
         Mathcad.Worksheet WS;
        
         #endregion
@@ -161,6 +160,9 @@ namespace KMintegrator
                 WK = MC.Worksheets;
                 WS = WK.Open(MathCadPath.Text);
                 MC.Visible = true;
+                WS.Recalculate();
+                WS.Save();
+
             }
             else
             {
@@ -223,7 +225,6 @@ namespace KMintegrator
             }
 
         }
-
         
         private void Clear_All()
         {
@@ -244,12 +245,10 @@ namespace KMintegrator
 
             // Добавляем нулевой элемент в комбо-бокс-столбец в таблице внешних переменных Компас-3D 
             //this.MathCadName_ComboBox.Items.Add("empty");
-        }
-        
-        
-		//заполняем комбобокс у верхней таблицы
+        }    
         private void AddMathCadCombo()
         {
+            //заполняем комбобокс у верхней таблицы
         	this.KompasName_ComboBox.Items.Clear();
         	this.KompasName_ComboBox.Items.Add("empty");
         	
@@ -262,11 +261,10 @@ namespace KMintegrator
             {
                 this.KompasName_ComboBox.DataGridView.Rows[i].Cells[4].Value = this.KompasName_ComboBox.Items[0];
             }
-        }
-        
-        //заполняем комбобокс у нижней таблице
+        }               
         private void AddKompasCombo()
         {
+            //заполняем комбобокс у нижней таблице
         	this.MathCadName_ComboBox.Items.Clear();
         	this.MathCadName_ComboBox.Items.Add("empty");
         	for (int j = 0; j < TableMathCad.Rows.Count; j++)
@@ -346,7 +344,8 @@ namespace KMintegrator
         private void Exit_MathCad()
         {
             if (MC != null)
-            {
+            {               
+
                 DialogResult reply = MessageBox.Show("Закрыть MathCAD?",
            				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             	try
@@ -450,13 +449,8 @@ namespace KMintegrator
 			}
         	return true;
         }
-  
-        
-        
 
-        #endregion
-
-  		private void Exit_Click(object sender, EventArgs e)
+        private void Exit_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -466,14 +460,17 @@ namespace KMintegrator
             Exit_Kompas();
             Exit_MathCad();
             //(this.LastPathKompas.Count == 1) & (this.LastMathCadPath.Count == 1)
-            if (  (this.LastPathKompas.Length > 2) && (this.LastMathCadPath.Length > 2) )
-        	{
-            	DialogResult reply = MessageBox.Show("Сохранить проект?",
-           					"Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            	if (reply == DialogResult.Yes) 
-       						SaveProject();
+            if ((this.LastPathKompas.Length > 2) && (this.LastMathCadPath.Length > 2))
+            {
+                DialogResult reply = MessageBox.Show("Сохранить проект?",
+                            "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (reply == DialogResult.Yes)
+                    SaveProject();
             }
         }      
+
+        #endregion
+  		
 
 
         private void AddKompas_Click(object sender, EventArgs e)
@@ -569,6 +566,23 @@ namespace KMintegrator
                 }
             }
         }
+
+        private void Apply_MathCadClick(object sender, EventArgs e)
+        {
+            MathCadParser(LastMathCadPath, true);
+
+            InitMathCad();
+
+            OpenMathCad();
+
+            Exit_MathCad();
+
+            MathCadParser(LastMathCadPath, false);
+
+            AddKompasCombo();
+
+        }
+
         
 
         private void Refresh_All_Click(object sender, EventArgs e)
@@ -604,6 +618,8 @@ namespace KMintegrator
             //Zero_Element();
 
         }
+
+
         
         void Open_ProjectClick(object sender, EventArgs e)
         {
@@ -626,12 +642,7 @@ namespace KMintegrator
  				AddKompasCombo();
             }
         	
-        }
-        
-        void Apply_MathCadClick(object sender, EventArgs e)
-        {
-        	MathCadParser(LastMathCadPath, true);
-        }
+        }          
         
         void Save_ProjectClick(object sender, EventArgs e)
         {
@@ -641,26 +652,8 @@ namespace KMintegrator
         		MessageBox.Show("Нет данных для сохранения", "Информация",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
         	
-        }
+        }       
 
-        private void EndEdit_TableKompas3D(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-        	if (e.ColumnIndex == 3)
-                this.TableKompas3D.Rows[e.RowIndex].Cells[1].Value =
-                    this.TableMathCad.Rows[MathCadName_ComboBox.Items.IndexOf(
-                        this.TableKompas3D.Rows[e.RowIndex].Cells[3].Value) - 1].Cells[1].Value;
-            }
-            catch
-            {
-            	return;
-            }
-            finally
-            {
-            	this.TableKompas3D.Update();
-            }
-        }
         
         
         void LinkLabel1LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -669,6 +662,25 @@ namespace KMintegrator
         	 System.Diagnostics.Process.Start("mailto:o.kozintsev@googlemail.com");
         	}
         	catch{};
+        }
+
+        private void EndEdit_TableKompas3D(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 3)
+                    this.TableKompas3D.Rows[e.RowIndex].Cells[1].Value =
+                        this.TableMathCad.Rows[MathCadName_ComboBox.Items.IndexOf(
+                            this.TableKompas3D.Rows[e.RowIndex].Cells[3].Value) - 1].Cells[1].Value;
+            }
+            catch
+            {
+                return;
+            }
+            finally
+            {
+                this.TableKompas3D.Update();
+            }
         }
         
         void TableMathCadCellEndEdit(object sender, DataGridViewCellEventArgs e)
