@@ -146,8 +146,8 @@ namespace KMintegrator
         	}
             catch
             {
-            	MessageBox.Show("MathCAD не установлен", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            	MessageBox.Show("MathCAD не установлен. Пересчёт не возможен.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             	err = false;
             }
             return err;
@@ -572,7 +572,7 @@ namespace KMintegrator
         {
             MathCadParser(LastMathCadPath, true);
 
-            if (!InitMathCad()) 
+            if (InitMathCad()) 
             {
              	 OpenMathCad();
            		 Exit_MathCad();
