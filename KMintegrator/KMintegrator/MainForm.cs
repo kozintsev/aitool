@@ -196,10 +196,13 @@ namespace KMintegrator
                                     if (ml_real.Name == "ml:real")
                                     {
                                     	if (save) 
+                                    	{
                                     		ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
+                                    		
+                                    	}
                                     	else
                                         	this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
-  
+  										i++;	
                                     }
                                 }
 
@@ -209,11 +212,9 @@ namespace KMintegrator
                                     result = ml_define.LastChild;
                                     //ml_real = result.FirstChild;
                                     if (!save) this.TableMathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная", region_id);
-
-
-
+									i++;	
                                 }
-								i++;	
+								
                             }
             			}	
             try{
