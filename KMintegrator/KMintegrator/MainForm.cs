@@ -572,11 +572,11 @@ namespace KMintegrator
         {
             MathCadParser(LastMathCadPath, true);
 
-            InitMathCad();
-
-            OpenMathCad();
-
-            Exit_MathCad();
+            if (!InitMathCad()) 
+            {
+             	 OpenMathCad();
+           		 Exit_MathCad();
+            }
 
             MathCadParser(LastMathCadPath, false);
 

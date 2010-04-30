@@ -68,7 +68,7 @@
       <math optimize="false" disable-calc="false">
         <ml:define>
           <ml:id xml:space="preserve">λ</ml:id>
-          <ml:real>3</ml:real>
+          <ml:real>4</ml:real>
         </ml:define>
       </math>
     </region>
@@ -81,7 +81,7 @@
       <math optimize="false" disable-calc="false">
         <ml:define>
           <ml:id xml:space="preserve">a</ml:id>
-          <ml:real>30</ml:real>
+          <ml:real>35</ml:real>
         </ml:define>
       </math>
     </region>
@@ -89,7 +89,7 @@
       <math optimize="false" disable-calc="false">
         <ml:define>
           <ml:id xml:space="preserve">D</ml:id>
-          <ml:real>34</ml:real>
+          <ml:real>30</ml:real>
         </ml:define>
       </math>
     </region>
@@ -165,7 +165,7 @@
       <math optimize="false" disable-calc="false">
         <ml:define>
           <ml:id xml:space="preserve">ξопт</ml:id>
-          <ml:real>1.16</ml:real>
+          <ml:real>1.15</ml:real>
         </ml:define>
       </math>
     </region>
