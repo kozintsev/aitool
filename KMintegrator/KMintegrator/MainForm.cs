@@ -157,7 +157,7 @@ namespace KMintegrator
         {
             if (MC != null)
             {
-                WK = MC.Worksheets;
+            	WK = MC.Worksheets;
                 WS = WK.Open(MathCadPath.Text);
                 MC.Visible = true;
                 WS.Recalculate();
@@ -344,13 +344,15 @@ namespace KMintegrator
 
         private void Exit_MathCad()
         {
-            if (MC != null)
+        	if (MC != null)
             {               
-
-                DialogResult reply = MessageBox.Show("Закрыть MathCAD?",
-           				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            	try
+        		try
             	{
+            		//MC.Visible = true;
+            		DialogResult reply = DialogResult.No;
+            		if (MC.Visible == true) reply = MessageBox.Show("Закрыть MathCAD?",
+           				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            		else MC.Quit(MCSaveOption.mcSaveChanges);
             		if (reply == DialogResult.Yes) MC.Quit(MCSaveOption.mcDiscardChanges);
             	}
             	catch
@@ -575,12 +577,12 @@ namespace KMintegrator
             if (InitMathCad()) 
             {
              	 OpenMathCad();
-           		 Exit_MathCad();
+           		 //Exit_MathCad();
             }
 
-            MathCadParser(LastMathCadPath, false);
+            //MathCadParser(LastMathCadPath, false);
 
-            AddKompasCombo();
+            //AddKompasCombo();
 
         }
 

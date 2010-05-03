@@ -16,3 +16,7 @@ E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.Properties.Reso
 E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.csproj.GenerateResource.Cache
 E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.exe
 E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.pdb
+D:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.exe
+D:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.pdb
+D:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.exe
+D:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.pdb
