@@ -153,16 +153,19 @@ namespace KMintegrator
             return err;
             
         }
-        private void OpenMathCad()
+        private void OpenMathCad(bool recal)
         {
             if (MC != null)
             {
             	WK = MC.Worksheets;
                 WS = WK.Open(MathCadPath.Text);
-                MC.Visible = true;
-                WS.Recalculate();
-                WS.Save();
-
+                MC.Visible = recal;
+                if (!recal)
+                {                	
+                	WS.Recalculate();
+                	WS.Save();
+                	WS.Close(MCSaveOption.mcSaveChanges);
+                }
             }
             else
             {
@@ -572,26 +575,29 @@ namespace KMintegrator
 
         private void Apply_MathCadClick(object sender, EventArgs e)
         {
-            MathCadParser(LastMathCadPath, true);
+            if (LastMathCadPath == "")
+            	return;
+        	MathCadParser(LastMathCadPath, true);
 
             if (InitMathCad()) 
             {
-             	 OpenMathCad();
-           		 //Exit_MathCad();
+             	 OpenMathCad(false);
+             	 MathCadParser(LastMathCadPath, false);
+             	 AddKompasCombo();
+           		 OpenMathCad(true);
             }
 
-            //MathCadParser(LastMathCadPath, false);
+           
 
-            //AddKompasCombo();
+            
 
         }
 
-        
-
+    
         private void Refresh_All_Click(object sender, EventArgs e)
         {
             // Проверяеме открыт ли файл Маткада
-            if (MathCadPath.Text == "")
+            if (LastMathCadPath == "")
             {                
                 MessageBox.Show("Откройте файл Маткада", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -599,7 +605,7 @@ namespace KMintegrator
             }
 
             // Проверяеме открыт ли файл Маткада
-            if (KompasPath.Text == "")
+            if (LastPathKompas == "")
             {
                 MessageBox.Show("Откройте файл Компас-3D", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
