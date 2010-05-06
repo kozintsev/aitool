@@ -582,7 +582,7 @@ namespace KMintegrator
         {
             if (LastMathCadPath == "")
                 return;
-            /*
+            
             // Закрытие файла маткада перед запуском парсера
             if (MC != null)
             {
@@ -591,7 +591,7 @@ namespace KMintegrator
                     if (WS != null)
                         WS.Close(MCSaveOption.mcSaveChanges);
                 }
-            }*/
+            }
 
             // Считываем значение из файла маткада в таблицу
             MathCadParser(LastMathCadPath, true);
@@ -607,12 +607,12 @@ namespace KMintegrator
             // заносим в таблицу вычисленные, закрываем
             OpenMathCad(false);
             
-            /*
+            
             // Заносим значения переменных маткада из таблицы в файл
             MathCadParser(LastMathCadPath, false);
             AddKompasCombo();
             // Просто открываем файл маткада
-            OpenMathCad(true);*/
+            OpenMathCad(true);
         }
 
     
