@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
-    <kompas>D:\svn\aitool\KMintegrator\Files\10\Cilinder.a3d</kompas>
+    <kompas>D:\svn\aitool\KMintegrator\Files\2Cilinder.a3d</kompas>
     <mcad>D:\svn\aitool\KMintegrator\Files\test.xmcd</mcad>
   </file>
+  <table>
+    <TableTop id="1" name="H">empty</TableTop>
+    <TableTop id="2" name="S">empty</TableTop>
+    <TableTop id="3" name="R">empty</TableTop>
+    <TableBottom id="1" name="" />
+    <TableBottom id="2" name="" />
+  </table>
 </project>

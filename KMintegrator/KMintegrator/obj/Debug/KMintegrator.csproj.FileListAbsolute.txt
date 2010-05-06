@@ -28,4 +28,3 @@ D:\SVN\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.Properties.Resour
 D:\SVN\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.csproj.GenerateResource.Cache
 D:\SVN\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.exe
 D:\SVN\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.pdb
-D:\SVN\aitool\KMintegrator\KMintegrator\bin\Debug\interop.mathcad.dll

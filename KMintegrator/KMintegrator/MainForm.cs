@@ -46,6 +46,7 @@ namespace KMintegrator
         Mathcad.Application MC;
         Mathcad.Worksheets WK;        
         Mathcad.Worksheet WS;
+        bool Save = false;
        
         #endregion
 
@@ -237,7 +238,7 @@ namespace KMintegrator
                    				 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-        }
+        } // end MathCadParse
         
         private void Clear_All()
         {
@@ -378,15 +379,34 @@ namespace KMintegrator
         private bool OpenProject(string path)
         {
         	XmlDocument xd = new XmlDocument();
+        	try{
             xd.Load(path);
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
+            XmlNodeList xnf;
             //XmlNode ml_id, ml_real, result;
             foreach (XmlNode xn in xnl)
             {
-            	LastPathKompas = xn.SelectSingleNode("kompas").InnerText;
-				LastMathCadPath = xn.SelectSingleNode("mcad").InnerText;
+            	//tLastPathKompas
+            	//this.LastPathKompas
+					xnf = xn.ChildNodes;
+            		foreach (XmlNode xnc in xnf)
+					{
+            			//switch (xnc.Name)          		
+            			if (xnc.Name == "kompas") this.LastPathKompas = xnc.InnerText;
+						if (xnc.Name == "mcad") this.LastMathCadPath = xnc.InnerText;
+					}
+            	//s1 = xn.SelectSingleNode("kompas").InnerText;
+				//this.LastMathCadPath
+				//s2 = xn.SelectSingleNode("mcad").InnerText;
 				
             }
+        	}
+        	catch
+        	{
+        		MessageBox.Show("Ошибка в файле проекта", "Ошибка",
+                   				 MessageBoxButtons.OK, MessageBoxIcon.Error);
+        		return false;
+        	}
             if (!File.Exists(LastPathKompas))
             {
             	MessageBox.Show("Файл Компаса не найден", "Ошибка",
@@ -402,11 +422,11 @@ namespace KMintegrator
             KompasPath.Text = LastPathKompas;
             MathCadPath.Text = LastMathCadPath;
             return true;
-        }
+        } // end OpenProject
         
         private bool SaveProject()
         {
-        	
+        	string str1, str2;
         	SaveFileDialog SaveFileDialog = new SaveFileDialog();
         	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
         	if (SaveFileDialog.ShowDialog() != DialogResult.OK)
@@ -429,21 +449,47 @@ namespace KMintegrator
 				writer.WriteStartElement("file");
 				
 				 writer.WriteStartElement("kompas");
-			 	 // вложенный элемент first
-				
 				 writer.WriteString(LastPathKompas);
-				 writer.WriteEndElement();
+				 writer.WriteEndElement(); // end kompas
 				
 				 
 				 writer.WriteStartElement("mcad");
 				 writer.WriteString(LastMathCadPath);
-				 writer.WriteEndElement();
+				 writer.WriteEndElement(); // end mathcad
 				
-				 writer.WriteEndElement();
+				 writer.WriteEndElement(); // Конец file
 			
+				
+				
+				writer.WriteStartElement("table");
+					for (int i = 0; i < this.TableMathCad.Rows.Count; i++)
+                    {
+                        str1 = this.TableMathCad.Rows[i].Cells[0].Value.ToString();
+                        str2 = this.TableMathCad.Rows[i].Cells[4].Value.ToString();
+                        writer.WriteStartElement("TableTop");
+						writer.WriteAttributeString("id", Convert.ToString(i + 1));
+						writer.WriteAttributeString("name", str1);
+						writer.WriteString(str2);
+						writer.WriteEndElement(); // конец тега TableTop
+					}
+				
+					for (int j = 0; j < this.TableKompas3D.Rows.Count; j++)
+					{
+						str1 = this.TableKompas3D.Rows[j].Cells[0].Value.ToString();
+						str2 = this.TableKompas3D.Rows[j].Cells[3].Value.ToString();
+						writer.WriteStartElement("TableBottom");
+						writer.WriteAttributeString("id", Convert.ToString(j + 1));
+						writer.WriteAttributeString("name", str1);
+						writer.WriteString(str2);
+						writer.WriteEndElement(); // конец тега TableBottom
+					}
+			
+					writer.WriteEndElement(); // конец table
+				
+				writer.WriteEndElement(); // конец project
 				// закрываем корневой элемент и завершаем работу с документом
-				writer.WriteEndElement();
-				writer.WriteEndDocument();
+				writer.WriteEndDocument(); 
+				
 			}
 			catch (Exception ex)
 			{
@@ -457,8 +503,9 @@ namespace KMintegrator
 				// закрываем файл
 				if (writer != null) writer.Close();
 			}
-        	return true;
-        }
+        	Save = true;
+			return Save;
+        } // end SaveProject()
 
         private void Exit_Click(object sender, EventArgs e)
         {
@@ -470,7 +517,7 @@ namespace KMintegrator
             Exit_Kompas();
             Exit_MathCad();
             //(this.LastPathKompas.Count == 1) & (this.LastMathCadPath.Count == 1)
-            if ((this.LastPathKompas.Length > 2) && (this.LastMathCadPath.Length > 2))
+            if ((this.LastPathKompas.Length > 2) && (this.LastMathCadPath.Length > 2) && Save == false)
             {
                 DialogResult reply = MessageBox.Show("Сохранить проект?",
                             "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -485,7 +532,7 @@ namespace KMintegrator
 
         private void AddKompas_Click(object sender, EventArgs e)
         {
-             
+            Save = false;
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "КОМПАС-3D Документы (*.m3d;*.a3d)|*.m3d;*.a3d";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
@@ -505,7 +552,8 @@ namespace KMintegrator
 
         private void AddMathCad_Click(object sender, EventArgs e)
         {
-            // Открываем файл Маткада
+            Save = false;
+        	// Открываем файл Маткада
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "Файлы MathCAD 14 (*.xmcd)|*.xmcd";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
@@ -520,6 +568,7 @@ namespace KMintegrator
 
         private void Apply_Kompas_Click(object sender, EventArgs e)
         {
+        	Save = false;
         	this.TableKompas3D.Update();
         	
         	// Записываем изменения из таблицы в файл Компас-3D, перестраиваем сборку
@@ -579,7 +628,8 @@ namespace KMintegrator
 
         private void Apply_MathCadClick(object sender, EventArgs e)
         {
-            if (LastMathCadPath == "")
+            Save = false;
+        	if (LastMathCadPath == "")
                 return;
             /*
             // Закрытие файла маткада перед запуском парсера
@@ -617,7 +667,8 @@ namespace KMintegrator
     
         private void Refresh_All_Click(object sender, EventArgs e)
         {
-            // Проверяеме открыт ли файл Маткада
+   			Save = false;
+        	// Проверяеме открыт ли файл Маткада
             if (LastMathCadPath == "")
             {                
                 MessageBox.Show("Откройте файл Маткада", "Внимание",
