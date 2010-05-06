@@ -576,21 +576,27 @@ namespace KMintegrator
         private void Apply_MathCadClick(object sender, EventArgs e)
         {
             if (LastMathCadPath == "")
-            	return;
-        	MathCadParser(LastMathCadPath, true);
+                return;
 
-            if (InitMathCad()) 
+            // Закрытие файла маткада перед запуском парсера
+            if (MC != null)
             {
-             	 OpenMathCad(false);
-             	 MathCadParser(LastMathCadPath, false);
-             	 AddKompasCombo();
-           		 OpenMathCad(true);
+                if (WS != null)
+                    WS.Close(MCSaveOption.mcSaveChanges);
             }
 
-           
+            MathCadParser(LastMathCadPath, true);
 
-            
+            // Инициализация маткада выполняется если маткад еще не запущен
+            if (MC == null)
+                InitMathCad();
 
+            // Убрал проверку на инициализацию маткада,
+            // Потому что в функции OpenMathCad уже есть "if (MC != null)"    
+            OpenMathCad(false);
+            MathCadParser(LastMathCadPath, false);
+            AddKompasCombo();
+            OpenMathCad(true);
         }
 
     
