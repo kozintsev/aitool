@@ -159,10 +159,21 @@ namespace KMintegrator
             {
             	WK = MC.Worksheets;
                 WS = WK.Open(MathCadPath.Text);
-                MC.Visible = recal;
+                MC.Visible = true;//recal;
                 if (!recal)
                 {                	
                 	WS.Recalculate();
+
+                    for (int j = 0; j < TableMathCad.Rows.Count; j++)
+                    {
+                        if (this.TableMathCad.Rows[j].Cells[2].Value.ToString() == "Вычисленная")
+                        {                            
+                            this.TableMathCad.Rows[j].Cells[1].Value = 
+                                (WS.GetValue(this.TableMathCad.Rows[j].Cells[0].Value.ToString()) as NumericValue).Real;
+                        }
+                        
+                    }
+
                 	WS.Save();
                 	WS.Close(MCSaveOption.mcSaveChanges);
                 }
@@ -243,12 +254,7 @@ namespace KMintegrator
 
             // Очищаем комбо-бокс-столбец в таблице внешних переменных Компас-3D
             this.MathCadName_ComboBox.Items.Clear();
-
-            // Добавляем нулевой элемент в комбо-бокс-столбец в таблице внешних переменных Маткада
-            //this.KompasName_ComboBox.Items.Add("empty");
-
-            // Добавляем нулевой элемент в комбо-бокс-столбец в таблице внешних переменных Компас-3D 
-            //this.MathCadName_ComboBox.Items.Add("empty");
+            
         }    
         private void AddMathCadCombo()
         {
@@ -577,14 +583,18 @@ namespace KMintegrator
         {
             if (LastMathCadPath == "")
                 return;
-
+            /*
             // Закрытие файла маткада перед запуском парсера
             if (MC != null)
             {
-                if (WS != null)
-                    WS.Close(MCSaveOption.mcSaveChanges);
-            }
+                if (WK != null)
+                {
+                    if (WS != null)
+                        WS.Close(MCSaveOption.mcSaveChanges);
+                }
+            }*/
 
+            // Считываем значение из файла маткада в таблицу
             MathCadParser(LastMathCadPath, true);
 
             // Инициализация маткада выполняется если маткад еще не запущен
@@ -592,11 +602,18 @@ namespace KMintegrator
                 InitMathCad();
 
             // Убрал проверку на инициализацию маткада,
-            // Потому что в функции OpenMathCad уже есть "if (MC != null)"    
+            // Потому что в функции OpenMathCad уже есть "if (MC != null)"  
+  
+            // Открываем файл маткада, пересчитываем, 
+            // заносим в таблицу вычисленные, закрываем
             OpenMathCad(false);
+            
+            /*
+            // Заносим значения переменных маткада из таблицы в файл
             MathCadParser(LastMathCadPath, false);
             AddKompasCombo();
-            OpenMathCad(true);
+            // Просто открываем файл маткада
+            OpenMathCad(true);*/
         }
 
     
@@ -627,10 +644,7 @@ namespace KMintegrator
 
             // Обновляем таблицу Маткада
             MathCadParser(MathCadPath.Text, false);
-            AddKompasCombo();
-
-            // Заполняем нулевыми элементами все ячейки в комбо-бокс-столбцах
-            //Zero_Element();
+            AddKompasCombo();           
 
         }
 

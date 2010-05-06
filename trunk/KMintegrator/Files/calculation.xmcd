@@ -68,7 +68,7 @@
       <math optimize="false" disable-calc="false">
         <ml:define>
           <ml:id xml:space="preserve">λ</ml:id>
-          <ml:real>4</ml:real>
+          <ml:real>6</ml:real>
         </ml:define>
       </math>
     </region>
