@@ -192,7 +192,7 @@ namespace KMintegrator
             XmlDocument xd = new XmlDocument();
             xd.Load(MathPath);
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
-            XmlNode ml_id, ml_real, result;
+            XmlNode ml_id, ml_real;
             if (!save) this.TableMathCad.Rows.Clear();
             foreach (XmlNode xn in xnl)
                 if (xn.Name == "regions")
@@ -220,11 +220,10 @@ namespace KMintegrator
                                 if (ml_define.Name == "ml:eval") // вычисления
                                 {
                                     ml_id = ml_define.FirstChild;
-                                    result = ml_define.LastChild;
-                                    //ml_real = result.FirstChild;
-                                    if (!save) this.TableMathCad.Rows.Add(ml_id.InnerText, result.InnerText, "Вычисленная", region_id);
+                                    ml_real = ml_define.LastChild;
+                                    if (!save) this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Вычисленная", region_id);
                                      else
-                                       result.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();	
+                                       ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();	
 									i++;	
                                 }
 								
@@ -582,7 +581,7 @@ namespace KMintegrator
         {
             if (LastMathCadPath == "")
                 return;
-            
+            /*
             // Закрытие файла маткада перед запуском парсера
             if (MC != null)
             {
@@ -591,7 +590,7 @@ namespace KMintegrator
                     if (WS != null)
                         WS.Close(MCSaveOption.mcSaveChanges);
                 }
-            }
+            }*/
 
             // Считываем значение из файла маткада в таблицу
             MathCadParser(LastMathCadPath, true);
@@ -607,12 +606,12 @@ namespace KMintegrator
             // заносим в таблицу вычисленные, закрываем
             OpenMathCad(false);
             
-            
+            /*
             // Заносим значения переменных маткада из таблицы в файл
             MathCadParser(LastMathCadPath, false);
             AddKompasCombo();
             // Просто открываем файл маткада
-            OpenMathCad(true);
+            OpenMathCad(true);*/
         }
 
     
