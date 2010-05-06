@@ -115,7 +115,7 @@
       <math optimize="false" disable-calc="false">
         <ml:define warning="WarnRedefinedBIUnit" xmlns:ml="http://schemas.mathsoft.com/math30">
           <ml:id xml:space="preserve">H</ml:id>
-          <ml:real>50</ml:real>
+          <ml:real>100</ml:real>
         </ml:define>
       </math>
       <rendering item-idref="1" />
