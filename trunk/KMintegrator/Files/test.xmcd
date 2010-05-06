@@ -166,7 +166,7 @@
         <ml:eval placeholderMultiplicationStyle="default" xmlns:ml="http://schemas.mathsoft.com/math30">
           <ml:id xml:space="preserve">R</ml:id>
           <result xmlns="http://schemas.mathsoft.com/math30">
-            <ml:real>6.1803872323710332</ml:real>
+            <ml:real>9.3912</ml:real>
           </result>
         </ml:eval>
       </math>
