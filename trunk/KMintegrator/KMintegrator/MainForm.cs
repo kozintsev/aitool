@@ -158,25 +158,27 @@ namespace KMintegrator
         {
             if (MC != null)
             {
-            	WK = MC.Worksheets;
+                WK = MC.Worksheets;
                 WS = WK.Open(MathCadPath.Text);
                 MC.Visible = true;//recal;
-                if (!recal)
-                {                	
-                	WS.Recalculate();
+                if (recal == true)
+                {
+                    WS.Recalculate();
+
 
                     for (int j = 0; j < TableMathCad.Rows.Count; j++)
                     {
                         if (this.TableMathCad.Rows[j].Cells[2].Value.ToString() == "Вычисленная")
-                        {                            
-                            this.TableMathCad.Rows[j].Cells[1].Value = 
+                        {
+                            this.TableMathCad.Rows[j].Cells[1].Value =
                                 (WS.GetValue(this.TableMathCad.Rows[j].Cells[0].Value.ToString()) as NumericValue).Real;
+                            //ConverToDouble((WS.GetValue(this.TableMathCad.Rows[j].Cells[0].Value.ToString()) as NumericValue).Real.ToString()).ToString();
                         }
-                        
-                    }
 
-                	WS.Save();
-                	WS.Close(MCSaveOption.mcSaveChanges);
+                    }
+                    WS.Save();
+
+                    WS.Close(MCSaveOption.mcSaveChanges);
                 }
             }
             else
@@ -194,49 +196,73 @@ namespace KMintegrator
             xd.Load(MathPath);
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
             XmlNode ml_id, ml_real;
-            if (!save) this.TableMathCad.Rows.Clear();
+            if (save == false) this.TableMathCad.Rows.Clear();
             foreach (XmlNode xn in xnl)
                 if (xn.Name == "regions")
                     foreach (XmlNode region in xn.ChildNodes)
-            		{
-            		region_id = region.Attributes[0].Value;
+                    {
+                        region_id = region.Attributes[0].Value;
                         foreach (XmlNode math in region.ChildNodes)
                             foreach (XmlNode ml_define in math.ChildNodes)
                             {
-                                
-                        		if (ml_define.Name == "ml:define") // определения
+
+                                if (ml_define.Name == "ml:define") // определения
                                 {
                                     ml_id = ml_define.FirstChild;
                                     ml_real = ml_define.LastChild;
                                     if (ml_real.Name == "ml:real")
                                     {
-                                    	if (save) 
-                                    		ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
-                                    	else
-                                        	this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
-  										i++;	
+                                        if (save == true)
+                                            ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
+                                        else
+                                            this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
+                                        i++;
                                     }
                                 }
+
+
 
                                 if (ml_define.Name == "ml:eval") // вычисления
                                 {
                                     ml_id = ml_define.FirstChild;
-                                    ml_real = ml_define.LastChild;
-                                    if (!save) this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Вычисленная", region_id);
-                                     else
-                                       ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();	
-									i++;	
+
+                                    if (save == true)
+                                    {
+                                        foreach (XmlNode result in ml_define.ChildNodes)
+                                            if (result.Name == "result")
+                                            {
+                                                ml_real = result.FirstChild;
+                                                ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
+                                            }
+
+                                    }
+
+                                    else
+                                    {
+                                        foreach (XmlNode result in ml_define.ChildNodes)
+                                            if (result.Name == "result")
+                                            {
+                                                ml_real = result.FirstChild;
+                                                this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Вычисленная", region_id);
+                                            }
+
+                                    }
+
+                                    i++;
                                 }
-								
+
                             }
-            			}	
-            try{
-            if (save) xd.Save(MathPath);
+                    }
+            try
+            {
+                if (save) xd.Save(MathPath);
             }
-            catch{
-            	MessageBox.Show("Не могу сохранить! Возможно файл открыт только для чтения!", "Ошибка",
-                   				 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch
+            {
+                MessageBox.Show("Не могу сохранить! Возможно файл открыт только для чтения!", "Ошибка",
+                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
 
         } // end MathCadParse
         
@@ -629,39 +655,32 @@ namespace KMintegrator
         private void Apply_MathCadClick(object sender, EventArgs e)
         {
             Save = false;
-        	if (LastMathCadPath == "")
+            if (LastMathCadPath == "")
                 return;
-            /*
+
             // Закрытие файла маткада перед запуском парсера
             if (MC != null)
-            {
-                if (WK != null)
-                {
-                    if (WS != null)
-                        WS.Close(MCSaveOption.mcSaveChanges);
-                }
-            }*/
+                WS.Close(MCSaveOption.mcSaveChanges);
 
-            // Считываем значение из файла маткада в таблицу
+            // Заносим значения переменных маткада из таблицы в файл
             MathCadParser(LastMathCadPath, true);
 
             // Инициализация маткада выполняется если маткад еще не запущен
             if (MC == null)
                 InitMathCad();
 
-            // Убрал проверку на инициализацию маткада,
-            // Потому что в функции OpenMathCad уже есть "if (MC != null)"  
-  
-            // Открываем файл маткада, пересчитываем, 
-            // заносим в таблицу вычисленные, закрываем
-            OpenMathCad(false);
-            
-            /*
+            // Открываем файл маткада, пересчитываем, заносим в таблицу вычисленные, закрываем
+            OpenMathCad(true);
+
             // Заносим значения переменных маткада из таблицы в файл
-            MathCadParser(LastMathCadPath, false);
+            MathCadParser(LastMathCadPath, true);
+
+            // Считываем значение из файла маткада в таблицу
+            //MathCadParser(LastMathCadPath, false);
+
             AddKompasCombo();
             // Просто открываем файл маткада
-            OpenMathCad(true);*/
+            OpenMathCad(false);
         }
 
     
