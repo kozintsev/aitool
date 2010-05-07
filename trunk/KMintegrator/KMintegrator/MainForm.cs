@@ -558,12 +558,11 @@ namespace KMintegrator
 
         private void AddKompas_Click(object sender, EventArgs e)
         {
-            Save = false;
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "КОМПАС-3D Документы (*.m3d;*.a3d)|*.m3d;*.a3d";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-
+                Save = false;
                 // Активируем Компас-3D
             	if (!InitKompas()) return;
             	KompasPath.Text = OpenFileDialog.FileName;
@@ -578,12 +577,12 @@ namespace KMintegrator
 
         private void AddMathCad_Click(object sender, EventArgs e)
         {
-            Save = false;
         	// Открываем файл Маткада
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "Файлы MathCAD 14 (*.xmcd)|*.xmcd";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
+                Save = false;
                 MathCadPath.Text = OpenFileDialog.FileName;
                 LastMathCadPath = MathCadPath.Text;
                 MathCadParser(LastMathCadPath, false);
