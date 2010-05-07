@@ -419,9 +419,15 @@ namespace KMintegrator
 					xnf = xn.ChildNodes;
             		foreach (XmlNode xnc in xnf)
 					{
-            			//switch (xnc.Name)          		
-            			if (xnc.Name == "kompas") this.LastPathKompas = xnc.InnerText;
-						if (xnc.Name == "mcad") this.LastMathCadPath = xnc.InnerText;
+            			//switch (xnc.Name) 
+            			switch(xnc.Name){
+            				case "kompas":
+            					this.LastPathKompas = xnc.InnerText;
+            					break;
+            				case "mcad":
+            					this.LastMathCadPath = xnc.InnerText;
+            					break;
+            			}
 					}
             	//s1 = xn.SelectSingleNode("kompas").InnerText;
 				//this.LastMathCadPath
