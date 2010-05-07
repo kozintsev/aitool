@@ -38,11 +38,6 @@
         	this.MathCadName_ComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	this.label1 = new System.Windows.Forms.Label();
         	this.TableMathCad = new System.Windows.Forms.DataGridView();
-        	this.MathCadName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.MathCadValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.MathCadType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.ID_region_xml = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.KompasName_ComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	this.label2 = new System.Windows.Forms.Label();
         	this.KompasPath = new System.Windows.Forms.TextBox();
         	this.MathCadPath = new System.Windows.Forms.TextBox();
@@ -61,6 +56,12 @@
         	this.statusStrip1 = new System.Windows.Forms.StatusStrip();
         	this.linkLabel1 = new System.Windows.Forms.LinkLabel();
         	this.label6 = new System.Windows.Forms.Label();
+        	this.MathCadName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.MathCadValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.MathCadType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.ID_region_xml = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.KompasName_ComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
+        	this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	((System.ComponentModel.ISupportInitialize)(this.TableKompas3D)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.TableMathCad)).BeginInit();
         	this.SuspendLayout();
@@ -142,7 +143,8 @@
         	        	        	this.MathCadValue,
         	        	        	this.MathCadType,
         	        	        	this.ID_region_xml,
-        	        	        	this.KompasName_ComboBox});
+        	        	        	this.KompasName_ComboBox,
+        	        	        	this.Type});
         	this.TableMathCad.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
         	this.TableMathCad.Location = new System.Drawing.Point(12, 29);
         	this.TableMathCad.Name = "TableMathCad";
@@ -151,51 +153,6 @@
         	this.TableMathCad.Size = new System.Drawing.Size(466, 164);
         	this.TableMathCad.TabIndex = 2;
         	this.TableMathCad.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.TableMathCadCellEndEdit);
-        	// 
-        	// MathCadName
-        	// 
-        	this.MathCadName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-        	this.MathCadName.HeaderText = "MathCadName";
-        	this.MathCadName.Name = "MathCadName";
-        	this.MathCadName.ReadOnly = true;
-        	this.MathCadName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	// 
-        	// MathCadValue
-        	// 
-        	this.MathCadValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-        	this.MathCadValue.HeaderText = "MathCadValue";
-        	this.MathCadValue.Name = "MathCadValue";
-        	this.MathCadValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.MathCadValue.Width = 120;
-        	// 
-        	// MathCadType
-        	// 
-        	this.MathCadType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-        	this.MathCadType.HeaderText = "MathCadType";
-        	this.MathCadType.Name = "MathCadType";
-        	this.MathCadType.ReadOnly = true;
-        	this.MathCadType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	// 
-        	// ID_region_xml
-        	// 
-        	this.ID_region_xml.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-        	this.ID_region_xml.FillWeight = 50F;
-        	this.ID_region_xml.HeaderText = "ID_region_xml";
-        	this.ID_region_xml.Name = "ID_region_xml";
-        	this.ID_region_xml.ReadOnly = true;
-        	this.ID_region_xml.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.ID_region_xml.Visible = false;
-        	this.ID_region_xml.Width = 40;
-        	// 
-        	// KompasName_ComboBox
-        	// 
-        	this.KompasName_ComboBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-        	dataGridViewCellStyle2.NullValue = "empty";
-        	this.KompasName_ComboBox.DefaultCellStyle = dataGridViewCellStyle2;
-        	this.KompasName_ComboBox.HeaderText = "KompasName";
-        	this.KompasName_ComboBox.Name = "KompasName_ComboBox";
-        	this.KompasName_ComboBox.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.KompasName_ComboBox.Width = 140;
         	// 
         	// label2
         	// 
@@ -385,6 +342,57 @@
         	this.label6.TabIndex = 23;
         	this.label6.Text = "Разработчики: Козинцев Олег и Кожевников Михаил";
         	// 
+        	// MathCadName
+        	// 
+        	this.MathCadName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+        	this.MathCadName.HeaderText = "MathCadName";
+        	this.MathCadName.Name = "MathCadName";
+        	this.MathCadName.ReadOnly = true;
+        	this.MathCadName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	// 
+        	// MathCadValue
+        	// 
+        	this.MathCadValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+        	this.MathCadValue.HeaderText = "MathCadValue";
+        	this.MathCadValue.Name = "MathCadValue";
+        	this.MathCadValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.MathCadValue.Width = 120;
+        	// 
+        	// MathCadType
+        	// 
+        	this.MathCadType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+        	this.MathCadType.HeaderText = "MathCadType";
+        	this.MathCadType.Name = "MathCadType";
+        	this.MathCadType.ReadOnly = true;
+        	this.MathCadType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	// 
+        	// ID_region_xml
+        	// 
+        	this.ID_region_xml.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+        	this.ID_region_xml.FillWeight = 50F;
+        	this.ID_region_xml.HeaderText = "ID_region_xml";
+        	this.ID_region_xml.Name = "ID_region_xml";
+        	this.ID_region_xml.ReadOnly = true;
+        	this.ID_region_xml.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.ID_region_xml.Visible = false;
+        	this.ID_region_xml.Width = 40;
+        	// 
+        	// KompasName_ComboBox
+        	// 
+        	this.KompasName_ComboBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+        	dataGridViewCellStyle2.NullValue = "empty";
+        	this.KompasName_ComboBox.DefaultCellStyle = dataGridViewCellStyle2;
+        	this.KompasName_ComboBox.HeaderText = "KompasName";
+        	this.KompasName_ComboBox.Name = "KompasName_ComboBox";
+        	this.KompasName_ComboBox.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.KompasName_ComboBox.Width = 140;
+        	// 
+        	// Type
+        	// 
+        	this.Type.HeaderText = "Type";
+        	this.Type.Name = "Type";
+        	this.Type.Visible = false;
+        	// 
         	// MainForm
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -421,6 +429,7 @@
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.DataGridView TableMathCad;

@@ -216,6 +216,7 @@ namespace KMintegrator
                                             ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
                                         else
                                             this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
+                                        
                                         i++;
                                     }
                                 }
@@ -331,7 +332,8 @@ namespace KMintegrator
 				if ( (s[i] == '.') || (s[i] == ',') ) start = true;
 				if (start) j++;
 				if (j > 3) break;
-				ns = ns + s[i];
+				if (s[i] == ',' ) ns = Name + '.';
+					else ns = ns + s[i];
 			}
 			
 			d = Convert.ToDouble(ns , provider);
@@ -452,7 +454,7 @@ namespace KMintegrator
         
         private bool SaveProject()
         {
-        	string str1, str2;
+        	string str1, str2, str3;
         	SaveFileDialog SaveFileDialog = new SaveFileDialog();
         	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
         	if (SaveFileDialog.ShowDialog() != DialogResult.OK)
@@ -492,9 +494,11 @@ namespace KMintegrator
                     {
                         str1 = this.TableMathCad.Rows[i].Cells[0].Value.ToString();
                         str2 = this.TableMathCad.Rows[i].Cells[4].Value.ToString();
+                        str3 = this.TableMathCad.Rows[i].Cells[5].Value.ToString();
                         writer.WriteStartElement("TableTop");
 						writer.WriteAttributeString("id", Convert.ToString(i + 1));
 						writer.WriteAttributeString("name", str1);
+						writer.WriteAttributeString("type", str3);
 						writer.WriteString(str2);
 						writer.WriteEndElement(); // конец тега TableTop
 					}
