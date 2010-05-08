@@ -168,7 +168,7 @@ namespace KMintegrator
 
                     for (int j = 0; j < TableMathCad.Rows.Count; j++)
                     {
-                        if (this.TableMathCad.Rows[j].Cells[2].Value.ToString() == "Вычисленная")
+                        if (this.TableMathCad.Rows[j].Cells[4].Value.ToString() == "eval")
                         {
                             this.TableMathCad.Rows[j].Cells[1].Value =
                                 (WS.GetValue(this.TableMathCad.Rows[j].Cells[0].Value.ToString()) as NumericValue).Real;
@@ -215,7 +215,7 @@ namespace KMintegrator
                                         if (save == true)
                                             ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
                                         else
-                                            this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id);
+                                            this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Присвоенная", region_id, "define");
                                         
                                         i++;
                                     }
@@ -244,7 +244,7 @@ namespace KMintegrator
                                             if (result.Name == "result")
                                             {
                                                 ml_real = result.FirstChild;
-                                                this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Вычисленная", region_id);
+                                                this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Вычисленная", region_id, "eval");
                                             }
 
                                     }
@@ -500,7 +500,7 @@ namespace KMintegrator
                     {
                         str1 = this.TableMathCad.Rows[i].Cells[0].Value.ToString();
                         str2 = this.TableMathCad.Rows[i].Cells[4].Value.ToString();
-                        str3 = this.TableMathCad.Rows[i].Cells[5].Value.ToString();
+                        str3 = this.TableMathCad.Rows[i].Cells[3].Value.ToString();
                         writer.WriteStartElement("TableTop");
 						writer.WriteAttributeString("id", Convert.ToString(i + 1));
 						writer.WriteAttributeString("name", str1);
@@ -666,17 +666,15 @@ namespace KMintegrator
             Save = false;
             if (LastMathCadPath == "")
                 return;
-
-            // Закрытие файла маткада перед запуском парсера
-            if (MC != null)
-                WS.Close(MCSaveOption.mcSaveChanges);
-
             // Заносим значения переменных маткада из таблицы в файл
             MathCadParser(LastMathCadPath, true);
-
             // Инициализация маткада выполняется если маткад еще не запущен
-            if (MC == null)
-                InitMathCad();
+            // Это функциия возвражает значение, ты упорно это игнорируешь
+			 if (!InitMathCad()) return;
+            // Закрытие файла маткада перед запуском парсера
+            // То что ниже работать не будет потому что MS не открыт 
+            //if (MC != null)
+            //    WS.Close(MCSaveOption.mcSaveChanges);
 
             // Открываем файл маткада, пересчитываем, заносим в таблицу вычисленные, закрываем
             OpenMathCad(true);

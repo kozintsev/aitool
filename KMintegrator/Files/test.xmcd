@@ -130,7 +130,7 @@
       <math optimize="false" disable-calc="false">
         <ml:define warning="WarnRedefinedBIUnit" xmlns:ml="http://schemas.mathsoft.com/math30">
           <ml:id xml:space="preserve">S</ml:id>
-          <ml:real>150</ml:real>
+          <ml:real>170</ml:real>
         </ml:define>
       </math>
       <rendering item-idref="3" />
@@ -166,7 +166,7 @@
         <ml:eval placeholderMultiplicationStyle="default" xmlns:ml="http://schemas.mathsoft.com/math30">
           <ml:id xml:space="preserve">R</ml:id>
           <result xmlns="http://schemas.mathsoft.com/math30">
-            <ml:real>6,90988298942671</ml:real>
+            <ml:real>7,35613218010963</ml:real>
           </result>
         </ml:eval>
       </math>

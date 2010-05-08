@@ -60,8 +60,8 @@
         	this.MathCadValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.MathCadType = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.ID_region_xml = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.KompasName_ComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.KompasName_ComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
         	((System.ComponentModel.ISupportInitialize)(this.TableKompas3D)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.TableMathCad)).BeginInit();
         	this.SuspendLayout();
@@ -143,8 +143,8 @@
         	        	        	this.MathCadValue,
         	        	        	this.MathCadType,
         	        	        	this.ID_region_xml,
-        	        	        	this.KompasName_ComboBox,
-        	        	        	this.Type});
+        	        	        	this.Type,
+        	        	        	this.KompasName_ComboBox});
         	this.TableMathCad.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
         	this.TableMathCad.Location = new System.Drawing.Point(12, 29);
         	this.TableMathCad.Name = "TableMathCad";
@@ -377,6 +377,12 @@
         	this.ID_region_xml.Visible = false;
         	this.ID_region_xml.Width = 40;
         	// 
+        	// Type
+        	// 
+        	this.Type.HeaderText = "Type";
+        	this.Type.Name = "Type";
+        	this.Type.Visible = false;
+        	// 
         	// KompasName_ComboBox
         	// 
         	this.KompasName_ComboBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -386,12 +392,6 @@
         	this.KompasName_ComboBox.Name = "KompasName_ComboBox";
         	this.KompasName_ComboBox.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.KompasName_ComboBox.Width = 140;
-        	// 
-        	// Type
-        	// 
-        	this.Type.HeaderText = "Type";
-        	this.Type.Name = "Type";
-        	this.Type.Visible = false;
         	// 
         	// MainForm
         	// 
