@@ -220,34 +220,18 @@ namespace KMintegrator
                                         i++;
                                     }
                                 }
-
-
-
                                 if (ml_define.Name == "ml:eval") // вычисления
                                 {
                                     ml_id = ml_define.FirstChild;
-
-                                    if (save == true)
-                                    {
                                         foreach (XmlNode result in ml_define.ChildNodes)
                                             if (result.Name == "result")
                                             {
                                                 ml_real = result.FirstChild;
-                                                ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
+												if (save == true)
+													ml_real.InnerText = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
+												else
+												   this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Вычисленная", region_id, "eval");
                                             }
-
-                                    }
-
-                                    else
-                                    {
-                                        foreach (XmlNode result in ml_define.ChildNodes)
-                                            if (result.Name == "result")
-                                            {
-                                                ml_real = result.FirstChild;
-                                                this.TableMathCad.Rows.Add(ml_id.InnerText, ml_real.InnerText, "Вычисленная", region_id, "eval");
-                                            }
-
-                                    }
 
                                     i++;
                                 }
