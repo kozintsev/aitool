@@ -153,7 +153,7 @@ namespace KMintegrator
             return MC;
             
         }
-        private void OpenMathCad(bool recal)
+        private void OpenMathCad(string Path, bool recal)
         {
             if (MC != null)
             {
@@ -162,10 +162,10 @@ namespace KMintegrator
                 for(int i = 0; i < WK.Count; i++)
                 {
                 	WS = WK.Item(i);
-                	if (WS.FullName == LastMathCadPath)
+                	if (WS.FullName == Path)
                 		WS.Close(MCSaveOption.mcSaveChanges);
                 }
-                WS = WK.Open(LastMathCadPath);
+                WS = WK.Open(Path);
                 MC.Visible = true;//recal;
                 if (recal == true)
                 {
@@ -258,8 +258,6 @@ namespace KMintegrator
                 MessageBox.Show("Не могу сохранить! Возможно файл открыт только для чтения!", "Ошибка",
                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
         } // end MathCadParse
         
         private void Clear_All()
@@ -671,17 +669,14 @@ namespace KMintegrator
             //    WS.Close(MCSaveOption.mcSaveChanges);
 
             // Открываем файл маткада, пересчитываем, заносим в таблицу вычисленные, закрываем
-            OpenMathCad(true);
-
-            // Заносим значения переменных маткада из таблицы в файл
-            MathCadParser(LastMathCadPath, true);
+            OpenMathCad(LastMathCadPath, true);
 
             // Считываем значение из файла маткада в таблицу
-            //MathCadParser(LastMathCadPath, false);
+            MathCadParser(LastMathCadPath, false);
 
             AddKompasCombo();
             // Просто открываем файл маткада
-            OpenMathCad(false);
+            OpenMathCad(LastMathCadPath, false);
         }
 
     
