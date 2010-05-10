@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -138,20 +138,19 @@ namespace KMintegrator
             }
         }
      
-        private bool InitMathCad()
+        private Mathcad.Application InitMathCad()
         {
-            bool err = true;
         	try
         	{
-                MC = new Mathcad.Application();
+                if (MC == null ) MC = new Mathcad.Application();
         	}
             catch
             {
             	MessageBox.Show("MathCAD не установлен. Пересчёт не возможен.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            	err = false;
+            	MC = null;
             }
-            return err;
+            return MC;
             
         }
         private void OpenMathCad(bool recal)
@@ -305,22 +304,21 @@ namespace KMintegrator
 			 int j = 0;
 			 bool start = false;
         	 double d;
-        	 
-           	 NumberFormatInfo provider = new NumberFormatInfo( );
-    	  	 provider.NumberDecimalSeparator = ".";
+           	 //NumberFormatInfo provider = new NumberFormatInfo( );
+    	  	 //provider.NumberDecimalSeparator = ".";
     	 	 //provider.NumberGroupSeparator = ".";
-         	 provider.NumberGroupSizes = new int[ ] { 2 };
+         	 //provider.NumberGroupSizes = new int[ ] { 2 };
          	 
 			for (int i = 0; i< s.Length; i++)
 			{
 				if ( (s[i] == '.') || (s[i] == ',') ) start = true;
 				if (start) j++;
 				if (j > 3) break;
-				if (s[i] == ',' ) ns = Name + '.';
+				if (s[i] == '.' ) ns = Name + ',';
 					else ns = ns + s[i];
 			}
-			
-			d = Convert.ToDouble(ns , provider);
+			d = Convert.ToDouble(ns);
+			//d = Convert.ToDouble(ns , provider);
 			return d;
         }
         
@@ -654,7 +652,7 @@ namespace KMintegrator
             MathCadParser(LastMathCadPath, true);
             // Инициализация маткада выполняется если маткад еще не запущен
             // Это функциия возвражает значение, ты упорно это игнорируешь
-			 if (!InitMathCad()) return;
+			if (InitMathCad() == null) return;
             // Закрытие файла маткада перед запуском парсера
             // То что ниже работать не будет потому что MS не открыт 
             //if (MC != null)
