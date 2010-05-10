@@ -170,14 +170,14 @@ namespace KMintegrator
                 if (recal == true)
                 {
                     WS.Recalculate();
-
+					WS.Save();
 
                     for (int j = 0; j < TableMathCad.Rows.Count; j++)
                     {
                         if (this.TableMathCad.Rows[j].Cells[4].Value.ToString() == "eval")
                         {
                             this.TableMathCad.Rows[j].Cells[1].Value =
-                                (WS.GetValue(this.TableMathCad.Rows[j].Cells[0].Value.ToString()) as NumericValue).Real;
+                            	(WS.GetValue(this.TableMathCad.Rows[j].Cells[0].Value.ToString()) as NumericValue).Real.ToString();
                             //ConverToDouble((WS.GetValue(this.TableMathCad.Rows[j].Cells[0].Value.ToString()) as NumericValue).Real.ToString()).ToString();
                         }
 
@@ -663,15 +663,12 @@ namespace KMintegrator
             // Инициализация маткада выполняется если маткад еще не запущен
             // Это функциия возвражает значение, ты упорно это игнорируешь
 			if (InitMathCad() == null) return;
-            // Закрытие файла маткада перед запуском парсера
-            // То что ниже работать не будет потому что MS не открыт
-            //if (MC != null)
-            //    WS.Close(MCSaveOption.mcSaveChanges);
 
             // Открываем файл маткада, пересчитываем, заносим в таблицу вычисленные, закрываем
             OpenMathCad(LastMathCadPath, true);
 
             // Считываем значение из файла маткада в таблицу
+            MathCadParser(LastMathCadPath, true);
             MathCadParser(LastMathCadPath, false);
 
             AddKompasCombo();
