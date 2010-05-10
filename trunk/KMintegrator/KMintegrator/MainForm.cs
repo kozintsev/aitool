@@ -158,7 +158,14 @@ namespace KMintegrator
             if (MC != null)
             {
                 WK = MC.Worksheets;
-                WS = WK.Open(MathCadPath.Text);
+                //WK.Count
+                for(int i = 0; i < WK.Count; i++)
+                {
+                	WS = WK.Item(i);
+                	if (WS.FullName == LastMathCadPath)
+                		WS.Close(MCSaveOption.mcSaveChanges);
+                }
+                WS = WK.Open(LastMathCadPath);
                 MC.Visible = true;//recal;
                 if (recal == true)
                 {
@@ -192,7 +199,12 @@ namespace KMintegrator
             int i = 0;
             string region_id;
             XmlDocument xd = new XmlDocument();
+            try{
             xd.Load(MathPath);
+            }
+            catch{
+            	return;
+            }
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
             XmlNode ml_id, ml_real;
             if (save == false) this.TableMathCad.Rows.Clear();
@@ -654,7 +666,7 @@ namespace KMintegrator
             // Это функциия возвражает значение, ты упорно это игнорируешь
 			if (InitMathCad() == null) return;
             // Закрытие файла маткада перед запуском парсера
-            // То что ниже работать не будет потому что MS не открыт 
+            // То что ниже работать не будет потому что MS не открыт
             //if (MC != null)
             //    WS.Close(MCSaveOption.mcSaveChanges);
 
