@@ -288,7 +288,7 @@ namespace KMintegrator
         	// Выбираем нулевой элемент для каждой ячейки в комбо-бокс-столбце в таблице внешних переменных Маткада
             for (int i = 0; i < TableMathCad.Rows.Count; i++)
             {
-                this.KompasName_ComboBox.DataGridView.Rows[i].Cells[4].Value = this.KompasName_ComboBox.Items[0];
+                this.KompasName_ComboBox.DataGridView.Rows[i].Cells[5].Value = this.KompasName_ComboBox.Items[0];
             }
         }               
         private void AddKompasCombo()
@@ -398,6 +398,7 @@ namespace KMintegrator
 
         private bool OpenProject(string path)
         {
+        	string s;
         	XmlDocument xd = new XmlDocument();
         	try{
             xd.Load(path);
@@ -412,12 +413,21 @@ namespace KMintegrator
             		foreach (XmlNode xnc in xnf)
 					{
             			//switch (xnc.Name) 
+            			s = xnc.InnerText;
+            			//TableTop
+            			//TableBottom
             			switch(xnc.Name){
             				case "kompas":
             					this.LastPathKompas = xnc.InnerText;
             					break;
             				case "mcad":
             					this.LastMathCadPath = xnc.InnerText;
+            					break;
+            				case "TableTop":
+            					s = xnc.Attributes[1].Value; // получить имя в InnerText будет значение
+            					break;
+            				case "TableBottom":
+            					s = xnc.Value;
             					break;
             			}
 					}
@@ -461,6 +471,7 @@ namespace KMintegrator
             
             // начинаем сохранять
 			XmlTextWriter writer = null;
+
 			try
 			{
 				// создаем класс для сохранения XML
@@ -491,8 +502,8 @@ namespace KMintegrator
 					for (int i = 0; i < this.TableMathCad.Rows.Count; i++)
                     {
                         str1 = this.TableMathCad.Rows[i].Cells[0].Value.ToString();
-                        str2 = this.TableMathCad.Rows[i].Cells[4].Value.ToString();
-                        str3 = this.TableMathCad.Rows[i].Cells[3].Value.ToString();
+                        str2 = this.TableMathCad.Rows[i].Cells[5].Value.ToString();
+                        str3 = this.TableMathCad.Rows[i].Cells[4].Value.ToString();
                         writer.WriteStartElement("TableTop");
 						writer.WriteAttributeString("id", Convert.ToString(i + 1));
 						writer.WriteAttributeString("name", str1);
@@ -500,7 +511,7 @@ namespace KMintegrator
 						writer.WriteString(str2);
 						writer.WriteEndElement(); // конец тега TableTop
 					}
-				
+			
 					for (int j = 0; j < this.TableKompas3D.Rows.Count; j++)
 					{
 						str1 = this.TableKompas3D.Rows[j].Cells[0].Value.ToString();
@@ -511,7 +522,7 @@ namespace KMintegrator
 						writer.WriteString(str2);
 						writer.WriteEndElement(); // конец тега TableBottom
 					}
-			
+					
 					writer.WriteEndElement(); // конец table
 				
 				writer.WriteEndElement(); // конец project
@@ -573,6 +584,7 @@ namespace KMintegrator
                 OpenFileKompas(LastPathKompas);
                 KompasRefresh();
                 AddMathCadCombo();
+                AddKompasCombo();
             }
 
         }
@@ -588,6 +600,7 @@ namespace KMintegrator
                 MathCadPath.Text = OpenFileDialog.FileName;
                 LastMathCadPath = MathCadPath.Text;
                 MathCadParser(LastMathCadPath, false);
+                AddMathCadCombo();
                 AddKompasCombo();
             }
             
