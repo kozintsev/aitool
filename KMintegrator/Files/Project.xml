@@ -2,26 +2,12 @@
 <project>
   <file>
     <kompas>D:\svn\aitool\KMintegrator\Files\2Cilinder.a3d</kompas>
-    <mcad>D:\svn\aitool\KMintegrator\Files\calculation.xmcd</mcad>
+    <mcad>D:\svn\aitool\KMintegrator\Files\test.xmcd</mcad>
   </file>
   <table>
-    <TableTop id="1" name="λ" type="define">empty</TableTop>
-    <TableTop id="2" name="a" type="define">empty</TableTop>
-    <TableTop id="3" name="D" type="define">empty</TableTop>
-    <TableTop id="4" name="la" type="eval">empty</TableTop>
-    <TableTop id="5" name="ξопт" type="eval">empty</TableTop>
-    <TableTop id="6" name="ξопт" type="define">empty</TableTop>
-    <TableTop id="7" name="t" type="eval">empty</TableTop>
-    <TableTop id="8" name="x" type="eval">empty</TableTop>
-    <TableTop id="9" name="h" type="eval">empty</TableTop>
-    <TableTop id="10" name="a" type="define">empty</TableTop>
-    <TableTop id="11" name="b" type="define">empty</TableTop>
-    <TableTop id="12" name="G" type="define">empty</TableTop>
-    <TableTop id="13" name="Sa" type="eval">empty</TableTop>
-    <TableTop id="14" name="b1" type="eval">empty</TableTop>
-    <TableTop id="15" name="a1" type="eval">empty</TableTop>
-    <TableTop id="16" name="RH" type="eval">empty</TableTop>
-    <TableTop id="17" name="l" type="eval">empty</TableTop>
+    <TableTop id="1" name="H" type="define">empty</TableTop>
+    <TableTop id="2" name="S" type="define">empty</TableTop>
+    <TableTop id="3" name="R" type="eval">empty</TableTop>
     <TableBottom id="1" name="R">empty</TableBottom>
     <TableBottom id="2" name="H">empty</TableBottom>
   </table>
