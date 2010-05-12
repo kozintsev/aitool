@@ -48,12 +48,22 @@ namespace KMintegrator
         Mathcad.Worksheet WS;
         bool Save = false;
         
-        List<string> nametop = new List<string>();
-   		List<string> typetop = new List<string>();
-      	List<string> valtop = new List<string>();
-      		
-        List<string> namebot = new List<string>();
-   		List<string> valbot = new List<string>();  
+        class VarTopTable {
+        	public string name;
+        	public string type;
+        	public string val;
+        	
+        }
+        
+        class VarBotTable
+        {
+        	public string name;
+        	public string val;
+        }
+        
+        List<VarTopTable> VarTop;
+        List<VarBotTable> VarBot;
+ 
        
         #endregion
 
@@ -407,14 +417,16 @@ namespace KMintegrator
         {
         	//string s;
         	//int i;
-        	  
-   			nametop.Clear();
-      		typetop.Clear();
-      		valtop.Clear();
-      		valtop.Clear();
-      			
-      		namebot.Clear();
-      		valbot.Clear();
+        	
+        	VarTopTable VarT = new VarTopTable();
+        	VarTop = new List<VarTopTable>();
+        	VarBotTable VarB = new VarBotTable();
+        	VarBot = new List<VarBotTable>();
+        	
+        	VarTop.Clear();
+        	VarBot.Clear();
+
+       
       		
         	XmlDocument xd = new XmlDocument();
         	try{
@@ -440,21 +452,19 @@ namespace KMintegrator
             					this.LastMathCadPath = xnc.InnerText;
             					break;
             				case "TableTop":
-            					nametop.Add(xnc.Attributes[1].Value); // получить имя в InnerText будет значение
-            					typetop.Add(xnc.Attributes[2].Value);
-            					valtop.Add(xnc.InnerText);
+            					VarT.name = xnc.Attributes[1].Value;
+            					VarT.type = xnc.Attributes[2].Value;
+            					VarT.val = xnc.InnerText;
+            					VarTop.Add(VarT);
             					break;
             				case "TableBottom":
-            					namebot.Add(xnc.Attributes[1].Value);
-            					valbot.Add(xnc.InnerText);
+            					VarB.name = xnc.Attributes[1].Value;
+            					VarB.val = xnc.InnerText;
+            					VarBot.Add(VarB);
             					//s = xnc.Value;
             					break;
             			}
-					}
-            	//s1 = xn.SelectSingleNode("kompas").InnerText;
-				//this.LastMathCadPath
-				//s2 = xn.SelectSingleNode("mcad").InnerText;
-				
+					}				
             }
         	}
         	catch
