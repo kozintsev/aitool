@@ -101,6 +101,7 @@ namespace KMintegrator
             if (kompas != null)
             {
                     doc3D = (ksDocument3D)kompas.Document3D();
+                    
                     if (doc3D != null) doc3D.Open(filename, false);
 
                     kompas.Visible = true;
