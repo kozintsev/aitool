@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Globalization;
-//using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -47,13 +47,20 @@ namespace KMintegrator
         Mathcad.Worksheets WK;        
         Mathcad.Worksheet WS;
         bool Save = false;
+        
+        List<string> nametop = new List<string>();
+   		List<string> typetop = new List<string>();
+      	List<string> valtop = new List<string>();
+      		
+        List<string> namebot = new List<string>();
+   		List<string> valbot = new List<string>();  
        
         #endregion
 
 
 
         #region Custom functions
-
+        
 
         private bool InitKompas()
         {
@@ -398,7 +405,17 @@ namespace KMintegrator
 
         private bool OpenProject(string path)
         {
-        	string s;
+        	//string s;
+        	//int i;
+        	  
+   			nametop.Clear();
+      		typetop.Clear();
+      		valtop.Clear();
+      		valtop.Clear();
+      			
+      		namebot.Clear();
+      		valbot.Clear();
+      		
         	XmlDocument xd = new XmlDocument();
         	try{
             xd.Load(path);
@@ -412,10 +429,9 @@ namespace KMintegrator
 					xnf = xn.ChildNodes;
             		foreach (XmlNode xnc in xnf)
 					{
-            			//switch (xnc.Name) 
-            			s = xnc.InnerText;
-            			//TableTop
-            			//TableBottom
+            			
+            			//s = xnc.InnerText;
+            			
             			switch(xnc.Name){
             				case "kompas":
             					this.LastPathKompas = xnc.InnerText;
@@ -424,10 +440,14 @@ namespace KMintegrator
             					this.LastMathCadPath = xnc.InnerText;
             					break;
             				case "TableTop":
-            					s = xnc.Attributes[1].Value; // получить имя в InnerText будет значение
+            					nametop.Add(xnc.Attributes[1].Value); // получить имя в InnerText будет значение
+            					typetop.Add(xnc.Attributes[2].Value);
+            					valtop.Add(xnc.InnerText);
             					break;
             				case "TableBottom":
-            					s = xnc.Value;
+            					namebot.Add(xnc.Attributes[1].Value);
+            					valbot.Add(xnc.InnerText);
+            					//s = xnc.Value;
             					break;
             			}
 					}
