@@ -50,6 +50,7 @@ namespace KMintegrator
         
         class VarTopTable {
         	public string name;
+        	public string nameval;
         	public string type;
         	public string val;
         	
@@ -58,6 +59,7 @@ namespace KMintegrator
         class VarBotTable
         {
         	public string name;
+        	public string nameval;
         	public string val;
         }
         
@@ -455,14 +457,15 @@ namespace KMintegrator
             				case "TableTop":
             					VarT.name = xnc.Attributes[1].Value;
             					VarT.type = xnc.Attributes[2].Value;
+            					VarT.nameval = xnc.Attributes[3].Value;
             					VarT.val = xnc.InnerText;
             					VarTop.Add(VarT);
             					break;
             				case "TableBottom":
             					VarB.name = xnc.Attributes[1].Value;
+            					VarB.nameval = xnc.Attributes[2].Value;
             					VarB.val = xnc.InnerText;
             					VarBot.Add(VarB);
-            					//s = xnc.Value;
             					break;
             			}
 					}				
@@ -493,7 +496,7 @@ namespace KMintegrator
         
         private bool SaveProject()
         {
-        	string str1, str2, str3;
+        	string str1, str2, str3, str4;
         	SaveFileDialog SaveFileDialog = new SaveFileDialog();
         	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
         	if (SaveFileDialog.ShowDialog() != DialogResult.OK)
@@ -535,10 +538,12 @@ namespace KMintegrator
                         str1 = this.TableMathCad.Rows[i].Cells[0].Value.ToString();
                         str2 = this.TableMathCad.Rows[i].Cells[5].Value.ToString();
                         str3 = this.TableMathCad.Rows[i].Cells[4].Value.ToString();
+                        str4 = this.TableMathCad.Rows[i].Cells[1].Value.ToString();
                         writer.WriteStartElement("TableTop");
 						writer.WriteAttributeString("id", Convert.ToString(i + 1));
 						writer.WriteAttributeString("name", str1);
 						writer.WriteAttributeString("type", str3);
+						writer.WriteAttributeString("val", str4);
 						writer.WriteString(str2);
 						writer.WriteEndElement(); // конец тега TableTop
 					}
@@ -547,9 +552,11 @@ namespace KMintegrator
 					{
 						str1 = this.TableKompas3D.Rows[j].Cells[0].Value.ToString();
 						str2 = this.TableKompas3D.Rows[j].Cells[3].Value.ToString();
+						str3 = this.TableKompas3D.Rows[j].Cells[1].Value.ToString();
 						writer.WriteStartElement("TableBottom");
 						writer.WriteAttributeString("id", Convert.ToString(j + 1));
 						writer.WriteAttributeString("name", str1);
+						writer.WriteAttributeString("val", str3);
 						writer.WriteString(str2);
 						writer.WriteEndElement(); // конец тега TableBottom
 					}
@@ -745,10 +752,10 @@ namespace KMintegrator
 
             // Обновляем таблицу Компас-3D
             KompasRefresh();
-            AddMathCadCombo();
-
             // Обновляем таблицу Маткада
             MathCadParser(MathCadPath.Text, false);
+            
+            AddMathCadCombo();
             AddKompasCombo();           
 
         }
@@ -770,10 +777,17 @@ namespace KMintegrator
 				// Открываем файл Компас-3D
 				OpenFileKompas(LastPathKompas);
 				KompasRefresh();
-				AddMathCadCombo();
-
  				MathCadParser(LastMathCadPath, false);
+ 				AddMathCadCombo();
  				AddKompasCombo();
+ 				// устанавливаем значения в верхней таблицы
+ 				if (TableMathCad.RowCount != VarTop.Count)
+ 					return;
+ 				for (int i = 0; i < TableMathCad.RowCount; i++)
+ 				{
+            	
+ 					this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[5].Value = VarTop[i].val;
+            	}
             }
         	
         }          
