@@ -1,0 +1,14 @@
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\obj\Debug\ResolveAssemblyReference.cache
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\obj\Debug\IntegratorKM_Lite.IntegratorKM_Lite.resources
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\obj\Debug\IntegratorKM_Lite.Properties.Resources.resources
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\obj\Debug\IntegratorKM_Lite.csproj.GenerateResource.Cache
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\bin\Debug\IntegratorKM_Lite.exe
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\bin\Debug\IntegratorKM_Lite.pdb
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\bin\Debug\interop.mathcad.dll
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\bin\Debug\KAPITypes.dll
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\bin\Debug\Kompas6API5.dll
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\bin\Debug\Kompas6Constants.dll
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\bin\Debug\Kompas6Constants3D.dll
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\bin\Debug\Kompas6LTAPI5.dll
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\obj\Debug\IntegratorKM_Lite.exe
+E:\CODE\Projects_VS\IntegratorKM_Lite\IntegratorKM_Lite\obj\Debug\IntegratorKM_Lite.pdb
