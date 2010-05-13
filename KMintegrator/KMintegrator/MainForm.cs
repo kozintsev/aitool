@@ -421,9 +421,8 @@ namespace KMintegrator
         	//string s;
         	//int i;
         	
-        	VarTopTable VarT = new VarTopTable();
+        	
         	VarTop = new List<VarTopTable>();
-        	VarBotTable VarB = new VarBotTable();
         	VarBot = new List<VarBotTable>();
         	
         	VarTop.Clear();
@@ -455,6 +454,7 @@ namespace KMintegrator
             					this.LastMathCadPath = xnc.InnerText;
             					break;
             				case "TableTop":
+            					VarTopTable VarT = new VarTopTable();
             					VarT.name = xnc.Attributes[1].Value;
             					VarT.type = xnc.Attributes[2].Value;
             					VarT.nameval = xnc.Attributes[3].Value;
@@ -462,6 +462,7 @@ namespace KMintegrator
             					VarTop.Add(VarT);
             					break;
             				case "TableBottom":
+            					VarBotTable VarB = new VarBotTable();
             					VarB.name = xnc.Attributes[1].Value;
             					VarB.nameval = xnc.Attributes[2].Value;
             					VarB.val = xnc.InnerText;
@@ -783,11 +784,26 @@ namespace KMintegrator
  				// устанавливаем значения в верхней таблицы
  				if (TableMathCad.RowCount != VarTop.Count)
  					return;
+ 				if (TableKompas3D.RowCount != VarBot.Count)
+ 					return;
+ 				try{
  				for (int i = 0; i < TableMathCad.RowCount; i++)
  				{
-            	
- 					this.MathCadName_ComboBox.DataGridView.Rows[i].Cells[5].Value = VarTop[i].val;
+ 					this.TableMathCad.Rows[i].Cells[1].Value = VarTop[i].nameval;
+ 					this.KompasName_ComboBox.DataGridView.Rows[i].Cells[5].Value = VarTop[i].val;
             	}
+ 				for (int j = 0; j < TableKompas3D.RowCount; j++)
+ 				{
+ 					if (this.TableKompas3D.Rows[j].Cells[1].Value.ToString() == VarBot[j].name) // если имена совпадают
+ 					{
+ 						this.TableKompas3D.Rows[j].Cells[1].Value = VarBot[j].nameval;
+ 						this.MathCadName_ComboBox.DataGridView.Rows[j].Cells[3].Value = VarBot[j].val;
+ 					}
+ 				}
+ 				}
+ 				catch{
+ 					MessageBox.Show("Error Open Conn");
+ 				}
             }
         	
         }          
@@ -823,7 +839,8 @@ namespace KMintegrator
             }
             catch
             {
-                return;
+                MessageBox.Show("Error");
+            	return;
             }
             finally
             {
@@ -835,19 +852,21 @@ namespace KMintegrator
         {      	
         	try
             {
-        	if (e.ColumnIndex == 4)
+        	if (e.ColumnIndex == 5)
                 this.TableMathCad.Rows[e.RowIndex].Cells[1].Value =
                     this.TableKompas3D.Rows[KompasName_ComboBox.Items.IndexOf(
-                        this.TableMathCad.Rows[e.RowIndex].Cells[4].Value) - 1].Cells[1].Value;
+                        this.TableMathCad.Rows[e.RowIndex].Cells[5].Value) - 1].Cells[1].Value;
             }
             catch
             {
+            	MessageBox.Show("Error");
             	return;
             }
             finally
             {
-            	this.TableKompas3D.Update();
+            	this.TableMathCad.Update();
             }
         }
+        
     }
 }

@@ -7,7 +7,7 @@
   <table>
     <TableTop id="1" name="H" type="define" val="100">empty</TableTop>
     <TableTop id="2" name="S" type="define" val="170">empty</TableTop>
-    <TableTop id="3" name="R" type="eval" val="7,35613218010963">R</TableTop>
+    <TableTop id="3" name="R" type="eval" val="7,97">R</TableTop>
     <TableBottom id="1" name="R" val="7,97">empty</TableBottom>
     <TableBottom id="2" name="H" val="100">H</TableBottom>
   </table>
