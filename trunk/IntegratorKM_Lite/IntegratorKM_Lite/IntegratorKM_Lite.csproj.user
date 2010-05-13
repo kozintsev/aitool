@@ -1,0 +1,5 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ReferencePath>C:\Program Files\ASCON\KOMPAS-3D V10\SDK\C#\Common\;C:\Program Files\Mathcad\Mathcad 14\</ReferencePath>
+  </PropertyGroup>
+</Project>
