@@ -794,11 +794,11 @@ namespace KMintegrator
             	}
  				for (int j = 0; j < TableKompas3D.RowCount; j++)
  				{
- 					if (this.TableKompas3D.Rows[j].Cells[1].Value.ToString() == VarBot[j].name) // если имена совпадают
- 					{
+ 					//if (this.TableKompas3D.Rows[j].Cells[1].Value.ToString() == VarBot[j].name) // если имена совпадают
+ 					//{
  						this.TableKompas3D.Rows[j].Cells[1].Value = VarBot[j].nameval;
  						this.MathCadName_ComboBox.DataGridView.Rows[j].Cells[3].Value = VarBot[j].val;
- 					}
+ 					//}
  				}
  				}
  				catch{
