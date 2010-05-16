@@ -392,26 +392,31 @@ namespace KMintegrator
 
         private void Exit_MathCad()
         {
-        	if (MC != null)
+            if (MC != null)
             {               
         		try
             	{
             		//MC.Visible = true;
             		DialogResult reply = DialogResult.No;
-            		if (MC.Visible == true) reply = MessageBox.Show("Закрыть MathCAD?",
-           				 "Вопрос",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            		else MC.Quit(MCSaveOption.mcSaveChanges);
-            		if (reply == DialogResult.Yes) MC.Quit(MCSaveOption.mcDiscardChanges);
+                    if (MC.Visible == true) reply = MessageBox.Show("Закрыть MathCAD?",
+                         "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    else
+                    {
+                        MC.Quit(MCSaveOption.mcDiscardChanges);
+                        Marshal.ReleaseComObject(MC);
+                    }
+                    if (reply == DialogResult.Yes)
+                    {
+                        MC.Quit(MCSaveOption.mcSaveChanges);
+                        Marshal.ReleaseComObject(MC);
+                    }
             	}
             	catch
             	{
             		MessageBox.Show("MathCAD уже закрыт или не может быть закрыт", "Сообщение",
                    				 MessageBoxButtons.OK, MessageBoxIcon.Information);	
             	}
-            	finally
-            	{
-            		Marshal.ReleaseComObject(MC);	
-            	}
+            	
             	       
             }
         }
@@ -781,6 +786,7 @@ namespace KMintegrator
  				MathCadParser(LastMathCadPath, false);
  				AddMathCadCombo();
  				AddKompasCombo();
+                Save = true;
  				// устанавливаем значения в верхней таблицы
  				if (TableMathCad.RowCount != VarTop.Count)
  					return;
