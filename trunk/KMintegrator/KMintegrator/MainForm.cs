@@ -501,16 +501,22 @@ namespace KMintegrator
             return true;
         } // end OpenProject
         
-        private bool SaveProject()
+        private bool SaveProject(string path)
         {
         	string str1, str2, str3, str4;
-        	SaveFileDialog SaveFileDialog = new SaveFileDialog();
-        	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
-        	if (SaveFileDialog.ShowDialog() != DialogResult.OK)
-              return false;
-        	LastProjectPath = SaveFileDialog.FileName;
-            ProjectPath.Text = LastProjectPath;
-            
+        	
+        	if (!File.Exists(path))
+        	{
+        		SaveFileDialog SaveFileDialog = new SaveFileDialog();
+        		SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
+        		if (SaveFileDialog.ShowDialog() != DialogResult.OK)
+              		return false;
+        		LastProjectPath = SaveFileDialog.FileName;
+            	ProjectPath.Text = LastProjectPath;
+        	}
+        	
+        	path = LastProjectPath;
+        	
             FileInfo filekompas = new FileInfo(LastPathKompas);
             FileInfo filemcad = new FileInfo(LastMathCadPath);
             // начинаем сохранять
@@ -521,7 +527,7 @@ namespace KMintegrator
 			try
 			{
 				// создаем класс для сохранения XML
-				writer = new XmlTextWriter(SaveFileDialog.FileName, System.Text.Encoding.UTF8);
+				writer = new XmlTextWriter(path, System.Text.Encoding.UTF8);
 				// форматирование, чтобы файл не был вытянут в одну линию
 				writer.Formatting = Formatting.Indented;
 
@@ -594,6 +600,8 @@ namespace KMintegrator
 				if (writer != null) writer.Close();
 			}
         	Save = true;
+        	MessageBox.Show("Проект сохранён!",
+        	                "Проект", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			return Save;
         } // end SaveProject()
 
@@ -612,9 +620,9 @@ namespace KMintegrator
                 DialogResult reply = MessageBox.Show("Сохранить проект?",
                             "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (reply == DialogResult.Yes)
-                    SaveProject();
+                		SaveProject(LastProjectPath);          
             }
-        }      
+        }   // MainForm_FormClosing   
 
         #endregion
   		
@@ -827,12 +835,25 @@ namespace KMintegrator
         void Save_ProjectClick(object sender, EventArgs e)
         {
         	if (  (this.LastPathKompas.Length > 2) && (this.LastMathCadPath.Length > 2) )
-        	 	SaveProject();
+        	{
+        	 	SaveProject(LastProjectPath);
+        	}
         	else
         		MessageBox.Show("Нет данных для сохранения", "Информация",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
         	
-        }       
+        } //     Save_ProjectClick  
+        
+        void SaveAsClick(object sender, EventArgs e)
+        {
+        	if (  (this.LastPathKompas.Length > 2) && (this.LastMathCadPath.Length > 2) )
+        	{
+        	 	SaveProject("");
+        	}
+        	else
+        		MessageBox.Show("Нет данных для сохранения", "Информация",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);     	
+        }
 
         
         
@@ -884,5 +905,7 @@ namespace KMintegrator
             }
         }
         
+        
+
     }
 }
