@@ -589,9 +589,9 @@ namespace KMintegrator
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "Error!");
-				//MessageBox.Show("Проект не сохранён!", "Ошибка",
-                //    MessageBoxButtons.OK, MessageBoxIcon.Error);
+				//MessageBox.Show(ex.Message, "Error!");
+				MessageBox.Show("Проект не сохранён!\n" + ex.Message, "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
 			finally
