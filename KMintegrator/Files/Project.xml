@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
-    <kompas>D:\svn\aitool\KMintegrator\Files\2Cilinder.a3d</kompas>
-    <mcad>D:\svn\aitool\KMintegrator\Files\test.xmcd</mcad>
+    <kompas>2Cilinder.a3d</kompas>
+    <mcad>test.xmcd</mcad>
   </file>
   <table>
     <TableTop id="1" name="H" type="define" val="100">empty</TableTop>

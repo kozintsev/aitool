@@ -426,7 +426,8 @@ namespace KMintegrator
         	//string s;
         	//int i;
         	
-        	
+        	FileInfo fileproject = new FileInfo(path);
+        	string dirpath = fileproject.DirectoryName + "\\";
         	VarTop = new List<VarTopTable>();
         	VarBot = new List<VarBotTable>();
         	
@@ -453,10 +454,10 @@ namespace KMintegrator
             			
             			switch(xnc.Name){
             				case "kompas":
-            					this.LastPathKompas = xnc.InnerText;
+            					this.LastPathKompas = dirpath + xnc.InnerText;
             					break;
             				case "mcad":
-            					this.LastMathCadPath = xnc.InnerText;
+            					this.LastMathCadPath = dirpath + xnc.InnerText;
             					break;
             				case "TableTop":
             					VarTopTable VarT = new VarTopTable();
@@ -507,10 +508,15 @@ namespace KMintegrator
         	SaveFileDialog.Filter  = "Документ XML (*.xml)|*.xml;";
         	if (SaveFileDialog.ShowDialog() != DialogResult.OK)
               return false;
-            ProjectPath.Text = SaveFileDialog.FileName;
+        	LastProjectPath = SaveFileDialog.FileName;
+            ProjectPath.Text = LastProjectPath;
             
+            FileInfo filekompas = new FileInfo(LastPathKompas);
+            FileInfo filemcad = new FileInfo(LastMathCadPath);
             // начинаем сохранять
 			XmlTextWriter writer = null;
+			
+			
 
 			try
 			{
@@ -526,12 +532,13 @@ namespace KMintegrator
 				writer.WriteStartElement("file");
 				
 				 writer.WriteStartElement("kompas");
-				 writer.WriteString(LastPathKompas);
+				 
+				 writer.WriteString(filekompas.Name);
 				 writer.WriteEndElement(); // end kompas
 				
 				 
 				 writer.WriteStartElement("mcad");
-				 writer.WriteString(LastMathCadPath);
+				 writer.WriteString(filemcad.Name);
 				 writer.WriteEndElement(); // end mathcad
 				
 				 writer.WriteEndElement(); // Конец file
@@ -775,6 +782,8 @@ namespace KMintegrator
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 LastProjectPath = OpenFileDialog.FileName;
+                FileInfo file = new FileInfo(LastProjectPath);
+                string filepath = file.DirectoryName;
                 ProjectPath.Text = LastProjectPath;
                 if ( !OpenProject(LastProjectPath) ) return;
                 
@@ -808,7 +817,8 @@ namespace KMintegrator
  				}
  				}
  				catch{
- 					MessageBox.Show("Error Open Conn");
+ 					MessageBox.Show("Ошибка при востановлении связей", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
  				}
             }
         	
