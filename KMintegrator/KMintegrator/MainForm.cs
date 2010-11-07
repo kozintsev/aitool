@@ -810,11 +810,13 @@ namespace KMintegrator
  				if (TableKompas3D.RowCount != VarBot.Count)
  					return;
  				try{
+ 				//верхная таблица
  				for (int i = 0; i < TableMathCad.RowCount; i++)
  				{
  					this.TableMathCad.Rows[i].Cells[1].Value = VarTop[i].nameval;
  					this.KompasName_ComboBox.DataGridView.Rows[i].Cells[5].Value = VarTop[i].val;
             	}
+ 				//нижная таблица
  				for (int j = 0; j < TableKompas3D.RowCount; j++)
  				{
  					//if (this.TableKompas3D.Rows[j].Cells[1].Value.ToString() == VarBot[j].name) // если имена совпадают
