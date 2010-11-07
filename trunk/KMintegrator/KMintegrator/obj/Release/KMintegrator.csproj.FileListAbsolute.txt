@@ -1,7 +1,3 @@
-D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\ResolveAssemblyReference.cache
-D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.MainForm.resources
-D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.Properties.Resources.resources
-D:\svn\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.csproj.GenerateResource.Cache
 E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.exe
 E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.pdb
 E:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\interop.mathcad.dll
@@ -16,8 +12,12 @@ E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.Properties.Reso
 E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.csproj.GenerateResource.Cache
 E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.exe
 E:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.pdb
-D:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.exe
-D:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.pdb
-D:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.exe
-D:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.pdb
+d:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.exe
+d:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\KMintegrator.pdb
 d:\SVN\aitool\KMintegrator\KMintegrator\bin\Release\interop.mathcad.dll
+d:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\ResolveAssemblyReference.cache
+d:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.MainForm.resources
+d:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.Properties.Resources.resources
+d:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.csproj.GenerateResource.Cache
+d:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.exe
+d:\SVN\aitool\KMintegrator\KMintegrator\obj\Release\KMintegrator.pdb
