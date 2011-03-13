@@ -52,6 +52,7 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConnectDB.cs" />
     <Compile Include="DocumentManager.cs">
       <SubType>Form</SubType>
     </Compile>

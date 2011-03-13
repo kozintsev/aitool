@@ -6,12 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.OleDb;// пространство имён для подключение к БД 
 
 namespace AiToolGui
 {
     public partial class AITool : Form
     {
-        private int childFormNumber = 0;
+        //private int childFormNumber = 0;
 
         Form childForm;
         Form AboutBox;
@@ -21,6 +22,19 @@ namespace AiToolGui
         public AITool()
         {
             InitializeComponent();
+        }
+
+        public void ConnectDataBase()
+        {
+            string ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=D:\\ВМИ\\For ADO\\BDTur_firm.mdb"; 
+			try{
+			 OleDbConnection conn = new OleDbConnection();
+             conn.ConnectionString = ConnectionString;
+			}
+			catch{
+            	   	MessageBox.Show("Ошибка подключения к База данных", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -130,11 +144,16 @@ namespace AiToolGui
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjectManager = new ProjectManager();
+        	ProjectManager = new ProjectManager();
             childForm = new Form();
             childForm = ProjectManager;
             childForm.MdiParent = this;
             childForm.Show();
+        }
+
+        private void AITool_VisibleChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
