@@ -98,8 +98,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 328);
             this.Controls.Add(this.Close);
-            this.Controls.Add(this.CreateProject);
+
             this.Controls.Add(this.listView1);
+           
             this.Text = "NewProject";
             this.ResumeLayout(false);
 
@@ -108,7 +109,7 @@
         #endregion
 
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button CreateProject;
+		private System.Windows.Forms.Button CreateProject;
         private System.Windows.Forms.Button Close;
         private System.Windows.Forms.ColumnHeader Name;
         private System.Windows.Forms.ColumnHeader Description;
