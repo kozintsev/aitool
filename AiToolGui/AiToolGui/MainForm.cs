@@ -25,9 +25,13 @@ namespace AiToolGui
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            childForm = new Form();
+            //childForm = new Form();
+            //childForm.MdiParent = this;
+            //childForm.Text = "Project " + childFormNumber++;
+            //childForm.Show();
+            childForm = new NewProject();
             childForm.MdiParent = this;
-            childForm.Text = "Project " + childFormNumber++;
+            childForm.Text = "Create New Project";
             childForm.Show();
         }
 
