@@ -1,0 +1,344 @@
+
+
+ Dim ERwinWorkspace As Workspace
+ Dim ERwinDatabase As Database
+ Dim ERwinTableDef As TableDef
+ Dim ERwinQueryDef As QueryDef
+ Dim ERwinIndex As Index
+ Dim ERwinField As Field
+ Dim ERwinRelation As Relation 
+  Set ERwinWorkspace = DBEngine.WorkSpaces(0)
+ 
+ Set ERwinDatabase = ERwinWorkspace.OpenDatabase("D:\svn\aitool\Base\aitool.mdb")
+
+
+'  CREATE TABLE Operations
+Set ERwinTableDef = ERwinDatabase.CreateTableDef("Operations")
+Set ERwinField = ERwinTableDef.CreateField("OperationID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("OperationName", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("OperationDesc", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("TypeID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+ERwinDatabase.TableDefs.Append ERwinTableDef
+Set ERwinField = ERwinTableDef.Fields("OperationID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "OperationID:")
+Set ERwinField = ERwinTableDef.Fields("OperationName")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "OperationName:")
+Set ERwinField = ERwinTableDef.Fields("OperationDesc")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "OperationDesc:")
+Set ERwinField = ERwinTableDef.Fields("TypeID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "TypeID:")
+
+
+'  CREATE INDEX XPKOperations
+Set ERwinTableDef = ERwinDatabase.TableDefs("Operations")
+Set ERwinIndex = ERwinTableDef.CreateIndex("XPKOperations")
+Set ERwinField = ERwinIndex.CreateField("OperationID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("TypeID")
+ERwinIndex.Fields.Append ERwinField
+ERwinIndex.Primary = True
+ERwinTableDef.Indexes.Append ERwinIndex
+
+
+'  CREATE TABLE OperationType
+Set ERwinTableDef = ERwinDatabase.CreateTableDef("OperationType")
+Set ERwinField = ERwinTableDef.CreateField("TypeID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("TypeName", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("TypeDesc", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+ERwinDatabase.TableDefs.Append ERwinTableDef
+Set ERwinField = ERwinTableDef.Fields("TypeID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "TypeID:")
+Set ERwinField = ERwinTableDef.Fields("TypeName")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "TypeName:")
+Set ERwinField = ERwinTableDef.Fields("TypeDesc")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "TypeDesc:")
+
+
+'  CREATE INDEX XPKOperationType
+Set ERwinTableDef = ERwinDatabase.TableDefs("OperationType")
+Set ERwinIndex = ERwinTableDef.CreateIndex("XPKOperationType")
+Set ERwinField = ERwinIndex.CreateField("TypeID")
+ERwinIndex.Fields.Append ERwinField
+ERwinIndex.Primary = True
+ERwinTableDef.Indexes.Append ERwinIndex
+
+
+'  CREATE TABLE OperConn
+Set ERwinTableDef = ERwinDatabase.CreateTableDef("OperConn")
+Set ERwinField = ERwinTableDef.CreateField("ID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("ProjectID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("OperationID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("TypeID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+ERwinDatabase.TableDefs.Append ERwinTableDef
+Set ERwinField = ERwinTableDef.Fields("ID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "ID:")
+Set ERwinField = ERwinTableDef.Fields("ProjectID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "ProjectID:")
+Set ERwinField = ERwinTableDef.Fields("OperationID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "OperationID:")
+Set ERwinField = ERwinTableDef.Fields("TypeID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "TypeID:")
+
+
+'  CREATE INDEX XPKOperConn
+Set ERwinTableDef = ERwinDatabase.TableDefs("OperConn")
+Set ERwinIndex = ERwinTableDef.CreateIndex("XPKOperConn")
+Set ERwinField = ERwinIndex.CreateField("ID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("ProjectID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("OperationID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("TypeID")
+ERwinIndex.Fields.Append ERwinField
+ERwinIndex.Primary = True
+ERwinTableDef.Indexes.Append ERwinIndex
+
+
+'  CREATE TABLE Project
+Set ERwinTableDef = ERwinDatabase.CreateTableDef("Project")
+Set ERwinField = ERwinTableDef.CreateField("ProjectID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("ProjectName", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("ProjectDesc", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+ERwinDatabase.TableDefs.Append ERwinTableDef
+Set ERwinField = ERwinTableDef.Fields("ProjectID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "ProjectID:")
+Set ERwinField = ERwinTableDef.Fields("ProjectName")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "ProjectName:")
+Set ERwinField = ERwinTableDef.Fields("ProjectDesc")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "ProjectDesc:")
+
+
+'  CREATE INDEX XPKProject
+Set ERwinTableDef = ERwinDatabase.TableDefs("Project")
+Set ERwinIndex = ERwinTableDef.CreateIndex("XPKProject")
+Set ERwinField = ERwinIndex.CreateField("ProjectID")
+ERwinIndex.Fields.Append ERwinField
+ERwinIndex.Primary = True
+ERwinTableDef.Indexes.Append ERwinIndex
+
+
+'  CREATE TABLE VarConn
+Set ERwinTableDef = ERwinDatabase.CreateTableDef("VarConn")
+Set ERwinField = ERwinTableDef.CreateField("VarConnID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarIDCon", DB_LONG)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("OperationID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("TypeID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarTypeID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+ERwinDatabase.TableDefs.Append ERwinTableDef
+Set ERwinField = ERwinTableDef.Fields("VarConnID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarConnID:")
+Set ERwinField = ERwinTableDef.Fields("VarIDCon")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarIDCon:")
+Set ERwinField = ERwinTableDef.Fields("VarID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarID:")
+Set ERwinField = ERwinTableDef.Fields("OperationID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "OperationID:")
+Set ERwinField = ERwinTableDef.Fields("TypeID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "TypeID:")
+Set ERwinField = ERwinTableDef.Fields("VarTypeID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarTypeID:")
+
+
+'  CREATE INDEX XPKVarConn
+Set ERwinTableDef = ERwinDatabase.TableDefs("VarConn")
+Set ERwinIndex = ERwinTableDef.CreateIndex("XPKVarConn")
+Set ERwinField = ERwinIndex.CreateField("VarConnID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("VarID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("OperationID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("TypeID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("VarTypeID")
+ERwinIndex.Fields.Append ERwinField
+ERwinIndex.Primary = True
+ERwinTableDef.Indexes.Append ERwinIndex
+
+
+'  CREATE TABLE Variables
+Set ERwinTableDef = ERwinDatabase.CreateTableDef("Variables")
+Set ERwinField = ERwinTableDef.CreateField("VarID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarName", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarValue", DB_TEXT, 18)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarDesc", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("OperationID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("TypeID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarTypeID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+ERwinDatabase.TableDefs.Append ERwinTableDef
+Set ERwinField = ERwinTableDef.Fields("VarID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarID:")
+Set ERwinField = ERwinTableDef.Fields("VarName")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarName:")
+Set ERwinField = ERwinTableDef.Fields("VarValue")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarValue:")
+Set ERwinField = ERwinTableDef.Fields("VarDesc")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarDesc:")
+Set ERwinField = ERwinTableDef.Fields("OperationID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "OperationID:")
+Set ERwinField = ERwinTableDef.Fields("TypeID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "TypeID:")
+Set ERwinField = ERwinTableDef.Fields("VarTypeID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarTypeID:")
+
+
+'  CREATE INDEX XPKVariables
+Set ERwinTableDef = ERwinDatabase.TableDefs("Variables")
+Set ERwinIndex = ERwinTableDef.CreateIndex("XPKVariables")
+Set ERwinField = ERwinIndex.CreateField("VarID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("OperationID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("TypeID")
+ERwinIndex.Fields.Append ERwinField
+Set ERwinField = ERwinIndex.CreateField("VarTypeID")
+ERwinIndex.Fields.Append ERwinField
+ERwinIndex.Primary = True
+ERwinTableDef.Indexes.Append ERwinIndex
+
+
+'  CREATE TABLE VarType
+Set ERwinTableDef = ERwinDatabase.CreateTableDef("VarType")
+Set ERwinField = ERwinTableDef.CreateField("VarTypeID", DB_DOUBLE)
+ERwinField.Required = True
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarTypeName", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+Set ERwinField = ERwinTableDef.CreateField("VarTypeDesc", DB_TEXT, 20)
+ERwinTableDef.Fields.Append ERwinField
+ERwinDatabase.TableDefs.Append ERwinTableDef
+Set ERwinField = ERwinTableDef.Fields("VarTypeID")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarTypeID:")
+Set ERwinField = ERwinTableDef.Fields("VarTypeName")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarTypeName:")
+Set ERwinField = ERwinTableDef.Fields("VarTypeDesc")
+Call SetFieldProp(ERwinField, "Caption", DB_TEXT , "VarTypeDesc:")
+
+
+'  CREATE INDEX XPKVarType
+Set ERwinTableDef = ERwinDatabase.TableDefs("VarType")
+Set ERwinIndex = ERwinTableDef.CreateIndex("XPKVarType")
+Set ERwinField = ERwinIndex.CreateField("VarTypeID")
+ERwinIndex.Fields.Append ERwinField
+ERwinIndex.Primary = True
+ERwinTableDef.Indexes.Append ERwinIndex
+
+
+'  CREATE RELATIONSHIP R/6
+
+Set ERwinRelation = ERwinDatabase.CreateRelation("R/6", "OperationType", "Operations")
+Set ERwinField = ERwinRelation.CreateField(     "TypeID" )
+ERwinField.ForeignName = TypeID
+ERwinRelation.Fields.Append ERwinField
+ERwinDatabase.Relations.Append ERwinRelation
+
+
+'  CREATE RELATIONSHIP R/4
+
+Set ERwinRelation = ERwinDatabase.CreateRelation("R/4", "Project", "OperConn")
+Set ERwinField = ERwinRelation.CreateField(     "ProjectID" )
+ERwinField.ForeignName = ProjectID
+ERwinRelation.Fields.Append ERwinField
+ERwinDatabase.Relations.Append ERwinRelation
+
+
+'  CREATE RELATIONSHIP R/5
+
+Set ERwinRelation = ERwinDatabase.CreateRelation("R/5", "Operations", "OperConn")
+Set ERwinField = ERwinRelation.CreateField(     "OperationID" )
+ERwinField.ForeignName = OperationID
+ERwinRelation.Fields.Append ERwinField
+Set ERwinField = ERwinRelation.CreateField(     "TypeID" )
+ERwinField.ForeignName = TypeID
+ERwinRelation.Fields.Append ERwinField
+ERwinDatabase.Relations.Append ERwinRelation
+
+
+'  CREATE RELATIONSHIP R/10
+
+Set ERwinRelation = ERwinDatabase.CreateRelation("R/10", "Variables", "VarConn")
+Set ERwinField = ERwinRelation.CreateField(     "VarID" )
+ERwinField.ForeignName = VarID
+ERwinRelation.Fields.Append ERwinField
+Set ERwinField = ERwinRelation.CreateField(     "OperationID" )
+ERwinField.ForeignName = OperationID
+ERwinRelation.Fields.Append ERwinField
+Set ERwinField = ERwinRelation.CreateField(     "TypeID" )
+ERwinField.ForeignName = TypeID
+ERwinRelation.Fields.Append ERwinField
+Set ERwinField = ERwinRelation.CreateField(     "VarTypeID" )
+ERwinField.ForeignName = VarTypeID
+ERwinRelation.Fields.Append ERwinField
+ERwinDatabase.Relations.Append ERwinRelation
+
+
+'  CREATE RELATIONSHIP R/8
+
+Set ERwinRelation = ERwinDatabase.CreateRelation("R/8", "Operations", "Variables")
+Set ERwinField = ERwinRelation.CreateField(     "OperationID" )
+ERwinField.ForeignName = OperationID
+ERwinRelation.Fields.Append ERwinField
+Set ERwinField = ERwinRelation.CreateField(     "TypeID" )
+ERwinField.ForeignName = TypeID
+ERwinRelation.Fields.Append ERwinField
+ERwinDatabase.Relations.Append ERwinRelation
+
+
+'  CREATE RELATIONSHIP R/9
+
+Set ERwinRelation = ERwinDatabase.CreateRelation("R/9", "VarType", "Variables")
+Set ERwinField = ERwinRelation.CreateField(     "VarTypeID" )
+ERwinField.ForeignName = VarTypeID
+ERwinRelation.Fields.Append ERwinField
+ERwinDatabase.Relations.Append ERwinRelation
+
+
+ERwinDatabase.Close
+ERwinWorkspace.Close
+'  Terminating Access Basic DAO Session...
