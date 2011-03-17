@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using System.Data.OleDb;// пространство имён для подключение к БД 
 
 namespace AiToolGui
@@ -26,7 +27,8 @@ namespace AiToolGui
 
         public void ConnectDataBase()
         {
-            string ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=D:\\ВМИ\\For ADO\\BDTur_firm.mdb"; 
+            string path = Application.StartupPath;
+            string ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + path + "\\Base\\aitool.mdb"; 
 			try{
 			 OleDbConnection conn = new OleDbConnection();
              conn.ConnectionString = ConnectionString;
@@ -43,6 +45,7 @@ namespace AiToolGui
             //childForm.MdiParent = this;
             //childForm.Text = "Project " + childFormNumber++;
             //childForm.Show();
+            ConnectDataBase();
             childForm = new NewProject();
             childForm.MdiParent = this;
             childForm.Text = "Create New Project";
