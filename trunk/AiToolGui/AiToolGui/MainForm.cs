@@ -19,11 +19,22 @@ namespace AiToolGui
         Form AboutBox;
         Form ProjectManager;
         Form DocumentManager;
+        NewProject np;
 
         public AITool()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
+
+        private void myForm_Status(object sender, EventArgs e)
+        {
+            //Console.WriteLine("Event handled");
+            //MessageBox.Show(sender.ToString() + "Событие!");
+            //toolStripStatusLabel
+            toolStripStatusLabel.Text = sender.ToString();
+            //statusStrip.
+        }
+
 
         public void ConnectDataBase()
         {
@@ -53,7 +64,8 @@ namespace AiToolGui
             }
             if (FormFound == false)
             {
-                NewProject np = new NewProject();
+                np = new NewProject();
+                np.Status += myForm_Status;
                 np.MdiParent = this;
                 np.Name = "NewProject";
                 np.Text = "Create New Project";

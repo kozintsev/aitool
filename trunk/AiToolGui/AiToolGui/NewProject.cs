@@ -12,13 +12,30 @@ namespace AiToolGui
     public partial class NewProject : Form
     {
 
+        public int a;
         private int itemIndex = 0;
         private int childFormNumber = 0;
+
+        public event EventHandler Status;
 
 
         public NewProject()
         {
             InitializeComponent();
+        }
+
+        protected virtual void OnStatus(string s)
+        {
+            object Obj = s;
+            if (Status != null)
+                Status(Obj, EventArgs.Empty);
+        }
+
+        private void Dummy()
+        {
+            OnStatus("asS");
+            MessageBox.Show("asS");
+            //Console.WriteLine("Event fired");
         }
 
       
@@ -41,7 +58,8 @@ namespace AiToolGui
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            //MessageBox.Show(listView1.Items[itemIndex].Text + itemIndex.ToString());
+            string s = listView1.Items[itemIndex].Text + itemIndex.ToString();
+            //MessageBox.Show();
             childFormNumber++;
             listView1.Items[itemIndex].Selected = true;
             switch (itemIndex)
@@ -52,6 +70,7 @@ namespace AiToolGui
                         mainForm.MdiParent = this.ParentForm;
                         mainForm.Text = mainForm.Text + " - " + childFormNumber.ToString();
                         mainForm.Show();
+                        OnStatus(s);
                         break;
                     }
                 case 1:
