@@ -36,5 +36,13 @@ namespace AiToolGui
         {
             //Сохранить настройки
         }
+
+        private void Options_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           
+         
+       
+
+        }
     }
 }

@@ -12,7 +12,8 @@ namespace AiToolGui
     public partial class NewProject : Form
     {
 
-        int itemIndex = 0;
+        private int itemIndex = 0;
+        private int childFormNumber = 0;
         public NewProject()
         {
             InitializeComponent();
@@ -36,14 +37,16 @@ namespace AiToolGui
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            MessageBox.Show(listView1.Items[itemIndex].Text + itemIndex.ToString());
+            //MessageBox.Show(listView1.Items[itemIndex].Text + itemIndex.ToString());
+            childFormNumber++;
             listView1.Items[itemIndex].Selected = true;
             switch (itemIndex)
             {
                 case 0:
                     {
-                        CreateSpecification mainForm = new CreateSpecification();
+                        Form mainForm = new CreateSpecification();
                         mainForm.MdiParent = this.ParentForm;
+                        mainForm.Text = mainForm.Text + " - " + childFormNumber.ToString();
                         mainForm.Show();
                         break;
                     }

@@ -89,6 +89,7 @@
             // 
             // Close
             // 
+            this.Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Close.Location = new System.Drawing.Point(282, 283);
             this.Close.Name = "Close";
             this.Close.Size = new System.Drawing.Size(75, 23);
@@ -99,6 +100,7 @@
             // 
             // Save
             // 
+            this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Save.Location = new System.Drawing.Point(201, 283);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
@@ -119,8 +121,10 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.DBPath);
             this.Controls.Add(this.label1);
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "Options";
             this.Text = "Options";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Options_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
