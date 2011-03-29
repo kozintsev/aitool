@@ -41,15 +41,27 @@ namespace AiToolGui
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            //childForm = new Form();
-            //childForm.MdiParent = this;
-            //childForm.Text = "Project " + childFormNumber++;
-            //childForm.Show();
+            bool FormFound = false;
+            FormCollection fс = Application.OpenForms;
+            foreach (Form frm in fс)
+            {
+                if (frm.Name == "NewProject")
+                {
+                    frm.Focus();
+                    FormFound = true;
+                }
+            }
+            if (FormFound == false)
+            {
+                NewProject np = new NewProject();
+                np.MdiParent = this;
+                np.Name = "NewProject";
+                np.Text = "Create New Project";
+                np.Show();
+            }
+
             ConnectDataBase();
-            childForm = new NewProject();
-            childForm.MdiParent = this;
-            childForm.Text = "Create New Project";
-            childForm.Show();
+            
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -161,9 +173,28 @@ namespace AiToolGui
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Options optwnd = new Options();
-            optwnd.MdiParent = this;
-            optwnd.Show();
+            bool FormFound = false;
+            FormCollection fс = Application.OpenForms;
+            foreach (Form frm in fс)
+            {
+                if (frm.Name == "Options")
+                {
+                    frm.Focus();
+                    FormFound = true;
+                }
+            }
+            if (FormFound == false)
+            {
+                Options optwnd = new Options();
+                optwnd.MdiParent = this;
+                optwnd.Show();
+            }
+          
+        }
+
+        private void AITool_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
