@@ -42,7 +42,9 @@ namespace AiToolGui
             {
                 case 0:
                     {
-                        
+                        CreateSpecification mainForm = new CreateSpecification();
+                        mainForm.MdiParent = this.ParentForm;
+                        mainForm.Show();
                         break;
                     }
                 case 1:
