@@ -28,40 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Узел4");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Узел2", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Узел5");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Узел3", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Узел0", new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Узел9");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Узел10");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Узел11");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Узел6", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Узел12");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Узел13");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Узел14");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Узел7", new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode11,
-            treeNode12});
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Узел15");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Узел16");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Узел17");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Узел8", new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15,
-            treeNode16});
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Узел1", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode13,
-            treeNode17});
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Узел4");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Узел2", new System.Windows.Forms.TreeNode[] {
+            treeNode19});
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Узел5");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Узел3", new System.Windows.Forms.TreeNode[] {
+            treeNode21});
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Узел0", new System.Windows.Forms.TreeNode[] {
+            treeNode20,
+            treeNode22});
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Узел9");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Узел10");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Узел11");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Узел6", new System.Windows.Forms.TreeNode[] {
+            treeNode24,
+            treeNode25,
+            treeNode26});
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Узел12");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Узел13");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Узел14");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Узел7", new System.Windows.Forms.TreeNode[] {
+            treeNode28,
+            treeNode29,
+            treeNode30});
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Узел15");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Узел16");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Узел17");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Узел8", new System.Windows.Forms.TreeNode[] {
+            treeNode32,
+            treeNode33,
+            treeNode34});
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Узел1", new System.Windows.Forms.TreeNode[] {
+            treeNode27,
+            treeNode31,
+            treeNode35});
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -79,8 +79,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.Close = new System.Windows.Forms.Button();
+            this.Save = new System.Windows.Forms.Button();
+            this.Open = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -244,45 +245,45 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Узел4";
-            treeNode1.Text = "Узел4";
-            treeNode2.Name = "Узел2";
-            treeNode2.Text = "Узел2";
-            treeNode3.Name = "Узел5";
-            treeNode3.Text = "Узел5";
-            treeNode4.Name = "Узел3";
-            treeNode4.Text = "Узел3";
-            treeNode5.Name = "Узел0";
-            treeNode5.Text = "Узел0";
-            treeNode6.Name = "Узел9";
-            treeNode6.Text = "Узел9";
-            treeNode7.Name = "Узел10";
-            treeNode7.Text = "Узел10";
-            treeNode8.Name = "Узел11";
-            treeNode8.Text = "Узел11";
-            treeNode9.Name = "Узел6";
-            treeNode9.Text = "Узел6";
-            treeNode10.Name = "Узел12";
-            treeNode10.Text = "Узел12";
-            treeNode11.Name = "Узел13";
-            treeNode11.Text = "Узел13";
-            treeNode12.Name = "Узел14";
-            treeNode12.Text = "Узел14";
-            treeNode13.Name = "Узел7";
-            treeNode13.Text = "Узел7";
-            treeNode14.Name = "Узел15";
-            treeNode14.Text = "Узел15";
-            treeNode15.Name = "Узел16";
-            treeNode15.Text = "Узел16";
-            treeNode16.Name = "Узел17";
-            treeNode16.Text = "Узел17";
-            treeNode17.Name = "Узел8";
-            treeNode17.Text = "Узел8";
-            treeNode18.Name = "Узел1";
-            treeNode18.Text = "Узел1";
+            treeNode19.Name = "Узел4";
+            treeNode19.Text = "Узел4";
+            treeNode20.Name = "Узел2";
+            treeNode20.Text = "Узел2";
+            treeNode21.Name = "Узел5";
+            treeNode21.Text = "Узел5";
+            treeNode22.Name = "Узел3";
+            treeNode22.Text = "Узел3";
+            treeNode23.Name = "Узел0";
+            treeNode23.Text = "Узел0";
+            treeNode24.Name = "Узел9";
+            treeNode24.Text = "Узел9";
+            treeNode25.Name = "Узел10";
+            treeNode25.Text = "Узел10";
+            treeNode26.Name = "Узел11";
+            treeNode26.Text = "Узел11";
+            treeNode27.Name = "Узел6";
+            treeNode27.Text = "Узел6";
+            treeNode28.Name = "Узел12";
+            treeNode28.Text = "Узел12";
+            treeNode29.Name = "Узел13";
+            treeNode29.Text = "Узел13";
+            treeNode30.Name = "Узел14";
+            treeNode30.Text = "Узел14";
+            treeNode31.Name = "Узел7";
+            treeNode31.Text = "Узел7";
+            treeNode32.Name = "Узел15";
+            treeNode32.Text = "Узел15";
+            treeNode33.Name = "Узел16";
+            treeNode33.Text = "Узел16";
+            treeNode34.Name = "Узел17";
+            treeNode34.Text = "Узел17";
+            treeNode35.Name = "Узел8";
+            treeNode35.Text = "Узел8";
+            treeNode36.Name = "Узел1";
+            treeNode36.Text = "Узел1";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode18});
+            treeNode23,
+            treeNode36});
             this.treeView1.Size = new System.Drawing.Size(190, 269);
             this.treeView1.TabIndex = 0;
             // 
@@ -297,34 +298,47 @@
             this.dataGridView2.Size = new System.Drawing.Size(412, 269);
             this.dataGridView2.TabIndex = 0;
             // 
-            // button3
+            // Close
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(659, 600);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 16;
-            this.button3.Text = "Close";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Close.Location = new System.Drawing.Point(659, 600);
+            this.Close.Name = "Close";
+            this.Close.Size = new System.Drawing.Size(75, 23);
+            this.Close.TabIndex = 16;
+            this.Close.Text = "Close";
+            this.Close.UseVisualStyleBackColor = true;
+            this.Close.Click += new System.EventHandler(this.Close_Click);
             // 
-            // button4
+            // Save
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(578, 600);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "Save";
-            this.button4.UseVisualStyleBackColor = true;
+            this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Save.Location = new System.Drawing.Point(578, 600);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(75, 23);
+            this.Save.TabIndex = 17;
+            this.Save.Text = "Save";
+            this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
+            // 
+            // Open
+            // 
+            this.Open.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Open.Location = new System.Drawing.Point(497, 600);
+            this.Open.Name = "Open";
+            this.Open.Size = new System.Drawing.Size(75, 23);
+            this.Open.TabIndex = 18;
+            this.Open.Text = "Open";
+            this.Open.UseVisualStyleBackColor = true;
+            this.Open.Click += new System.EventHandler(this.Open_Click);
             // 
             // CreateSpecification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 635);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.Open);
+            this.Controls.Add(this.Save);
+            this.Controls.Add(this.Close);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label5);
@@ -370,7 +384,8 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button Close;
+        private System.Windows.Forms.Button Save;
+        private System.Windows.Forms.Button Open;
     }
 }

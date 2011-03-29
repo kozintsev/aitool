@@ -14,10 +14,14 @@ namespace AiToolGui
 
         private int itemIndex = 0;
         private int childFormNumber = 0;
+
+
         public NewProject()
         {
             InitializeComponent();
         }
+
+      
 
         private void Close_Click(object sender, EventArgs e)
         {
