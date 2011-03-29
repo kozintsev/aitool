@@ -158,5 +158,12 @@ namespace AiToolGui
         {
             
         }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Options optwnd = new Options();
+            optwnd.MdiParent = this;
+            optwnd.Show();
+        }
     }
 }
