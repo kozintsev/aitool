@@ -18,3 +18,4 @@ D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.ProjectManager.resourc
 D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.DocumentManager.resources
 D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.ProjectViewer.resources
 d:\SVN\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.NewProject.resources
+d:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.CreateSpecification.resources
