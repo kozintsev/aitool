@@ -98,10 +98,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 328);
             this.Controls.Add(this.Close);
-
             this.Controls.Add(this.listView1);
-           
+            //this.Name = "NewProject";
             this.Text = "NewProject";
+            this.Load += new System.EventHandler(this.NewProject_Load);
             this.ResumeLayout(false);
 
         }

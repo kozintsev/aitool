@@ -67,6 +67,11 @@ namespace AiToolGui
             listView1.Items[itemIndex].Selected = true;
         }
 
+        private void NewProject_Load(object sender, EventArgs e)
+        {
+            //
+        }
+
      
      
     }
