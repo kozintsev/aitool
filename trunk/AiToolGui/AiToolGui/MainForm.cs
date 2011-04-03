@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Data.OleDb;// пространство имён для подключение к БД 
+using System.Globalization; // для локализации
+using System.Threading; // для локализации
 
 namespace AiToolGui
 {
@@ -206,6 +208,33 @@ namespace AiToolGui
 
         private void AITool_Load(object sender, EventArgs e)
         {
+
+        }
+        
+        void RussiaToolStripMenuItemClick(object sender, EventArgs e)
+        {
+        	englishToolStripMenuItem.Checked = false;
+        	russiaToolStripMenuItem.Checked = true;
+            defaultToolStripMenuItem.Checked = false;
+            MessageBox.Show(this.fileMenu.Text);
+
+        	
+        }
+        
+        void EnglishToolStripMenuItemClick(object sender, EventArgs e)
+        {
+        	englishToolStripMenuItem.Checked = true;
+        	russiaToolStripMenuItem.Checked = false;
+            defaultToolStripMenuItem.Checked = false;
+            
+            
+        }
+
+        private void defaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            englishToolStripMenuItem.Checked = false;
+            russiaToolStripMenuItem.Checked = false;
+            defaultToolStripMenuItem.Checked = true;
 
         }
     }

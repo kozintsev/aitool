@@ -15,6 +15,13 @@ namespace AiToolGui
         public CreateSpecification()
         {
             InitializeComponent();
+            label3.Visible = false;
+            comboBox1.Visible = false;
+            comboBox2.Visible = false;
+            comboBox3.Visible = false;
+            listBox1.Visible = false;
+            textBox4.Visible = false;
+            textBox5.Visible = false;
         }
 
 
@@ -88,7 +95,7 @@ namespace AiToolGui
         {
             Close();
         }
-
+		/*
         private bool FindDouble(TreeNode node, string AddText)
         {
             
@@ -102,7 +109,7 @@ namespace AiToolGui
             }
             return false;
         }
-
+		*/
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -115,7 +122,7 @@ namespace AiToolGui
             }
             TreeNode node;
             node = treeView1.SelectedNode;
-
+            if (node == null) return;
             for (int i = 0; i < node.Nodes.Count; i++)
             {
                 if (AddText == node.Nodes[i].Text)
@@ -158,12 +165,16 @@ namespace AiToolGui
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
+			//MessageBox.Show("Ололололо");
         }
 
-        private void treeView1_ParentChanged(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-                       
+            TreeNode node;
+            node = treeView1.SelectedNode;
+            if (node == null) return;
+            node.Remove();
+
         }
 
     

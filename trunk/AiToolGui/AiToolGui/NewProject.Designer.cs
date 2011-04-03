@@ -32,10 +32,10 @@
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Прочитать ТЗ");
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Интерактивный ввод ТЗ");
             this.listView1 = new System.Windows.Forms.ListView();
-            this.Name = new System.Windows.Forms.ColumnHeader();
+            this.NameCol = new System.Windows.Forms.ColumnHeader();
             this.Description = new System.Windows.Forms.ColumnHeader();
             this.CreateProject = new System.Windows.Forms.Button();
-            this.Close = new System.Windows.Forms.Button();
+            this.CloseForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -44,7 +44,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Name,
+            this.NameCol,
             this.Description});
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
@@ -60,10 +60,10 @@
             this.listView1.VisibleChanged += new System.EventHandler(this.listView1_VisibleChanged);
             this.listView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView1_ItemSelectionChanged);
             // 
-            // Name
+            // NameCol
             // 
-            this.Name.Text = "Name";
-            this.Name.Width = 247;
+            this.NameCol.Text = "Name";
+            this.NameCol.Width = 247;
             // 
             // Description
             // 
@@ -81,37 +81,37 @@
             this.CreateProject.UseVisualStyleBackColor = true;
             this.CreateProject.Click += new System.EventHandler(this.CreateProject_Click);
             // 
-            // Close
+            // CloseForm
             // 
-            this.Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Close.Location = new System.Drawing.Point(302, 293);
-            this.Close.Name = "Close";
-            this.Close.Size = new System.Drawing.Size(75, 23);
-            this.Close.TabIndex = 3;
-            this.Close.Text = "Close";
-            this.Close.UseVisualStyleBackColor = true;
-            this.Close.Click += new System.EventHandler(this.Close_Click);
+            this.CloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CloseForm.Location = new System.Drawing.Point(302, 293);
+            this.CloseForm.Name = "CloseForm";
+            this.CloseForm.Size = new System.Drawing.Size(75, 23);
+            this.CloseForm.TabIndex = 3;
+            this.CloseForm.Text = "Close";
+            this.CloseForm.UseVisualStyleBackColor = true;
+            this.CloseForm.Click += new System.EventHandler(this.Close_Click);
             // 
             // NewProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 328);
-            this.Controls.Add(this.Close);
+            this.Controls.Add(this.CloseForm);
             this.Controls.Add(this.listView1);
-            //this.Name = "NewProject";
+            this.Name = "NewProject";
             this.Text = "NewProject";
             this.Load += new System.EventHandler(this.NewProject_Load);
             this.ResumeLayout(false);
 
         }
+        private System.Windows.Forms.Button CloseForm;
 
         #endregion
 
         private System.Windows.Forms.ListView listView1;
 		private System.Windows.Forms.Button CreateProject;
-        private System.Windows.Forms.Button Close;
-        private System.Windows.Forms.ColumnHeader Name;
+        private System.Windows.Forms.ColumnHeader NameCol;
         private System.Windows.Forms.ColumnHeader Description;
     }
 }

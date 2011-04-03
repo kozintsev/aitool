@@ -20,3 +20,12 @@ D:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.ProjectViewer.resource
 d:\SVN\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.NewProject.resources
 d:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.CreateSpecification.resources
 d:\svn\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.Options.resources
+D:\SVN\aitool\AiToolGui\AiToolGui\bin\Debug\ru\AiToolGui.resources.dll
+D:\SVN\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.AITool.ru.resources
+D:\SVN\aitool\AiToolGui\AiToolGui\obj\x86\Debug\ru\AiToolGui.resources.dll
+D:\SVN\aitool\AiToolGui\AiToolGui\bin\Debug\en\AiToolGui.resources.dll
+D:\SVN\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.AITool.en.resources
+D:\SVN\aitool\AiToolGui\AiToolGui\obj\x86\Debug\en\AiToolGui.resources.dll
+D:\SVN\aitool\AiToolGui\AiToolGui\bin\Debug\en-US\AiToolGui.resources.dll
+D:\SVN\aitool\AiToolGui\AiToolGui\obj\x86\Debug\AiToolGui.AITool.en-US.resources
+D:\SVN\aitool\AiToolGui\AiToolGui\obj\x86\Debug\en-US\AiToolGui.resources.dll
