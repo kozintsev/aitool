@@ -33,27 +33,18 @@ namespace AiToolGui
 
         private void Dummy()
         {
-            OnStatus("asS");
-            MessageBox.Show("asS");
-            //Console.WriteLine("Event fired");
-        }
-
-      
+            
+        }  
 
         private void Close_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        
-
         private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-
-            itemIndex = e.ItemIndex; 
-                
+            itemIndex = e.ItemIndex;              
              //MessageBox.Show(listView1.Items[e.ItemIndex].Text);
-          
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -70,6 +61,7 @@ namespace AiToolGui
                         mainForm.MdiParent = this.ParentForm;
                         mainForm.Text = mainForm.Text + " - " + childFormNumber.ToString();
                         mainForm.Show();
+                        this.Close();
                         OnStatus(s);
                         break;
                     }
