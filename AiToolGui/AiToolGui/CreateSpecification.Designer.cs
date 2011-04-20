@@ -28,18 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.KeyWord = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.AddNodeText = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateSpecification));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -49,152 +38,57 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.AddNodeText = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.AddNode = new System.Windows.Forms.Button();
             this.CloseForm = new System.Windows.Forms.Button();
+            this.ExportDocXml = new System.Windows.Forms.Button();
+            this.ImportDocXml = new System.Windows.Forms.Button();
+            this.AddRoot = new System.Windows.Forms.Button();
+            this.DelNode = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
             this.Open = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(119, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(618, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Обозначение:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(119, 38);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(618, 20);
-            this.textBox2.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Наименование:";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.KeyWord});
-            this.dataGridView1.Location = new System.Drawing.Point(119, 215);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(618, 69);
-            this.dataGridView1.TabIndex = 6;
-            // 
-            // KeyWord
-            // 
-            this.KeyWord.FillWeight = 255F;
-            this.KeyWord.HeaderText = "Ключевые слова";
-            this.KeyWord.Name = "KeyWord";
-            this.KeyWord.Width = 150;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 189);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Ключевое слово:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(119, 189);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(565, 20);
-            this.textBox3.TabIndex = 8;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(691, 185);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // AddNodeText
-            // 
-            this.AddNodeText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddNodeText.Location = new System.Drawing.Point(119, 293);
-            this.AddNodeText.Name = "AddNodeText";
-            this.AddNodeText.Size = new System.Drawing.Size(411, 20);
-            this.AddNodeText.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 300);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Тех. требования:";
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(608, 290);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(69, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Add Child";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(119, 319);
+            this.splitContainer1.AccessibleDescription = null;
+            this.splitContainer1.AccessibleName = null;
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
+            this.splitContainer1.BackgroundImage = null;
+            this.splitContainer1.Font = null;
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.AccessibleDescription = null;
+            this.splitContainer1.Panel1.AccessibleName = null;
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
+            this.splitContainer1.Panel1.BackgroundImage = null;
             this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+            this.splitContainer1.Panel1.Font = null;
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AccessibleDescription = null;
+            this.splitContainer1.Panel2.AccessibleName = null;
+            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
+            this.splitContainer1.Panel2.BackgroundImage = null;
             this.splitContainer1.Panel2.Controls.Add(this.listBox1);
             this.splitContainer1.Panel2.Controls.Add(this.comboBox3);
             this.splitContainer1.Panel2.Controls.Add(this.comboBox2);
@@ -202,225 +96,307 @@
             this.splitContainer1.Panel2.Controls.Add(this.textBox4);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.comboBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(618, 275);
-            this.splitContainer1.SplitterDistance = 196;
-            this.splitContainer1.TabIndex = 15;
+            this.splitContainer1.Panel2.Font = null;
             // 
             // treeView1
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView1.AccessibleDescription = null;
+            this.treeView1.AccessibleName = null;
+            resources.ApplyResources(this.treeView1, "treeView1");
+            this.treeView1.BackgroundImage = null;
+            this.treeView1.Font = null;
             this.treeView1.HideSelection = false;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(190, 269);
-            this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // listBox1
             // 
+            this.listBox1.AccessibleDescription = null;
+            this.listBox1.AccessibleName = null;
+            resources.ApplyResources(this.listBox1, "listBox1");
+            this.listBox1.BackgroundImage = null;
+            this.listBox1.Font = null;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(153, 46);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(100, 108);
-            this.listBox1.TabIndex = 6;
             // 
             // comboBox3
             // 
+            this.comboBox3.AccessibleDescription = null;
+            this.comboBox3.AccessibleName = null;
+            resources.ApplyResources(this.comboBox3, "comboBox3");
+            this.comboBox3.BackgroundImage = null;
+            this.comboBox3.Font = null;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(349, 45);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(47, 21);
-            this.comboBox3.TabIndex = 5;
             // 
             // comboBox2
             // 
+            this.comboBox2.AccessibleDescription = null;
+            this.comboBox2.AccessibleName = null;
+            resources.ApplyResources(this.comboBox2, "comboBox2");
+            this.comboBox2.BackgroundImage = null;
+            this.comboBox2.Font = null;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(289, 45);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(54, 21);
-            this.comboBox2.TabIndex = 4;
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(153, 72);
+            this.textBox5.AccessibleDescription = null;
+            this.textBox5.AccessibleName = null;
+            resources.ApplyResources(this.textBox5, "textBox5");
+            this.textBox5.BackgroundImage = null;
+            this.textBox5.Font = null;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 20);
-            this.textBox5.TabIndex = 3;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(153, 46);
+            this.textBox4.AccessibleDescription = null;
+            this.textBox4.AccessibleName = null;
+            resources.ApplyResources(this.textBox4, "textBox4");
+            this.textBox4.BackgroundImage = null;
+            this.textBox4.Font = null;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(121, 20);
-            this.textBox4.TabIndex = 2;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(15, 51);
+            this.label3.AccessibleDescription = null;
+            this.label3.AccessibleName = null;
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Font = null;
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Переменная:";
             // 
             // comboBox1
             // 
+            this.comboBox1.AccessibleDescription = null;
+            this.comboBox1.AccessibleName = null;
+            resources.ApplyResources(this.comboBox1, "comboBox1");
+            this.comboBox1.BackgroundImage = null;
+            this.comboBox1.Font = null;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(15, 14);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.AccessibleDescription = null;
+            this.textBox1.AccessibleName = null;
+            resources.ApplyResources(this.textBox1, "textBox1");
+            this.textBox1.BackgroundImage = null;
+            this.textBox1.Font = null;
+            this.textBox1.Name = "textBox1";
+            // 
+            // label1
+            // 
+            this.label1.AccessibleDescription = null;
+            this.label1.AccessibleName = null;
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Font = null;
+            this.label1.Name = "label1";
+            // 
+            // textBox2
+            // 
+            this.textBox2.AccessibleDescription = null;
+            this.textBox2.AccessibleName = null;
+            resources.ApplyResources(this.textBox2, "textBox2");
+            this.textBox2.BackgroundImage = null;
+            this.textBox2.Font = null;
+            this.textBox2.Name = "textBox2";
+            // 
+            // label2
+            // 
+            this.label2.AccessibleDescription = null;
+            this.label2.AccessibleName = null;
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Font = null;
+            this.label2.Name = "label2";
+            // 
+            // AddNodeText
+            // 
+            this.AddNodeText.AccessibleDescription = null;
+            this.AddNodeText.AccessibleName = null;
+            resources.ApplyResources(this.AddNodeText, "AddNodeText");
+            this.AddNodeText.BackgroundImage = null;
+            this.AddNodeText.Font = null;
+            this.AddNodeText.Name = "AddNodeText";
+            // 
+            // label5
+            // 
+            this.label5.AccessibleDescription = null;
+            this.label5.AccessibleName = null;
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Font = null;
+            this.label5.Name = "label5";
+            // 
+            // AddNode
+            // 
+            this.AddNode.AccessibleDescription = null;
+            this.AddNode.AccessibleName = null;
+            resources.ApplyResources(this.AddNode, "AddNode");
+            this.AddNode.BackgroundImage = null;
+            this.AddNode.Font = null;
+            this.AddNode.Name = "AddNode";
+            this.AddNode.UseVisualStyleBackColor = true;
+            this.AddNode.Click += new System.EventHandler(this.AddNode_Click);
             // 
             // CloseForm
             // 
-            this.CloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloseForm.Location = new System.Drawing.Point(659, 600);
+            this.CloseForm.AccessibleDescription = null;
+            this.CloseForm.AccessibleName = null;
+            resources.ApplyResources(this.CloseForm, "CloseForm");
+            this.CloseForm.BackgroundImage = null;
+            this.CloseForm.Font = null;
             this.CloseForm.Name = "CloseForm";
-            this.CloseForm.Size = new System.Drawing.Size(75, 23);
-            this.CloseForm.TabIndex = 16;
-            this.CloseForm.Text = "Close";
             this.CloseForm.UseVisualStyleBackColor = true;
             this.CloseForm.Click += new System.EventHandler(this.Close_Click);
             // 
+            // ExportDocXml
+            // 
+            this.ExportDocXml.AccessibleDescription = null;
+            this.ExportDocXml.AccessibleName = null;
+            resources.ApplyResources(this.ExportDocXml, "ExportDocXml");
+            this.ExportDocXml.BackgroundImage = null;
+            this.ExportDocXml.Font = null;
+            this.ExportDocXml.Name = "ExportDocXml";
+            this.ExportDocXml.UseVisualStyleBackColor = true;
+            this.ExportDocXml.Click += new System.EventHandler(this.ExportDocXml_Click);
+            // 
+            // ImportDocXml
+            // 
+            this.ImportDocXml.AccessibleDescription = null;
+            this.ImportDocXml.AccessibleName = null;
+            resources.ApplyResources(this.ImportDocXml, "ImportDocXml");
+            this.ImportDocXml.BackgroundImage = null;
+            this.ImportDocXml.Font = null;
+            this.ImportDocXml.Name = "ImportDocXml";
+            this.ImportDocXml.UseVisualStyleBackColor = true;
+            this.ImportDocXml.Click += new System.EventHandler(this.ImportDocXml_Click);
+            // 
+            // AddRoot
+            // 
+            this.AddRoot.AccessibleDescription = null;
+            this.AddRoot.AccessibleName = null;
+            resources.ApplyResources(this.AddRoot, "AddRoot");
+            this.AddRoot.BackgroundImage = null;
+            this.AddRoot.Font = null;
+            this.AddRoot.Name = "AddRoot";
+            this.AddRoot.UseVisualStyleBackColor = true;
+            this.AddRoot.Click += new System.EventHandler(this.AddRoot_Click);
+            // 
+            // DelNode
+            // 
+            this.DelNode.AccessibleDescription = null;
+            this.DelNode.AccessibleName = null;
+            resources.ApplyResources(this.DelNode, "DelNode");
+            this.DelNode.BackgroundImage = null;
+            this.DelNode.Font = null;
+            this.DelNode.Name = "DelNode";
+            this.DelNode.UseVisualStyleBackColor = true;
+            this.DelNode.Click += new System.EventHandler(this.DelNode_Click);
+            // 
             // Save
             // 
-            this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Save.Location = new System.Drawing.Point(578, 600);
+            this.Save.AccessibleDescription = null;
+            this.Save.AccessibleName = null;
+            resources.ApplyResources(this.Save, "Save");
+            this.Save.BackgroundImage = null;
+            this.Save.Font = null;
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(75, 23);
-            this.Save.TabIndex = 17;
-            this.Save.Text = "Save";
             this.Save.UseVisualStyleBackColor = true;
-            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Open
             // 
-            this.Open.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Open.Location = new System.Drawing.Point(497, 600);
+            this.Open.AccessibleDescription = null;
+            this.Open.AccessibleName = null;
+            resources.ApplyResources(this.Open, "Open");
+            this.Open.BackgroundImage = null;
+            this.Open.Font = null;
             this.Open.Name = "Open";
-            this.Open.Size = new System.Drawing.Size(75, 23);
-            this.Open.TabIndex = 18;
-            this.Open.Text = "Open";
             this.Open.UseVisualStyleBackColor = true;
-            this.Open.Click += new System.EventHandler(this.Open_Click);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(119, 65);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(618, 118);
-            this.tabControl1.TabIndex = 20;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.richTextBox2);
-            this.tabPage1.Controls.Add(this.richTextBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(610, 92);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Цель";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(-1, 0);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(611, 92);
-            this.richTextBox2.TabIndex = 6;
-            this.richTextBox2.Text = "";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(-1, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(605, 92);
-            this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = "";
             // 
             // tabPage2
             // 
+            this.tabPage2.AccessibleDescription = null;
+            this.tabPage2.AccessibleName = null;
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.BackgroundImage = null;
             this.tabPage2.Controls.Add(this.richTextBox3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Font = null;
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(610, 92);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Аннотация";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox3.AccessibleDescription = null;
+            this.richTextBox3.AccessibleName = null;
+            resources.ApplyResources(this.richTextBox3, "richTextBox3");
+            this.richTextBox3.BackgroundImage = null;
+            this.richTextBox3.Font = null;
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(610, 92);
-            this.richTextBox3.TabIndex = 0;
-            this.richTextBox3.Text = "";
             // 
-            // button3
+            // tabPage1
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(536, 290);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(66, 23);
-            this.button3.TabIndex = 21;
-            this.button3.Text = "Add Root";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.tabPage1.AccessibleDescription = null;
+            this.tabPage1.AccessibleName = null;
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.BackgroundImage = null;
+            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Font = null;
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // richTextBox1
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(703, 290);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(34, 23);
-            this.button4.TabIndex = 22;
-            this.button4.Text = "Del";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.richTextBox1.AccessibleDescription = null;
+            this.richTextBox1.AccessibleName = null;
+            resources.ApplyResources(this.richTextBox1, "richTextBox1");
+            this.richTextBox1.BackgroundImage = null;
+            this.richTextBox1.Font = null;
+            this.richTextBox1.Name = "richTextBox1";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.AccessibleDescription = null;
+            this.tabControl1.AccessibleName = null;
+            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.BackgroundImage = null;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Font = null;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
             // 
             // CreateSpecification
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 635);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.tabControl1);
+            this.BackgroundImage = null;
             this.Controls.Add(this.Open);
             this.Controls.Add(this.Save);
+            this.Controls.Add(this.DelNode);
+            this.Controls.Add(this.AddRoot);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.ImportDocXml);
+            this.Controls.Add(this.ExportDocXml);
             this.Controls.Add(this.CloseForm);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.AddNode);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.AddNodeText);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
+            this.Font = null;
+            this.Icon = null;
             this.Name = "CreateSpecification";
-            this.Text = "CreateSpecification";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -439,26 +415,22 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn KeyWord;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox AddNodeText;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button AddNode;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button CloseForm;
+        private System.Windows.Forms.Button ExportDocXml;
+        private System.Windows.Forms.Button ImportDocXml;
+        private System.Windows.Forms.Button AddRoot;
+        private System.Windows.Forms.Button DelNode;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Button Open;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TabControl tabControl1;
     }
 }
