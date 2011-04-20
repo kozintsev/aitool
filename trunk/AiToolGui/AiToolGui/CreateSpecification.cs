@@ -25,9 +25,11 @@ namespace AiToolGui
         }
 
 
-        private void Save_Click(object sender, EventArgs e)
+        private void ExportDocXml_Click(object sender, EventArgs e)
         {
-            //cохранение пока в XML
+            //экспортировать в XML, в будущем реализуем возможность сохранить в DOC, DOCX, ODT
+           
+
             if (textBox1.Text.Length < 1) 
             {
                 MessageBox.Show("Слишком короткое Обозначение" );
@@ -86,11 +88,12 @@ namespace AiToolGui
 
         }
 
-        private void Open_Click(object sender, EventArgs e)
+        private void ImportDocXml_Click(object sender, EventArgs e)
         {
-
+            //функция загрузки файла XML 
         }
 
+        
         private void Close_Click(object sender, EventArgs e)
         {
             Close();
@@ -111,7 +114,7 @@ namespace AiToolGui
         }
 		*/
 
-        private void button2_Click(object sender, EventArgs e)
+        private void AddNode_Click(object sender, EventArgs e)
         {
             // добавить характеристику в дерево child
             string AddText = AddNodeText.Text;
@@ -138,7 +141,7 @@ namespace AiToolGui
             
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void AddRoot_Click(object sender, EventArgs e)
         {
             // добавить root
             string AddText = AddNodeText.Text;
@@ -168,7 +171,7 @@ namespace AiToolGui
 			//MessageBox.Show("Ололололо");
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void DelNode_Click(object sender, EventArgs e)
         {
             TreeNode node;
             node = treeView1.SelectedNode;
@@ -177,6 +180,9 @@ namespace AiToolGui
 
         }
 
+       
+
+  
     
     }
 }

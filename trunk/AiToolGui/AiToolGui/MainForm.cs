@@ -22,11 +22,17 @@ namespace AiToolGui
         Form ProjectManager;
         Form DocumentManager;
         NewProject np;
+        Setting sett;
+        ConnectDataBase cdb;
 
         public AITool()
         {
-            InitializeComponent();           
+            InitializeComponent();
+            sett = new Setting();
+            cdb = new ConnectDataBase();
+            cdb.CreateConnectDataBase();
         }
+            
 
         private void myForm_Status(object sender, EventArgs e)
         {
@@ -38,19 +44,6 @@ namespace AiToolGui
         }
 
 
-        public void ConnectDataBase()
-        {
-            string path = Application.StartupPath;
-            string ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + path + "\\Base\\aitool.mdb"; 
-			try{
-			 OleDbConnection conn = new OleDbConnection();
-             conn.ConnectionString = ConnectionString;
-			}
-			catch{
-            	   	MessageBox.Show("Ошибка подключения к База данных", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-        }
 
         private void ShowNewForm(object sender, EventArgs e)
         {
@@ -73,8 +66,6 @@ namespace AiToolGui
                 np.Text = "Create New Project";
                 np.Show();
             }
-
-            ConnectDataBase();
             
         }
 
@@ -216,7 +207,7 @@ namespace AiToolGui
         	englishToolStripMenuItem.Checked = false;
         	russiaToolStripMenuItem.Checked = true;
             defaultToolStripMenuItem.Checked = false;
-            MessageBox.Show(this.fileMenu.Text);
+         
 
         	
         }
