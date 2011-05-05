@@ -40,10 +40,13 @@
             this.StatusWord = new System.Windows.Forms.Label();
             this.checkTopWindow = new System.Windows.Forms.CheckBox();
             this.CountWordsLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.checkTransl = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // openDoc
             // 
+            this.openDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.openDoc.Location = new System.Drawing.Point(27, 231);
             this.openDoc.Name = "openDoc";
             this.openDoc.Size = new System.Drawing.Size(75, 23);
@@ -54,6 +57,8 @@
             // 
             // progressBar1
             // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(27, 144);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(253, 23);
@@ -61,6 +66,8 @@
             // 
             // progressBar2
             // 
+            this.progressBar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar2.Location = new System.Drawing.Point(27, 189);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(253, 23);
@@ -68,6 +75,7 @@
             // 
             // CloseForm
             // 
+            this.CloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CloseForm.Location = new System.Drawing.Point(205, 231);
             this.CloseForm.Name = "CloseForm";
             this.CloseForm.Size = new System.Drawing.Size(75, 23);
@@ -140,11 +148,33 @@
             this.CountWordsLabel.TabIndex = 10;
             this.CountWordsLabel.Text = "N";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(187, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Translate";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // checkTransl
+            // 
+            this.checkTransl.AutoSize = true;
+            this.checkTransl.Location = new System.Drawing.Point(166, 84);
+            this.checkTransl.Name = "checkTransl";
+            this.checkTransl.Size = new System.Drawing.Size(70, 17);
+            this.checkTransl.TabIndex = 12;
+            this.checkTransl.Text = "Translate";
+            this.checkTransl.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Controls.Add(this.checkTransl);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.CountWordsLabel);
             this.Controls.Add(this.checkTopWindow);
             this.Controls.Add(this.StatusWord);
@@ -177,6 +207,8 @@
         private System.Windows.Forms.Label StatusWord;
         private System.Windows.Forms.CheckBox checkTopWindow;
         private System.Windows.Forms.Label CountWordsLabel;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkTransl;
     }
 }
 
