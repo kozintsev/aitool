@@ -1,0 +1,13 @@
+d:\coding\WordParser\WordParser\WordParser\bin\Release\WordParser.exe
+d:\coding\WordParser\WordParser\WordParser\bin\Release\WordParser.pdb
+d:\coding\WordParser\WordParser\WordParser\bin\Release\Microsoft.Office.Interop.Word.dll
+d:\coding\WordParser\WordParser\WordParser\bin\Release\Microsoft.Vbe.Interop.dll
+d:\coding\WordParser\WordParser\WordParser\bin\Release\office.dll
+d:\coding\WordParser\WordParser\WordParser\obj\Release\ResolveAssemblyReference.cache
+d:\coding\WordParser\WordParser\WordParser\obj\Release\WordParser.MainForm.resources
+d:\coding\WordParser\WordParser\WordParser\obj\Release\WordParser.Properties.Resources.resources
+d:\coding\WordParser\WordParser\WordParser\obj\Release\WordParser.csproj.GenerateResource.Cache
+d:\coding\WordParser\WordParser\WordParser\obj\Release\WordParser.exe
+d:\coding\WordParser\WordParser\WordParser\obj\Release\WordParser.pdb
+G:\!\WordParser\WordParser\WordParser\obj\Release\WordParser.exe
+G:\!\WordParser\WordParser\WordParser\obj\Release\WordParser.pdb
