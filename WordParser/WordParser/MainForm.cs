@@ -32,10 +32,14 @@ namespace WordParser
         bool NPDict;
         List<string> wordslist;
         List<string> Dict;
+        //List<char> c;
 
         public MainForm()
         {
             InitializeComponent();
+
+            //с = new List<char>();
+            
             
             this.backgroundWorker.WorkerReportsProgress = true;
 			this.backgroundWorker.WorkerSupportsCancellation = true;
@@ -57,8 +61,13 @@ namespace WordParser
              {
                  wordslist.Add(dataReader["word"].ToString());
                  //Console.WriteLine(dataReader["word"]);
-             } 
+             }
 
+             commandText = "SELECT COUNT (*) FROM Words";
+             OleDbCommand myCommand2 = conn.CreateCommand();
+             myCommand2.CommandText = commandText;
+             //myCommand.ExecuteScalar();
+             CountWordsLabel.Text = Convert.ToString(myCommand2.ExecuteScalar());
              conn.Close();
 
             
@@ -71,53 +80,53 @@ namespace WordParser
 		}
 
         
-void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
 
-{
+        {
 
-       //for (int i = 1; i < 100; i++)
+            //for (int i = 1; i < 100; i++)
 
-       //{
+            //{
 
-            //if (backgroundWorker.CancellationPending)
+                //if (backgroundWorker.CancellationPending)
 
-              //  return;
+                    //  return;
 
-            //Thread.Sleep(1000);
+                 //Thread.Sleep(1000);
 
-            //backgroundWorker.ReportProgress(i);
+                 //backgroundWorker.ReportProgress(i);
 
-       //}
-    WordParsing();
+            //}
+            WordParsing();
     
 
-}
+        }
 
-void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
 
-{
+        {
 
-    switch (e.UserState.ToString())
-    {
-        case "1":
-            progressBar1.Value = e.ProgressPercentage;
-            break;
-        case "2":
-            progressBar2.Value = e.ProgressPercentage;
-            break;
+            switch (e.UserState.ToString())
+            {
+                case "1":
+                    progressBar1.Value = e.ProgressPercentage;
+                    break;
+                case "2":
+                    progressBar2.Value = e.ProgressPercentage;
+                    break;
 
-    }
-    //progressBar2.Value = e.ProgressPercentage;
+            }
+            //progressBar2.Value = e.ProgressPercentage;
 
-}
+        }
 
-void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 
-{
+        {
 
-      // MessageBox.Show(this, "Hello word!!!");
+            // MessageBox.Show(this, "Hello word!!!");
 
-}
+        }
 
         private void openDoc_Click(object sender, EventArgs e)
         {
@@ -220,6 +229,7 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
                         Str = wordparagraph.Range.Words[j].Text;
                         Str = Str.Trim();;
                         Str = Str.ToLower();
+                        //Str.Length
                         foreach (string st in wordslist)
                         {
                             string st1;
@@ -284,6 +294,7 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
         {
             bool addword = true;
             string Str = WorkInDict.Text;
+            if (Str == "") return;
             OleDbCommand myCommand;
             OleDbDataReader dataReader;
             Str = Str.Trim(); ;

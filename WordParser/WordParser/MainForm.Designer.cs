@@ -39,6 +39,7 @@
             this.NotParDict = new System.Windows.Forms.CheckBox();
             this.StatusWord = new System.Windows.Forms.Label();
             this.checkTopWindow = new System.Windows.Forms.CheckBox();
+            this.CountWordsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openDoc
@@ -130,11 +131,21 @@
             this.checkTopWindow.UseVisualStyleBackColor = true;
             this.checkTopWindow.CheckedChanged += new System.EventHandler(this.checkTopWindow_CheckedChanged);
             // 
+            // CountWordsLabel
+            // 
+            this.CountWordsLabel.AutoSize = true;
+            this.CountWordsLabel.Location = new System.Drawing.Point(205, 8);
+            this.CountWordsLabel.Name = "CountWordsLabel";
+            this.CountWordsLabel.Size = new System.Drawing.Size(15, 13);
+            this.CountWordsLabel.TabIndex = 10;
+            this.CountWordsLabel.Text = "N";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Controls.Add(this.CountWordsLabel);
             this.Controls.Add(this.checkTopWindow);
             this.Controls.Add(this.StatusWord);
             this.Controls.Add(this.NotParDict);
@@ -165,6 +176,7 @@
         private System.Windows.Forms.CheckBox NotParDict;
         private System.Windows.Forms.Label StatusWord;
         private System.Windows.Forms.CheckBox checkTopWindow;
+        private System.Windows.Forms.Label CountWordsLabel;
     }
 }
 
