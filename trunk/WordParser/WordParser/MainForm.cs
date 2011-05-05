@@ -27,10 +27,11 @@ namespace WordParser
         private Word.Paragraphs wordparagraphs, newParagraphs;
         private Word.Paragraph wordparagraph, newParagraph;
         //private Word.Words pWords;
-        
-         
 
+
+        bool NPDict;
         List<string> wordslist;
+        List<string> Dict;
 
         public MainForm()
         {
@@ -125,6 +126,8 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
             DocPath = dlg.FileName;
+
+            NPDict = NotParDict.Checked;
             
             backgroundWorker.RunWorkerAsync();
             
@@ -188,7 +191,10 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
                 object oMissing = System.Reflection.Missing.Value;
                 int g = 1;
                 int m = wordparagraphs.Count;
-               
+
+                Dict = new List<string>();
+       
+
                 for (int i = 1; i < m; i++)
                 {
                     wordparagraph = wordparagraphs[i];
@@ -196,12 +202,14 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
                     int n = wordparagraph.Range.Words.Count;
                     //progBar2.Value = 0;
                     //progBar2.Maximum = n;
-                    g++;
-                    newdocument.Paragraphs.Add(ref oMissing);
-                    newParagraph = newParagraphs[g];
-                    newParagraph.Range.Font.Bold = 1;
-                    newParagraph.Range.Text = " ------------ " + i.ToString() + " -------------- ";
-                    
+                    if (!NPDict)
+                    {
+                        g++;
+                        newdocument.Paragraphs.Add(ref oMissing);
+                        newParagraph = newParagraphs[g];
+                        newParagraph.Range.Font.Bold = 1;
+                        newParagraph.Range.Text = " ------------ " + i.ToString() + " -------------- ";
+                    }
                     
 
 
@@ -219,12 +227,28 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
                             if (( Str == st1) || (Str == "") ) found = true;
                         }
                         if (!found)
-                        {
-                            g++;
-                            newdocument.Paragraphs.Add(ref oMissing);
-                            newParagraph = newParagraphs[g];
-                            newParagraph.Range.Font.Bold = 0;
-                            newParagraph.Range.Text = Str;
+                        {              
+                            bool diff = false;
+                            if (NPDict)
+                            {
+
+                                if (Dict.Count > 0)
+                                {
+                                    foreach (string s in Dict)
+                                    {
+                                        if (Str == s) diff = true;
+                                    }
+                                }
+                                if (!diff) Dict.Add(Str);
+                            }
+                            if (!diff || !NPDict)
+                            {
+                                g++;
+                                newdocument.Paragraphs.Add(ref oMissing);
+                                newParagraph = newParagraphs[g];
+                                newParagraph.Range.Font.Bold = 0;
+                                newParagraph.Range.Text = Str;
+                            }
                         }
                         double proc1 = ((j * 100) / n);
                         backgroundWorker.ReportProgress((int)Math.Ceiling(proc1), 2);
@@ -236,6 +260,7 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
                     //progBar1.Value = i;
                     //MessageBox.Show(Str);
                 }
+                Dict.Clear();
                 backgroundWorker.ReportProgress(100, 1);
                 backgroundWorker.ReportProgress(100, 2);
                 //Str = Convert.ToString(wordparagraphs.Count);
@@ -290,6 +315,8 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
                  myCommand = conn.CreateCommand();
                  myCommand.CommandText = commandText;
                  myCommand.ExecuteNonQuery();
+                 StatusWord.Text = Str;
+                 WorkInDict.Text = "";
              }
               conn.Close();
 
