@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Net;
 
 using Microsoft.Office.Interop;
 using Microsoft.Office.Interop.Word;
@@ -29,7 +30,7 @@ namespace WordParser
         //private Word.Words pWords;
 
 
-        bool NPDict;
+        bool NPDict, Tran;
         List<string> wordslist;
         List<string> Dict;
         //List<char> c;
@@ -137,6 +138,7 @@ namespace WordParser
             DocPath = dlg.FileName;
 
             NPDict = NotParDict.Checked;
+            Tran = checkTransl.Checked;
             
             backgroundWorker.RunWorkerAsync();
             
@@ -254,7 +256,8 @@ namespace WordParser
                                 newdocument.Paragraphs.Add(ref oMissing);
                                 newParagraph = newParagraphs[g];
                                 newParagraph.Range.Font.Bold = 0;
-                                newParagraph.Range.Text = Str;
+                                if (Tran) newParagraph.Range.Text = Str + " - " + TranslateStr(Str);
+                                else newParagraph.Range.Text = Str;
                             }
                         }
                         double proc1 = ((j * 100) / n);
@@ -341,6 +344,51 @@ namespace WordParser
         private void checkTopWindow_CheckedChanged(object sender, EventArgs e)
         {
             this.TopMost = checkTopWindow.Checked;
+        }
+
+        private string TranslateStr(string Str)
+        {
+            //Str = @"can";
+            string URI = @"http://lingvo.yandex.ru/" + Str + @"/с английского/";
+            string GetHTML, Transl;
+            Transl = "";
+
+            bool b = true;
+            try
+            {
+                WebClient client = new WebClient();
+                byte[] response = client.DownloadData(URI);
+                GetHTML = Encoding.UTF8.GetString(response);
+
+                int result = GetHTML.IndexOf("<strong>1)</strong>");
+                result = result + 29;
+                
+                while (b)
+                {
+                    result++;
+                    if (GetHTML[result] == '/')
+                        b = false;
+                    else
+                        Transl += GetHTML[result].ToString();
+                }
+                
+                
+   
+                //MessageBox.Show(test1, "Тест");
+                //x = String.Compare(GetHTML, );
+                //x = x + 11;
+                //test1.CopyTo(x, GetHTML.ToCharArray(), 0, 15);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }
+            return Transl;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (WorkInDict.Text != "") TranslateStr(WorkInDict.Text);
         }
     }
 
