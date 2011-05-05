@@ -38,6 +38,7 @@
             this.AddWorkInDict = new System.Windows.Forms.Button();
             this.NotParDict = new System.Windows.Forms.CheckBox();
             this.StatusWord = new System.Windows.Forms.Label();
+            this.checkTopWindow = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // openDoc
@@ -118,11 +119,23 @@
             this.StatusWord.Size = new System.Drawing.Size(0, 13);
             this.StatusWord.TabIndex = 8;
             // 
+            // checkTopWindow
+            // 
+            this.checkTopWindow.AutoSize = true;
+            this.checkTopWindow.Location = new System.Drawing.Point(166, 107);
+            this.checkTopWindow.Name = "checkTopWindow";
+            this.checkTopWindow.Size = new System.Drawing.Size(96, 17);
+            this.checkTopWindow.TabIndex = 9;
+            this.checkTopWindow.Text = "Always on Top";
+            this.checkTopWindow.UseVisualStyleBackColor = true;
+            this.checkTopWindow.CheckedChanged += new System.EventHandler(this.checkTopWindow_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Controls.Add(this.checkTopWindow);
             this.Controls.Add(this.StatusWord);
             this.Controls.Add(this.NotParDict);
             this.Controls.Add(this.AddWorkInDict);
@@ -151,6 +164,7 @@
         private System.Windows.Forms.Button AddWorkInDict;
         private System.Windows.Forms.CheckBox NotParDict;
         private System.Windows.Forms.Label StatusWord;
+        private System.Windows.Forms.CheckBox checkTopWindow;
     }
 }
 

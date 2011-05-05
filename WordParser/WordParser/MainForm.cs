@@ -205,6 +205,7 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
                     if (!NPDict)
                     {
                         g++;
+                        Dict.Clear();
                         newdocument.Paragraphs.Add(ref oMissing);
                         newParagraph = newParagraphs[g];
                         newParagraph.Range.Font.Bold = 1;
@@ -229,21 +230,17 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
                         if (!found)
                         {              
                             bool diff = false;
-                            if (NPDict)
+                            if (Dict.Count > 0)
                             {
-
-                                if (Dict.Count > 0)
+                                foreach (string s in Dict)
                                 {
-                                    foreach (string s in Dict)
-                                    {
-                                        if (Str == s) diff = true;
-                                    }
+                                     if (Str == s) diff = true;
                                 }
-                                if (!diff) Dict.Add(Str);
                             }
-                            if (!diff || !NPDict)
+                            if (!diff)
                             {
                                 g++;
+                                Dict.Add(Str);
                                 newdocument.Paragraphs.Add(ref oMissing);
                                 newParagraph = newParagraphs[g];
                                 newParagraph.Range.Font.Bold = 0;
@@ -328,6 +325,11 @@ void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventA
 				
 			}
 
+        }
+
+        private void checkTopWindow_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = checkTopWindow.Checked;
         }
     }
 
