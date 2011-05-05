@@ -388,7 +388,7 @@ namespace WordParser
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (WorkInDict.Text != "") TranslateStr(WorkInDict.Text);
+            if (WorkInDict.Text != "") MessageBox.Show(TranslateStr(WorkInDict.Text), "Translate");
         }
     }
 
