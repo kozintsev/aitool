@@ -36,6 +36,8 @@
             this.WorkInDict = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.AddWorkInDict = new System.Windows.Forms.Button();
+            this.NotParDict = new System.Windows.Forms.CheckBox();
+            this.StatusWord = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openDoc
@@ -98,11 +100,31 @@
             this.AddWorkInDict.UseVisualStyleBackColor = true;
             this.AddWorkInDict.Click += new System.EventHandler(this.AddWorkInDict_Click);
             // 
+            // NotParDict
+            // 
+            this.NotParDict.AutoSize = true;
+            this.NotParDict.Location = new System.Drawing.Point(27, 107);
+            this.NotParDict.Name = "NotParDict";
+            this.NotParDict.Size = new System.Drawing.Size(117, 17);
+            this.NotParDict.TabIndex = 7;
+            this.NotParDict.Text = "Not Paragraph Dict";
+            this.NotParDict.UseVisualStyleBackColor = true;
+            // 
+            // StatusWord
+            // 
+            this.StatusWord.AutoSize = true;
+            this.StatusWord.Location = new System.Drawing.Point(109, 60);
+            this.StatusWord.Name = "StatusWord";
+            this.StatusWord.Size = new System.Drawing.Size(0, 13);
+            this.StatusWord.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Controls.Add(this.StatusWord);
+            this.Controls.Add(this.NotParDict);
             this.Controls.Add(this.AddWorkInDict);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.WorkInDict);
@@ -127,6 +149,8 @@
         private System.Windows.Forms.TextBox WorkInDict;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button AddWorkInDict;
+        private System.Windows.Forms.CheckBox NotParDict;
+        private System.Windows.Forms.Label StatusWord;
     }
 }
 
