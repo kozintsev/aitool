@@ -8,6 +8,8 @@
     <AssemblyName>AiToolGui</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>Main.ico</ApplicationIcon>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -20,7 +22,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -79,6 +80,9 @@
     </Compile>
     <Compile Include="DocumentManager.Designer.cs">
       <DependentUpon>DocumentManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphEditor.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -207,5 +211,18 @@
       <ProductName>Установщик Windows 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PiccoloX\PiccoloX.csproj">
+      <Project>{E4079B36-6A5D-42C2-8F20-6C0DD8780192}</Project>
+      <Name>PiccoloX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Piccolo\Piccolo.csproj">
+      <Project>{A1E844B2-72BC-469D-B68F-7DE6AF0BBCD9}</Project>
+      <Name>Piccolo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Main.ico" />
   </ItemGroup>
 </Project>

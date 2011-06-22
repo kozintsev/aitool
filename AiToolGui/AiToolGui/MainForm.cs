@@ -21,6 +21,7 @@ namespace AiToolGui
         Form AboutBox;
         Form ProjectManager;
         Form DocumentManager;
+        ProjectViewer pv;
         NewProject np;
         Setting sett;
         ConnectDataBase cdb;
@@ -47,11 +48,15 @@ namespace AiToolGui
 
         private void ShowNewForm(object sender, EventArgs e)
         {
+            pv = new ProjectViewer();
+            pv.MdiParent = this;
+            pv.Show();
+            /*
             bool FormFound = false;
             FormCollection fс = Application.OpenForms;
             foreach (Form frm in fс)
             {
-                if (frm.Name == "NewProject")
+                if (frm.Name == "NewProject") //
                 {
                     frm.Focus();
                     FormFound = true;
@@ -66,7 +71,7 @@ namespace AiToolGui
                 np.Text = "Create New Project";
                 np.Show();
             }
-            
+            */
         }
 
         private void OpenFile(object sender, EventArgs e)
