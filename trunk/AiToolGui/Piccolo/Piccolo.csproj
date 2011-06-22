@@ -1,0 +1,228 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A1E844B2-72BC-469D-B68F-7DE6AF0BBCD9}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>UMD.HCIL.Piccolo</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>UMD.HCIL.Piccolo</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\AiToolGui\bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>UMD.HCIL.Piccolo.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\AiToolGui\bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>piccolo.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>3</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activities\NamespaceDoc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Activities\PActivity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Activities\PActivityScheduler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Activities\PColorActivity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Activities\PInterpolatingActivity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Activities\PTransformActivity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\NamespaceDoc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\PBasicInputEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\PDragEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\PDragSequenceEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\PInputEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\PInputEventListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\PPanEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\PPropertyEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Event\PZoomEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NamespaceDoc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Nodes\NamespaceDoc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Nodes\PImage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Nodes\PPath.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Nodes\PText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PCamera.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PCanvas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PInputManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PLayer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PRoot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\GraphicsPathSurrogate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\MatrixSurrogate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\NamespaceDoc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PActivityList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PCameraList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PDebug.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PLayerList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PMatrix.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PNodeFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PNodeList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PPaintContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PPickPath.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\PUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="PCanvas.resx">
+      <DependentUpon>PCanvas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

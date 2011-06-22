@@ -1,0 +1,6 @@
+D:\svn\aitool\AiToolGui\PiccoloX\bin\Debug\UMD.HCIL.PiccoloX.dll
+D:\svn\aitool\AiToolGui\PiccoloX\bin\Debug\UMD.HCIL.PiccoloX.pdb
+D:\svn\aitool\AiToolGui\PiccoloX\bin\Debug\UMD.HCIL.PiccoloX.xml
+D:\svn\aitool\AiToolGui\PiccoloX\bin\Debug\UMD.HCIL.Piccolo.dll
+D:\svn\aitool\AiToolGui\PiccoloX\bin\Debug\UMD.HCIL.Piccolo.pdb
+D:\svn\aitool\AiToolGui\PiccoloX\bin\Debug\UMD.HCIL.Piccolo.xml

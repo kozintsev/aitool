@@ -1,0 +1,11 @@
+d:\coding\Piccolo.NET\Source\Piccolo\bin\Debug\UMD.HCIL.Piccolo.dll
+d:\coding\Piccolo.NET\Source\Piccolo\bin\Debug\UMD.HCIL.Piccolo.pdb
+d:\coding\Piccolo.NET\Source\Piccolo\bin\Debug\UMD.HCIL.Piccolo.xml
+d:\coding\Piccolo.NET\Source\Piccolo\obj\Debug\ResolveAssemblyReference.cache
+d:\coding\Piccolo.NET\Source\Piccolo\obj\Debug\UMD.HCIL.Piccolo.PCanvas.resources
+d:\coding\Piccolo.NET\Source\Piccolo\obj\Debug\Piccolo.csproj.GenerateResource.Cache
+d:\coding\Piccolo.NET\Source\Piccolo\obj\Debug\UMD.HCIL.Piccolo.dll
+d:\coding\Piccolo.NET\Source\Piccolo\obj\Debug\UMD.HCIL.Piccolo.pdb
+D:\svn\aitool\AiToolGui\Piccolo\bin\Debug\UMD.HCIL.Piccolo.dll
+D:\svn\aitool\AiToolGui\Piccolo\bin\Debug\UMD.HCIL.Piccolo.pdb
+D:\svn\aitool\AiToolGui\Piccolo\bin\Debug\UMD.HCIL.Piccolo.xml
