@@ -54,6 +54,7 @@ namespace UMD.HCIL.GraphEditor {
 		private System.ComponentModel.Container components = null;
 		private static int DEFAULT_WIDTH = 500;
 		private static int DEFAULT_HEIGHT = 500;
+        PLayer nodeLayer;
 
 		/// <summary>
 		/// Empty Constructor is necessary so that this control can be used as an applet.
@@ -69,7 +70,7 @@ namespace UMD.HCIL.GraphEditor {
 			int numEdges = 5;
 
 			// Initialize, and create a layer for the edges (always underneath the nodes)
-			PLayer nodeLayer = this.Layer;
+			nodeLayer = this.Layer;
 			PLayer edgeLayer = new PLayer();
 			Root.AddChild(edgeLayer);
 			this.Camera.AddLayer(0, edgeLayer);
@@ -123,6 +124,16 @@ namespace UMD.HCIL.GraphEditor {
 			edge.Reset();
 			edge.AddLine(start.X, start.Y, end.X, end.Y);
 		}
+
+        public void AddBlock()
+        {
+            //nodeLayer = this.Layer;
+
+            PPath path = PPath.CreateRectangle(10, 10, 150, 100); ;
+            path.Tag = new ArrayList();
+            nodeLayer.AddChild(path);
+        }
+
 
 		/// <summary>
 		/// Simple event handler which applies the following actions to every node it is called on:

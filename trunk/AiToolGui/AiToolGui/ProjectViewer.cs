@@ -13,10 +13,11 @@ namespace AiToolGui
 {
     public partial class ProjectViewer : Form
     {
+        GraphEditor graphEditor;
         public ProjectViewer()
         {
             InitializeComponent();
-            GraphEditor graphEditor = new GraphEditor(this.ClientSize.Width, this.ClientSize.Height);
+            graphEditor = new GraphEditor(this.ClientSize.Width, this.ClientSize.Height);
             this.splitContainer1.Panel2.Controls.Add(graphEditor);
             //Controls.Add(graphEditor);
             graphEditor.Bounds = this.ClientRectangle;
@@ -31,6 +32,11 @@ namespace AiToolGui
             mainForm.MdiParent = this.ParentForm;
             mainForm.Show();
             //OnStatus(s);
+        }
+
+        private void toolStripBlock_Click(object sender, EventArgs e)
+        {
+            graphEditor.AddBlock(); 
         }
 
      

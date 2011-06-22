@@ -30,9 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectViewer));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripScope = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.toolStripBlock = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -41,22 +42,23 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.toolStripScope,
+            this.toolStripBlock});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(451, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // toolStripScope
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripScope";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripScope_Click);
+            this.toolStripScope.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripScope.Image = ((System.Drawing.Image)(resources.GetObject("toolStripScope.Image")));
+            this.toolStripScope.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripScope.Name = "toolStripScope";
+            this.toolStripScope.Size = new System.Drawing.Size(23, 22);
+            this.toolStripScope.Text = "toolStripScope";
+            this.toolStripScope.Click += new System.EventHandler(this.toolStripScope_Click);
             // 
             // splitContainer1
             // 
@@ -81,6 +83,16 @@
             this.treeView1.Size = new System.Drawing.Size(133, 265);
             this.treeView1.TabIndex = 0;
             // 
+            // toolStripBlock
+            // 
+            this.toolStripBlock.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBlock.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBlock.Image")));
+            this.toolStripBlock.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBlock.Name = "toolStripBlock";
+            this.toolStripBlock.Size = new System.Drawing.Size(23, 22);
+            this.toolStripBlock.Text = "toolStripBlock";
+            this.toolStripBlock.Click += new System.EventHandler(this.toolStripBlock_Click);
+            // 
             // ProjectViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -104,6 +116,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripScope;
+        private System.Windows.Forms.ToolStripButton toolStripBlock;
     }
 }
