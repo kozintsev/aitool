@@ -55,7 +55,7 @@ namespace UMD.HCIL.GraphEditor {
 		private static int DEFAULT_WIDTH = 500;
 		private static int DEFAULT_HEIGHT = 500;
         PLayer nodeLayer;
-
+        PLayer edgeLayer;
 		/// <summary>
 		/// Empty Constructor is necessary so that this control can be used as an applet.
 		/// </summary>
@@ -71,7 +71,7 @@ namespace UMD.HCIL.GraphEditor {
 
 			// Initialize, and create a layer for the edges (always underneath the nodes)
 			nodeLayer = this.Layer;
-			PLayer edgeLayer = new PLayer();
+			edgeLayer = new PLayer();
 			Root.AddChild(edgeLayer);
 			this.Camera.AddLayer(0, edgeLayer);
 			Random rnd = new Random();
@@ -135,6 +135,7 @@ namespace UMD.HCIL.GraphEditor {
         }
 
 
+
 		/// <summary>
 		/// Simple event handler which applies the following actions to every node it is called on:
 		///   * Turn node red when the mouse goes over the node
@@ -148,11 +149,17 @@ namespace UMD.HCIL.GraphEditor {
 			public override bool DoesAcceptEvent(PInputEventArgs e) {
 				return e.IsMouseEvent && (e.Button != MouseButtons.None || e.IsMouseEnterOrMouseLeave);
 			}
-
+            //клик мышкой по Ноду
 			public override void OnMouseEnter(object sender, PInputEventArgs e) {
 				base.OnMouseEnter (sender, e);
 				if (e.Button == MouseButtons.None) {
 					e.PickedNode.Brush = Brushes.Black;
+                    //PNode node = e.PickedNode;
+                    //int с = nodeLayer.ChildrenCount;
+                    //for(int i = 0; i < c; i++)
+                    //{
+                        
+                    //}
 				}
 			}
 
