@@ -57,7 +57,8 @@ namespace UMD.HCIL.GraphEditor {
 		private static int DEFAULT_HEIGHT = 500;
         PLayer nodeLayer;
         PLayer edgeLayer;
-        
+ 
+
         public bool drawline = false; 
 		/// <summary>
 		/// Empty Constructor is necessary so that this control can be used as an applet.
@@ -144,7 +145,7 @@ namespace UMD.HCIL.GraphEditor {
         public void AddBlock()
         {
             //nodeLayer = this.Layer;
-            PPath path = PPath.CreateRectangle(10, 10, 150, 100);
+            PNode path = PPath.CreateRectangle(10, 10, 150, 100);
             PBoundsHandle.AddBoundsHandlesTo(path);
             path.Tag = new ArrayList();
             nodeLayer.AddChild(path);
@@ -152,15 +153,29 @@ namespace UMD.HCIL.GraphEditor {
 
         public void AddEllipse()
         {
-            PPath path = PPath.CreateEllipse(10, 10, 20, 20);
+            PNode path = PPath.CreateEllipse(10, 10, 20, 20);
             //PBoundsHandle.AddBoundsHandlesTo(path);
             path.Tag = new ArrayList();
             nodeLayer.AddChild(path);
         }
 
+
+        public static void AddLine(PPath edge, PNode node1, PNode node2)
+        {          
+            PointF start = PUtil.CenterOfRectangle(node1.FullBounds);
+            PointF end = PUtil.CenterOfRectangle(node2.FullBounds);
+            edge.Reset();
+            edge.AddLine(start.X, start.Y, end.X, end.Y);                   
+        }
+
+
+
         public void AddEdge()
         {
             drawline = true;
+            //edge = new PPath();
+            //edgeLayer.AddChild(edge);
+            //UpdateEdge(edge);
             RandomNodes();
         }
 
@@ -176,6 +191,7 @@ namespace UMD.HCIL.GraphEditor {
 		/// </summary>
 		class NodeDragHandler : PDragEventHandler {
             bool selectnode = false;
+            PNode node1, node2;
 			public override bool DoesAcceptEvent(PInputEventArgs e) {
 				return e.IsMouseEvent && (e.Button != MouseButtons.None || e.IsMouseEnterOrMouseLeave);
 			}
@@ -200,12 +216,14 @@ namespace UMD.HCIL.GraphEditor {
                 if (!selectnode)
                 {
                     e.PickedNode.Brush = Brushes.Red;
+                    node1 = e.PickedNode;
                     selectnode = true;
                 }
                 else
                 {
                     e.PickedNode.Brush = Brushes.Green;
-                    selectnode = false;                    
+                    node2 = e.PickedNode;
+                    selectnode = false;
                 }
                  
                 
