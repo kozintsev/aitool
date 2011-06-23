@@ -1,34 +1,3 @@
-/* 
- * Copyright (c) 2003-2005, University of Maryland
- * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided
- * that the following conditions are met:
- * 
- *		Redistributions of source code must retain the above copyright notice, this list of conditions
- *		and the following disclaimer.
- * 
- *		Redistributions in binary form must reproduce the above copyright notice, this list of conditions
- *		and the following disclaimer in the documentation and/or other materials provided with the
- *		distribution.
- * 
- *		Neither the name of the University of Maryland nor the names of its contributors may be used to
- *		endorse or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
- * TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * Piccolo was written at the Human-Computer Interaction Laboratory www.cs.umd.edu/hcil by Jesse Grosjean
- * and ported to C# by Aaron Clamage under the supervision of Ben Bederson.  The Piccolo website is
- * www.cs.umd.edu/hcil/piccolo.
- */
-
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -48,18 +17,16 @@ namespace UMD.HCIL.GraphEditor {
 	/// A simple graph control with some random nodes and connected edges.  An event
 	/// handler allows users to drag nodes around, keeping the edges connected.
 	/// </summary>
-	public class GraphEditor : PCanvas {
+    public class GraphEditor : PCanvas
+    {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 		private static int DEFAULT_WIDTH = 500;
 		private static int DEFAULT_HEIGHT = 500;
-        PLayer nodeLayer;
-        PLayer edgeLayer;
- 
-
-        public bool drawline = false; 
+        private PText tooltipNode;
+      
 		/// <summary>
 		/// Empty Constructor is necessary so that this control can be used as an applet.
 		/// </summary>
@@ -68,95 +35,76 @@ namespace UMD.HCIL.GraphEditor {
 		public GraphEditor(int width, int height) {
 			// This call is required by the Windows.Forms Form Designer.
 			InitializeComponent();
-
-			this.Size = new Size(width, height);
-			
-
-			// Initialize, and create a layer for the edges (always underneath the nodes)
-			nodeLayer = this.Layer;
-			edgeLayer = new PLayer();
-			Root.AddChild(edgeLayer);
-			this.Camera.AddLayer(0, edgeLayer);
-
-            // Create event handler to move nodes and update edges
-            nodeLayer.AddInputEventListener(new NodeDragHandler());
+            PanEventHandler = null;
+            AddInputEventListener(new PDragEventHandler());//включить движение фигур
+			this.Size = new Size(width, height);            
+            PCamera camera = Camera;
+            tooltipNode = new PText();
+            tooltipNode.Pickable = false;
+            camera.AddChild(tooltipNode);
             
-			
+            PBasicInputEventHandler tipEventHandler = new PBasicInputEventHandler();
+            tipEventHandler.MouseUp = new MouseUpDelegate(MouseUpHandler);
+            tipEventHandler.MouseMove = new MouseMoveDelegate(MouseMoveHandler);
+            tipEventHandler.MouseDrag = new MouseDragDelegate(MouseDragHandler);
+            camera.AddInputEventListener(tipEventHandler);			
 		}
-
-		public static void UpdateEdge(PPath edge) {
-			// Note that the node's "FullBounds" must be used (instead of just the "Bound") 
-			// because the nodes have non-identity transforms which must be included when
-			// determining their position.
-
-			ArrayList nodes = (ArrayList)edge.Tag;
-			PNode node1 = (PNode)nodes[0];
-			PNode node2 = (PNode)nodes[1];
-			PointF start = PUtil.CenterOfRectangle(node1.FullBounds);
-			PointF end = PUtil.CenterOfRectangle(node2.FullBounds);
-			edge.Reset();
-			edge.AddLine(start.X, start.Y, end.X, end.Y);
-		}
-
-        public void RandomNodes()
+        
+        public void MouseUpHandler(object sender, PInputEventArgs e)
         {
-            int numNodes = 5;
-            int numEdges = 5;
-            Random rnd = new Random();
-
-            // Create some random nodes
-            // Each node's Tag has an ArrayList used to store associated edges
-            for (int i = 0; i < numNodes; i++)
-            {
-                float x = (float)(this.ClientSize.Width * rnd.NextDouble());
-                float y = (float)(this.ClientSize.Height * rnd.NextDouble());
-                PPath path = PPath.CreateEllipse(x, y, 20, 20);
-                path.Tag = new ArrayList();
-                nodeLayer.AddChild(path);
-            }
-
-            // Create some random edges
-            // Each edge's Tag has an ArrayList used to store associated nodes
-            for (int i = 0; i < numEdges; i++)
-            {
-                int n1 = rnd.Next(numNodes);
-                int n2 = n1;
-                while (n2 == n1)
-                {
-                    n2 = rnd.Next(numNodes);  // Make sure we have two distinct nodes.
-                }
-
-                PNode node1 = nodeLayer[n1];
-                PNode node2 = nodeLayer[n2];
-                PPath edge = new PPath();
-                ((ArrayList)node1.Tag).Add(edge);
-                ((ArrayList)node2.Tag).Add(edge);
-                edge.Tag = new ArrayList();
-                ((ArrayList)edge.Tag).Add(node1);
-                ((ArrayList)edge.Tag).Add(node2);
-                edgeLayer.AddChild(edge);
-                UpdateEdge(edge);
-            }
-
-            
-
+            UpdateToolTip(e);
         }
 
+        public void MouseMoveHandler(object sender, PInputEventArgs e)
+        {
+            //UpdateToolTip(e);
+            
+            
+            PointF p = e.CanvasPosition;
+
+            String tooltipString = "X = " + Convert.ToString(p.X) + "Y = " + Convert.ToString(p.Y);
+            p = e.Path.CanvasToLocal(p, Camera);
+
+            tooltipNode.Text = tooltipString;
+            tooltipNode.SetOffset(p.X + 8, p.Y - 8);
+        }
+
+        public void MouseDragHandler(object sender, PInputEventArgs e)
+        {
+            //UpdateToolTip(e);
+            //MessageBox.Show("Drag");
+        }
+
+        public void UpdateToolTip(PInputEventArgs e)
+        {
+            PNode n = e.InputManager.MouseOver.PickedNode;
+            String tooltipString = (String)n.Tag;
+            PointF p = e.CanvasPosition;
+
+            p = e.Path.CanvasToLocal(p, Camera);
+
+            tooltipNode.Text = tooltipString;
+            tooltipNode.SetOffset(p.X + 8, p.Y - 8);
+        }
+		
         public void AddBlock()
         {
-            //nodeLayer = this.Layer;
-            PNode path = PPath.CreateRectangle(10, 10, 150, 100);
-            PBoundsHandle.AddBoundsHandlesTo(path);
-            path.Tag = new ArrayList();
-            nodeLayer.AddChild(path);
+            PNode n1 = PPath.CreateEllipse(0, 0, 100, 100);
+            PNode n2 = PPath.CreateRectangle(300, 200, 100, 100);
+
+            n1.Tag = "node 1";
+            n2.Tag = "node 2";
+            Layer.AddChild(n1);
+            Layer.AddChild(n2);
+
         }
 
         public void AddEllipse()
         {
             PNode path = PPath.CreateEllipse(10, 10, 20, 20);
+            Layer.AddChild(path);
             //PBoundsHandle.AddBoundsHandlesTo(path);
-            path.Tag = new ArrayList();
-            nodeLayer.AddChild(path);
+          
         }
 
 
@@ -172,87 +120,13 @@ namespace UMD.HCIL.GraphEditor {
 
         public void AddEdge()
         {
-            drawline = true;
+            
             //edge = new PPath();
             //edgeLayer.AddChild(edge);
             //UpdateEdge(edge);
-            RandomNodes();
+
         }
 
-
-		/// <summary>
-		/// Simple event handler which applies the following actions to every node it is called on:
-		///   * Turn node red when the mouse goes over the node
-		///   * Turn node white when the mouse exits the node
-		///   * Drag the node, and associated edges on mousedrag
-		/// It assumes that the node's Tag references an ArrayList with a list of associated
-		/// edges where each edge is a PPath which each have a Tag that references an ArrayList
-		/// with a list of associated nodes.
-		/// </summary>
-		class NodeDragHandler : PDragEventHandler {
-            bool selectnode = false;
-            PNode node1, node2;
-			public override bool DoesAcceptEvent(PInputEventArgs e) {
-				return e.IsMouseEvent && (e.Button != MouseButtons.None || e.IsMouseEnterOrMouseLeave);
-			}
-            //клик мышкой по Ноду
-			public override void OnMouseEnter(object sender, PInputEventArgs e) {
-				base.OnMouseEnter (sender, e);
-				if (e.Button == MouseButtons.None) {
-					e.PickedNode.Brush = Brushes.Black;
-                    //PNode node = e.PickedNode;
-                    //int с = nodeLayer.ChildrenCount;
-                    //for(int i = 0; i < c; i++)
-                    //{
-                        
-                    //}
-				}
-			}
-
-            public override void OnMouseDown(object sender, PInputEventArgs e)
-            {
-                base.OnMouseDown(sender, e);
-                
-                if (!selectnode)
-                {
-                    e.PickedNode.Brush = Brushes.Red;
-                    node1 = e.PickedNode;
-                    selectnode = true;
-                }
-                else
-                {
-                    e.PickedNode.Brush = Brushes.Green;
-                    node2 = e.PickedNode;
-                    selectnode = false;
-                }
-                 
-                
-                //MessageBox.Show("Hello World!");
-            }
-
-			public override void OnMouseLeave(object sender, PInputEventArgs e) {
-				base.OnMouseLeave (sender, e);
-				if (e.Button == MouseButtons.None) {
-					e.PickedNode.Brush = Brushes.White;
-				}
-			}
-
-			protected override void OnStartDrag(object sender, PInputEventArgs e) {
-				base.OnStartDrag(sender, e);
-				e.Handled = true;
-				e.PickedNode.MoveToFront();
-			}
-
-			protected override void OnDrag(object sender, PInputEventArgs e) {
-				base.OnDrag (sender, e);
-
-				ArrayList edges = (ArrayList)e.PickedNode.Tag;
-                if (edges == null) return;
-				foreach (PPath edge in edges) {
-					GraphEditor.UpdateEdge(edge);
-				}
-			}
-		}
 
 		/// <summary>
 		/// Clean up any resources being used.
