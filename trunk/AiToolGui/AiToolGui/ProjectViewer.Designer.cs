@@ -32,9 +32,10 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripScope = new System.Windows.Forms.ToolStripButton();
             this.toolStripBlock = new System.Windows.Forms.ToolStripButton();
+            this.toolStripEllipse = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.toolStripEllipse = new System.Windows.Forms.ToolStripButton();
+            this.toolStripeEdge = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -45,7 +46,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripScope,
             this.toolStripBlock,
-            this.toolStripEllipse});
+            this.toolStripEllipse,
+            this.toolStripeEdge});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(451, 25);
@@ -72,6 +74,16 @@
             this.toolStripBlock.Text = "toolStripBlock";
             this.toolStripBlock.Click += new System.EventHandler(this.toolStripBlock_Click);
             // 
+            // toolStripEllipse
+            // 
+            this.toolStripEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripEllipse.Image = ((System.Drawing.Image)(resources.GetObject("toolStripEllipse.Image")));
+            this.toolStripEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripEllipse.Name = "toolStripEllipse";
+            this.toolStripEllipse.Size = new System.Drawing.Size(23, 22);
+            this.toolStripEllipse.Text = "toolStripEllipse";
+            this.toolStripEllipse.Click += new System.EventHandler(this.toolStripEllipse_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -95,15 +107,15 @@
             this.treeView1.Size = new System.Drawing.Size(133, 265);
             this.treeView1.TabIndex = 0;
             // 
-            // toolStripEllipse
+            // toolStripeEdge
             // 
-            this.toolStripEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripEllipse.Image = ((System.Drawing.Image)(resources.GetObject("toolStripEllipse.Image")));
-            this.toolStripEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripEllipse.Name = "toolStripEllipse";
-            this.toolStripEllipse.Size = new System.Drawing.Size(23, 22);
-            this.toolStripEllipse.Text = "toolStripEllipse";
-            this.toolStripEllipse.Click += new System.EventHandler(this.toolStripEllipse_Click);
+            this.toolStripeEdge.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripeEdge.Image = ((System.Drawing.Image)(resources.GetObject("toolStripeEdge.Image")));
+            this.toolStripeEdge.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripeEdge.Name = "toolStripeEdge";
+            this.toolStripeEdge.Size = new System.Drawing.Size(23, 22);
+            this.toolStripeEdge.Text = "toolStripEdge";
+            this.toolStripeEdge.Click += new System.EventHandler(this.toolStripeEdge_Click);
             // 
             // ProjectViewer
             // 
@@ -131,5 +143,6 @@
         private System.Windows.Forms.ToolStripButton toolStripScope;
         private System.Windows.Forms.ToolStripButton toolStripBlock;
         private System.Windows.Forms.ToolStripButton toolStripEllipse;
+        private System.Windows.Forms.ToolStripButton toolStripeEdge;
     }
 }
