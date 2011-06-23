@@ -41,6 +41,7 @@ using UMD.HCIL.Piccolo.Nodes;
 using UMD.HCIL.Piccolo.Event;
 using UMD.HCIL.PiccoloX;
 using UMD.HCIL.Piccolo.Util;
+using UMD.HCIL.PiccoloX.Handles;
 
 namespace UMD.HCIL.GraphEditor {
 	/// <summary>
@@ -128,12 +129,18 @@ namespace UMD.HCIL.GraphEditor {
         public void AddBlock()
         {
             //nodeLayer = this.Layer;
-
-            PPath path = PPath.CreateRectangle(10, 10, 150, 100); ;
+            PPath path = PPath.CreateRectangle(10, 10, 150, 100);
+            //PBoundsHandle.AddBoundsHandlesTo(path);
             path.Tag = new ArrayList();
             nodeLayer.AddChild(path);
         }
 
+        public void AddEllipse()
+        {
+            PPath path = PPath.CreateEllipse(10, 10, 20, 20);
+            path.Tag = new ArrayList();
+            nodeLayer.AddChild(path);
+        }
 
 
 		/// <summary>
