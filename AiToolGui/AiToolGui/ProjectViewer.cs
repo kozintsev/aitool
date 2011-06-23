@@ -44,6 +44,11 @@ namespace AiToolGui
             graphEditor.AddEllipse();
         }
 
+        private void toolStripeEdge_Click(object sender, EventArgs e)
+        {
+            graphEditor.AddEdge();
+        }
+
      
     }
 }

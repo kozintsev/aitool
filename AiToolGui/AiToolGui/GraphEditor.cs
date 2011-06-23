@@ -57,6 +57,8 @@ namespace UMD.HCIL.GraphEditor {
 		private static int DEFAULT_HEIGHT = 500;
         PLayer nodeLayer;
         PLayer edgeLayer;
+        
+        public bool drawline = false; 
 		/// <summary>
 		/// Empty Constructor is necessary so that this control can be used as an applet.
 		/// </summary>
@@ -67,49 +69,18 @@ namespace UMD.HCIL.GraphEditor {
 			InitializeComponent();
 
 			this.Size = new Size(width, height);
-			int numNodes = 5;
-			int numEdges = 5;
+			
 
 			// Initialize, and create a layer for the edges (always underneath the nodes)
 			nodeLayer = this.Layer;
 			edgeLayer = new PLayer();
 			Root.AddChild(edgeLayer);
 			this.Camera.AddLayer(0, edgeLayer);
-			Random rnd = new Random();
 
-			// Create some random nodes
-			// Each node's Tag has an ArrayList used to store associated edges
-			for (int i=0; i<numNodes; i++) {
-				float x = (float)(this.ClientSize.Width * rnd.NextDouble());
-				float y = (float)(this.ClientSize.Height * rnd.NextDouble());
-				PPath path = PPath.CreateEllipse(x, y, 20, 20);
-				path.Tag = new ArrayList();
-				nodeLayer.AddChild(path);
-			}
-
-			// Create some random edges
-			// Each edge's Tag has an ArrayList used to store associated nodes
-			for (int i=0; i<numEdges; i++) {
-				int n1 = rnd.Next(numNodes);
-				int n2 = n1;
-				while (n2 == n1) {
-					n2 = rnd.Next(numNodes);  // Make sure we have two distinct nodes.
-				}
-
-				PNode node1 = nodeLayer[n1];
-				PNode node2 = nodeLayer[n2];
-				PPath edge = new PPath();
-				((ArrayList)node1.Tag).Add(edge);
-				((ArrayList)node2.Tag).Add(edge);
-				edge.Tag = new ArrayList();
-				((ArrayList)edge.Tag).Add(node1);
-				((ArrayList)edge.Tag).Add(node2);
-				edgeLayer.AddChild(edge);
-				UpdateEdge(edge);
-			}
-
-			// Create event handler to move nodes and update edges
-			nodeLayer.AddInputEventListener(new NodeDragHandler());
+            // Create event handler to move nodes and update edges
+            nodeLayer.AddInputEventListener(new NodeDragHandler());
+            
+			
 		}
 
 		public static void UpdateEdge(PPath edge) {
@@ -126,11 +97,55 @@ namespace UMD.HCIL.GraphEditor {
 			edge.AddLine(start.X, start.Y, end.X, end.Y);
 		}
 
+        public void RandomNodes()
+        {
+            int numNodes = 5;
+            int numEdges = 5;
+            Random rnd = new Random();
+
+            // Create some random nodes
+            // Each node's Tag has an ArrayList used to store associated edges
+            for (int i = 0; i < numNodes; i++)
+            {
+                float x = (float)(this.ClientSize.Width * rnd.NextDouble());
+                float y = (float)(this.ClientSize.Height * rnd.NextDouble());
+                PPath path = PPath.CreateEllipse(x, y, 20, 20);
+                path.Tag = new ArrayList();
+                nodeLayer.AddChild(path);
+            }
+
+            // Create some random edges
+            // Each edge's Tag has an ArrayList used to store associated nodes
+            for (int i = 0; i < numEdges; i++)
+            {
+                int n1 = rnd.Next(numNodes);
+                int n2 = n1;
+                while (n2 == n1)
+                {
+                    n2 = rnd.Next(numNodes);  // Make sure we have two distinct nodes.
+                }
+
+                PNode node1 = nodeLayer[n1];
+                PNode node2 = nodeLayer[n2];
+                PPath edge = new PPath();
+                ((ArrayList)node1.Tag).Add(edge);
+                ((ArrayList)node2.Tag).Add(edge);
+                edge.Tag = new ArrayList();
+                ((ArrayList)edge.Tag).Add(node1);
+                ((ArrayList)edge.Tag).Add(node2);
+                edgeLayer.AddChild(edge);
+                UpdateEdge(edge);
+            }
+
+            
+
+        }
+
         public void AddBlock()
         {
             //nodeLayer = this.Layer;
             PPath path = PPath.CreateRectangle(10, 10, 150, 100);
-            //PBoundsHandle.AddBoundsHandlesTo(path);
+            PBoundsHandle.AddBoundsHandlesTo(path);
             path.Tag = new ArrayList();
             nodeLayer.AddChild(path);
         }
@@ -138,8 +153,15 @@ namespace UMD.HCIL.GraphEditor {
         public void AddEllipse()
         {
             PPath path = PPath.CreateEllipse(10, 10, 20, 20);
+            //PBoundsHandle.AddBoundsHandlesTo(path);
             path.Tag = new ArrayList();
             nodeLayer.AddChild(path);
+        }
+
+        public void AddEdge()
+        {
+            drawline = true;
+            RandomNodes();
         }
 
 
@@ -153,6 +175,7 @@ namespace UMD.HCIL.GraphEditor {
 		/// with a list of associated nodes.
 		/// </summary>
 		class NodeDragHandler : PDragEventHandler {
+            bool selectnode = false;
 			public override bool DoesAcceptEvent(PInputEventArgs e) {
 				return e.IsMouseEvent && (e.Button != MouseButtons.None || e.IsMouseEnterOrMouseLeave);
 			}
@@ -169,6 +192,25 @@ namespace UMD.HCIL.GraphEditor {
                     //}
 				}
 			}
+
+            public override void OnMouseDown(object sender, PInputEventArgs e)
+            {
+                base.OnMouseDown(sender, e);
+                
+                if (!selectnode)
+                {
+                    e.PickedNode.Brush = Brushes.Red;
+                    selectnode = true;
+                }
+                else
+                {
+                    e.PickedNode.Brush = Brushes.Green;
+                    selectnode = false;                    
+                }
+                 
+                
+                //MessageBox.Show("Hello World!");
+            }
 
 			public override void OnMouseLeave(object sender, PInputEventArgs e) {
 				base.OnMouseLeave (sender, e);
@@ -187,6 +229,7 @@ namespace UMD.HCIL.GraphEditor {
 				base.OnDrag (sender, e);
 
 				ArrayList edges = (ArrayList)e.PickedNode.Tag;
+                if (edges == null) return;
 				foreach (PPath edge in edges) {
 					GraphEditor.UpdateEdge(edge);
 				}
