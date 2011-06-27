@@ -736,6 +736,9 @@ namespace KMintegrator
                         break;
                     case ".sm":
                         SMathStudioParser(LastMathCadPath, false);
+                        string programstart = "c:\\Program Files\\SMathStudioDesktop\\SMathStudio_Desktop.exe";
+                        //programstart +=   "\"" + LastMathCadPath + "\"";
+                        System.Diagnostics.Process.Start(programstart, LastMathCadPath);
                         break;
                 }
               
@@ -819,7 +822,7 @@ namespace KMintegrator
             }
             MathCadParser(LastMathCadPath, true);
             // Инициализация маткада выполняется если маткад еще не запущен
-            // Это функциия возвражает значение, ты упорно это игнорируешь
+            // Это функциия возвражает значение
 			if (InitMathCad() == null) return;
 
             // Открываем файл маткада, пересчитываем, заносим в таблицу вычисленные, закрываем
