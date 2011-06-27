@@ -213,6 +213,8 @@ namespace KMintegrator
             }
             
         }
+        // удалось распарсить файл SMathStudio версии 0.87
+        // в 0.89 поменяли структуру будут ошибки
         private void SMathStudioParser(string MathPath, bool save)
         {
             XmlDocument xd = new XmlDocument();
@@ -222,6 +224,9 @@ namespace KMintegrator
             }
             catch
             {
+
+                MessageBox.Show("Ошибка открытия файла SMathStudio", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             //XmlNodeList xnl = xd.DocumentElement.ChildNodes;
@@ -234,6 +239,7 @@ namespace KMintegrator
             s3 = "";
             foreach (XmlNode xn in list)
             {
+                //xn.InnerText
                 xnl = xn.ChildNodes;
                 XmlNode e;
                 for (int i = 0; i < xnl.Count; i++)
@@ -246,12 +252,22 @@ namespace KMintegrator
                     if (i == 1 && e.Attributes[0].Value == "operand")
                     {
                         s2  = e.InnerText;
+                        string a = s2.ToString().Replace('.', ',');
+                        Double n;
+                        if (!Double.TryParse(a, out n))
+                        {
+                            //обработка, если не число
+                            break;
+                            //MessageBox.Show(s2 + "не число");
+                        }
                     }
                     if (i == xnl.Count - 1 && e.Attributes[0].Value == "operator")
                     {
                         s3 = e.InnerText;
                         if (xnl.Count == 3 && s3 == "←")
                             this.TableMathCad.Rows.Add(s1, s2, "Присвоенная", "1", "define");
+                        if (xnl.Count == 3 && s3 == "=")
+                            this.TableMathCad.Rows.Add(s1, s2, "Вычисленная", "1", "eval");
                     }
                     
                 }
@@ -376,25 +392,9 @@ namespace KMintegrator
        
         private double ConverToDouble(string s)
         {
-          	 string ns = "";
-			 int j = 0;
-			 bool start = false;
-        	 double d;
-           	 //NumberFormatInfo provider = new NumberFormatInfo( );
-    	  	 //provider.NumberDecimalSeparator = ".";
-    	 	 //provider.NumberGroupSeparator = ".";
-         	 //provider.NumberGroupSizes = new int[ ] { 2 };
-         	 
-			for (int i = 0; i< s.Length; i++)
-			{
-				if ( (s[i] == '.') || (s[i] == ',') ) start = true;
-				if (start) j++;
-				if (j > 3) break;
-				if (s[i] == '.' ) ns = Name + ',';
-					else ns = ns + s[i];
-			}
-			d = Convert.ToDouble(ns);
-			//d = Convert.ToDouble(ns , provider);
+            double d;
+            string a = s.ToString().Replace('.', ',');
+			d = Convert.ToDouble(a);
 			return d;
         }
         
