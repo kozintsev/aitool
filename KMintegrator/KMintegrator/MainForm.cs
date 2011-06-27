@@ -213,6 +213,52 @@ namespace KMintegrator
             }
             
         }
+        private void SMathStudioParser(string MathPath, bool save)
+        {
+            XmlDocument xd = new XmlDocument();
+            try
+            {
+                xd.Load(MathPath);
+            }
+            catch
+            {
+                return;
+            }
+            //XmlNodeList xnl = xd.DocumentElement.ChildNodes;
+            if (save == false) this.TableMathCad.Rows.Clear();
+            XmlNodeList list = xd.GetElementsByTagName("math");
+            XmlNodeList xnl;
+            string s1, s2, s3;
+            s1 = "";
+            s2 = "";
+            s3 = "";
+            foreach (XmlNode xn in list)
+            {
+                xnl = xn.ChildNodes;
+                XmlNode e;
+                for (int i = 0; i < xnl.Count; i++)
+                {
+                    e = xnl[i];
+                    if (i == 0 && e.Attributes[0].Value == "operand") 
+                    {
+                        s1 = e.InnerText;
+                    }
+                    if (i == 1 && e.Attributes[0].Value == "operand")
+                    {
+                        s2  = e.InnerText;
+                    }
+                    if (i == xnl.Count - 1 && e.Attributes[0].Value == "operator")
+                    {
+                        s3 = e.InnerText;
+                        if (xnl.Count == 3 && s3 == "←")
+                            this.TableMathCad.Rows.Add(s1, s2, "Присвоенная", "1", "define");
+                    }
+                    
+                }
+
+            }
+        }
+
         private void MathCadParser(string MathPath, bool save)
         {
             // Обновляем таблицу Маткада
@@ -652,13 +698,23 @@ namespace KMintegrator
         {
         	// Открываем файл Маткада
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Filter = "Файлы MathCAD 14 (*.xmcd)|*.xmcd";
+            OpenFileDialog.Filter = "All supported(*.xmcd;*.sm)|*.xmcd;*.sm|Файлы MathCAD (*.xmcd)|*.xmcd|Файлы SMath Studio (*.sm)|*.sm|All Files|*.*";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 Save = false;
                 MathCadPath.Text = OpenFileDialog.FileName;
-                LastMathCadPath = MathCadPath.Text;
-                MathCadParser(LastMathCadPath, false);
+                LastMathCadPath = MathCadPath.Text;        
+                string s = Path.GetExtension(OpenFileDialog.SafeFileName);
+                switch (s)
+                {
+                    case ".xmcd":
+                        MathCadParser(LastMathCadPath, false);
+                        break;
+                    case ".sm":
+                        SMathStudioParser(LastMathCadPath, false);
+                        break;
+                }
+              
                 AddMathCadCombo();
                 AddKompasCombo();
             }
@@ -731,6 +787,12 @@ namespace KMintegrator
             if (LastMathCadPath == "")
                 return;
             // Заносим значения переменных маткада из таблицы в файл
+            if (TableMathCad.RowCount == 0)
+            {
+                MessageBox.Show("Нет данных для сохранения", "Сообщение",
+                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             MathCadParser(LastMathCadPath, true);
             // Инициализация маткада выполняется если маткад еще не запущен
             // Это функциия возвражает значение, ты упорно это игнорируешь
