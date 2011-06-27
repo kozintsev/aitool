@@ -213,8 +213,8 @@ namespace KMintegrator
             }
             
         }
-        // удалось распарсить файл SMathStudio версии 0.87
-        // в 0.89 поменяли структуру будут ошибки
+        // удалось распарсить файл SMathStudio версии 0.89
+        // пока только чтение
         private void SMathStudioParser(string MathPath, bool save)
         {
             XmlDocument xd = new XmlDocument();
@@ -229,6 +229,7 @@ namespace KMintegrator
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
             //XmlNodeList xnl = xd.DocumentElement.ChildNodes;
             if (save == false) this.TableMathCad.Rows.Clear();
             XmlNodeList list = xd.GetElementsByTagName("math");
@@ -240,37 +241,60 @@ namespace KMintegrator
             foreach (XmlNode xn in list)
             {
                 //xn.InnerText
+                //if (xn.Name == "result")
+
+                //if (xn.Name != "input") break;
                 xnl = xn.ChildNodes;
-                XmlNode e;
+                
                 for (int i = 0; i < xnl.Count; i++)
                 {
-                    e = xnl[i];
-                    if (i == 0 && e.Attributes[0].Value == "operand") 
+                    string s = xnl[i].Name;
+                    if (xnl[i].Name == "input")
                     {
-                        s1 = e.InnerText;
-                    }
-                    if (i == 1 && e.Attributes[0].Value == "operand")
-                    {
-                        s2  = e.InnerText;
-                        string a = s2.ToString().Replace('.', ',');
-                        Double n;
-                        if (!Double.TryParse(a, out n))
+                        XmlNodeList inputs = xnl[i].ChildNodes;
+                        XmlNode e;
+                        for (int j = 0; j < inputs.Count; j++)
                         {
-                            //обработка, если не число
-                            break;
-                            //MessageBox.Show(s2 + "не число");
+                            e = inputs[j];
+                            if (j == 0 && e.Attributes[0].Value == "operand")
+                            {
+                                s1 = e.InnerText;
+                            }
+                            if (j == 1 && e.Attributes[0].Value == "operand")
+                            {
+                                s2 = e.InnerText;
+                                string a = s2.ToString().Replace('.', ',');
+                                Double n;
+                                if (!Double.TryParse(a, out n))
+                                {
+                                    //обработка, если не число
+                                    break;
+                                    //MessageBox.Show(s2 + "не число");
+                                }
+                            }
+                            if (j == inputs.Count - 1 && e.Attributes[0].Value == "operator")
+                            {
+                                s3 = e.InnerText;
+                                if (inputs.Count == 3 && s3 == "←")
+                                    this.TableMathCad.Rows.Add(s1, s2, "Присвоенная", "1", "define");
+                                if (inputs.Count == 3 && s3 == "=")
+                                    this.TableMathCad.Rows.Add(s1, s2, "Вычисленная", "1", "eval");
+                            }
+
                         }
                     }
-                    if (i == xnl.Count - 1 && e.Attributes[0].Value == "operator")
+                    if (xnl[i].Name == "result")
                     {
-                        s3 = e.InnerText;
-                        if (xnl.Count == 3 && s3 == "←")
-                            this.TableMathCad.Rows.Add(s1, s2, "Присвоенная", "1", "define");
-                        if (xnl.Count == 3 && s3 == "=")
-                            this.TableMathCad.Rows.Add(s1, s2, "Вычисленная", "1", "eval");
+                        //XmlNodeList result = xnl[i].ChildNodes[0];
+                        XmlNode e = xnl[i].ChildNodes[0];
+                        if (e.Attributes[0].Value == "operand")
+                            s2 = e.InnerText;
+                        this.TableMathCad.Rows.Add(s1, s2, "Вычисленная", "1", "eval");
+
                     }
-                    
-                }
+                                        
+                }// for end
+                
 
             }
         }
@@ -698,7 +722,7 @@ namespace KMintegrator
         {
         	// Открываем файл Маткада
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Filter = "All supported(*.xmcd;*.sm)|*.xmcd;*.sm|Файлы MathCAD (*.xmcd)|*.xmcd|Файлы SMath Studio (*.sm)|*.sm|All Files|*.*";
+            OpenFileDialog.Filter = "All supported(*.xmcd;*.sm)|*.xmcd;*.sm|Файлы MathCAD 14 (*.xmcd)|*.xmcd|Файлы SMath Studio (*.sm)|*.sm|All Files|*.*";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 Save = false;
