@@ -28,3 +28,4 @@ d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.Properties.Resour
 d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.csproj.GenerateResource.Cache
 d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.exe
 d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.pdb
+d:\svn\aitool\KMintegrator\KMintegrator\bin\Debug\KMintegrator.exe.config

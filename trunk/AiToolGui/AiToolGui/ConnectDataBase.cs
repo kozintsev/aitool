@@ -18,12 +18,12 @@ namespace AiToolGui
 	/// </summary>
 	public class ConnectDataBase
 	{
-        Setting sett;
+        Settings sett;
         OleDbConnection conn;
 
         public ConnectDataBase()
 		{
-            sett = new Setting();
+            sett = new Settings();
 		}
 
 		public bool CreateConnectDataBase()

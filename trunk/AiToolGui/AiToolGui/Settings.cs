@@ -1,28 +1,88 @@
-﻿namespace AiToolGui.Properties {
-    
-    
-    // This class allows you to handle specific events on the settings class:
-    //  The SettingChanging event is raised before a setting's value is changed.
-    //  The PropertyChanged event is raised after a setting's value is changed.
-    //  The SettingsLoaded event is raised after the setting values are loaded.
-    //  The SettingsSaving event is raised before the setting values are saved.
-    internal sealed partial class Settings {
-        
-        public Settings() {
-            // // To add event handlers for saving and changing settings, uncomment the lines below:
-            //
-            // this.SettingChanging += this.SettingChangingEventHandler;
-            //
-            // this.SettingsSaving += this.SettingsSavingEventHandler;
-            //
+﻿using System;
+using System.Windows.Forms;
+using System.IO;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+using System.Data;
+using System.Xml;
+
+namespace AiToolGui
+{
+    public class Settings
+    {
+        string appath = Application.StartupPath;
+        string optionspath = Application.StartupPath + "\\options.xml";
+
+        public Settings()
+        {
+            if (!File.Exists(optionspath)) CreateSetting();            
         }
         
-        private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
-            // Add code to handle the SettingChangingEvent event here.
+        public string GetDataBase()
+        {
+            XmlDocument doc = new XmlDocument();
+            string pathbd = "";
+            try
+            {
+                doc.Load(optionspath);
+                XmlNodeList setting = doc.DocumentElement.ChildNodes;
+                //pathbd = setting.Item(0).InnerText;
+                foreach (XmlNode str in setting)
+                {
+                    if (str.Name == "pathbd") pathbd = appath + str.InnerText;
+                    //pathbd = str.SelectSingleNode("pathbd").InnerText;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }
+            return pathbd;
         }
-        
-        private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
-            // Add code to handle the SettingsSaving event here.
+
+        public void SaveDataBaseType()
+        {
+
         }
+
+        public void SaveDataBasePath()
+        {
+
+        }
+
+        public void CreateSetting()
+        {
+            // начинаем сохранять
+            XmlTextWriter writer = null;
+            try
+            {
+                // создаем класс для сохранения XML
+                writer = new XmlTextWriter(optionspath, System.Text.Encoding.UTF8);
+                // форматирование, чтобы файл не был вытянут в одну линию
+                writer.Formatting = Formatting.Indented;
+
+                // пишем заголовок и корневой элемент
+                writer.WriteStartDocument();
+                writer.WriteStartElement("setting");             
+                    writer.WriteStartElement("pathbd");
+                    writer.WriteString("\\Base\\aitool.mdb");
+                    writer.WriteEndElement();                               
+                // закрываем корневой элемент и завершаем работу с документом
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error!");
+            }
+            finally
+            {
+                // закрываем файл
+                if (writer != null) writer.Close();
+            }
+        }
+
     }
 }
