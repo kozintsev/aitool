@@ -23,13 +23,13 @@ namespace AiToolGui
         Form DocumentManager;
         ProjectViewer pv;
         NewProject np;
-        Setting sett;
+        Settings sett;
         ConnectDataBase cdb;
 
         public AITool()
         {
             InitializeComponent();
-            sett = new Setting();
+            sett = new Settings();
             cdb = new ConnectDataBase();
             cdb.CreateConnectDataBase();
         }

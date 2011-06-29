@@ -1,55 +1,52 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.IO;
 //using System.Collections.Generic;
 //using System.Linq;
-//using System.Text;
+using System.Text;
+using System.IO;
 using System.Data;
 using System.Xml;
 
-namespace AiToolGui
+namespace KMintegrator
 {
-    public class Setting
+    class Settings
     {
         string appath = Application.StartupPath;
-        string optionspath = Application.StartupPath + "\\options.xml";
-
-        public Setting()
-        {
-            if (!File.Exists(optionspath)) CreateSetting();            
-        }
+        string optionspath = Application.StartupPath + "\\config.xml";
         
-        public string GetDataBase()
+        public Settings()
+        {
+            if (!File.Exists(optionspath)) CreateSetting(); 
+        }
+
+        public string GetSMathPath()
         {
             XmlDocument doc = new XmlDocument();
-            string pathbd = "";
+            string path = "";
             try
             {
                 doc.Load(optionspath);
-                XmlNodeList setting = doc.DocumentElement.ChildNodes;
-                //pathbd = setting.Item(0).InnerText;
-                foreach (XmlNode str in setting)
+                XmlNodeList config = doc.GetElementsByTagName("math");
+                //path = config.Item(0).InnerText;
+               
+                foreach (XmlNode str in config)
                 {
-                    if (str.Name == "pathbd") pathbd = appath + str.InnerText;
-                    //pathbd = str.SelectSingleNode("pathbd").InnerText;
+                    if (str.Name == "math") path= str.InnerText;
                 }
+                
+                if (File.Exists(appath + path))
+                    path = appath + path;
+                if (File.Exists(appath + "\\" + path))
+                    path = appath + "\\" +  path;
+                if (!File.Exists(path)) path = "";
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error!");
             }
-            return pathbd;
+            return path;
         }
 
-        public void SaveDataBaseType()
-        {
-
-        }
-
-        public void SaveDataBasePath()
-        {
-
-        }
 
         public void CreateSetting()
         {
@@ -64,10 +61,10 @@ namespace AiToolGui
 
                 // пишем заголовок и корневой элемент
                 writer.WriteStartDocument();
-                writer.WriteStartElement("setting");             
-                    writer.WriteStartElement("pathbd");
-                    writer.WriteString("\\Base\\aitool.mdb");
-                    writer.WriteEndElement();                               
+                writer.WriteStartElement("config");
+                writer.WriteStartElement("math");
+                writer.WriteString("c:\\Program Files\\SMathStudioDesktop\\SMathStudio_Desktop.exe");
+                writer.WriteEndElement();
                 // закрываем корневой элемент и завершаем работу с документом
                 writer.WriteEndElement();
                 writer.WriteEndDocument();

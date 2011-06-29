@@ -14,7 +14,7 @@ namespace AiToolGui
         public Options()
         {
             InitializeComponent();
-            Setting sett = new Setting();
+            Settings sett = new Settings();
             DBPath.Text = sett.GetDataBase();
         }
 
