@@ -26,6 +26,7 @@ namespace UMD.HCIL.GraphEditor {
 		private static int DEFAULT_WIDTH = 500;
 		private static int DEFAULT_HEIGHT = 500;
         private PText tooltipNode;
+        //private PNodeList nList;
       
 		/// <summary>
 		/// Empty Constructor is necessary so that this control can be used as an applet.
@@ -53,19 +54,20 @@ namespace UMD.HCIL.GraphEditor {
         public void MouseUpHandler(object sender, PInputEventArgs e)
         {
             UpdateToolTip(e);
+            //MessageBox.Show("Up");
         }
 
         public void MouseMoveHandler(object sender, PInputEventArgs e)
         {
             //UpdateToolTip(e);
-            
+            PNode n = e.InputManager.MouseOver.PickedNode;
             
             PointF p = e.CanvasPosition;
 
             String tooltipString = "X = " + Convert.ToString(p.X) + "Y = " + Convert.ToString(p.Y);
             p = e.Path.CanvasToLocal(p, Camera);
 
-            tooltipNode.Text = tooltipString;
+            tooltipNode.Text = tooltipString + "\n" + (String)n.Tag;
             tooltipNode.SetOffset(p.X + 8, p.Y - 8);
         }
 
@@ -87,16 +89,11 @@ namespace UMD.HCIL.GraphEditor {
             tooltipNode.SetOffset(p.X + 8, p.Y - 8);
         }
 		
-        public void AddBlock()
+        public void AddBlock(string name)
         {
-            PNode n1 = PPath.CreateEllipse(0, 0, 100, 100);
-            PNode n2 = PPath.CreateRectangle(300, 200, 100, 100);
-
-            n1.Tag = "node 1";
-            n2.Tag = "node 2";
-            Layer.AddChild(n1);
-            Layer.AddChild(n2);
-
+            PNode n = PPath.CreateRectangle(300, 200, 100, 100);
+            n.Tag = name;
+            Layer.AddChild(n);
         }
 
         public void AddEllipse()

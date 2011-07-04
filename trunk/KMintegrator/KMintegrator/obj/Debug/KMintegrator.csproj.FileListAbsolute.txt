@@ -20,12 +20,3 @@ E:\SVN\aitool\KMintegrator\KMintegrator\bin\Debug\Kompas6Constants.dll
 E:\SVN\aitool\KMintegrator\KMintegrator\bin\Debug\Kompas6Constants3D.dll
 E:\SVN\aitool\KMintegrator\KMintegrator\bin\Debug\Kompas6LTAPI5.dll
 E:\SVN\aitool\KMintegrator\KMintegrator\bin\Debug\interop.mathcad.dll
-d:\svn\aitool\KMintegrator\KMintegrator\bin\Debug\KMintegrator.exe
-d:\svn\aitool\KMintegrator\KMintegrator\bin\Debug\KMintegrator.pdb
-d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\ResolveAssemblyReference.cache
-d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.MainForm.resources
-d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.Properties.Resources.resources
-d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.csproj.GenerateResource.Cache
-d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.exe
-d:\svn\aitool\KMintegrator\KMintegrator\obj\Debug\KMintegrator.pdb
-d:\svn\aitool\KMintegrator\KMintegrator\bin\Debug\KMintegrator.exe.config
