@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?application progid="SMath Studio" version="0.89"?>
+<regions>
+  <settings>
+    <editable>true</editable>
+    <calculation>
+      <functions>0</functions>
+      <precision>4</precision>
+      <angle>radians</angle>
+      <fractions>decimal</fractions>
+      <recalculation>true</recalculation>
+    </calculation>
+    <dependences>
+      <assembly name="SMath Studio" version="0.89" guid="a37cba83-b69c-4c71-9992-55ff666763bd" />
+    </dependences>
+  </settings>
+</regions>

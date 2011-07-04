@@ -36,7 +36,13 @@ namespace AiToolGui
 
         private void toolStripBlock_Click(object sender, EventArgs e)
         {
-            graphEditor.AddBlock();
+            AddBlocks AddBlock = new AddBlocks();
+            //AddBlocks.MdiParent = this.ParentForm;
+            AddBlock.ShowDialog();
+            string name = AddBlock.GetBlockName();       
+            if (name == "") return;
+            graphEditor.AddBlock(name);
+            AddBlock.Close();
         }
 
         private void toolStripEllipse_Click(object sender, EventArgs e)
