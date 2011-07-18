@@ -28,34 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.SuspendLayout();
-            // 
-            // listView1
-            // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Location = new System.Drawing.Point(2, 5);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(618, 422);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // DocumentManager
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 429);
-            this.Controls.Add(this.listView1);
-            this.Name = "DocumentManager";
-            this.Text = "Document Manager";
-            this.ResumeLayout(false);
-
+            this.Text = "DocumentManager";
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listView1;
     }
 }
