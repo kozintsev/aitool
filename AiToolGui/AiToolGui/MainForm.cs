@@ -41,13 +41,13 @@ namespace AiToolGui
             //MessageBox.Show(sender.ToString() + "Событие!");
             //toolStripStatusLabel
             toolStripStatusLabel.Text = sender.ToString();
-            //statusStrip.
         }
 
 
 
         private void ShowNewForm(object sender, EventArgs e)
         {
+            //Запрос имени проекта
             pv = new ProjectViewer();
             pv.MdiParent = this;
             pv.Show();

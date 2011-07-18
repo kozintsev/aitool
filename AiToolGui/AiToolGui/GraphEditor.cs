@@ -92,8 +92,12 @@ namespace UMD.HCIL.GraphEditor {
         public void AddBlock(string name)
         {
             PNode n = PPath.CreateRectangle(300, 200, 100, 100);
+            PNode text = new PText(name);
+            text.SetOffset(300, 250);
             n.Tag = name;
             Layer.AddChild(n);
+            n.AddChild(text);
+            
         }
 
         public void AddEllipse()
