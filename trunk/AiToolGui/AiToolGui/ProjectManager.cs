@@ -32,20 +32,15 @@ namespace AiToolGui
       
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void listViewProjectItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            //MessageBox.Show(e.ToString());
+
         }
 
-        private void listView1_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void listViewProject_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            //
             MessageBox.Show(e.ToString());
-        }
-        
-        void ListView1ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-        	
         }
     }
 }

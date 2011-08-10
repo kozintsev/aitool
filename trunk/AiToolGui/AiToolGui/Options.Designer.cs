@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.DBPath = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.AddAccess = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.CloseForm = new System.Windows.Forms.Button();
@@ -56,22 +56,23 @@
             this.DBPath.Size = new System.Drawing.Size(221, 20);
             this.DBPath.TabIndex = 1;
             // 
-            // button1
+            // AddAccess
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(330, 35);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(27, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.AddAccess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddAccess.Location = new System.Drawing.Point(330, 35);
+            this.AddAccess.Name = "AddAccess";
+            this.AddAccess.Size = new System.Drawing.Size(27, 23);
+            this.AddAccess.TabIndex = 2;
+            this.AddAccess.Text = "...";
+            this.AddAccess.UseVisualStyleBackColor = true;
+            this.AddAccess.Click += new System.EventHandler(this.AddAccess_Click);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Access"});
+            "Access",
+            "Microsoft SQL Server"});
             this.comboBox1.Location = new System.Drawing.Point(103, 13);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
@@ -118,7 +119,7 @@
             this.Controls.Add(this.CloseForm);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.AddAccess);
             this.Controls.Add(this.DBPath);
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(300, 300);
@@ -134,7 +135,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox DBPath;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button AddAccess;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button CloseForm;

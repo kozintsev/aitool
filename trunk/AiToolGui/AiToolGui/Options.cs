@@ -18,17 +18,6 @@ namespace AiToolGui
             DBPath.Text = sett.GetDataBase();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Файлы Microsoft Access 2003 (*.mdb)|*.mdb";
-
-            if (dlg.ShowDialog() != DialogResult.OK)
-                return;
-
-            DBPath.Text = dlg.FileName;
-        }
-
         private void Close_Click(object sender, EventArgs e)
         {
             Close();
@@ -45,6 +34,17 @@ namespace AiToolGui
          
        
 
+        }
+
+        private void AddAccess_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Файлы Microsoft Access 2003 (*.mdb)|*.mdb";
+
+            if (dlg.ShowDialog() != DialogResult.OK)
+                return;
+
+            DBPath.Text = dlg.FileName;
         }
     }
 }
