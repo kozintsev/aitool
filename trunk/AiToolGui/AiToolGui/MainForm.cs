@@ -17,14 +17,14 @@ namespace AiToolGui
     {
         //private int childFormNumber = 0;
 
-        Form childForm;
-        Form AboutBox;
-        Form ProjectManager;
-        Form DocumentManager;
-        ProjectViewer pv;
-        NewProject np;
-        Settings sett;
-        ConnectDataBase cdb;
+        private Form childForm;
+        private Form AboutBox;
+        private Form ProjectManager;
+        private Form DocumentManager;
+        private ProjectViewer pv;
+        private NewProject np;
+        private Settings sett;
+        private ConnectDataBase cdb;
 
         public AITool()
         {
@@ -232,6 +232,14 @@ namespace AiToolGui
             russiaToolStripMenuItem.Checked = false;
             defaultToolStripMenuItem.Checked = true;
 
+        }
+
+        private void AITool_Shown(object sender, EventArgs e) // событие возникает при первом отображении формы
+        {
+            Login FormLogin = new Login();
+            FormLogin.ShowDialog(this);
+            if (FormLogin.OpenProgram == false)
+                this.Close();
         }
     }
 }
