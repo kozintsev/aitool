@@ -461,7 +461,9 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "AITool";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AITool_Load);
+            this.Shown += new System.EventHandler(this.AITool_Shown);
             this.VisibleChanged += new System.EventHandler(this.AITool_VisibleChanged);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

@@ -11,8 +11,8 @@ namespace AiToolGui
 {
     public class Settings
     {
-        string appath = Application.StartupPath;
-        string optionspath = Application.StartupPath + "\\options.xml";
+        private string appath = Application.StartupPath;
+        private string optionspath = Application.StartupPath + "\\options.xml";
 
         public Settings()
         {
@@ -21,34 +21,51 @@ namespace AiToolGui
         
         public string GetDataBase()
         {
+            string pathbd = appath + DataBase("pathbd", "", false);
+            return pathbd;
+        }
+
+        public string GetLogin()
+        {
+            return DataBase("login", "", false);
+
+        }
+
+        public void SetLogin(string login)
+        {
+            DataBase("login", login, true);
+        }
+
+        private string DataBase(string str, string text ,bool save)
+        {
             XmlDocument doc = new XmlDocument();
-            string pathbd = "";
+            string temp = "";
             try
             {
                 doc.Load(optionspath);
                 XmlNodeList setting = doc.DocumentElement.ChildNodes;
-                //pathbd = setting.Item(0).InnerText;
-                foreach (XmlNode str in setting)
+                foreach (XmlNode node in setting)
                 {
-                    if (str.Name == "pathbd") pathbd = appath + str.InnerText;
-                    //pathbd = str.SelectSingleNode("pathbd").InnerText;
+                    if (node.Name == str)
+                    {
+
+                        if (save)
+                        {
+                            node.InnerText = text;
+                            doc.Save(optionspath);
+                        }
+                        else
+                        {
+                            temp = node.InnerText;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error!");
             }
-            return pathbd;
-        }
-
-        public void SaveDataBaseType()
-        {
-
-        }
-
-        public void SaveDataBasePath()
-        {
-
+            return temp;
         }
 
         public void CreateSetting()
@@ -64,7 +81,10 @@ namespace AiToolGui
 
                 // пишем заголовок и корневой элемент
                 writer.WriteStartDocument();
-                writer.WriteStartElement("setting");             
+                writer.WriteStartElement("setting");
+                    writer.WriteStartElement("login");
+                    writer.WriteString("");
+                    writer.WriteEndElement();
                     writer.WriteStartElement("pathbd");
                     writer.WriteString("\\Base\\aitool.mdb");
                     writer.WriteEndElement();                               
