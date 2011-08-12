@@ -28,12 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "1",
-            "2",
-            "2",
-            "3"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("2");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listViewProject = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
@@ -84,9 +78,6 @@
             this.listViewProject.HideSelection = false;
             this.listViewProject.HotTracking = true;
             this.listViewProject.HoverSelection = true;
-            this.listViewProject.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
             this.listViewProject.LabelEdit = true;
             this.listViewProject.Location = new System.Drawing.Point(3, 3);
             this.listViewProject.Name = "listViewProject";
