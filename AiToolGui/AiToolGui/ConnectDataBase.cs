@@ -20,8 +20,15 @@ namespace AiToolGui
 	public class ConnectDataBase
 	{
         private Settings sett;
-        private OleDbConnection conn;
 
+        private OleDbConnection conn;
+        public OleDbConnection Conn
+        {
+            get
+            {
+                return conn;
+            }
+        }
         public ConnectDataBase()
 		{
             sett = new Settings();
@@ -83,5 +90,6 @@ namespace AiToolGui
             } while (reader.NextResult());
             return auth;
         }
+
 	}
 }

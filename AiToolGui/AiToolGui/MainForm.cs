@@ -241,5 +241,14 @@ namespace AiToolGui
             if (FormLogin.OpenProgram == false)
                 this.Close();
         }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            // сохранить открытый проект
+            if (pv != null) // новый проект, их может быть дохрена
+            {
+                
+            }
+        }
     }
 }
