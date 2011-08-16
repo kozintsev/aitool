@@ -28,6 +28,7 @@ namespace AiToolGui
             if(File.Exists(pathbd))
                 return pathbd;
             else pathbd = "";
+            UserParam.LocalBDPath = pathbd;
             return pathbd;
         }
 

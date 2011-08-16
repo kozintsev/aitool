@@ -80,6 +80,12 @@
     <Compile Include="AddBlocks.Designer.cs">
       <DependentUpon>AddBlocks.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddUser.Designer.cs">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConnectDataBase.cs" />
     <Compile Include="CreateSpecification.cs">
       <SubType>Form</SubType>
@@ -154,6 +160,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddBlocks.resx">
       <DependentUpon>AddBlocks.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddUser.resx">
+      <DependentUpon>AddUser.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateSpecification.en.resx">

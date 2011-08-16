@@ -38,10 +38,8 @@ namespace AiToolGui
 
         private void myForm_Status(object sender, EventArgs e)
         {
-            //Console.WriteLine("Event handled");
-            //MessageBox.Show(sender.ToString() + "Событие!");
-            //toolStripStatusLabel
-            toolStripStatusLabel.Text = sender.ToString();
+            toolStripStatusLabel.Text = "";
+            toolStripUser.Text = sender.ToString();
         }
 
 
@@ -238,6 +236,8 @@ namespace AiToolGui
         private void AITool_Shown(object sender, EventArgs e) // событие возникает при первом отображении формы
         {
             Login FormLogin = new Login();
+            //+= myForm_Status
+            FormLogin.Status += new EventHandler(myForm_Status);
             FormLogin.ShowDialog(this);
             if (FormLogin.OpenProgram == false)
                 this.Close();

@@ -14,6 +14,7 @@ namespace AiToolGui
         private Settings sett;
         private ConnectDataBase cdb;
         private bool conn = false;
+        public event EventHandler Status;
         public Login()
         {
             InitializeComponent();
@@ -37,6 +38,13 @@ namespace AiToolGui
             }
         }
 
+        protected virtual void OnStatus(string s)
+        {
+            object Obj = s;
+            if (Status != null)
+                Status(Obj, EventArgs.Empty);
+        }
+
         private void buttonExit_Click(object sender, EventArgs e)
         {
             openProgram = false;
@@ -52,7 +60,11 @@ namespace AiToolGui
             {
                 openProgram = true; // если пароль и логин верны
                 sett.SetLogin(textBoxLogin.Text); // если всё окей сохраняем имя пользователя
+                cdb.GetRoleName();
                 cdb.CloseConnectDataBase(); // закрыть соединение с базой данных
+                UserParam.StatusText = String.Format("Имя пользователя:{0}, Полное имя: {1} , Роль: {2}, База данных подключена",
+                    UserParam.Username, UserParam.Fullname, UserParam.Rolename);
+                OnStatus(UserParam.StatusText);
                 Close();
             }
         }

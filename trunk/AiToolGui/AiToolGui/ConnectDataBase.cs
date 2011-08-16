@@ -116,10 +116,22 @@ namespace AiToolGui
             if (connLocal != null)
                 connLocal.Close();
         }
-
+        public void GetRoleName()
+        {
+            string str = String.Empty;
+            OleDbCommand command = connLocal.CreateCommand();
+            command.CommandText = "SELECT * FROM Roles WHERE id_role=" + UserParam.Role.ToString();
+            OleDbDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                UserParam.Rolename = reader["role"].ToString().TrimEnd();
+            }
+            reader.Close();
+        }
         public bool Authorization(string login, string pwd)
         {
             bool auth = false;
+            string idrole = String.Empty; ;
             //UserParam usrPrm = new UserParam() ;
             //List<UserParam> userList = List<UserParam>();
             OleDbCommand command = connLocal.CreateCommand();
@@ -133,6 +145,9 @@ namespace AiToolGui
                     UserParam.Username = reader["username"].ToString().TrimEnd();
                     UserParam.Password = reader["password"].ToString().TrimEnd();
                     UserParam.Fullname = reader["fullname"].ToString().TrimEnd();
+                    idrole = reader["id_role"].ToString().Trim();
+                    UserParam.Role = Convert.ToInt16(idrole);
+                    
                     if (login == UserParam.Username && pwd == UserParam.Password)
                         auth = true;
                     //userList.Add(usrPrm);
@@ -142,6 +157,7 @@ namespace AiToolGui
                     //item.SubItems.Add(reader.GetValue(4).ToString());
                 }
             } while (reader.NextResult());
+            reader.Close();
             return auth;
         }
 

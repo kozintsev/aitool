@@ -10,6 +10,10 @@ namespace AiToolGui
         private static string username;
         private static string password;
         private static string fullname;
+        private static short role;
+        private static string rolename;
+        private static string statustext;
+        private static string localbdpath;
 
         public static string Username
         {
@@ -25,6 +29,28 @@ namespace AiToolGui
         {
             get { return fullname; }
             set { fullname = value; }
+        }
+        public static short Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
+        public static string Rolename
+        {
+            get { return rolename; }
+            set { rolename = value; }
+        }
+        
+        public static string StatusText
+        {
+            get { return statustext; }
+            set { statustext = value; }
+        }
+
+        public static string LocalBDPath
+        {
+            get { return localbdpath; }
+            set { localbdpath = value; }
         }
     }
 }
