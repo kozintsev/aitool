@@ -19,10 +19,30 @@ namespace AiToolGui
             if (!File.Exists(optionspath)) CreateSetting();            
         }
         
-        public string GetDataBase()
+        public string GetDataBaseLocal()
         {
-            string pathbd = appath + DataBase("pathbd", "", false);
+            string pathbd = DataBase("pathbd", "", false);
+            if(File.Exists(pathbd))
+                return pathbd;
+            pathbd = appath + pathbd;
+            if(File.Exists(pathbd))
+                return pathbd;
+            else pathbd = "";
             return pathbd;
+        }
+
+        public void SetDataBaseLocal(string pathdb)
+        {
+            string str, path;
+            if (File.Exists(pathdb))
+            {
+                path = "\\" + pathdb.TrimStart(appath.ToCharArray());
+                str = appath + path;
+                if (File.Exists(str))
+                    DataBase("pathbd", path, true);
+                else
+                    DataBase("pathbd", pathdb, true);
+            }
         }
 
         public string GetLogin()
