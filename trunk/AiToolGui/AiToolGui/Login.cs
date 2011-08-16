@@ -22,7 +22,11 @@ namespace AiToolGui
             textBoxLogin.Text = sett.GetLogin();
             cdb = new ConnectDataBase();
             conn = cdb.CreateConnectDataBase(); // подключились или нет?
-
+            if (textBoxLogin.Text != "")
+            {
+                textBoxPwd.Focus();
+                textBoxPwd.Select();
+            }
         }
 
         private bool openProgram = false;
@@ -53,9 +57,13 @@ namespace AiToolGui
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            Go();
+        }
+        private bool Go()
+        {
             if (textBoxLogin.Text == "" || textBoxPwd.Text == "")
-                return;
-            if (!conn) return;
+                return false;
+            if (!conn) return false;
             if (cdb.Authorization(textBoxLogin.Text, textBoxPwd.Text))
             {
                 openProgram = true; // если пароль и логин верны
@@ -66,6 +74,23 @@ namespace AiToolGui
                     UserParam.Username, UserParam.Fullname, UserParam.Rolename);
                 OnStatus(UserParam.StatusText);
                 Close();
+            }
+            return true;
+        }
+        private void textBoxPwd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                Go();
+            }
+        }
+
+        private void textBoxLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                textBoxPwd.Focus();
+                textBoxPwd.Select();
             }
         }
     }

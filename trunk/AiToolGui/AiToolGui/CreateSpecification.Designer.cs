@@ -35,9 +35,9 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBoxtext = new System.Windows.Forms.TextBox();
+            this.labelInp = new System.Windows.Forms.Label();
+            this.comboBoxType = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -80,9 +80,9 @@
             this.splitContainer1.Panel2.Controls.Add(this.comboBox3);
             this.splitContainer1.Panel2.Controls.Add(this.comboBox2);
             this.splitContainer1.Panel2.Controls.Add(this.textBox5);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox4);
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.comboBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.textBoxtext);
+            this.splitContainer1.Panel2.Controls.Add(this.labelInp);
+            this.splitContainer1.Panel2.Controls.Add(this.comboBoxType);
             // 
             // treeView1
             // 
@@ -114,21 +114,30 @@
             resources.ApplyResources(this.textBox5, "textBox5");
             this.textBox5.Name = "textBox5";
             // 
-            // textBox4
+            // textBoxtext
             // 
-            resources.ApplyResources(this.textBox4, "textBox4");
-            this.textBox4.Name = "textBox4";
+            resources.ApplyResources(this.textBoxtext, "textBoxtext");
+            this.textBoxtext.Name = "textBoxtext";
             // 
-            // label3
+            // labelInp
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.labelInp, "labelInp");
+            this.labelInp.Name = "labelInp";
             // 
-            // comboBox1
+            // comboBoxType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
+            this.comboBoxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxType.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBoxType, "comboBoxType");
+            this.comboBoxType.Items.AddRange(new object[] {
+            resources.GetString("comboBoxType.Items"),
+            resources.GetString("comboBoxType.Items1"),
+            resources.GetString("comboBoxType.Items2"),
+            resources.GetString("comboBoxType.Items3")});
+            this.comboBoxType.Name = "comboBoxType";
+            this.comboBoxType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxType_DrawItem);
+            this.comboBoxType.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.comboBoxType_MeasureItem);
+            this.comboBoxType.SelectedIndexChanged += new System.EventHandler(this.comboBoxType_SelectedIndexChanged);
             // 
             // textBox1
             // 
@@ -197,6 +206,7 @@
             // 
             // DelNode
             // 
+            this.DelNode.AllowDrop = true;
             resources.ApplyResources(this.DelNode, "DelNode");
             this.DelNode.Name = "DelNode";
             this.DelNode.UseVisualStyleBackColor = true;
@@ -278,9 +288,9 @@
             this.PerformLayout();
 
         }
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.ComboBox comboBoxType;
+        private System.Windows.Forms.Label labelInp;
+        private System.Windows.Forms.TextBox textBoxtext;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
