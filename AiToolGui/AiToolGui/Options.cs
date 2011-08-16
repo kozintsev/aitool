@@ -33,10 +33,7 @@ namespace AiToolGui
 
         private void Options_FormClosed(object sender, FormClosedEventArgs e)
         {
-           
-         
        
-
         }
 
         private void AddAccess_Click(object sender, EventArgs e)

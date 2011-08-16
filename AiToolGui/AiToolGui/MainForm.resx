@@ -762,6 +762,9 @@
   <data name="toolStripStatusLabel.Text" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="toolStripUser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 17</value>
+  </data>
   <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 544</value>
   </data>
@@ -1148,6 +1151,12 @@
   </data>
   <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripUser.Name" xml:space="preserve">
+    <value>toolStripUser</value>
+  </data>
+  <data name="&gt;&gt;toolStripUser.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AITool</value>
