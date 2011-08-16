@@ -248,7 +248,7 @@ namespace AiToolGui
             // сохранить открытый проект
             if (pv != null) // новый проект, их может быть дохрена
             {
-                
+                ActiveMdiChild.Text = ActiveMdiChild.Text + "Активное окно";
             }
         }
     }

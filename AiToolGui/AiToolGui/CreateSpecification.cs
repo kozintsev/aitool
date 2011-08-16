@@ -15,13 +15,13 @@ namespace AiToolGui
         public CreateSpecification()
         {
             InitializeComponent();
-            label3.Visible = false;
-            comboBox1.Visible = false;
+            //labelInp.Visible = false;
             comboBox2.Visible = false;
             comboBox3.Visible = false;
             listBox1.Visible = false;
-            textBox4.Visible = false;
+            //textBoxtext.Visible = false;
             textBox5.Visible = false;
+            comboBoxType.Text = "Текст";
         }
 
 
@@ -178,6 +178,31 @@ namespace AiToolGui
             if (node == null) return;
             node.Remove();
 
+        }
+
+        private void comboBoxType_TextUpdate(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxType_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxType_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+            int i = e.Index;
+        }
+
+        private void comboBoxType_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            int i = e.Index;
+        }
+
+        private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
 
        

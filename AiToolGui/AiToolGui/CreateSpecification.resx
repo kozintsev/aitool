@@ -163,7 +163,7 @@
     <value>0</value>
   </data>
   <data name="listBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 98</value>
+    <value>296, 155</value>
   </data>
   <data name="listBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 108</value>
@@ -184,7 +184,7 @@
     <value>0</value>
   </data>
   <data name="comboBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 45</value>
+    <value>218, 127</value>
   </data>
   <data name="comboBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 21</value>
@@ -205,7 +205,7 @@
     <value>1</value>
   </data>
   <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 45</value>
+    <value>130, 155</value>
   </data>
   <data name="comboBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 21</value>
@@ -226,7 +226,7 @@
     <value>2</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 72</value>
+    <value>144, 199</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 20</value>
@@ -246,70 +246,91 @@
   <data name="&gt;&gt;textBox5.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="textBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 46</value>
+  <data name="textBoxtext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 54</value>
   </data>
-  <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
+  <data name="textBoxtext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 20</value>
   </data>
-  <data name="textBox4.TabIndex" type="System.Int32, mscorlib">
+  <data name="textBoxtext.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;textBox4.Name" xml:space="preserve">
-    <value>textBox4</value>
+  <data name="&gt;&gt;textBoxtext.Name" xml:space="preserve">
+    <value>textBoxtext</value>
   </data>
-  <data name="&gt;&gt;textBox4.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxtext.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxtext.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name="&gt;&gt;textBox4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxtext.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 51</value>
+  <data name="labelInp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 36</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelInp.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 15</value>
   </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelInp.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="labelInp.Text" xml:space="preserve">
     <value>Переменная:</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="&gt;&gt;labelInp.Name" xml:space="preserve">
+    <value>labelInp</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelInp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelInp.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelInp.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 14</value>
+  <data name="comboBoxType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
   </data>
-  <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="comboBoxType.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="comboBoxType.Items" xml:space="preserve">
+    <value>Текст</value>
+  </data>
+  <data name="comboBoxType.Items1" xml:space="preserve">
+    <value>Переменная</value>
+  </data>
+  <data name="comboBoxType.Items2" xml:space="preserve">
+    <value>Диапазон</value>
+  </data>
+  <data name="comboBoxType.Items3" xml:space="preserve">
+    <value>Ряд значений</value>
+  </data>
+  <data name="comboBoxType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 12</value>
+  </data>
+  <data name="comboBoxType.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="comboBoxType.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
   </data>
-  <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="comboBoxType.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;comboBox1.Name" xml:space="preserve">
-    <value>comboBox1</value>
+  <data name="&gt;&gt;comboBoxType.Name" xml:space="preserve">
+    <value>comboBoxType</value>
   </data>
-  <data name="&gt;&gt;comboBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxType.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxType.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
@@ -708,18 +729,6 @@
   <data name="&gt;&gt;Open.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="richTextBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="richTextBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 135</value>
-  </data>
-  <data name="richTextBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="richTextBox3.Text" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;richTextBox3.Name" xml:space="preserve">
     <value>richTextBox3</value>
   </data>
@@ -759,20 +768,29 @@
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="richTextBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="richTextBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="richTextBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="richTextBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="richTextBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>601, 135</value>
   </data>
-  <data name="richTextBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="richTextBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="richTextBox1.Text" xml:space="preserve">
+  <data name="richTextBox3.Text" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;richTextBox3.Name" xml:space="preserve">
+    <value>richTextBox3</value>
+  </data>
+  <data name="&gt;&gt;richTextBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;richTextBox3.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;richTextBox3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
     <value>richTextBox1</value>
@@ -811,6 +829,33 @@
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="richTextBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="richTextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="richTextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>601, 135</value>
+  </data>
+  <data name="richTextBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
+    <value>richTextBox1</value>
+  </data>
+  <data name="&gt;&gt;richTextBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;richTextBox1.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;richTextBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
