@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace AiToolGui
 {
     public partial class Options : Form
     {
+        private Settings sett;
         public Options()
         {
             InitializeComponent();
-            Settings sett = new Settings();
-            DBPath.Text = sett.GetDataBase();
+            sett = new Settings();
+            DBPath.Text = sett.GetDataBaseLocal();
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -26,6 +25,10 @@ namespace AiToolGui
         private void Save_Click(object sender, EventArgs e)
         {
             //Сохранить настройки
+            if (File.Exists(DBPath.Text)) // если файл существует
+            {
+                sett.SetDataBaseLocal(DBPath.Text);
+            }
         }
 
         private void Options_FormClosed(object sender, FormClosedEventArgs e)

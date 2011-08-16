@@ -36,7 +36,7 @@ namespace AiToolGui
 
 		public bool CreateConnectDataBase()
 		{
-            string FileBD = sett.GetDataBase();
+            string FileBD = sett.GetDataBaseLocal();
             if (!File.Exists(FileBD))
             {
                 MessageBox.Show("Файл базы данных отсутствует", "Информация",
