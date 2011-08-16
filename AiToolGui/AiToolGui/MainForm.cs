@@ -32,6 +32,7 @@ namespace AiToolGui
             sett = new Settings();
             cdb = new ConnectDataBase();
             cdb.CreateConnectDataBase();
+            
         }
             
 
