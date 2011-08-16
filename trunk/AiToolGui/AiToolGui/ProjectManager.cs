@@ -24,7 +24,7 @@ namespace AiToolGui
         private void ProjectManager_Load(object sender, EventArgs e)
         {
             int i = 1;
-            OleDbCommand command = cdb.Conn.CreateCommand();
+            OleDbCommand command = cdb.ConnLocal.CreateCommand();
             command.CommandText = "SELECT * FROM Project";
             OleDbDataReader reader = command.ExecuteReader();
             do
