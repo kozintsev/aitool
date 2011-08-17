@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AITool.NET")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Интегрированная среда автоматизированного проектирования")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("УлГТУ")]
 [assembly: AssemblyProduct("AITool.NET")]
-[assembly: AssemblyCopyright("Copyright 2010")]
+[assembly: AssemblyCopyright("Copyright 2010-2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
