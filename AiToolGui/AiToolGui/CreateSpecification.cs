@@ -15,13 +15,6 @@ namespace AiToolGui
         public CreateSpecification()
         {
             InitializeComponent();
-            //labelInp.Visible = false;
-            comboBox2.Visible = false;
-            comboBox3.Visible = false;
-            listBox1.Visible = false;
-            //textBoxtext.Visible = false;
-            textBox5.Visible = false;
-            comboBoxType.Text = "Текст";
         }
 
 

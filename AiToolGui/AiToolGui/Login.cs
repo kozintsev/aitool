@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace AiToolGui
 {
@@ -64,7 +65,8 @@ namespace AiToolGui
             if (textBoxLogin.Text == "" || textBoxPwd.Text == "")
                 return false;
             if (!conn) return false;
-            if (cdb.Authorization(textBoxLogin.Text, textBoxPwd.Text))
+            string pass = MD5Hash(textBoxPwd.Text.Trim());
+            if (cdb.Authorization(textBoxLogin.Text, pass))
             {
                 openProgram = true; // если пароль и логин верны
                 sett.SetLogin(textBoxLogin.Text); // если всё окей сохраняем имя пользователя
@@ -93,5 +95,16 @@ namespace AiToolGui
                 textBoxPwd.Select();
             }
         }
+        private string MD5Hash(string instr)
+        {
+            string strHash = string.Empty;
+
+            foreach (byte b in new MD5CryptoServiceProvider().ComputeHash(Encoding.Default.GetBytes(instr)))
+            {
+                strHash += b.ToString("X2");
+            }
+            return strHash;
+        } 
+
     }
 }
