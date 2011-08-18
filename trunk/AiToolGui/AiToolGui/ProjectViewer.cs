@@ -14,6 +14,10 @@ namespace AiToolGui
     public partial class ProjectViewer : Form
     {
         GraphEditor graphEditor;
+        CreateSpecification specification;
+        private string projectName = String.Empty;
+        private string projectNum = String.Empty;
+
         public ProjectViewer()
         {
             InitializeComponent();
@@ -28,11 +32,25 @@ namespace AiToolGui
 
         private void toolStripScope_Click(object sender, EventArgs e)
         {
-            Form mainForm = new CreateSpecification();
-            mainForm.MdiParent = this.ParentForm;
-            mainForm.Show();
-            //OnStatus(s);
+            specification = new CreateSpecification();
+            specification.MdiParent = this.ParentForm;
+            specification.eProjectName += new EventHandler(specification_eProjectName);
+            specification.eProjectNum += new EventHandler(specification_eProjectNum);
+            specification.Show();
         }
+
+        void specification_eProjectNum(object sender, EventArgs e) // вызовится вторым
+        {
+            projectNum = sender.ToString();
+            //throw new NotImplementedException();
+        }
+
+        void specification_eProjectName(object sender, EventArgs e)
+        {
+            projectName = sender.ToString();
+            //throw new NotImplementedException();
+        }
+
 
         private void toolStripBlock_Click(object sender, EventArgs e)
         {
@@ -54,7 +72,11 @@ namespace AiToolGui
         {
             graphEditor.AddEdge();
         }
-
+        // сохранение проекта
+        public void SaveProject()
+        {
+            MessageBox.Show("Имя проекта: " + projectName);
+        }
      
     }
 }

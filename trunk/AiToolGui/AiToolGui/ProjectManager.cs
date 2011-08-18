@@ -25,15 +25,15 @@ namespace AiToolGui
         {
             int i = 1;
             OleDbCommand command = cdb.ConnLocal.CreateCommand();
-            command.CommandText = "SELECT * FROM Project";
+            command.CommandText = "SELECT ProjectNumber,  ProjectName FROM Project";
             OleDbDataReader reader = command.ExecuteReader();
             do
             {
                 while (reader.Read())
                 {
                     ListViewItem item = listViewProject.Items.Add(i.ToString());
+                    item.SubItems.Add(reader["ProjectNumber"].ToString().TrimEnd());
                     item.SubItems.Add(reader["ProjectName"].ToString().TrimEnd());
-                    item.SubItems.Add(reader["ProjectDesc"].ToString().TrimEnd());
                     i++;
                 }
             } while (reader.NextResult());
@@ -58,6 +58,14 @@ namespace AiToolGui
         private void listViewProject_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             MessageBox.Show(e.ToString());
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            // создать новый проект
+            //ProjectViewer pv = new ProjectViewer();
+            //pv.MdiParent = this;
+            //pv.Show();
         }
     }
 }

@@ -17,12 +17,11 @@ namespace AiToolGui
     {
         //private int childFormNumber = 0;
 
-        private Form childForm;
+        //private Form childForm;
         private Form AboutBox;
-        private Form ProjectManager;
-        private Form DocumentManager;
-        private ProjectViewer pv;
-        private NewProject np;
+        private Form ProjectManager; // список проектов
+        private ProjectViewer pv; // работа над проектом
+        //private NewProject np;
         private Settings sett;
         private ConnectDataBase cdb;
 
@@ -50,27 +49,6 @@ namespace AiToolGui
             pv = new ProjectViewer();
             pv.MdiParent = this;
             pv.Show();
-            /*
-            bool FormFound = false;
-            FormCollection fс = Application.OpenForms;
-            foreach (Form frm in fс)
-            {
-                if (frm.Name == "NewProject") //
-                {
-                    frm.Focus();
-                    FormFound = true;
-                }
-            }
-            if (FormFound == false)
-            {
-                np = new NewProject();
-                np.Status += myForm_Status;
-                np.MdiParent = this;
-                np.Name = "NewProject";
-                np.Text = "Create New Project";
-                np.Show();
-            }
-            */
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -158,21 +136,29 @@ namespace AiToolGui
 
         private void documentManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DocumentManager = new DocumentManager();
-            //DocumentManager.Show();
-            childForm = new Form();
-            childForm = DocumentManager;
-            childForm.MdiParent = this;
-            childForm.Show();
+           
         }
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        	ProjectManager = new ProjectManager();
-            childForm = new Form();
-            childForm = ProjectManager;
-            childForm.MdiParent = this;
-            childForm.Show();
+            bool FormFound = false;
+            FormCollection fс = Application.OpenForms;
+            foreach (Form frm in fс)
+            {
+                if (frm.Name == "ProjectManager") //
+                {
+                    frm.Focus();
+                    FormFound = true;
+                }
+            }
+            if (FormFound == false)
+            {
+                ProjectManager = new ProjectManager();
+
+                ProjectManager.MdiParent = this;
+                ProjectManager.Name = "ProjectManager";
+                ProjectManager.Show();
+            }
         }
 
         private void AITool_VisibleChanged(object sender, EventArgs e)
@@ -236,7 +222,6 @@ namespace AiToolGui
         private void AITool_Shown(object sender, EventArgs e) // событие возникает при первом отображении формы
         {
             Login FormLogin = new Login();
-            //+= myForm_Status
             FormLogin.Status += new EventHandler(myForm_Status);
             FormLogin.ShowDialog(this);
             if (FormLogin.OpenProgram == false)
@@ -246,10 +231,13 @@ namespace AiToolGui
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
             // сохранить открытый проект
-            if (pv != null) // новый проект, их может быть дохрена
+            Form activeChildForm = this.ActiveMdiChild;
+            if (activeChildForm != null)
             {
-                ActiveMdiChild.Text = ActiveMdiChild.Text + "Активное окно";
-            }
+                pv = activeChildForm as ProjectViewer;  // если перобразование невозможно as вызовет null
+                if (pv != null)
+                    pv.SaveProject();
+            }            
         }
     }
 }
