@@ -17,6 +17,7 @@ namespace AiToolGui
         CreateSpecification specification;
         private string projectName = String.Empty;
         private string projectNum = String.Empty;
+        public event EventHandler eStatus;
 
         public ProjectViewer()
         {
@@ -27,7 +28,12 @@ namespace AiToolGui
             graphEditor.Bounds = this.ClientRectangle;
             graphEditor.Anchor = graphEditor.Anchor | AnchorStyles.Right | AnchorStyles.Bottom;
         }
-
+        protected virtual void OnStatus(string s)
+        {
+            object Obj = s;
+            if (eStatus != null)
+                eStatus(Obj, EventArgs.Empty);
+        }
       
 
         private void toolStripScope_Click(object sender, EventArgs e)
@@ -42,6 +48,7 @@ namespace AiToolGui
         void specification_eProjectNum(object sender, EventArgs e) // вызовится вторым
         {
             projectNum = sender.ToString();
+            //OnStatus(projectNum + " - " + projectName);
             //throw new NotImplementedException();
         }
 
@@ -76,6 +83,11 @@ namespace AiToolGui
         public void SaveProject()
         {
             MessageBox.Show("Имя проекта: " + projectName);
+        }
+
+        private void ProjectViewer_Activated(object sender, EventArgs e)
+        {
+            OnStatus(projectNum + " - " + projectName);
         }
      
     }

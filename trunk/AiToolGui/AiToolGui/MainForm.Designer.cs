@@ -82,9 +82,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.StatusUserLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripUser = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.StatusProjectLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -444,20 +445,26 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel,
-            this.toolStripUser});
+            this.StatusProjectLabel,
+            this.toolStripUser,
+            this.StatusUserLabel});
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Name = "statusStrip";
             // 
-            // toolStripStatusLabel
+            // StatusUserLabel
             // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            resources.ApplyResources(this.toolStripStatusLabel, "toolStripStatusLabel");
+            this.StatusUserLabel.Name = "StatusUserLabel";
+            resources.ApplyResources(this.StatusUserLabel, "StatusUserLabel");
             // 
             // toolStripUser
             // 
             this.toolStripUser.Name = "toolStripUser";
             resources.ApplyResources(this.toolStripUser, "toolStripUser");
+            // 
+            // StatusProjectLabel
+            // 
+            this.StatusProjectLabel.Name = "StatusProjectLabel";
+            resources.ApplyResources(this.StatusProjectLabel, "StatusProjectLabel");
             // 
             // AITool
             // 
@@ -500,7 +507,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel StatusUserLabel;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileHorizontalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileMenu;
@@ -541,6 +548,7 @@
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem defaultToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripUser;
+        private System.Windows.Forms.ToolStripStatusLabel StatusProjectLabel;
     }
 }
 
