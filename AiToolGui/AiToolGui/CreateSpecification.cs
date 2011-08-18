@@ -12,23 +12,34 @@ namespace AiToolGui
 {
     public partial class CreateSpecification : Form
     {
+        public event EventHandler eProjectName;
+        public event EventHandler eProjectNum;
         public CreateSpecification()
         {
             InitializeComponent();
         }
 
-
+        protected virtual void OnProjectName(string s)
+        {
+            object Obj = s;
+            if (eProjectName != null)
+                eProjectName(Obj, EventArgs.Empty);
+        }
+        protected virtual void OnProjectNum(string s)
+        {
+            object Obj = s;
+            if (eProjectNum != null)
+                eProjectNum(Obj, EventArgs.Empty);
+        }
         private void ExportDocXml_Click(object sender, EventArgs e)
         {
             //экспортировать в XML, в будущем реализуем возможность сохранить в DOC, DOCX, ODT
-           
-
-            if (textBox1.Text.Length < 1) 
+            if (textBoxNum.Text.Length < 1) 
             {
                 MessageBox.Show("Слишком короткое Обозначение" );
                 return;
             }
-            if (textBox2.Text.Length < 1)
+            if (textBoxName.Text.Length < 1)
             {
                 MessageBox.Show("Слишком короткое Наименование");
                 return;
@@ -57,11 +68,11 @@ namespace AiToolGui
                 //writer.WriteAttributeString("death", person.Death.ToShortDateString());
                 //вложенный элемент
                 writer.WriteStartElement("description");
-                writer.WriteString(textBox1.Text);
+                writer.WriteString(textBoxNum.Text);
                 writer.WriteEndElement();
                 // вложенный элемент
                 writer.WriteStartElement("name");
-                writer.WriteString(textBox2.Text);
+                writer.WriteString(textBoxName.Text);
                 writer.WriteEndElement();
     
                 // закрываем корневой элемент и завершаем работу с документом
@@ -117,7 +128,7 @@ namespace AiToolGui
                 return;
             }
             TreeNode node;
-            node = treeView1.SelectedNode;
+            node = treeParam.SelectedNode;
             if (node == null) return;
             for (int i = 0; i < node.Nodes.Count; i++)
             {
@@ -146,9 +157,9 @@ namespace AiToolGui
 
             //if (FindDouble(treeView1, AddNodeText.Text)) return;
             
-            for (int i = 0; i < treeView1.Nodes.Count; i++)
+            for (int i = 0; i < treeParam.Nodes.Count; i++)
             {
-                if (AddText == treeView1.Nodes[i].Text)
+                if (AddText == treeParam.Nodes[i].Text)
                 {
                     MessageBox.Show("Такой узел уже есть");
                     return;
@@ -156,7 +167,7 @@ namespace AiToolGui
             }
              
                 //treeView1.Nodes.Count
-            treeView1.Nodes.Add(AddText);
+            treeParam.Nodes.Add(AddText);
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -167,7 +178,7 @@ namespace AiToolGui
         private void DelNode_Click(object sender, EventArgs e)
         {
             TreeNode node;
-            node = treeView1.SelectedNode;
+            node = treeParam.SelectedNode;
             if (node == null) return;
             node.Remove();
 
@@ -196,6 +207,30 @@ namespace AiToolGui
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void Open_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            // сохранить название проекта и обозначение
+            string num = textBoxNum.Text, nam = textBoxName.Text;
+            if (num.Length < 1)
+            {
+                MessageBox.Show("Слишком короткое Обозначение");
+                return;
+            }
+            if (nam.Length < 1)
+            {
+                MessageBox.Show("Слишком короткое Наименование");
+                return;
+            }
+            OnProjectName(nam); // отправляем сообщение о том что проекту присвоенно обозначение и наименование
+            OnProjectNum(num);
+
         }
 
        

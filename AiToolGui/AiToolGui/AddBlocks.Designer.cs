@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Ok = new System.Windows.Forms.Button();
-            this.Close = new System.Windows.Forms.Button();
+            this.BtnOk = new System.Windows.Forms.Button();
+            this.BtnClose = new System.Windows.Forms.Button();
             this.BlockName = new System.Windows.Forms.TextBox();
             this.Comment = new System.Windows.Forms.TextBox();
             this.LableName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // Ok
+            // BtnOk
             // 
-            this.Ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Ok.Location = new System.Drawing.Point(205, 155);
-            this.Ok.Name = "Ok";
-            this.Ok.Size = new System.Drawing.Size(75, 23);
-            this.Ok.TabIndex = 0;
-            this.Ok.Text = "Ok";
-            this.Ok.UseVisualStyleBackColor = true;
-            this.Ok.Click += new System.EventHandler(this.Ok_Click);
+            this.BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnOk.Location = new System.Drawing.Point(205, 155);
+            this.BtnOk.Name = "BtnOk";
+            this.BtnOk.Size = new System.Drawing.Size(75, 23);
+            this.BtnOk.TabIndex = 0;
+            this.BtnOk.Text = "Ok";
+            this.BtnOk.UseVisualStyleBackColor = true;
+            this.BtnOk.Click += new System.EventHandler(this.Ok_Click);
             // 
-            // Close
+            // BtnClose
             // 
-            this.Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Close.Location = new System.Drawing.Point(286, 155);
-            this.Close.Name = "Close";
-            this.Close.Size = new System.Drawing.Size(75, 23);
-            this.Close.TabIndex = 1;
-            this.Close.Text = "Close";
-            this.Close.UseVisualStyleBackColor = true;
-            this.Close.Click += new System.EventHandler(this.Close_Click);
+            this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnClose.Location = new System.Drawing.Point(286, 155);
+            this.BtnClose.Name = "BtnClose";
+            this.BtnClose.Size = new System.Drawing.Size(75, 23);
+            this.BtnClose.TabIndex = 1;
+            this.BtnClose.Text = "Close";
+            this.BtnClose.UseVisualStyleBackColor = true;
+            this.BtnClose.Click += new System.EventHandler(this.Close_Click);
             // 
             // BlockName
             // 
@@ -102,8 +102,8 @@
             this.Controls.Add(this.LableName);
             this.Controls.Add(this.Comment);
             this.Controls.Add(this.BlockName);
-            this.Controls.Add(this.Close);
-            this.Controls.Add(this.Ok);
+            this.Controls.Add(this.BtnClose);
+            this.Controls.Add(this.BtnOk);
             this.Name = "AddBlocks";
             this.Text = "AddBlocks";
             this.ResumeLayout(false);
@@ -113,8 +113,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button Ok;
-        private System.Windows.Forms.Button Close;
+        private System.Windows.Forms.Button BtnOk;
+        private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.TextBox BlockName;
         private System.Windows.Forms.TextBox Comment;
         private System.Windows.Forms.Label LableName;

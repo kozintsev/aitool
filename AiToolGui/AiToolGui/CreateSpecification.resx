@@ -125,29 +125,29 @@
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 269</value>
   </data>
-  <data name="treeView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="treeParam.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="treeView1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="treeParam.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="treeView1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="treeParam.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 269</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="treeView1.TabIndex" type="System.Int32, mscorlib">
+  <data name="treeParam.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;treeView1.Name" xml:space="preserve">
-    <value>treeView1</value>
+  <data name="&gt;&gt;treeParam.Name" xml:space="preserve">
+    <value>treeParam</value>
   </data>
-  <data name="&gt;&gt;treeView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;treeParam.Type" xml:space="preserve">
     <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;treeView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;treeParam.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;treeView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;treeParam.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
@@ -505,31 +505,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
-  <data name="textBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="textBoxNum.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="textBoxNum.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 12</value>
   </data>
-  <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="textBoxNum.Size" type="System.Drawing.Size, System.Drawing">
     <value>618, 20</value>
   </data>
-  <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="textBoxNum.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
-    <value>textBox1</value>
+  <data name="&gt;&gt;textBoxNum.Name" xml:space="preserve">
+    <value>textBoxNum</value>
   </data>
-  <data name="&gt;&gt;textBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxNum.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxNum.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="&gt;&gt;textBoxNum.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -556,31 +556,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
-  <data name="textBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="textBoxName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="textBoxName.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 38</value>
   </data>
-  <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="textBoxName.Size" type="System.Drawing.Size, System.Drawing">
     <value>618, 20</value>
   </data>
-  <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="textBoxName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;textBox2.Name" xml:space="preserve">
-    <value>textBox2</value>
+  <data name="&gt;&gt;textBoxName.Name" xml:space="preserve">
+    <value>textBoxName</value>
   </data>
-  <data name="&gt;&gt;textBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;textBoxName.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -607,7 +607,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="AddNodeText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -631,7 +631,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;AddNodeText.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -658,7 +658,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="AddNode.Location" type="System.Drawing.Point, System.Drawing">
     <value>590, 240</value>
@@ -682,7 +682,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;AddNode.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="CloseForm.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -709,7 +709,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;CloseForm.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ExportDocXml.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -739,7 +739,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ExportDocXml.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="ImportDocXml.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -766,7 +766,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ImportDocXml.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="AddRoot.Location" type="System.Drawing.Point, System.Drawing">
     <value>509, 240</value>
@@ -790,7 +790,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;AddRoot.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="DelNode.Location" type="System.Drawing.Point, System.Drawing">
     <value>671, 240</value>
@@ -814,7 +814,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;DelNode.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="Save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -841,33 +841,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Save.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Open.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="Open.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 600</value>
-  </data>
-  <data name="Open.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="Open.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="Open.Text" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="&gt;&gt;Open.Name" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="&gt;&gt;Open.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Open.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;Open.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="richTextBox3.Location" type="System.Drawing.Point, System.Drawing">
@@ -921,31 +894,31 @@
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="richTextBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="richTextBoxTarget.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="richTextBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="richTextBoxTarget.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="richTextBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="richTextBoxTarget.Size" type="System.Drawing.Size, System.Drawing">
     <value>601, 135</value>
   </data>
-  <data name="richTextBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="richTextBoxTarget.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="richTextBox1.Text" xml:space="preserve">
+  <data name="richTextBoxTarget.Text" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
-    <value>richTextBox1</value>
+  <data name="&gt;&gt;richTextBoxTarget.Name" xml:space="preserve">
+    <value>richTextBoxTarget</value>
   </data>
-  <data name="&gt;&gt;richTextBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;richTextBoxTarget.Type" xml:space="preserve">
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;richTextBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;richTextBoxTarget.Parent" xml:space="preserve">
     <value>tabPage1</value>
   </data>
-  <data name="&gt;&gt;richTextBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;richTextBoxTarget.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
@@ -997,7 +970,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
