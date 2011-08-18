@@ -72,7 +72,7 @@ namespace AiToolGui
                 sett.SetLogin(textBoxLogin.Text); // если всё окей сохраняем имя пользователя
                 cdb.GetRoleName();
                 cdb.CloseConnectDataBase(); // закрыть соединение с базой данных
-                UserParam.StatusText = String.Format("Имя пользователя:{0}, Полное имя: {1} , Роль: {2}, База данных подключена",
+                UserParam.StatusText = String.Format(" Имя пользователя:{0}, Полное имя: {1} , Роль: {2}, База данных подключена",
                     UserParam.Username, UserParam.Fullname, UserParam.Rolename);
                 OnStatus(UserParam.StatusText);
                 Close();

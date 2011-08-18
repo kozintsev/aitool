@@ -33,9 +33,9 @@
             this.toolStripScope = new System.Windows.Forms.ToolStripButton();
             this.toolStripBlock = new System.Windows.Forms.ToolStripButton();
             this.toolStripEllipse = new System.Windows.Forms.ToolStripButton();
+            this.toolStripeEdge = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.toolStripeEdge = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -84,6 +84,16 @@
             this.toolStripEllipse.Text = "toolStripEllipse";
             this.toolStripEllipse.Click += new System.EventHandler(this.toolStripEllipse_Click);
             // 
+            // toolStripeEdge
+            // 
+            this.toolStripeEdge.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripeEdge.Image = ((System.Drawing.Image)(resources.GetObject("toolStripeEdge.Image")));
+            this.toolStripeEdge.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripeEdge.Name = "toolStripeEdge";
+            this.toolStripeEdge.Size = new System.Drawing.Size(23, 22);
+            this.toolStripeEdge.Text = "toolStripEdge";
+            this.toolStripeEdge.Click += new System.EventHandler(this.toolStripeEdge_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -107,16 +117,6 @@
             this.treeView1.Size = new System.Drawing.Size(133, 265);
             this.treeView1.TabIndex = 0;
             // 
-            // toolStripeEdge
-            // 
-            this.toolStripeEdge.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripeEdge.Image = ((System.Drawing.Image)(resources.GetObject("toolStripeEdge.Image")));
-            this.toolStripeEdge.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripeEdge.Name = "toolStripeEdge";
-            this.toolStripeEdge.Size = new System.Drawing.Size(23, 22);
-            this.toolStripeEdge.Text = "toolStripEdge";
-            this.toolStripeEdge.Click += new System.EventHandler(this.toolStripeEdge_Click);
-            // 
             // ProjectViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -126,6 +126,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "ProjectViewer";
             this.Text = "Project Viewer";
+            this.Activated += new System.EventHandler(this.ProjectViewer_Activated);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

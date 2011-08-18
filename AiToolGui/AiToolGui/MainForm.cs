@@ -31,13 +31,15 @@ namespace AiToolGui
             sett = new Settings();
             cdb = new ConnectDataBase();
             cdb.CreateConnectDataBase();
+            StatusUserLabel.Text = "";
+            StatusProjectLabel.Text = "";
             
         }
             
 
         private void myForm_Status(object sender, EventArgs e)
         {
-            toolStripStatusLabel.Text = "";
+            StatusUserLabel.Text = "";
             toolStripUser.Text = sender.ToString();
         }
 
@@ -48,7 +50,15 @@ namespace AiToolGui
             //Запрос имени проекта
             pv = new ProjectViewer();
             pv.MdiParent = this;
+            pv.eStatus += new EventHandler(pv_eStatus);
             pv.Show();
+        }
+
+        void pv_eStatus(object sender, EventArgs e)
+        {
+            StatusProjectLabel.Text = "";
+            StatusProjectLabel.Text = sender.ToString();
+            //throw new NotImplementedException();
         }
 
         private void OpenFile(object sender, EventArgs e)
