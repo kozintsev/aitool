@@ -13,30 +13,46 @@ namespace AiToolGui
     public partial class ProjectManager : Form
     {
         private ConnectDataBase cdb;
-
+        List<string> ProjectIDList;
         public ProjectManager()
         {
             InitializeComponent();
             cdb = new ConnectDataBase();
             cdb.CreateConnectDataBase();
+            ProjectIDList = new List<string>();
         }
 
-        private void ProjectManager_Load(object sender, EventArgs e)
+        private void LoadProjectList(bool curuser)
         {
             int i = 1;
+            ProjectIDList.Clear();
+            listViewProject.Items.Clear();
             OleDbCommand command = cdb.ConnLocal.CreateCommand();
-            command.CommandText = "SELECT ProjectNumber,  ProjectName FROM Project";
+            if (!curuser)
+            {
+                command.CommandText = "SELECT ProjectID, ProjectNumber,  ProjectName FROM Project";
+            }
+            else
+            {
+                command.CommandText = "SELECT ProjectID, ProjectNumber,  ProjectName FROM Project WHERE user_id = " + UserParam.UserId;
+            }
             OleDbDataReader reader = command.ExecuteReader();
             do
             {
                 while (reader.Read())
                 {
+                    ProjectIDList.Add(reader["ProjectNumber"].ToString().TrimEnd());
                     ListViewItem item = listViewProject.Items.Add(i.ToString());
                     item.SubItems.Add(reader["ProjectNumber"].ToString().TrimEnd());
                     item.SubItems.Add(reader["ProjectName"].ToString().TrimEnd());
                     i++;
                 }
             } while (reader.NextResult());
+        }
+
+        private void ProjectManager_Load(object sender, EventArgs e)
+        {
+            LoadProjectList(checkCurUser.Checked);
         }
         
         void Button4Click(object sender, EventArgs e)
@@ -66,6 +82,11 @@ namespace AiToolGui
             //ProjectViewer pv = new ProjectViewer();
             //pv.MdiParent = this;
             //pv.Show();
+        }
+
+        private void checkBoxUser_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadProjectList(checkCurUser.Checked);
         }
     }
 }

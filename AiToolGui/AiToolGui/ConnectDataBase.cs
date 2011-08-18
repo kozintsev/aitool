@@ -142,6 +142,7 @@ namespace AiToolGui
                 while (reader.Read())
                 {
                     
+                    UserParam.UserId = reader["id_user"].ToString().TrimEnd();
                     UserParam.Username = reader["username"].ToString().TrimEnd();
                     UserParam.Password = reader["password"].ToString().TrimEnd();
                     UserParam.Fullname = reader["fullname"].ToString().TrimEnd();
