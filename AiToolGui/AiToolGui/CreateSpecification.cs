@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,12 @@ namespace AiToolGui
     {
         public event EventHandler eProjectName;
         public event EventHandler eProjectNum;
+        private ConnectDataBase cdb;
         public CreateSpecification()
         {
             InitializeComponent();
+            cdb = new ConnectDataBase();
+            cdb.CreateConnectDataBase();
         }
 
         protected virtual void OnProjectName(string s)
@@ -137,10 +141,7 @@ namespace AiToolGui
                     MessageBox.Show("Такой узел уже есть");
                     return;
                 }
-            }
-    
-            
-            
+            }            
             node.Nodes.Add(AddNodeText.Text);
             
         }
@@ -209,14 +210,26 @@ namespace AiToolGui
             
         }
 
-        private void Open_Click(object sender, EventArgs e)
+        private bool ProjectNumDup(string num)
         {
-
+            int coun;
+            OleDbCommand command = cdb.ConnLocal.CreateCommand();
+            //SELECT COUNT (*) FROM
+            command.CommandText = " SELECT COUNT (ProjectNumber) FROM Projects WHERE ProjectNumber = \'" + num + "\'";
+            coun = (int)command.ExecuteScalar();
+            if (coun > 0)
+            {
+                MessageBox.Show("Проект с точно таким же обозначением есть", "Информация",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            return false;
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
             // сохранить название проекта и обозначение
+            //byte[] B = {255, 255};
             string num = textBoxNum.Text, nam = textBoxName.Text;
             if (num.Length < 1)
             {
@@ -228,14 +241,47 @@ namespace AiToolGui
                 MessageBox.Show("Слишком короткое Наименование");
                 return;
             }
+            if (ProjectNumDup(num))
+                return;
+            try
+            {
+                OleDbCommand command = cdb.ConnLocal.CreateCommand();
+                command.CommandText = "INSERT INTO Projects (ProjectNumber, ProjectName, PTID, user_id, class) " +
+                    "VALUES (\'" + num + "\', \'" + nam + "\', 1, " + UserParam.UserId + ", 1)";
+                command.ExecuteNonQuery();
+                if (richTextBoxTarget.Text != String.Empty)
+                {
+                    command.CommandText = "UPDATE Projects SET ProjectTarget = \'" + richTextBoxTarget.Text +
+                        "\' WHERE ProjectNumber = \'" + num + "\'";
+                    command.ExecuteNonQuery();
+                }
+                if (richTextAbs.Text != String.Empty)
+                {
+                    command.CommandText = "UPDATE Projects SET  ProjectAbstract = \'" +
+                        richTextAbs.Text + "\' WHERE ProjectNumber = \'" + num + "\'";
+                    command.ExecuteNonQuery();
+                }
+                //command.CommandText = "SELECT ProjectID, FROM Project WHERE ProjectNumber = ?";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении данных: " + ex.Message, "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+            MessageBox.Show("Данные сохранены", "Информация",
+                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
             OnProjectName(nam); // отправляем сообщение о том что проекту присвоенно обозначение и наименование
             OnProjectNum(num);
 
         }
 
-       
-
-  
+        private void CreateSpecification_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cdb.CloseConnectDataBaseLocal();
+        }
     
     }
 }

@@ -127,6 +127,7 @@
             this.Name = "ProjectViewer";
             this.Text = "Project Viewer";
             this.Activated += new System.EventHandler(this.ProjectViewer_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProjectViewer_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

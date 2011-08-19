@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 using UMD.HCIL.GraphEditor;
 
@@ -19,6 +20,8 @@ namespace AiToolGui
         private string projectNum = String.Empty;
         private string projectID = String.Empty;
         public event EventHandler eStatus;
+
+        private ConnectDataBase cdb;
 
         public ProjectViewer()
         {
@@ -41,6 +44,8 @@ namespace AiToolGui
             //Controls.Add(graphEditor);
             graphEditor.Bounds = this.ClientRectangle;
             graphEditor.Anchor = graphEditor.Anchor | AnchorStyles.Right | AnchorStyles.Bottom;
+            cdb = new ConnectDataBase();
+            cdb.CreateConnectDataBase();
         }
         protected virtual void OnStatus(string s)
         {
@@ -96,12 +101,24 @@ namespace AiToolGui
         // сохранение проекта
         public void SaveProject()
         {
-            MessageBox.Show("Имя проекта: " + projectName);
+            if (projectName == "" || projectNum == "")
+            {
+                MessageBox.Show("Для сохранения проекта нужно создать задание", "Информация",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            
+            //projectID
         }
 
         private void ProjectViewer_Activated(object sender, EventArgs e)
         {
             OnStatus(projectNum + " - " + projectName);
+        }
+
+        private void ProjectViewer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cdb.CloseConnectDataBaseLocal();
         }
      
     }

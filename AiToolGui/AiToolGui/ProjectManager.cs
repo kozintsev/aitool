@@ -30,11 +30,11 @@ namespace AiToolGui
             OleDbCommand command = cdb.ConnLocal.CreateCommand();
             if (!curuser)
             {
-                command.CommandText = "SELECT ProjectID, ProjectNumber,  ProjectName FROM Project";
+                command.CommandText = "SELECT ProjectID, ProjectNumber,  ProjectName FROM Projects";
             }
             else
             {
-                command.CommandText = "SELECT ProjectID, ProjectNumber,  ProjectName FROM Project WHERE user_id = " + UserParam.UserId;
+                command.CommandText = "SELECT ProjectID, ProjectNumber,  ProjectName FROM Projects WHERE user_id = " + UserParam.UserId;
             }
             OleDbDataReader reader = command.ExecuteReader();
             do
@@ -52,7 +52,7 @@ namespace AiToolGui
 
         private void ProjectManager_Load(object sender, EventArgs e)
         {
-            LoadProjectList(checkCurUser.Checked);
+            
         }
         
         void Button4Click(object sender, EventArgs e)
@@ -92,6 +92,11 @@ namespace AiToolGui
         private void buttonOpen_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ProjectManager_Shown(object sender, EventArgs e)
+        {
+            LoadProjectList(checkCurUser.Checked);
         }
     }
 }

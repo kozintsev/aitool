@@ -58,7 +58,7 @@
             this.DelNode = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.richTextAbs = new System.Windows.Forms.RichTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.richTextBoxTarget = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -251,15 +251,15 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.richTextBox3);
+            this.tabPage2.Controls.Add(this.richTextAbs);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // richTextBox3
+            // richTextAbs
             // 
-            resources.ApplyResources(this.richTextBox3, "richTextBox3");
-            this.richTextBox3.Name = "richTextBox3";
+            resources.ApplyResources(this.richTextAbs, "richTextAbs");
+            this.richTextAbs.Name = "richTextAbs";
             // 
             // tabPage1
             // 
@@ -301,6 +301,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxNum);
             this.Name = "CreateSpecification";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateSpecification_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -334,7 +335,7 @@
         private System.Windows.Forms.Button DelNode;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.RichTextBox richTextAbs;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.RichTextBox richTextBoxTarget;
         private System.Windows.Forms.TabControl tabControl1;
