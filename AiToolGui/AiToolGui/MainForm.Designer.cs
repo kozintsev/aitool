@@ -82,10 +82,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.StatusUserLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.StatusProjectLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripUser = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusUserLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -129,7 +129,7 @@
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
             resources.ApplyResources(this.newProjectToolStripMenuItem, "newProjectToolStripMenuItem");
-            this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
+            this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.OpenProject);
             // 
             // documentManagerToolStripMenuItem
             // 
@@ -202,19 +202,16 @@
             // 
             resources.ApplyResources(this.cutToolStripMenuItem, "cutToolStripMenuItem");
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Click += new System.EventHandler(this.CutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
             resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             resources.ApplyResources(this.pasteToolStripMenuItem, "pasteToolStripMenuItem");
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.PasteToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
@@ -405,7 +402,7 @@
             this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.openToolStripButton, "openToolStripButton");
             this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Click += new System.EventHandler(this.OpenFile);
+            this.openToolStripButton.Click += new System.EventHandler(this.OpenProject);
             // 
             // saveToolStripButton
             // 
@@ -451,20 +448,20 @@
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Name = "statusStrip";
             // 
-            // StatusUserLabel
+            // StatusProjectLabel
             // 
-            this.StatusUserLabel.Name = "StatusUserLabel";
-            resources.ApplyResources(this.StatusUserLabel, "StatusUserLabel");
+            this.StatusProjectLabel.Name = "StatusProjectLabel";
+            resources.ApplyResources(this.StatusProjectLabel, "StatusProjectLabel");
             // 
             // toolStripUser
             // 
             this.toolStripUser.Name = "toolStripUser";
             resources.ApplyResources(this.toolStripUser, "toolStripUser");
             // 
-            // StatusProjectLabel
+            // StatusUserLabel
             // 
-            this.StatusProjectLabel.Name = "StatusProjectLabel";
-            resources.ApplyResources(this.StatusProjectLabel, "StatusProjectLabel");
+            this.StatusUserLabel.Name = "StatusUserLabel";
+            resources.ApplyResources(this.StatusUserLabel, "StatusUserLabel");
             // 
             // AITool
             // 

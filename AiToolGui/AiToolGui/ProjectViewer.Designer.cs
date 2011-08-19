@@ -35,7 +35,7 @@
             this.toolStripEllipse = new System.Windows.Forms.ToolStripButton();
             this.toolStripeEdge = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeProject = new System.Windows.Forms.TreeView();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -102,20 +102,20 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+            this.splitContainer1.Panel1.Controls.Add(this.treeProject);
             this.splitContainer1.Size = new System.Drawing.Size(451, 271);
             this.splitContainer1.SplitterDistance = 139;
             this.splitContainer1.TabIndex = 1;
             // 
-            // treeView1
+            // treeProject
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.treeProject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(133, 265);
-            this.treeView1.TabIndex = 0;
+            this.treeProject.Location = new System.Drawing.Point(3, 3);
+            this.treeProject.Name = "treeProject";
+            this.treeProject.Size = new System.Drawing.Size(133, 265);
+            this.treeProject.TabIndex = 0;
             // 
             // ProjectViewer
             // 
@@ -140,7 +140,7 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView treeProject;
         private System.Windows.Forms.ToolStripButton toolStripScope;
         private System.Windows.Forms.ToolStripButton toolStripBlock;
         private System.Windows.Forms.ToolStripButton toolStripEllipse;

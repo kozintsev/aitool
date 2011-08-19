@@ -136,6 +136,7 @@
             this.buttonOpen.TabIndex = 0;
             this.buttonOpen.Text = "Open";
             this.buttonOpen.UseVisualStyleBackColor = true;
+            this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
             // ProjectManager
             // 

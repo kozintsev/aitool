@@ -88,16 +88,14 @@ namespace AiToolGui
             this.Close();
         }
 
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
         }
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
         }
 
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -151,24 +149,7 @@ namespace AiToolGui
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool FormFound = false;
-            FormCollection fс = Application.OpenForms;
-            foreach (Form frm in fс)
-            {
-                if (frm.Name == "ProjectManager") //
-                {
-                    frm.Focus();
-                    FormFound = true;
-                }
-            }
-            if (FormFound == false)
-            {
-                ProjectManager = new ProjectManager();
 
-                ProjectManager.MdiParent = this;
-                ProjectManager.Name = "ProjectManager";
-                ProjectManager.Show();
-            }
         }
 
         private void AITool_VisibleChanged(object sender, EventArgs e)
@@ -248,6 +229,28 @@ namespace AiToolGui
                 if (pv != null)
                     pv.SaveProject();
             }            
+        }
+
+        private void OpenProject(object sender, EventArgs e)
+        {
+            bool FormFound = false;
+            FormCollection fс = Application.OpenForms;
+            foreach (Form frm in fс)
+            {
+                if (frm.Name == "ProjectManager") //
+                {
+                    frm.Focus();
+                    FormFound = true;
+                }
+            }
+            if (FormFound == false)
+            {
+                ProjectManager = new ProjectManager();
+
+                ProjectManager.MdiParent = this;
+                ProjectManager.Name = "ProjectManager";
+                ProjectManager.Show();
+            }
         }
     }
 }

@@ -17,9 +17,23 @@ namespace AiToolGui
         CreateSpecification specification;
         private string projectName = String.Empty;
         private string projectNum = String.Empty;
+        private string projectID = String.Empty;
         public event EventHandler eStatus;
 
         public ProjectViewer()
+        {
+            InitProjectViewer();
+        }
+
+        public ProjectViewer(string ProjectID, string ProjectNum, string ProjectName) 
+        {
+            projectID = ProjectID;
+            projectNum = ProjectNum;
+            projectName = ProjectName;
+            InitProjectViewer();
+        }
+
+        private void InitProjectViewer()
         {
             InitializeComponent();
             graphEditor = new GraphEditor(this.ClientSize.Width, this.ClientSize.Height);
