@@ -71,7 +71,7 @@ namespace AiToolGui
                 openProgram = true; // если пароль и логин верны
                 sett.SetLogin(textBoxLogin.Text); // если всё окей сохраняем имя пользователя
                 cdb.GetRoleName();
-                cdb.CloseConnectDataBase(); // закрыть соединение с базой данных
+                cdb.CloseConnectDataBaseLocal(); // закрыть соединение с базой данных
                 UserParam.StatusText = String.Format(" Имя пользователя:{0}, Полное имя: {1} , Роль: {2}, База данных подключена",
                     UserParam.Username, UserParam.Fullname, UserParam.Rolename);
                 OnStatus(UserParam.StatusText);
@@ -99,6 +99,7 @@ namespace AiToolGui
         {
             string strHash = string.Empty;
 
+           
             foreach (byte b in new MD5CryptoServiceProvider().ComputeHash(Encoding.Default.GetBytes(instr)))
             {
                 strHash += b.ToString("X2");

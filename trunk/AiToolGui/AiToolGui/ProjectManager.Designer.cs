@@ -35,6 +35,9 @@
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
+            this.colProjectN = new System.Windows.Forms.ColumnHeader();
+            this.colProjectName = new System.Windows.Forms.ColumnHeader();
+            this.colProjectNum = new System.Windows.Forms.ColumnHeader();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -70,6 +73,10 @@
             this.listViewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewProject.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colProjectN,
+            this.colProjectNum,
+            this.colProjectName});
             this.listViewProject.HideSelection = false;
             this.listViewProject.HotTracking = true;
             this.listViewProject.HoverSelection = true;
@@ -138,6 +145,21 @@
             this.buttonOpen.UseVisualStyleBackColor = true;
             this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
+            // colProjectN
+            // 
+            this.colProjectN.Text = "Numer";
+            // 
+            // colProjectName
+            // 
+            this.colProjectName.DisplayIndex = 1;
+            this.colProjectName.Text = "Project Name";
+            this.colProjectName.Width = 170;
+            // 
+            // colProjectNum
+            // 
+            this.colProjectNum.Text = "Project Numer";
+            this.colProjectNum.Width = 100;
+            // 
             // ProjectManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,6 +170,7 @@
             this.Name = "ProjectManager";
             this.Text = "Project Manager";
             this.Load += new System.EventHandler(this.ProjectManager_Load);
+            this.Shown += new System.EventHandler(this.ProjectManager_Shown);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProjectManager_FormClosed);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -166,5 +189,8 @@
 
         private System.Windows.Forms.ListView listViewProject;
         private System.Windows.Forms.CheckBox checkCurUser;
+        private System.Windows.Forms.ColumnHeader colProjectN;
+        private System.Windows.Forms.ColumnHeader colProjectName;
+        private System.Windows.Forms.ColumnHeader colProjectNum;
     }
 }

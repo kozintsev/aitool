@@ -111,7 +111,7 @@ namespace AiToolGui
         }
       
             
-        public void CloseConnectDataBase()
+        public void CloseConnectDataBaseLocal()
         {
             if (connLocal != null)
                 connLocal.Close();
