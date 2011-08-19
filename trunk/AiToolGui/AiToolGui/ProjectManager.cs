@@ -88,5 +88,10 @@ namespace AiToolGui
         {
             LoadProjectList(checkCurUser.Checked);
         }
+
+        private void buttonOpen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
