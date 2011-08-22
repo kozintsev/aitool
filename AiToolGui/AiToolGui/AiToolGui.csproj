@@ -108,12 +108,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewProject.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewProject.Designer.cs">
-      <DependentUpon>NewProject.cs</DependentUpon>
-    </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,10 +180,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.ru.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NewProject.resx">
-      <DependentUpon>NewProject.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Options.resx">

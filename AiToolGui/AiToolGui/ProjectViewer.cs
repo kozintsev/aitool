@@ -18,7 +18,7 @@ namespace AiToolGui
         CreateSpecification specification;
         private string projectName = String.Empty;
         private string projectNum = String.Empty;
-        private string projectID = String.Empty;
+        private int projectID;
         public event EventHandler eStatus;
 
         private ConnectDataBase cdb;
@@ -28,12 +28,13 @@ namespace AiToolGui
             InitProjectViewer();
         }
 
-        public ProjectViewer(string ProjectID, string ProjectNum, string ProjectName) 
+        public ProjectViewer(int ProjectID, string ProjectNum, string ProjectName) 
         {
             projectID = ProjectID;
             projectNum = ProjectNum;
             projectName = ProjectName;
             InitProjectViewer();
+            this.Text = String.Format("Project Viewer : [{0}] - {1}", ProjectNum, ProjectName);
         }
 
         private void InitProjectViewer()

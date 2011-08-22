@@ -7,16 +7,16 @@ namespace AiToolGui
 {
     public class UserParam
     {
-        private static string userId;
+        private static int userId;
         private static string username;
         private static string password;
         private static string fullname;
-        private static short role;
+        private static int role;
         private static string rolename;
         private static string statustext;
         private static string localbdpath;
 
-        public static string UserId
+        public static int UserId
         {
             get { return userId; }
             set { userId = value; }
@@ -37,7 +37,7 @@ namespace AiToolGui
             get { return fullname; }
             set { fullname = value; }
         }
-        public static short Role
+        public static int Role
         {
             get { return role; }
             set { role = value; }
