@@ -77,6 +77,13 @@ namespace AiToolGui
                 OnStatus(UserParam.StatusText);
                 Close();
             }
+            else
+            {
+                MessageBox.Show("Неверное имя пользователя или пароль",
+                            "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                textBoxPwd.Text = "";
+                return false;
+            }
             return true;
         }
         private void textBoxPwd_KeyPress(object sender, KeyPressEventArgs e)

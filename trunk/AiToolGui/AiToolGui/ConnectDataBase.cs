@@ -133,11 +133,17 @@ namespace AiToolGui
         }
         public bool Authorization(string login, string pwd)
         {
+            object scal;
+            int userCount = 0;
             OleDbCommand command = connLocal.CreateCommand();
             command.CommandText = "SELECT id_user, fullname, id_role FROM Users WHERE username=@username AND Password=@password";
             command.Parameters.Add("@username", OleDbType.VarChar).Value = login;
             command.Parameters.Add("@password", OleDbType.VarChar).Value = pwd;
-            int userCount = (int)command.ExecuteScalar();
+            scal = command.ExecuteScalar();
+            if (scal != null)
+                userCount = (int)scal;
+            else
+                return false;
             if (userCount != 1)
                 return false;
             OleDbDataReader reader = command.ExecuteReader();

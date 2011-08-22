@@ -13,28 +13,46 @@ namespace AiToolGui
 {
     public partial class CreateSpecification : Form
     {
-        public event EventHandler eProjectName;
-        public event EventHandler eProjectNum;
+        public delegate void ProjectSave(ProjectChangedEvent arg);
+        public event ProjectSave eProjectSave;
         private ConnectDataBase cdb;
+        private bool newscop = true , save = false;
+        private int id = -1;
         public CreateSpecification()
         {
+            newscop = true;
             InitializeComponent();
             cdb = new ConnectDataBase();
             cdb.CreateConnectDataBase();
         }
-
-        protected virtual void OnProjectName(string s)
+        public CreateSpecification(int _id)
         {
-            object Obj = s;
-            if (eProjectName != null)
-                eProjectName(Obj, EventArgs.Empty);
+            newscop = false;
+            save = true;
+            id = _id;
+            InitializeComponent();
+            cdb = new ConnectDataBase();
+            cdb.CreateConnectDataBase();
+            OleDbCommand command = cdb.ConnLocal.CreateCommand();
+            command.CommandText = "SELECT ProjectName, ProjectNumber  FROM Projects WHERE ProjectID = @ProjectID";
+            command.Parameters.Add("@ProjectID", OleDbType.Integer).Value = _id;
+            OleDbDataReader reader = command.ExecuteReader();
+            reader.Read();
+            textBoxName.Text = reader["ProjectName"].ToString();
+            textBoxNum.Text = reader["ProjectNumber"].ToString();
+            reader.Close();
+            command.Dispose();
         }
-        protected virtual void OnProjectNum(string s)
+        protected virtual void OnProjectSave(int id, string num, string name)
         {
-            object Obj = s;
-            if (eProjectNum != null)
-                eProjectNum(Obj, EventArgs.Empty);
+            ProjectChangedEvent arg = new ProjectChangedEvent();
+            arg.ProjectID = id;
+            arg.ProjectNum = num;
+            arg.ProjectName = name;
+            if (eProjectSave != null)
+                eProjectSave(arg);
         }
+ 
         private void ExportDocXml_Click(object sender, EventArgs e)
         {
             //экспортировать в XML, в будущем реализуем возможность сохранить в DOC, DOCX, ODT
@@ -209,7 +227,6 @@ namespace AiToolGui
         {
             
         }
-
         private bool ProjectNumDup(string num)
         {
             int coun;
@@ -230,6 +247,7 @@ namespace AiToolGui
         {
             // сохранить название проекта и обозначение
             //byte[] B = {255, 255};
+            int idpr = -1;
             string num = textBoxNum.Text, nam = textBoxName.Text;
             if (num.Length < 1)
             {
@@ -241,13 +259,26 @@ namespace AiToolGui
                 MessageBox.Show("Слишком короткое Наименование");
                 return;
             }
-            if (ProjectNumDup(num))
+            if (ProjectNumDup(num)) // проверка уникальности номера
                 return;
             try
             {
                 OleDbCommand command = cdb.ConnLocal.CreateCommand();
-                command.CommandText = "INSERT INTO Projects (ProjectNumber, ProjectName, PTID, user_id, class) " +
-                    "VALUES (\'" + num + "\', \'" + nam + "\', 1, " + UserParam.UserId + ", 1)";
+                if (newscop)
+                {
+                    command.CommandText = "INSERT INTO Projects (ProjectNumber, ProjectName, PTID, user_id, class) " +
+                        "VALUES (@ProjectNumber, @ProjectName, 1, user_id, 1)";
+                }
+                else
+                {
+                    command.CommandText = "UPDATE Projects SET  ProjectNumber=@ProjectNumber, ProjectName=@ProjectName, user_id=@user_id " +
+                     "WHERE ProjectID=@ProjectID";
+                }
+                command.Parameters.Add("@ProjectNumber", OleDbType.VarChar).Value = num;
+                command.Parameters.Add("@ProjectName", OleDbType.VarChar).Value = nam;
+                command.Parameters.Add("@user_id", OleDbType.Integer).Value = UserParam.UserId;
+                if (!newscop)
+                    command.Parameters.Add("@ProjectID", OleDbType.Integer).Value = id;
                 command.ExecuteNonQuery();
                 if (richTextBoxTarget.Text != String.Empty)
                 {
@@ -261,7 +292,18 @@ namespace AiToolGui
                         richTextAbs.Text + "\' WHERE ProjectNumber = \'" + num + "\'";
                     command.ExecuteNonQuery();
                 }
-                //command.CommandText = "SELECT ProjectID, FROM Project WHERE ProjectNumber = ?";
+                if (newscop)
+                {
+                    command.CommandText = "SELECT ProjectID FROM Projects WHERE ProjectNumber = @ProjectNumber";
+                    command.Parameters.Add("@ProjectNumber", OleDbType.VarChar).Value = num;
+                    OleDbDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    idpr = reader.GetInt32(0);
+                    reader.Close();
+                }
+                else
+                    idpr = id;
+                command.Dispose();
             }
             catch (Exception ex)
             {
@@ -270,17 +312,33 @@ namespace AiToolGui
                 return;
 
             }
+            save = true;
             MessageBox.Show("Данные сохранены", "Информация",
                  MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-            OnProjectName(nam); // отправляем сообщение о том что проекту присвоенно обозначение и наименование
-            OnProjectNum(num);
+            OnProjectSave(idpr, num, nam); // отправляем сообщение о том что проекту присвоенно обозначение и наименование
 
         }
 
         private void CreateSpecification_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!save)
+            {
+                DialogResult reply = MessageBox.Show("Сохранить?",
+                               "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //if (reply == DialogResult.Yes)
+                //SaveProject(LastProjectPath); 
+            }
             cdb.CloseConnectDataBaseLocal();
+        }
+
+        private void textBoxNum_TextChanged(object sender, EventArgs e)
+        {
+            Save = false;
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            Save = false;
         }
     
     }

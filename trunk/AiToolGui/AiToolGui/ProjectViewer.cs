@@ -58,27 +58,25 @@ namespace AiToolGui
 
         private void toolStripScope_Click(object sender, EventArgs e)
         {
-            specification = new CreateSpecification();
+            if (projectNum != String.Empty)
+                specification = new CreateSpecification(projectID);
+             else
+                specification = new CreateSpecification();
             specification.MdiParent = this.ParentForm;
-            specification.eProjectName += new EventHandler(specification_eProjectName);
-            specification.eProjectNum += new EventHandler(specification_eProjectNum);
+            specification.eProjectSave += new CreateSpecification.ProjectSave(specification_eProjectSave);
             specification.Show();
         }
 
-        void specification_eProjectNum(object sender, EventArgs e) // вызовится вторым
+        void specification_eProjectSave(ProjectChangedEvent arg)
         {
-            projectNum = sender.ToString();
+            projectID = arg.ProjectID;
+            projectNum = arg.ProjectNum;
+            projectName = arg.ProjectName;
             this.Text = String.Format("Project Viewer : [{0}] - {1}", projectNum, projectName);
             OnStatus(projectNum + " - " + projectName);
+            //treeProject.Nodes.Add("Спецификация");
             //throw new NotImplementedException();
         }
-
-        void specification_eProjectName(object sender, EventArgs e)
-        {
-            projectName = sender.ToString();
-            //throw new NotImplementedException();
-        }
-
 
         private void toolStripBlock_Click(object sender, EventArgs e)
         {
@@ -124,6 +122,7 @@ namespace AiToolGui
         private void ProjectViewer_FormClosing(object sender, FormClosingEventArgs e)
         {
             cdb.CloseConnectDataBaseLocal();
+            OnStatus(" ");
         }
      
     }
