@@ -115,6 +115,7 @@
       <DependentUpon>Options.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="ProjectChangedEvent.cs" />
     <Compile Include="ProjectManager.cs">
       <SubType>Form</SubType>
     </Compile>

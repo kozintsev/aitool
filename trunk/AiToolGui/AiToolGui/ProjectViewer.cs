@@ -34,7 +34,7 @@ namespace AiToolGui
             projectNum = ProjectNum;
             projectName = ProjectName;
             InitProjectViewer();
-            this.Text = String.Format("Project Viewer : [{0}] - {1}", ProjectNum, ProjectName);
+            this.Text = String.Format("Project Viewer : [{0}] - {1}", projectNum, projectName);
         }
 
         private void InitProjectViewer()
@@ -68,7 +68,8 @@ namespace AiToolGui
         void specification_eProjectNum(object sender, EventArgs e) // вызовится вторым
         {
             projectNum = sender.ToString();
-            //OnStatus(projectNum + " - " + projectName);
+            this.Text = String.Format("Project Viewer : [{0}] - {1}", projectNum, projectName);
+            OnStatus(projectNum + " - " + projectName);
             //throw new NotImplementedException();
         }
 
@@ -114,7 +115,10 @@ namespace AiToolGui
 
         private void ProjectViewer_Activated(object sender, EventArgs e)
         {
-            OnStatus(projectNum + " - " + projectName);
+            if ((projectNum == "") && (projectNum == ""))
+                OnStatus(" Новый проект ");
+            else
+                OnStatus(projectNum + " - " + projectName);
         }
 
         private void ProjectViewer_FormClosing(object sender, FormClosingEventArgs e)
