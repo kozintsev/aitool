@@ -843,18 +843,6 @@
   <data name="&gt;&gt;Save.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="richTextAbs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="richTextAbs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 135</value>
-  </data>
-  <data name="richTextAbs.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="richTextAbs.Text" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;richTextAbs.Name" xml:space="preserve">
     <value>richTextAbs</value>
   </data>
@@ -894,20 +882,29 @@
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="richTextBoxTarget.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="richTextBoxTarget.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="richTextAbs.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="richTextBoxTarget.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="richTextAbs.Size" type="System.Drawing.Size, System.Drawing">
     <value>601, 135</value>
   </data>
-  <data name="richTextBoxTarget.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="richTextAbs.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="richTextBoxTarget.Text" xml:space="preserve">
+  <data name="richTextAbs.Text" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;richTextAbs.Name" xml:space="preserve">
+    <value>richTextAbs</value>
+  </data>
+  <data name="&gt;&gt;richTextAbs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;richTextAbs.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;richTextAbs.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;richTextBoxTarget.Name" xml:space="preserve">
     <value>richTextBoxTarget</value>
@@ -946,6 +943,33 @@
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="richTextBoxTarget.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="richTextBoxTarget.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="richTextBoxTarget.Size" type="System.Drawing.Size, System.Drawing">
+    <value>601, 135</value>
+  </data>
+  <data name="richTextBoxTarget.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="richTextBoxTarget.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;richTextBoxTarget.Name" xml:space="preserve">
+    <value>richTextBoxTarget</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxTarget.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxTarget.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxTarget.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">

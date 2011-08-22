@@ -173,6 +173,7 @@
             // 
             resources.ApplyResources(this.textBoxNum, "textBoxNum");
             this.textBoxNum.Name = "textBoxNum";
+            this.textBoxNum.TextChanged += new System.EventHandler(this.textBoxNum_TextChanged);
             // 
             // label1
             // 
@@ -183,6 +184,7 @@
             // 
             resources.ApplyResources(this.textBoxName, "textBoxName");
             this.textBoxName.Name = "textBoxName";
+            this.textBoxName.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
             // 
             // label2
             // 

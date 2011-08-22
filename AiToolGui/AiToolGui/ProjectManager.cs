@@ -91,9 +91,6 @@ namespace AiToolGui
         {
             // создать новый проект
             OnNewProject();
-            //pv = new ProjectViewer();
-            //pv.MdiParent = pForm;
-            //pv.Show();
             this.Close();
         }
 
