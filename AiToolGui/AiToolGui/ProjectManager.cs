@@ -15,8 +15,14 @@ namespace AiToolGui
         private ConnectDataBase cdb;
         List<int> ProjectIDList;
         private int selectItem = 0;
-        private ProjectViewer pv;
         private Form pForm;
+        
+        public delegate void ProjectChanged(ProjectChangedEvent arg);
+        public delegate void NewProjectChanged();
+
+        public event ProjectChanged MyProjectChanged;
+        public event NewProjectChanged NewProjectEvent;
+
         public ProjectManager(Form mainForm)
         {
             InitializeComponent();
@@ -24,6 +30,20 @@ namespace AiToolGui
             cdb = new ConnectDataBase();
             cdb.CreateConnectDataBase();
             ProjectIDList = new List<int>();
+        }
+        protected virtual void OnNewProject()
+        {
+            if (NewProjectEvent != null)
+                NewProjectEvent();
+        }
+        protected virtual void OnProjectChanged(int id, string num, string name)
+        {
+            ProjectChangedEvent arg = new ProjectChangedEvent();
+            arg.ProjectID = id;
+            arg.ProjectNum = num;
+            arg.ProjectName = name;
+            if (MyProjectChanged != null)
+                MyProjectChanged(arg);
         }
 
         private void LoadProjectList(bool curuser)
@@ -70,9 +90,10 @@ namespace AiToolGui
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             // создать новый проект
-            pv = new ProjectViewer();
-            pv.MdiParent = pForm;
-            pv.Show();
+            OnNewProject();
+            //pv = new ProjectViewer();
+            //pv.MdiParent = pForm;
+            //pv.Show();
             this.Close();
         }
 
@@ -109,9 +130,7 @@ namespace AiToolGui
             //ProjectViewer(string ProjectID, string ProjectNum, string ProjectName)
             int j = ProjectIDList[id - 1];
             ListViewItem item = listViewProject.Items[id-1];
-            ProjectViewer pv = new ProjectViewer(j, item.SubItems[1].Text, item.SubItems[2].Text);
-            pv.MdiParent = pForm;
-            pv.Show();
+            OnProjectChanged(j, item.SubItems[1].Text, item.SubItems[2].Text);
             this.Close();
         }
 

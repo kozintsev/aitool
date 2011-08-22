@@ -19,7 +19,7 @@ namespace AiToolGui
 
         //private Form childForm;
         private Form AboutBox;
-        private Form ProjectManager; // список проектов
+        private ProjectManager pm; // список проектов
         private ProjectViewer pv; // работа над проектом
         //private NewProject np;
         private Settings sett;
@@ -43,6 +43,10 @@ namespace AiToolGui
             toolStripUser.Text = sender.ToString();
         }
 
+        private void myOpenProject(ProjectChangedEvent arg)
+        {
+
+        }
 
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -245,12 +249,34 @@ namespace AiToolGui
             }
             if (FormFound == false)
             {
-                ProjectManager = new ProjectManager(this);
-
-                ProjectManager.MdiParent = this;
-                ProjectManager.Name = "ProjectManager";
-                ProjectManager.Show();
+                pm = new ProjectManager(this);
+                pm.MyProjectChanged += new ProjectManager.ProjectChanged(pm_MyProjectChanged);
+                pm.NewProjectEvent += new ProjectManager.NewProjectChanged(pm_NewProjectEvent);
+                pm.MdiParent = this;
+                pm.Name = "ProjectManager";               
+                //ProjectManager.OpenProjectChanged += new ProjectChanged(myOpenProject);
+                pm.Show();
             }
+        }
+
+        void pm_NewProjectEvent()
+        {
+            pv = new ProjectViewer();
+            pv.MdiParent = this;
+            pv.eStatus += new EventHandler(pv_eStatus);
+            pv.Show();
+            //throw new NotImplementedException();
+        }
+
+        void pm_MyProjectChanged(ProjectChangedEvent arg)
+        {
+
+            pv = new ProjectViewer(arg.ProjectID, arg.ProjectNum, arg.ProjectName);
+            pv.MdiParent = this;
+            pv.eStatus += new EventHandler(pv_eStatus);
+            pv.Show();
+            //arg.ProjectID
+            //throw new NotImplementedException();
         }
     }
 }
