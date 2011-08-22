@@ -245,7 +245,7 @@ namespace AiToolGui
             }
             if (FormFound == false)
             {
-                ProjectManager = new ProjectManager();
+                ProjectManager = new ProjectManager(this);
 
                 ProjectManager.MdiParent = this;
                 ProjectManager.Name = "ProjectManager";

@@ -108,13 +108,16 @@ namespace AiToolGui
                 return false;
             }
             return true;
-        }
-      
-            
+        }       
         public void CloseConnectDataBaseLocal()
         {
             if (connLocal != null)
                 connLocal.Close();
+        }
+        public void CloseConnectDataBaseServ()
+        {
+            if (connServ != null)
+                connServ.Close();
         }
         public void GetRoleName()
         {
@@ -130,36 +133,22 @@ namespace AiToolGui
         }
         public bool Authorization(string login, string pwd)
         {
-            bool auth = false;
-            string idrole = String.Empty; ;
-            //UserParam usrPrm = new UserParam() ;
-            //List<UserParam> userList = List<UserParam>();
             OleDbCommand command = connLocal.CreateCommand();
-            command.CommandText = "SELECT * FROM Users WHERE username='" + login.TrimEnd() + "'";
+            command.CommandText = "SELECT id_user, fullname, id_role FROM Users WHERE username=@username AND Password=@password";
+            command.Parameters.Add("@username", OleDbType.VarChar).Value = login;
+            command.Parameters.Add("@password", OleDbType.VarChar).Value = pwd;
+            int userCount = (int)command.ExecuteScalar();
+            if (userCount != 1)
+                return false;
             OleDbDataReader reader = command.ExecuteReader();
-            do
-            {
-                while (reader.Read())
-                {
-                    
-                    UserParam.UserId = reader["id_user"].ToString().TrimEnd();
-                    UserParam.Username = reader["username"].ToString().TrimEnd();
-                    UserParam.Password = reader["password"].ToString().TrimEnd();
-                    UserParam.Fullname = reader["fullname"].ToString().TrimEnd();
-                    idrole = reader["id_role"].ToString().Trim();
-                    UserParam.Role = Convert.ToInt16(idrole);
-                    
-                    if (login == UserParam.Username && pwd == UserParam.Password)
-                        auth = true;
-                    //userList.Add(usrPrm);
-                    //ListViewItem item = listView1.Items.Add(reader["username"].ToString().TrimEnd());
-                    //item.SubItems.Add(reader.GetValue(NAME_INDEX).ToString().TrimEnd());
-                    //item.SubItems.Add(reader.GetDateTime(3).ToLongDateString());
-                    //item.SubItems.Add(reader.GetValue(4).ToString());
-                }
-            } while (reader.NextResult());
+            reader.Read();
+            UserParam.UserId = reader.GetInt32(0);
+            UserParam.Username = login; // reader["username"].ToString().TrimEnd();
+            UserParam.Password = pwd; // reader["password"].ToString().TrimEnd();
+            UserParam.Fullname = reader["fullname"].ToString().TrimEnd();
+            UserParam.Role = reader.GetInt32(2);
             reader.Close();
-            return auth;
+            return true;
         }
 
 	}
