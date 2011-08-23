@@ -77,11 +77,18 @@ namespace AiToolGui
             {
                 // создаем класс для сохранения XML
                 writer = new XmlTextWriter(dlg.FileName, System.Text.Encoding.UTF8);
+            }
+             catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error!");
+            }
                 // форматирование, чтобы файл не был вытянут в одну линию
                 writer.Formatting = Formatting.Indented;
 
                 // пишем заголовок и корневой элемент
                 writer.WriteStartDocument();
+                writer.WriteComment("Export File AiTool.NET");
                 writer.WriteStartElement("Specification");
                 //аттрибуты элемента
                 writer.WriteAttributeString("Number", textBoxNum.Text);
@@ -102,19 +109,8 @@ namespace AiToolGui
     
                 // закрываем корневой элемент и завершаем работу с документом
                 writer.WriteEndElement();
-                writer.WriteEndDocument();
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message, "Error!");
-            }
-            finally
-            {
-                // закрываем файл
-                if (writer != null) writer.Close();
-            }
-
+                writer.WriteEndDocument(); 
+           if (writer != null) writer.Close();
         }
         private void SaveXmlFile(XmlTextWriter wrtr, TreeNodeCollection nodes)
         {
@@ -145,6 +141,25 @@ namespace AiToolGui
             dlg.Filter = "Файлы XML (*.xml)|*.xml";
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
+            XmlTextReader xmlIn = new XmlTextReader(dlg.FileName);
+            try
+            {
+                xmlIn.MoveToContent();
+                if (xmlIn.Name != "Specification")
+                    throw new IndexOutOfRangeException("Incorrect file format");
+
+                xmlIn.Close();
+                do
+                {
+
+                }while (!xmlIn.EOF);
+        
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при открытии: " + ex.Message, "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         
