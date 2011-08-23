@@ -278,5 +278,15 @@ namespace AiToolGui
             //arg.ProjectID
             //throw new NotImplementedException();
         }
+
+        private void MainFormClipboardCopy(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void MainFormClipboardPaste(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

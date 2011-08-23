@@ -207,11 +207,13 @@
             // 
             resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.MainFormClipboardCopy);
             // 
             // pasteToolStripMenuItem
             // 
             resources.ApplyResources(this.pasteToolStripMenuItem, "pasteToolStripMenuItem");
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.MainFormClipboardPaste);
             // 
             // toolStripSeparator7
             // 
