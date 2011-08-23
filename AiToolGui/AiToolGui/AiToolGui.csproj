@@ -103,7 +103,6 @@
       <DependentUpon>CreateSpecification.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphEditor.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
