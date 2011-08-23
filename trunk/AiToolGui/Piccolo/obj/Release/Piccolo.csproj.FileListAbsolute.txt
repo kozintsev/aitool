@@ -1,8 +1,0 @@
-D:\svn\aitool\AiToolGui\Piccolo\bin\Release\UMD.HCIL.Piccolo.dll
-D:\svn\aitool\AiToolGui\Piccolo\bin\Release\piccolo.xml
-D:\svn\aitool\AiToolGui\Piccolo\obj\Release\ResolveAssemblyReference.cache
-D:\svn\aitool\AiToolGui\Piccolo\obj\Release\UMD.HCIL.Piccolo.PCanvas.resources
-D:\svn\aitool\AiToolGui\Piccolo\obj\Release\Piccolo.csproj.GenerateResource.Cache
-D:\svn\aitool\AiToolGui\Piccolo\obj\Release\UMD.HCIL.Piccolo.dll
-D:\svn\aitool\AiToolGui\AiToolGui\bin\Release\UMD.HCIL.Piccolo.dll
-D:\svn\aitool\AiToolGui\AiToolGui\bin\Release\piccolo.xml
