@@ -141,27 +141,87 @@ namespace AiToolGui
             dlg.Filter = "Файлы XML (*.xml)|*.xml";
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
-            XmlTextReader xmlIn = new XmlTextReader(dlg.FileName);
+            XmlDocument doc = new XmlDocument();
             try
             {
-                xmlIn.MoveToContent();
-                if (xmlIn.Name != "Specification")
-                    throw new IndexOutOfRangeException("Incorrect file format");
-
-                xmlIn.Close();
-                do
-                {
-
-                }while (!xmlIn.EOF);
-        
+            doc.Load(dlg.FileName);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка при открытии: " + ex.Message, "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            XmlNode rootnode = doc.DocumentElement;
+            if (rootnode.Name != "Specification")
+                throw new ArgumentException("Incorrect file format");
+            textBoxNum.Text = rootnode.Attributes["Number"].Value;
+            textBoxName.Text = rootnode.Attributes["ProjectName"].Value;
+            XmlNodeList nodeList = doc.DocumentElement.ChildNodes;
+            foreach (XmlNode node in nodeList)
+            { 
+                switch(node.Name)
+                {
+                    case "Target":
+                        richTextBoxTarget.Text = node.InnerText;
+                        break;
+                    case "Abstract":
+                        richTextAbs.Text = node.InnerText;
+                        break;
+                    case "Parameters":
+                        XmlNodeList nList = node.ChildNodes;
+                        foreach (XmlNode pNode in nList)
+                        {
+                            if (pNode.Name == "Node")
+                            {
+                                TreeNode treenode = new TreeNode();
+                                treenode.Text = pNode.Attributes["Text"].Value; ;
+                                NodeTechParam nodparam = new NodeTechParam();
+                                nodparam.Description = pNode.Attributes["Text"].InnerText;
+                                nodparam.VarName = pNode.Attributes["VarName"].Value;
+                                nodparam.VarMax = pNode.Attributes["VarMax"].Value;
+                                treenode.Tag = nodparam;
+                                treeParam.Nodes.Add(treenode);
+                                OpenXmlFile(treenode, pNode.ChildNodes);
+                            }
+                        }
+                     break;
+                }
+            }
         }
-
+        /*
+            TreeNode node = new TreeNode();
+            node.Text = AddText;
+            NodeTechParam nodparam = new NodeTechParam();
+            nodparam.Description = textBoxtext.Text;
+            nodparam.VarName = textVarName.Text;
+            nodparam.VarMax = textVarMax.Text;
+            node.Tag = nodparam;
+            treeParam.Nodes.Add(node);
+         * 
+         * selnode.Nodes.Add(node);
+        */
+        private void OpenXmlFile(TreeNode treenode, XmlNodeList nodes)
+        {
+            NodeTechParam nodeparam = new NodeTechParam();
+            foreach (XmlNode node in nodes)
+            {
+                if (node != null)
+                {//Метод использует рекурсивный алглритм
+                    if (node.Name == "Node")
+                    {
+                        TreeNode newnode = new TreeNode();
+                        newnode.Text = node.Attributes["Text"].Value;
+                        NodeTechParam nodparam = new NodeTechParam();
+                        nodparam.Description = node.Attributes["Text"].InnerText;
+                        nodparam.VarName = node.Attributes["VarName"].Value;
+                        nodparam.VarMax = node.Attributes["VarMax"].Value;
+                        newnode.Tag = nodparam;
+                        treenode.Nodes.Add(newnode);
+                        OpenXmlFile(newnode, node.ChildNodes);
+                    }
+                }
+            }
+        }
         
         private void Close_Click(object sender, EventArgs e)
         {
