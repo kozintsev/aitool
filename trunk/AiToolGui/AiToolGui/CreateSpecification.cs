@@ -67,8 +67,6 @@ namespace AiToolGui
                 return;
             }
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.FileName = "untitled";
-            dlg.DefaultExt = "xml";
             dlg.Filter = "Файлы XML (*.xml)|*.xml";
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
@@ -86,15 +84,20 @@ namespace AiToolGui
                 writer.WriteStartDocument();
                 writer.WriteStartElement("Specification");
                 //аттрибуты элемента
-                //writer.WriteAttributeString("birth", person.Birth.ToShortDateString());
-                //writer.WriteAttributeString("death", person.Death.ToShortDateString());
+                writer.WriteAttributeString("Number", textBoxNum.Text);
+                writer.WriteAttributeString("ProjectName", textBoxName.Text);
                 //вложенный элемент
-                writer.WriteStartElement("description");
-                writer.WriteString(textBoxNum.Text);
+                writer.WriteStartElement("Target");
+                writer.WriteString(richTextBoxTarget.Text);
                 writer.WriteEndElement();
                 // вложенный элемент
-                writer.WriteStartElement("name");
-                writer.WriteString(textBoxName.Text);
+                writer.WriteStartElement("Abstract");
+                writer.WriteString(richTextAbs.Text);
+                writer.WriteEndElement();
+                writer.WriteStartElement("Parameters");
+                // здесь читается дерево и пишутся параметры
+                SaveXmlFile(writer, treeParam.Nodes);
+                //treeParam.Nodes
                 writer.WriteEndElement();
     
                 // закрываем корневой элемент и завершаем работу с документом
@@ -113,10 +116,35 @@ namespace AiToolGui
             }
 
         }
-
+        private void SaveXmlFile(XmlTextWriter wrtr, TreeNodeCollection nodes)
+        {
+            NodeTechParam nodeparam = new NodeTechParam();
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Nodes != null)
+                {//Метод использует рекурсивный алглритм
+                    wrtr.WriteStartElement("Node");
+                    wrtr.WriteAttributeString("Text", node.Text);
+                    nodeparam = node.Tag as NodeTechParam;
+                    if (nodeparam != null)
+                    {
+                        wrtr.WriteAttributeString("VarName", nodeparam.VarName);
+                        wrtr.WriteAttributeString("VarMax", nodeparam.VarMax);
+                        wrtr.WriteString(nodeparam.Description);
+                    }         
+                    SaveXmlFile(wrtr, node.Nodes);
+                    wrtr.WriteEndElement();
+                }
+            }          
+        }
         private void ImportDocXml_Click(object sender, EventArgs e)
         {
             //функция загрузки файла XML 
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.DefaultExt = "xml";
+            dlg.Filter = "Файлы XML (*.xml)|*.xml";
+            if (dlg.ShowDialog() != DialogResult.OK)
+                return;
         }
 
         
@@ -149,18 +177,32 @@ namespace AiToolGui
                 MessageBox.Show("Введите текст");
                 return;
             }
-            TreeNode node;
-            node = treeParam.SelectedNode;
-            if (node == null) return;
-            for (int i = 0; i < node.Nodes.Count; i++)
+            TreeNode selnode;
+            selnode = treeParam.SelectedNode;
+            TreeNode node = new TreeNode();
+            NodeTechParam nodparam = new NodeTechParam();
+            nodparam.Description = textBoxtext.Text;
+            nodparam.VarName = textVarName.Text;
+            nodparam.VarMax = textVarMax.Text;
+            node.Text = AddText;
+            node.Tag = nodparam;
+
+            if (node == null || selnode == null)
+                return;
+
+            for (int i = 0; i < selnode.Nodes.Count; i++)
             {
-                if (AddText == node.Nodes[i].Text)
+                if (AddText == selnode.Nodes[i].Text)
                 {
                     MessageBox.Show("Такой узел уже есть");
                     return;
                 }
-            }            
-            node.Nodes.Add(AddNodeText.Text);
+            }
+            selnode.Nodes.Add(node);
+            AddNodeText.Text = "";
+            textBoxtext.Text = "";
+            textVarName.Text = "";
+            textVarMax.Text = "";
             
         }
 
@@ -184,14 +226,33 @@ namespace AiToolGui
                     return;
                 }
             }
-             
-                //treeView1.Nodes.Count
-            treeParam.Nodes.Add(AddText);
+            TreeNode node = new TreeNode();
+            node.Text = AddText;
+            NodeTechParam nodparam = new NodeTechParam();
+            nodparam.Description = textBoxtext.Text;
+            nodparam.VarName = textVarName.Text;
+            nodparam.VarMax = textVarMax.Text;
+            node.Tag = nodparam;
+            treeParam.Nodes.Add(node);
+            AddNodeText.Text = "";
+            textBoxtext.Text = "";
+            textVarName.Text = "";
+            textVarMax.Text = "";
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-			//MessageBox.Show("Ололололо");
+            TreeNode node;
+            node = e.Node;
+            NodeTechParam n = new NodeTechParam();
+            n = node.Tag as NodeTechParam;
+            if (node != null)
+            {
+                textBoxtext.Text = n.Description;
+                textBoxtext.Text = n.Description;
+                textVarName.Text = n.VarName;
+                textVarMax.Text = n.VarMax;
+            }
         }
 
         private void DelNode_Click(object sender, EventArgs e)
@@ -243,7 +304,7 @@ namespace AiToolGui
             return false;
         }
 
-        private void Save_Click(object sender, EventArgs e)
+        private void SaveSpecification()
         {
             // сохранить название проекта и обозначение
             //byte[] B = {255, 255};
@@ -316,7 +377,10 @@ namespace AiToolGui
             MessageBox.Show("Данные сохранены", "Информация",
                  MessageBoxButtons.OK, MessageBoxIcon.Information);
             OnProjectSave(idpr, num, nam); // отправляем сообщение о том что проекту присвоенно обозначение и наименование
-
+        }
+        private void Save_Click(object sender, EventArgs e)
+        {
+            SaveSpecification();  
         }
 
         private void CreateSpecification_FormClosing(object sender, FormClosingEventArgs e)
@@ -325,20 +389,20 @@ namespace AiToolGui
             {
                 DialogResult reply = MessageBox.Show("Сохранить?",
                                "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //if (reply == DialogResult.Yes)
-                //SaveProject(LastProjectPath); 
+                if (reply == DialogResult.Yes)
+                    SaveSpecification();
             }
             cdb.CloseConnectDataBaseLocal();
         }
-
+        //изменение текста
         private void textBoxNum_TextChanged(object sender, EventArgs e)
         {
-            Save = false;
+            save = false;
         }
-
+        // изменение текста
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
-            Save = false;
+            save = false;
         }
     
     }

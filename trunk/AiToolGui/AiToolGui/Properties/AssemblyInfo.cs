@@ -29,3 +29,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can use the default the Revision and 
 // Build Numbers by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.*")]
+[assembly: GuidAttribute("26023467-057B-4489-A05B-94C4527A0BC4")]
