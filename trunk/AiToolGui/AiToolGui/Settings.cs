@@ -24,6 +24,14 @@ namespace AiToolGui
             //temp = temp.Substring(0, temp.LastIndexOf('.'));
             return Directory.GetFiles(appath + "\\Languages");
         }
+        public string GetLngText(string lng, string nameform)
+        {
+            return ParsingLangFile(lng, nameform);
+        }
+        public string GetLngText(string lng, string nameform, string name)
+        {
+            return ParsingLangFile(lng, nameform, name);
+        }
         public void SetLanguage(string lng)
         {
             ParsingSetting("Language", lng, true);
@@ -71,7 +79,53 @@ namespace AiToolGui
         {
             ParsingSetting("login", login, true);
         }
-
+        private string ParsingLangFile(string lng, string nameform)
+        {
+            XmlDocument doc = new XmlDocument();
+            string temp = "";
+            try
+            {
+                doc.Load(lng);
+                XmlNodeList list = doc.DocumentElement.ChildNodes;
+                foreach (XmlNode node in list)
+                {
+                    if (node.Name == nameform)
+                    {
+                        temp = node.Attributes["name"].Value;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }
+            return temp;
+        }
+        private string ParsingLangFile(string lng, string nameform, string control)
+        {
+            XmlDocument doc = new XmlDocument();
+            string temp = "";
+            try
+            {
+                doc.Load(lng);
+                XmlNodeList list = doc.DocumentElement.ChildNodes;
+                foreach (XmlNode node in list)
+                {
+                    if (node.Name == nameform)
+                    {                         
+                        foreach(XmlNode n in node.ChildNodes)
+                        {
+                            if (control == n.Name) temp = n.InnerText;
+                        }                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }
+            return temp;
+        }
         private string ParsingSetting(string str, string text, bool save)
         {
             XmlDocument doc = new XmlDocument();

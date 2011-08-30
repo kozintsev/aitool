@@ -23,6 +23,14 @@ namespace AiToolGui
             textBoxLogin.Text = sett.GetLogin();
             cdb = new ConnectDataBase();
             conn = cdb.CreateConnectDataBase(); // подключились или нет?
+            string text;
+            this.Text = text = sett.GetLngText(UserParam.Language, "Login");
+            foreach (Control c in this.Controls)
+            {
+                  text = sett.GetLngText( UserParam.Language, "Login", c.Name);
+                  if (text != "")
+                      c.Text = text;
+            }
             if (textBoxLogin.Text != "")
             {
                 textBoxPwd.Focus();

@@ -57,6 +57,9 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataBase = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.classfierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,9 +86,6 @@
             this.toolStripUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusUserLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.dataBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.classfierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -98,7 +98,7 @@
             this.editMenu,
             this.viewMenu,
             this.toolsMenu,
-            this.dataBaseToolStripMenuItem,
+            this.dataBase,
             this.windowsMenu,
             this.helpMenu});
             resources.ApplyResources(this.menuStrip, "menuStrip");
@@ -277,6 +277,24 @@
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
             resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
             // 
+            // dataBase
+            // 
+            this.dataBase.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.usersToolStripMenuItem,
+            this.classfierToolStripMenuItem});
+            this.dataBase.Name = "dataBase";
+            resources.ApplyResources(this.dataBase, "dataBase");
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            resources.ApplyResources(this.usersToolStripMenuItem, "usersToolStripMenuItem");
+            // 
+            // classfierToolStripMenuItem
+            // 
+            this.classfierToolStripMenuItem.Name = "classfierToolStripMenuItem";
+            resources.ApplyResources(this.classfierToolStripMenuItem, "classfierToolStripMenuItem");
+            // 
             // windowsMenu
             // 
             this.windowsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -442,24 +460,6 @@
             this.StatusUserLabel.Name = "StatusUserLabel";
             resources.ApplyResources(this.StatusUserLabel, "StatusUserLabel");
             // 
-            // dataBaseToolStripMenuItem
-            // 
-            this.dataBaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usersToolStripMenuItem,
-            this.classfierToolStripMenuItem});
-            this.dataBaseToolStripMenuItem.Name = "dataBaseToolStripMenuItem";
-            resources.ApplyResources(this.dataBaseToolStripMenuItem, "dataBaseToolStripMenuItem");
-            // 
-            // usersToolStripMenuItem
-            // 
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            resources.ApplyResources(this.usersToolStripMenuItem, "usersToolStripMenuItem");
-            // 
-            // classfierToolStripMenuItem
-            // 
-            this.classfierToolStripMenuItem.Name = "classfierToolStripMenuItem";
-            resources.ApplyResources(this.classfierToolStripMenuItem, "classfierToolStripMenuItem");
-            // 
             // AITool
             // 
             resources.ApplyResources(this, "$this");
@@ -540,7 +540,7 @@
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripUser;
         private System.Windows.Forms.ToolStripStatusLabel StatusProjectLabel;
-        private System.Windows.Forms.ToolStripMenuItem dataBaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dataBase;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem classfierToolStripMenuItem;
     }

@@ -419,10 +419,10 @@
   <data name="classfierToolStripMenuItem.Text" xml:space="preserve">
     <value>Classfier</value>
   </data>
-  <data name="dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dataBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 20</value>
   </data>
-  <data name="dataBaseToolStripMenuItem.Text" xml:space="preserve">
+  <data name="dataBase.Text" xml:space="preserve">
     <value>Data Base</value>
   </data>
   <data name="cascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -1002,6 +1002,24 @@
   <data name="&gt;&gt;languageToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;dataBase.Name" xml:space="preserve">
+    <value>dataBase</value>
+  </data>
+  <data name="&gt;&gt;dataBase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;usersToolStripMenuItem.Name" xml:space="preserve">
+    <value>usersToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;usersToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;classfierToolStripMenuItem.Name" xml:space="preserve">
+    <value>classfierToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;classfierToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;windowsMenu.Name" xml:space="preserve">
     <value>windowsMenu</value>
   </data>
@@ -1145,24 +1163,6 @@
   </data>
   <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataBaseToolStripMenuItem.Name" xml:space="preserve">
-    <value>dataBaseToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;dataBaseToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;usersToolStripMenuItem.Name" xml:space="preserve">
-    <value>usersToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;usersToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;classfierToolStripMenuItem.Name" xml:space="preserve">
-    <value>classfierToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;classfierToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AITool</value>
