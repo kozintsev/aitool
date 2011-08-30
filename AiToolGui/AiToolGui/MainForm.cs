@@ -21,6 +21,7 @@ namespace AiToolGui
         private Form AboutBox;
         private ProjectManager pm; // список проектов
         private ProjectViewer pv; // работа над проектом
+        private ClassfierForm classfier;
         //private NewProject np;
         private Settings sett;
         private ConnectDataBase cdb;
@@ -303,7 +304,29 @@ namespace AiToolGui
 
         private void MainFormClipboardPaste(object sender, EventArgs e)
         {
-            
+
         }
+
+        private void OpenClassfier(object sender, EventArgs e)
+        {
+            bool FormFound = false;
+            FormCollection fс = Application.OpenForms;
+            foreach (Form frm in fс)
+            {
+                if (frm.Name == "ClasfierForm") //
+                {
+                    frm.Focus();
+                    FormFound = true;
+                }
+            }
+            if (FormFound == false)
+            {
+                classfier = new ClassfierForm();
+                classfier.MdiParent = this;
+                classfier.Name = "ClasfierForm";               
+                classfier.Show();
+            }
+        }
+        
     }
 }

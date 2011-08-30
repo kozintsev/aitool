@@ -294,6 +294,7 @@
             // 
             this.classfierToolStripMenuItem.Name = "classfierToolStripMenuItem";
             resources.ApplyResources(this.classfierToolStripMenuItem, "classfierToolStripMenuItem");
+            this.classfierToolStripMenuItem.Click += new System.EventHandler(this.OpenClassfier);
             // 
             // windowsMenu
             // 
