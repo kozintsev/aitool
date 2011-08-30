@@ -15,6 +15,12 @@ namespace AiToolGui
         private static string rolename;
         private static string statustext;
         private static string localbdpath;
+        private static string language;
+        public static string Language
+        {
+            get { return language; }
+            set { language = value;}
+        }
 
         public static int UserId
         {

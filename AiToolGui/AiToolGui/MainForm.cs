@@ -44,21 +44,41 @@ namespace AiToolGui
                 lngToolStripMenuItem.Text = tmp;
                 lngToolStripMenuItem.Click += this.MyMenuLngItemClick;
                 if (lang == tmp)
+                {
                     lngToolStripMenuItem.Checked = true;
+                    SetLanguageForm(lng);
+                }
                 this.languageToolStripMenuItem.DropDownItems.Add(lngToolStripMenuItem);
+            }
+        }
+        private void SetLanguageForm(string lng)
+        {
+            string text = String.Empty;
+            UserParam.Language = lng;
+            foreach (ToolStripMenuItem menuitem in this.menuStrip.Items)
+            {
+                text = sett.GetLngText(lng, "MainForm", menuitem.Name);
+                if (text != "")
+                    menuitem.Text = text;
+                foreach (ToolStripItem subitem in menuitem.DropDownItems)
+                {
+                    text = sett.GetLngText(lng, "MainForm", subitem.Name);
+                    if (text != "")
+                        subitem.Text = text;
+                }
             }
         }
         private void MyMenuLngItemClick(object sender, EventArgs e)
         {
             string lng = ((ToolStripMenuItem)sender).Tag.ToString();
+            sett.SetLanguage(Path.GetFileNameWithoutExtension(lng));
             foreach (ToolStripMenuItem Item in this.languageToolStripMenuItem.DropDownItems)
             {
                 Item.Checked = false;
                 if (Item == (ToolStripMenuItem)sender)
                     Item.Checked = true;
-            } 
-
-            MessageBox.Show(lng);
+            }
+            SetLanguageForm(lng);
         }
 
         private void myForm_Status(object sender, EventArgs e)

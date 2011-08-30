@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AiTool>
+<MainForm>
+	<fileMenu>&amp;Проекты</fileMenu>
+	<editMenu>&amp;Правка</editMenu>
+	<viewMenu>&amp;Вид</viewMenu>
+	<toolsMenu>&amp;Сервис</toolsMenu>
+	<dataBase>&amp;Справочники</dataBase>
+	<windowsMenu>&amp;Окна</windowsMenu>
+	<helpMenu>&amp;Помощь</helpMenu>
+	<newToolStripMenuItem>&amp;Новый проект</newToolStripMenuItem>
+	<newProjectToolStripMenuItem>&amp;Менеджер проектов</newProjectToolStripMenuItem>
+</MainForm>
+<Login name="Вход в систему">
+	<labelLogin>Имя пользователя:</labelLogin>
+	<labelPwd>Пароль:</labelPwd>
+	<buttonExit>Выход</buttonExit>
+</Login>
+<CreateSpecification>
+</CreateSpecification>
+</AiTool>

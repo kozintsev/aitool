@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AiTool>
+<MainForm>
+	<fileMenu>&amp;Project</fileMenu>
+	<editMenu>&amp;Edit</editMenu>
+	<viewMenu>&amp;View</viewMenu>
+	<toolsMenu>&amp;Tools</toolsMenu>
+	<dataBase>Data Base</dataBase>
+	<windowsMenu>&amp;Windows</windowsMenu>
+	<helpMenu>&amp;Help</helpMenu>
+	<newToolStripMenuItem>&amp;New Project</newToolStripMenuItem>
+	<newProjectToolStripMenuItem>Project Manager</newProjectToolStripMenuItem>
+</MainForm>
+<Login name="Login">
+	<labelLogin>Login:</labelLogin>
+	<labelPwd>Password:</labelPwd>
+	<buttonExit>Exit</buttonExit>
+</Login>
+<CreateSpecification>
+</CreateSpecification>
+</AiTool>
