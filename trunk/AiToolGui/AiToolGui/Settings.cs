@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
 using System.Data;
@@ -18,10 +18,25 @@ namespace AiToolGui
         {
             if (!File.Exists(optionspath)) CreateSetting();            
         }
-        
+
+        public string[] GetLanguagesList()
+        {
+            //temp = temp.Substring(0, temp.LastIndexOf('.'));
+            return Directory.GetFiles(appath + "\\Languages");
+        }
+        public void SetLanguage(string lng)
+        {
+            ParsingSetting("Language", lng, true);
+        }
+
+        public string GetLanguage()
+        {
+            return ParsingSetting("Language", "", false);
+        }
+
         public string GetDataBaseLocal()
         {
-            string pathbd = DataBase("pathbd", "", false);
+            string pathbd = ParsingSetting("pathbd", "", false);
             if(File.Exists(pathbd))
                 return pathbd;
             pathbd = appath + pathbd;
@@ -40,24 +55,24 @@ namespace AiToolGui
                 path = "\\" + pathdb.TrimStart(appath.ToCharArray());
                 str = appath + path;
                 if (File.Exists(str))
-                    DataBase("pathbd", path, true);
+                    ParsingSetting("pathbd", path, true);
                 else
-                    DataBase("pathbd", pathdb, true);
+                    ParsingSetting("pathbd", pathdb, true);
             }
         }
 
         public string GetLogin()
         {
-            return DataBase("login", "", false);
+            return ParsingSetting("login", "", false);
 
         }
 
         public void SetLogin(string login)
         {
-            DataBase("login", login, true);
+            ParsingSetting("login", login, true);
         }
 
-        private string DataBase(string str, string text ,bool save)
+        private string ParsingSetting(string str, string text, bool save)
         {
             XmlDocument doc = new XmlDocument();
             string temp = "";
@@ -108,7 +123,10 @@ namespace AiToolGui
                     writer.WriteEndElement();
                     writer.WriteStartElement("pathbd");
                     writer.WriteString("\\Base\\aitool.mdb");
-                    writer.WriteEndElement();                               
+                    writer.WriteEndElement();
+                    writer.WriteStartElement("Language");
+                    writer.WriteString("Russia");
+                    writer.WriteEndElement();          
                 // закрываем корневой элемент и завершаем работу с документом
                 writer.WriteEndElement();
                 writer.WriteEndDocument();

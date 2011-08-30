@@ -57,9 +57,6 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.russiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,6 +83,9 @@
             this.toolStripUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusUserLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.dataBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.classfierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -98,6 +98,7 @@
             this.editMenu,
             this.viewMenu,
             this.toolsMenu,
+            this.dataBaseToolStripMenuItem,
             this.windowsMenu,
             this.helpMenu});
             resources.ApplyResources(this.menuStrip, "menuStrip");
@@ -273,32 +274,8 @@
             // 
             // languageToolStripMenuItem
             // 
-            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.defaultToolStripMenuItem,
-            this.englishToolStripMenuItem,
-            this.russiaToolStripMenuItem});
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
             resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
-            // 
-            // defaultToolStripMenuItem
-            // 
-            this.defaultToolStripMenuItem.Checked = true;
-            this.defaultToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
-            resources.ApplyResources(this.defaultToolStripMenuItem, "defaultToolStripMenuItem");
-            this.defaultToolStripMenuItem.Click += new System.EventHandler(this.defaultToolStripMenuItem_Click);
-            // 
-            // englishToolStripMenuItem
-            // 
-            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
-            this.englishToolStripMenuItem.Click += new System.EventHandler(this.EnglishToolStripMenuItemClick);
-            // 
-            // russiaToolStripMenuItem
-            // 
-            this.russiaToolStripMenuItem.Name = "russiaToolStripMenuItem";
-            resources.ApplyResources(this.russiaToolStripMenuItem, "russiaToolStripMenuItem");
-            this.russiaToolStripMenuItem.Click += new System.EventHandler(this.RussiaToolStripMenuItemClick);
             // 
             // windowsMenu
             // 
@@ -465,6 +442,24 @@
             this.StatusUserLabel.Name = "StatusUserLabel";
             resources.ApplyResources(this.StatusUserLabel, "StatusUserLabel");
             // 
+            // dataBaseToolStripMenuItem
+            // 
+            this.dataBaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.usersToolStripMenuItem,
+            this.classfierToolStripMenuItem});
+            this.dataBaseToolStripMenuItem.Name = "dataBaseToolStripMenuItem";
+            resources.ApplyResources(this.dataBaseToolStripMenuItem, "dataBaseToolStripMenuItem");
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            resources.ApplyResources(this.usersToolStripMenuItem, "usersToolStripMenuItem");
+            // 
+            // classfierToolStripMenuItem
+            // 
+            this.classfierToolStripMenuItem.Name = "classfierToolStripMenuItem";
+            resources.ApplyResources(this.classfierToolStripMenuItem, "classfierToolStripMenuItem");
+            // 
             // AITool
             // 
             resources.ApplyResources(this, "$this");
@@ -489,8 +484,6 @@
             this.PerformLayout();
 
         }
-        private System.Windows.Forms.ToolStripMenuItem russiaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
         #endregion
@@ -545,9 +538,11 @@
         private System.Windows.Forms.ToolStripMenuItem documentManagerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem defaultToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripUser;
         private System.Windows.Forms.ToolStripStatusLabel StatusProjectLabel;
+        private System.Windows.Forms.ToolStripMenuItem dataBaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem classfierToolStripMenuItem;
     }
 }
 
