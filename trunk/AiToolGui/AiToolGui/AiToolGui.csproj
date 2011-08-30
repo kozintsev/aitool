@@ -95,6 +95,12 @@
     <Compile Include="AddUser.Designer.cs">
       <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClassfierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassfierForm.Designer.cs">
+      <DependentUpon>ClassfierForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConnectDataBase.cs" />
     <Compile Include="CreateSpecification.cs">
       <SubType>Form</SubType>
@@ -151,6 +157,12 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="UserParam.cs" />
+    <Compile Include="UsersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForm.Designer.cs">
+      <DependentUpon>UsersForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutBox.resx">
@@ -163,6 +175,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClassfierForm.resx">
+      <DependentUpon>ClassfierForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateSpecification.en.resx">
