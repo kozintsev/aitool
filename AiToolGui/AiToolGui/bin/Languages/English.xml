@@ -10,6 +10,15 @@
 	<helpMenu>&amp;Help</helpMenu>
 	<newToolStripMenuItem>&amp;New Project</newToolStripMenuItem>
 	<newProjectToolStripMenuItem>Project Manager</newProjectToolStripMenuItem>
+	<saveToolStripMenuItem>Save</saveToolStripMenuItem>
+	<saveAsToolStripMenuItem>Save As</saveAsToolStripMenuItem>
+	<closeToolStripMenuItem>Close</closeToolStripMenuItem>
+	<exitToolStripMenuItem>Exit</exitToolStripMenuItem>
+	<optionsToolStripMenuItem>Options</optionsToolStripMenuItem>
+	<pluginsToolStripMenuItem>Plugin Manager</pluginsToolStripMenuItem>
+	<languageToolStripMenuItem>Language</languageToolStripMenuItem>
+	<usersToolStripMenuItem>Users</usersToolStripMenuItem>
+	<classfierToolStripMenuItem>Clasfier</classfierToolStripMenuItem>
 </MainForm>
 <Login name="Login">
 	<labelLogin>Login:</labelLogin>

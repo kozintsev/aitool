@@ -112,6 +112,9 @@ Section "Program Files" SEC01
   SetOverwrite try
   SetOutPath "$INSTDIR\Base"
   File "d:\svn\aitool\AiToolGui\AiToolGui\bin\Base\aitool.mdb"
+  SetOutPath "$INSTDIR\Languages"
+  File "d:\svn\aitool\AiToolGui\AiToolGui\bin\Languages\English.xml"
+  File "d:\svn\aitool\AiToolGui\AiToolGui\bin\Languages\Russia.xml"
   Goto finish
  err_dot_net_not_found:
 	Abort "Aborted: .Net framework not found."

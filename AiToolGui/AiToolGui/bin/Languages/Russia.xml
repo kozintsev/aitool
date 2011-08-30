@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AiTool>
 <MainForm>
-	<fileMenu>&amp;Проекты</fileMenu>
+	<fileMenu>П&amp;роекты</fileMenu>
 	<editMenu>&amp;Правка</editMenu>
 	<viewMenu>&amp;Вид</viewMenu>
 	<toolsMenu>&amp;Сервис</toolsMenu>
@@ -10,6 +10,15 @@
 	<helpMenu>&amp;Помощь</helpMenu>
 	<newToolStripMenuItem>&amp;Новый проект</newToolStripMenuItem>
 	<newProjectToolStripMenuItem>&amp;Менеджер проектов</newProjectToolStripMenuItem>
+	<saveToolStripMenuItem>Сохранить</saveToolStripMenuItem>
+	<saveAsToolStripMenuItem>Сохранить как</saveAsToolStripMenuItem>
+	<closeToolStripMenuItem>Закрыть</closeToolStripMenuItem>
+	<exitToolStripMenuItem>Выход</exitToolStripMenuItem>
+	<optionsToolStripMenuItem>Настройки</optionsToolStripMenuItem>
+	<pluginsToolStripMenuItem>Модули</pluginsToolStripMenuItem>
+	<languageToolStripMenuItem>Язык</languageToolStripMenuItem>
+	<usersToolStripMenuItem>Пользователи</usersToolStripMenuItem>
+	<classfierToolStripMenuItem>Классификатор</classfierToolStripMenuItem>
 </MainForm>
 <Login name="Вход в систему">
 	<labelLogin>Имя пользователя:</labelLogin>
