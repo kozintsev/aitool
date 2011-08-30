@@ -12,6 +12,8 @@ namespace AiToolGui
         {
             
         }
+        public int NodeID { get; set; }
+        public int ParentNodeID { get; set; }
         public string VarName{ get; set; }
         public string VarMax { get; set; }
         private string description;

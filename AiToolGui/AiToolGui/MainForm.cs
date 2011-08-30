@@ -33,9 +33,33 @@ namespace AiToolGui
             cdb.CreateConnectDataBase();
             StatusUserLabel.Text = "";
             StatusProjectLabel.Text = "";
-            
+            string lang = sett.GetLanguage();
+            string [] langlist = sett.GetLanguagesList();
+            string tmp;
+            foreach (string lng in langlist)
+            {
+                tmp = Path.GetFileNameWithoutExtension(lng);
+                ToolStripMenuItem lngToolStripMenuItem = new ToolStripMenuItem();
+                lngToolStripMenuItem.Tag = lng;
+                lngToolStripMenuItem.Text = tmp;
+                lngToolStripMenuItem.Click += this.MyMenuLngItemClick;
+                if (lang == tmp)
+                    lngToolStripMenuItem.Checked = true;
+                this.languageToolStripMenuItem.DropDownItems.Add(lngToolStripMenuItem);
+            }
         }
-            
+        private void MyMenuLngItemClick(object sender, EventArgs e)
+        {
+            string lng = ((ToolStripMenuItem)sender).Tag.ToString();
+            foreach (ToolStripMenuItem Item in this.languageToolStripMenuItem.DropDownItems)
+            {
+                Item.Checked = false;
+                if (Item == (ToolStripMenuItem)sender)
+                    Item.Checked = true;
+            } 
+
+            MessageBox.Show(lng);
+        }
 
         private void myForm_Status(object sender, EventArgs e)
         {
@@ -184,33 +208,6 @@ namespace AiToolGui
 
         private void AITool_Load(object sender, EventArgs e)
         {
-
-        }
-        
-        void RussiaToolStripMenuItemClick(object sender, EventArgs e)
-        {
-        	englishToolStripMenuItem.Checked = false;
-        	russiaToolStripMenuItem.Checked = true;
-            defaultToolStripMenuItem.Checked = false;
-         
-
-        	
-        }
-        
-        void EnglishToolStripMenuItemClick(object sender, EventArgs e)
-        {
-        	englishToolStripMenuItem.Checked = true;
-        	russiaToolStripMenuItem.Checked = false;
-            defaultToolStripMenuItem.Checked = false;
-            
-            
-        }
-
-        private void defaultToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            englishToolStripMenuItem.Checked = false;
-            russiaToolStripMenuItem.Checked = false;
-            defaultToolStripMenuItem.Checked = true;
 
         }
 

@@ -18,6 +18,8 @@ namespace AiToolGui
         private ConnectDataBase cdb;
         private bool newscop = true , save = false;
         private int id = -1;
+        private int nodeid = 0;
+        private int parentnodeid = 0;
         public CreateSpecification()
         {
             newscop = true;
@@ -254,8 +256,15 @@ namespace AiToolGui
             }
             TreeNode selnode;
             selnode = treeParam.SelectedNode;
+            NodeTechParam selparam = new NodeTechParam();
+            selparam = selnode.Tag as NodeTechParam;
+             
             TreeNode node = new TreeNode();
             NodeTechParam nodparam = new NodeTechParam();
+            nodeid++;
+            nodparam.NodeID = nodeid;
+            if (selparam != null)
+                nodparam.ParentNodeID = selparam.NodeID;
             nodparam.Description = textBoxtext.Text;
             nodparam.VarName = textVarName.Text;
             nodparam.VarMax = textVarMax.Text;
@@ -302,13 +311,17 @@ namespace AiToolGui
                 }
             }
             TreeNode node = new TreeNode();
+            nodeid++;
             node.Text = AddText;
             NodeTechParam nodparam = new NodeTechParam();
+            nodparam.NodeID = nodeid;
+            nodparam.ParentNodeID = 0; // корневой элемент 
             nodparam.Description = textBoxtext.Text;
             nodparam.VarName = textVarName.Text;
             nodparam.VarMax = textVarMax.Text;
             node.Tag = nodparam;
             treeParam.Nodes.Add(node);
+            
             AddNodeText.Text = "";
             textBoxtext.Text = "";
             textVarName.Text = "";
