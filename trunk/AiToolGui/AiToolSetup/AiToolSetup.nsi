@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "AiTool.NET"
-!define PRODUCT_VERSION "1.0.0.156"
+!define PRODUCT_VERSION "1.0.r191 "
 !define PRODUCT_PUBLISHER "AiTool.NET Team"
 !define PRODUCT_WEB_SITE "http://code.google.com/p/aitool/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\AiToolGui.exe"
@@ -169,14 +169,19 @@ Section Uninstall
   Delete "$INSTDIR\UMD.HCIL.Piccolo.dll"
   Delete "$INSTDIR\UMD.HCIL.Piccolo.xml"
   Delete "$INSTDIR\UMD.HCIL.PiccoloX.dll"  
+  Delete "$INSTDIR\readme.rtf"
   Delete "$INSTDIR\Base\aitool.mdb" 
-	
+
+  Delete "$INSTDIR\Languages\English.xml" 
+  Delete "$INSTDIR\Languages\Russia.xml" 
+  
   Delete "$SMPROGRAMS\AiTool.NET\Uninstall.lnk"
   Delete "$DESKTOP\AiTool.NET.lnk"
   Delete "$SMPROGRAMS\AiTool.NET\AiToolGui.lnk"
 
   RMDir "$SMPROGRAMS\AiTool.NET"
   RMDir "$INSTDIR\Base"
+  RMDir "$INSTDIR\Languages"
   RMDir "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
