@@ -129,7 +129,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Components\PCacheCanvas.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\PDefaultScrollDirector.cs">
       <SubType>Code</SubType>

@@ -54,11 +54,11 @@ namespace AiToolGui
             OleDbCommand command = cdb.ConnLocal.CreateCommand();
             if (!curuser)
             {
-                command.CommandText = "SELECT ProjectID, ProjectNumber,  ProjectName FROM Projects";
+                command.CommandText = @"SELECT ProjectID, ProjectNumber,  ProjectName FROM Projects";
             }
             else
             {
-                command.CommandText = "SELECT ProjectID, ProjectNumber,  ProjectName FROM Projects WHERE user_id = @userid";
+                command.CommandText = @"SELECT ProjectID, ProjectNumber,  ProjectName FROM Projects WHERE user_id = @userid";
                 command.Parameters.Add("@userid", OleDbType.Decimal).Value = UserParam.UserId;
             }
             OleDbDataReader reader = command.ExecuteReader();
