@@ -348,6 +348,7 @@ namespace AiToolGui
             TreeNode node;
             node = treeParam.SelectedNode;
             if (node == null) return;
+            if (node.Nodes.Count >= 1) return;
             node.Remove();
 
         }
