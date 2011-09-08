@@ -134,7 +134,7 @@ namespace KMintegrator
                 		kompas.ksError("Текущий документ должен быть сборкой");
                         return;
                     }
-
+                    //doc3D.GetPart
                     ksPart part = (ksPart)doc3D.GetPart(-1);	// Выбор компонента: -1 главный(сборка), 0 первый(деталь)
                     if (part != null)
                     {
@@ -708,7 +708,7 @@ namespace KMintegrator
         private void AddKompas_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Filter = "КОМПАС-3D Документы (*.m3d;*.a3d)|*.m3d;*.a3d";
+            OpenFileDialog.Filter = "КОМПАС-3D Сборки (*.a3d)|*.a3d";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 Save = false;
