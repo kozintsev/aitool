@@ -98,13 +98,20 @@ namespace KMintegrator
             }
             return err;
         }
-        private void OpenFileKompas(string filename)
+        private bool OpenFileKompas(string filename)
         {
+            bool fileopen = false;
             if (kompas != null)
             {
                     doc3D = (ksDocument3D)kompas.Document3D();
                     
-                    if (doc3D != null) doc3D.Open(filename, false);
+                    if (doc3D != null) fileopen = doc3D.Open(filename, false);
+                    if (!fileopen)
+                    {
+                        MessageBox.Show("Не могу открыть файл", "Ошибка",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
 
                     kompas.Visible = true;
 
@@ -116,7 +123,9 @@ namespace KMintegrator
             else
             {
                 MessageBox.Show(this, "Объект не захвачен", "Сообщение");
+                return false;
             }
+            return true;
         }
         private void KompasRefresh()
         {
@@ -173,7 +182,7 @@ namespace KMintegrator
             return MC;
             
         }
-        private void OpenMathCad(string Path, bool recal)
+        private bool OpenMathCad(string Path, bool recal)
         {
             if (MC != null)
             {
@@ -210,8 +219,9 @@ namespace KMintegrator
             else
             {
             	MessageBox.Show(this, "Объект не захвачен", "Сообщение");
+                return false;
             }
-            
+            return true;
         }
         // удалось распарсить файл SMathStudio версии 0.89
         // пока только чтение
@@ -306,7 +316,7 @@ namespace KMintegrator
             }
         }
 
-        private void MathCadParser(string MathPath, bool save)
+        private bool MathCadParser(string MathPath, bool save)
         {
             // Обновляем таблицу Маткада
             int i = 0;
@@ -316,7 +326,7 @@ namespace KMintegrator
             xd.Load(MathPath);
             }
             catch{
-            	return;
+            	return false;
             }
             XmlNodeList xnl = xd.DocumentElement.ChildNodes;
             XmlNode ml_id, ml_real;
@@ -370,7 +380,9 @@ namespace KMintegrator
             {
                 MessageBox.Show("Не могу сохранить! Возможно файл открыт только для чтения!", "Ошибка",
                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
+            return true;
         } // end MathCadParse
         
         private void Clear_All()
@@ -717,7 +729,8 @@ namespace KMintegrator
             	KompasPath.Text = OpenFileDialog.FileName;
                 LastPathKompas = KompasPath.Text;
                 // Открываем файл Компас-3D
-                OpenFileKompas(LastPathKompas);
+                if (!OpenFileKompas(LastPathKompas))
+                    return;
                 KompasRefresh();
                 AddMathCadCombo();
                 AddKompasCombo();
@@ -825,6 +838,12 @@ namespace KMintegrator
             Save = false;
             if (LastMathCadPath == "")
                 return;
+            if (Path.GetExtension(LastMathCadPath) != ".xmcd")
+            {
+                MessageBox.Show("Пересчёт возможен только для файлов MathCAD", "Сообщение",
+                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return; // для не маткад файла пересчёт не возможен
+            }
             // Заносим значения переменных маткада из таблицы в файл
             if (TableMathCad.RowCount == 0)
             {
@@ -832,17 +851,19 @@ namespace KMintegrator
                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            MathCadParser(LastMathCadPath, true);
+            if (!MathCadParser(LastMathCadPath, true))
+                return;
             // Инициализация маткада выполняется если маткад еще не запущен
             // Это функциия возвражает значение
 			if (InitMathCad() == null) return;
 
             // Открываем файл маткада, пересчитываем, заносим в таблицу вычисленные, закрываем
-            OpenMathCad(LastMathCadPath, true);
+            if (!OpenMathCad(LastMathCadPath, true))
+                return;
 
             // Считываем значение из файла маткада в таблицу
-            MathCadParser(LastMathCadPath, true);
-            MathCadParser(LastMathCadPath, false);
+            if (!MathCadParser(LastMathCadPath, true)) return;
+            if (!MathCadParser(LastMathCadPath, false)) return;
 
             AddKompasCombo();
             // Просто открываем файл маткада
@@ -899,9 +920,11 @@ namespace KMintegrator
                 // Активируем Компас-3D
  				if (!InitKompas()) return;
 				// Открываем файл Компас-3D
-				OpenFileKompas(LastPathKompas);
+				if (!OpenFileKompas(LastPathKompas))
+                    return;
 				KompasRefresh();
- 				MathCadParser(LastMathCadPath, false);
+ 				if (!MathCadParser(LastMathCadPath, false))
+                    return;
  				AddMathCadCombo();
  				AddKompasCombo();
                 Save = true;
@@ -970,45 +993,40 @@ namespace KMintegrator
 
         private void EndEdit_TableKompas3D(object sender, DataGridViewCellEventArgs e)
         {
-            try
+            object obj;
+            int i;
+
+            if (e.ColumnIndex == 3)
             {
-                if (e.ColumnIndex == 3)
-                    this.TableKompas3D.Rows[e.RowIndex].Cells[1].Value =
-                        this.TableMathCad.Rows[MathCadName_ComboBox.Items.IndexOf(
-                            this.TableKompas3D.Rows[e.RowIndex].Cells[3].Value) - 1].Cells[1].Value;
+                 obj = this.TableKompas3D.Rows[e.RowIndex].Cells[3].Value;
+                 if (obj == null)
+                     return;
+                 i = MathCadName_ComboBox.Items.IndexOf(obj) - 1;
+                 if (i == -1)
+                     return;
+                 this.TableKompas3D.Rows[e.RowIndex].Cells[1].Value =
+                     this.TableMathCad.Rows[i].Cells[1].Value;
             }
-            catch
-            {
-                MessageBox.Show("Error");
-            	return;
-            }
-            finally
-            {
                 this.TableKompas3D.Update();
-            }
         }
         
         void TableMathCadCellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {      	
-        	try
+        {
+            object obj;
+            int i;
+            if (e.ColumnIndex == 5)
             {
-        	if (e.ColumnIndex == 5)
-                this.TableMathCad.Rows[e.RowIndex].Cells[1].Value =
-                    this.TableKompas3D.Rows[KompasName_ComboBox.Items.IndexOf(
-                        this.TableMathCad.Rows[e.RowIndex].Cells[5].Value) - 1].Cells[1].Value;
-            }
-            catch
-            {
-            	MessageBox.Show("Error");
-            	return;
-            }
-            finally
-            {
-            	this.TableMathCad.Update();
-            }
+                 obj = this.TableMathCad.Rows[e.RowIndex].Cells[5].Value;
+                 if (obj == null)
+                      return;
+                 i = KompasName_ComboBox.Items.IndexOf(obj) - 1;
+                 if (i == -1)
+                     return;
+                 this.TableMathCad.Rows[e.RowIndex].Cells[1].Value =
+                     this.TableKompas3D.Rows[i].Cells[1].Value;
+            }          
+            this.TableMathCad.Update();
         }
-        
-        
-
+       
     }
 }
