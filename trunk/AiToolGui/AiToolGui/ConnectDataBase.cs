@@ -1,6 +1,6 @@
 ﻿/*
  * Created by SharpDevelop.
- * User: Oleg
+ * User: Oleg V. Kozintsev
  * Date: 13.03.2011
  * Time: 13:49
  * 
@@ -130,6 +130,10 @@ namespace AiToolGui
                 UserParam.Rolename = reader["role"].ToString().TrimEnd();
             }
             reader.Close();
+        }
+        public bool EmpfyDataBase()// проверка на пустую БД пока оставлю не тронутым тут
+        {
+            return true;
         }
         public bool Authorization(string login, string pwd)
         {

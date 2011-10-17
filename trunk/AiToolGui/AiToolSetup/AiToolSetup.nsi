@@ -30,7 +30,7 @@ SetCompressor lzma
 ; License page
 !insertmacro MUI_PAGE_LICENSE "readme.rtf"
 ; Components page
-;!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_COMPONENTS
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
 ; Instfiles page
@@ -89,12 +89,13 @@ getdotnetdir_err:
 FunctionEnd
 
 Section "Program Files" SEC01
+  SectionIn 1 2 3 RO ; секция только чтения
   	Push "v2.0"
 	Call GetDotNetDir
 	Pop $R0 ; .net framework v2.0 installation directory
 	StrCmpS "" $R0 err_dot_net_not_found
   SetOutPath "$INSTDIR"
-  SetOverwrite ifnewer
+  SetOverwrite ifnewer ; перезаписывать если новая версия
   File "d:\svn\aitool\AiToolGui\AiToolGui\bin\AiToolGui.exe"
   CreateDirectory "$SMPROGRAMS\AiTool.NET"
   CreateShortCut "$SMPROGRAMS\AiTool.NET\AiToolGui.lnk" "$INSTDIR\AiToolGui.exe"
@@ -121,13 +122,19 @@ Section "Program Files" SEC01
 finish:
 SectionEnd
 
-;Section "Media Player Classic" SEC02
-;  SetOverwrite ifnewer
-;  File "mpc-hc.ini"
-;  File "mpc-hc.exe"
-;  File "d3dx9_41.dll"
-;  File "mpcresources.ru.dll"
-;SectionEnd
+Section "Demo Base" SEC02
+  SetOverwrite on ; перезаписывть всегда
+  SetOutPath "$INSTDIR" ; установить в папку установки
+  File "d:\svn\aitool\AiToolGui\AiToolGui\bin\options.xml" ; перезаписать файл с Демо базой
+  SetOutPath "$INSTDIR\Base" ; установка в каталог Base
+  File "d:\svn\aitool\Base\схема данных.xps" ; файл с демо базой
+SectionEnd
+
+Section "Sample" SEC03
+  SetOverwrite on ; перезаписывть всегда
+  SetOutPath "$INSTDIR\Sample" ; установка в каталог Base
+  File "d:\svn\aitool\AiToolGui\AiToolGui\bin\Sample\Антенна поверхностных волн.xml" ; пример ТЗ
+SectionEnd
 
 Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"

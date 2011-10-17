@@ -86,6 +86,7 @@
             this.toolStripUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusUserLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.StatusEvent = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -442,7 +443,8 @@
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusProjectLabel,
             this.toolStripUser,
-            this.StatusUserLabel});
+            this.StatusUserLabel,
+            this.StatusEvent});
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Name = "statusStrip";
             // 
@@ -460,6 +462,11 @@
             // 
             this.StatusUserLabel.Name = "StatusUserLabel";
             resources.ApplyResources(this.StatusUserLabel, "StatusUserLabel");
+            // 
+            // StatusEvent
+            // 
+            this.StatusEvent.Name = "StatusEvent";
+            resources.ApplyResources(this.StatusEvent, "StatusEvent");
             // 
             // AITool
             // 
@@ -544,6 +551,7 @@
         private System.Windows.Forms.ToolStripMenuItem dataBase;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem classfierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel StatusEvent;
     }
 }
 
