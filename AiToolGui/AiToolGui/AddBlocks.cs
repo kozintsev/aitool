@@ -22,6 +22,10 @@ namespace AiToolGui
         {
             return BlockName.Text;
         }
+        public string GetBlockDesc()
+        {
+            return Comment.Text;
+        }
 
         private void Ok_Click(object sender, EventArgs e)
         {

@@ -19,7 +19,7 @@ namespace AiToolGui
         private bool newscop = true , save = false;
         private int id = -1;
         private int nodeid = 0;
-        private int parentnodeid = 0;
+        //private int parentnodeid = 0;
         public CreateSpecification()
         {
             newscop = true;

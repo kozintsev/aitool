@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Author Oleg V. Kozintsev
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,6 +35,7 @@ namespace AiToolGui
             cdb.CreateConnectDataBase();
             StatusUserLabel.Text = "";
             StatusProjectLabel.Text = "";
+            StatusEvent.Text = "";
             string lang = sett.GetLanguage();
             string [] langlist = sett.GetLanguagesList();
             string tmp;
@@ -100,6 +102,10 @@ namespace AiToolGui
             pv = new ProjectViewer();
             pv.MdiParent = this;
             pv.eStatus += new EventHandler(pv_eStatus);
+            pv.eStatusEvent += new EventHandler(pv_eStatusEvent);
+            // нужно добавить ещё одно событие
+            // для обновления StatusEvent.Text в котором отображается 
+            // информация 
             pv.Show();
         }
 
@@ -282,8 +288,15 @@ namespace AiToolGui
             pv = new ProjectViewer();
             pv.MdiParent = this;
             pv.eStatus += new EventHandler(pv_eStatus);
+            pv.eStatusEvent += new EventHandler(pv_eStatusEvent);
             pv.Show();
             //throw new NotImplementedException();
+        }
+
+        void pv_eStatusEvent(object sender, EventArgs e)
+        {
+            StatusEvent.Text = "";
+            StatusEvent.Text = sender.ToString();
         }
 
         void pm_MyProjectChanged(ProjectChangedEvent arg)
@@ -292,6 +305,7 @@ namespace AiToolGui
             pv = new ProjectViewer(arg.ProjectID, arg.ProjectNum, arg.ProjectName);
             pv.MdiParent = this;
             pv.eStatus += new EventHandler(pv_eStatus);
+            pv.eStatusEvent += new EventHandler(pv_eStatusEvent);
             pv.Show();
             //arg.ProjectID
             //throw new NotImplementedException();

@@ -20,7 +20,7 @@ namespace AiToolGui
         private string projectNum = String.Empty;
         private int projectID;
         public event EventHandler eStatus;
-
+        public event EventHandler eStatusEvent;
         private ConnectDataBase cdb;
 
         public ProjectViewer()
@@ -45,8 +45,18 @@ namespace AiToolGui
             //Controls.Add(graphEditor);
             graphEditor.Bounds = this.ClientRectangle;
             graphEditor.Anchor = graphEditor.Anchor | AnchorStyles.Right | AnchorStyles.Bottom;
+            // нужно добавить спец события вставка блока и.т.д
+            graphEditor.eXY += new EventHandler(graphEditor_eXY);
             cdb = new ConnectDataBase();
             cdb.CreateConnectDataBase();
+        }
+
+        void graphEditor_eXY(object sender, EventArgs e)
+        {
+            string s = sender as string;
+            if (s != null)
+                OnStatusEvent(s);
+            //throw new NotImplementedException();
         }
         protected virtual void OnStatus(string s)
         {
@@ -54,7 +64,12 @@ namespace AiToolGui
             if (eStatus != null)
                 eStatus(Obj, EventArgs.Empty);
         }
-      
+        protected virtual void OnStatusEvent(string s) // вызываем эту функцию  если хотим изменить 
+        {                                              // статус 
+            object Obj = s;
+            if (eStatusEvent != null)
+                eStatusEvent(Obj, EventArgs.Empty);
+        }
 
         private void toolStripScope_Click(object sender, EventArgs e)
         {
@@ -78,23 +93,24 @@ namespace AiToolGui
             //throw new NotImplementedException();
         }
 
-        private void toolStripBlock_Click(object sender, EventArgs e)
+        private void toolStripBlock_Click(object sender, EventArgs e) // добавляем блок
         {
             AddBlocks AddBlock = new AddBlocks();
-            //AddBlocks.MdiParent = this.ParentForm;
             AddBlock.ShowDialog();
-            string name = AddBlock.GetBlockName();       
+            string name = AddBlock.GetBlockName();
+            string desc = AddBlock.GetBlockDesc();
             if (name == "") return;
-            graphEditor.AddBlock(name);
+            graphEditor.AddEntity(2, name, desc);
+            //graphEditor.AddBlock(name, desc, 0, 0, 150, 100);
             AddBlock.Close();
         }
 
         private void toolStripEllipse_Click(object sender, EventArgs e)
         {
-            graphEditor.AddEllipse();
+            graphEditor.AddEntity(1, "start", "");
         }
 
-        private void toolStripeEdge_Click(object sender, EventArgs e)
+        private void toolStripeEdge_Click(object sender, EventArgs e) 
         {
             graphEditor.AddEdge();
         }
