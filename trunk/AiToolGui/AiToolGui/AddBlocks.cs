@@ -11,12 +11,23 @@ namespace AiToolGui
 {
     public partial class AddBlocks : Form
     {
+        private ConnectDataBase cdb;
+
         public AddBlocks()
         {
             InitializeComponent();
+            bool conn = false;
+            cdb = new ConnectDataBase();
+            conn = cdb.CreateConnectDataBase(); // подключились или нет?
+            if (!conn) return;
+            List<CProjectProcedures> list = cdb.GetProjectProcedureList();
+            cdb.CloseConnectDataBaseLocal();
+            for (int i = 0; i < list.Count; i++)
+            {
+                comboBoxType.Items.Add(list[i].ProcedurName);
+            }
+            //comboBoxType список проектных процедур
         }
-
-        public string Strrr;
 
         public string GetBlockName()
         {
