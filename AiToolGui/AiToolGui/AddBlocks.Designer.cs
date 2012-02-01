@@ -33,13 +33,15 @@
             this.BlockName = new System.Windows.Forms.TextBox();
             this.Comment = new System.Windows.Forms.TextBox();
             this.LableName = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelCom = new System.Windows.Forms.Label();
+            this.comboBoxType = new System.Windows.Forms.ComboBox();
+            this.labelType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnOk
             // 
             this.BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnOk.Location = new System.Drawing.Point(205, 155);
+            this.BtnOk.Location = new System.Drawing.Point(205, 185);
             this.BtnOk.Name = "BtnOk";
             this.BtnOk.Size = new System.Drawing.Size(75, 23);
             this.BtnOk.TabIndex = 0;
@@ -50,7 +52,7 @@
             // BtnClose
             // 
             this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClose.Location = new System.Drawing.Point(286, 155);
+            this.BtnClose.Location = new System.Drawing.Point(286, 185);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(75, 23);
             this.BtnClose.TabIndex = 1;
@@ -84,21 +86,40 @@
             this.LableName.TabIndex = 4;
             this.LableName.Text = "Name:";
             // 
-            // label1
+            // labelCom
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Comment:";
+            this.labelCom.AutoSize = true;
+            this.labelCom.Location = new System.Drawing.Point(13, 52);
+            this.labelCom.Name = "labelCom";
+            this.labelCom.Size = new System.Drawing.Size(54, 13);
+            this.labelCom.TabIndex = 5;
+            this.labelCom.Text = "Comment:";
+            // 
+            // comboBoxType
+            // 
+            this.comboBoxType.FormattingEnabled = true;
+            this.comboBoxType.Location = new System.Drawing.Point(79, 149);
+            this.comboBoxType.Name = "comboBoxType";
+            this.comboBoxType.Size = new System.Drawing.Size(276, 21);
+            this.comboBoxType.TabIndex = 6;
+            // 
+            // labelType
+            // 
+            this.labelType.AutoSize = true;
+            this.labelType.Location = new System.Drawing.Point(16, 156);
+            this.labelType.Name = "labelType";
+            this.labelType.Size = new System.Drawing.Size(31, 13);
+            this.labelType.TabIndex = 7;
+            this.labelType.Text = "Type";
             // 
             // AddBlocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 190);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(367, 220);
+            this.Controls.Add(this.labelType);
+            this.Controls.Add(this.comboBoxType);
+            this.Controls.Add(this.labelCom);
             this.Controls.Add(this.LableName);
             this.Controls.Add(this.Comment);
             this.Controls.Add(this.BlockName);
@@ -118,6 +139,8 @@
         private System.Windows.Forms.TextBox BlockName;
         private System.Windows.Forms.TextBox Comment;
         private System.Windows.Forms.Label LableName;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelCom;
+        private System.Windows.Forms.ComboBox comboBoxType;
+        private System.Windows.Forms.Label labelType;
     }
 }

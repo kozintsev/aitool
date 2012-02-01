@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Data.OleDb;// пространство имён для подключение к БД 
+using System.Collections;
 using System.Collections.Generic;
 
 namespace AiToolGui
@@ -161,5 +162,22 @@ namespace AiToolGui
             return true;
         }
 
+        public List<CProjectProcedures> GetProjectProcedureList()
+        {
+            List<CProjectProcedures> list = new List<CProjectProcedures>();
+            CProjectProcedures ProjectProcedures;
+            OleDbCommand command = connLocal.CreateCommand();
+            command.CommandText = "SELECT * FROM ProjectProcedure";
+            OleDbDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                ProjectProcedures = new CProjectProcedures();
+                ProjectProcedures.idProjectProcedure = reader.GetInt32(0);
+                ProjectProcedures.ProcedurName = reader["ProcedurName"].ToString().TrimEnd();
+                ProjectProcedures.ProcedurDescription = reader["ProcedurDescription"].ToString().TrimEnd();
+                list.Add(ProjectProcedures);
+            }
+            return list;
+        }
 	}
 }
