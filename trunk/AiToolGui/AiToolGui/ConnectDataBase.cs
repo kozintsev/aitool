@@ -124,7 +124,7 @@ namespace AiToolGui
         {
             string str = String.Empty;
             OleDbCommand command = connLocal.CreateCommand();
-            command.CommandText = "SELECT * FROM Roles WHERE id_role=" + UserParam.Role.ToString();
+            command.CommandText = "SELECT * FROM Roles WHERE RoleID=" + UserParam.Role.ToString();
             OleDbDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -141,7 +141,7 @@ namespace AiToolGui
             object scal;
             int userCount = 0;
             OleDbCommand command = connLocal.CreateCommand();
-            command.CommandText = "SELECT id_user, fullname, id_role FROM Users WHERE username=@username AND Password=@password";
+            command.CommandText = "SELECT UserID, fullname, RoleID FROM Users WHERE username=@username AND Password=@password";
             command.Parameters.Add("@username", OleDbType.VarChar).Value = login;
             command.Parameters.Add("@password", OleDbType.VarChar).Value = pwd;
             scal = command.ExecuteScalar();

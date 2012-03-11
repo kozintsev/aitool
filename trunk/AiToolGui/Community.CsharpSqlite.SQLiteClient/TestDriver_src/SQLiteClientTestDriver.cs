@@ -13,7 +13,7 @@ namespace SQLiteClientTests
 {
   public class SQLiteClientTestDriver
   {
-    StringBuilder TempDirectory = new StringBuilder( "B:/TEMP/" );
+    StringBuilder TempDirectory = new StringBuilder( "C:/TEMP/" );
 
     public void Test1()
     {
@@ -907,7 +907,7 @@ namespace SQLiteClientTests
     {
       SQLiteClientTestDriver tests = new SQLiteClientTestDriver();
 
-      int Test = 124;
+      int Test = 1;
       switch ( Test )
       {
         case 1:
