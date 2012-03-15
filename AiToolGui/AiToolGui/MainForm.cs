@@ -240,8 +240,12 @@ namespace AiToolGui
 
         private void AITool_Shown(object sender, EventArgs e) // событие возникает при первом отображении формы
         {
-            if (cdb.Authorization(Environment.UserDomainName + "\\" + Environment.UserName))
+            string Login = Environment.UserDomainName + "\\" + Environment.UserName;
+            if (cdb.Authorization(Login))
             {
+                sett.SetLogin(Login); // если всё окей сохраняем имя пользователя
+                cdb.GetRoleName();
+                cdb.CloseConnectDataBaseLocal(); // закрыть соединение с базой данных
                 UserParam.StatusText = String.Format(" Имя пользователя:{0}, Полное имя: {1} , Роль: {2}, База данных подключена",
                     UserParam.Username, UserParam.Fullname, UserParam.Rolename);
                 StatusUserLabel.Text = "";
