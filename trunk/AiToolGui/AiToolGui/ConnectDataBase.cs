@@ -54,7 +54,7 @@ namespace AiToolGui
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + FileBD;
+            ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + FileBD;
             try
             {
                 connLocal = new OleDbConnection();
@@ -156,6 +156,29 @@ namespace AiToolGui
             UserParam.UserId = reader.GetInt32(0);
             UserParam.Username = login; // reader["username"].ToString().TrimEnd();
             UserParam.Password = pwd; // reader["password"].ToString().TrimEnd();
+            UserParam.Fullname = reader["fullname"].ToString().TrimEnd();
+            UserParam.Role = reader.GetInt32(2);
+            reader.Close();
+            return true;
+        }
+
+        public bool Authorization(string login)
+        {
+            object scal;
+            int userCount = 0;
+            OleDbCommand command = connLocal.CreateCommand();
+            command.CommandText = "SELECT UserID, fullname, RoleID FROM Users WHERE username=@username";
+            command.Parameters.Add("@username", OleDbType.VarChar).Value = login;
+            scal = command.ExecuteScalar();
+            if (scal != null)
+                userCount = (int)scal;
+            else
+                return false;
+            OleDbDataReader reader = command.ExecuteReader();
+            reader.Read();
+            UserParam.UserId = reader.GetInt32(0);
+            UserParam.Username = login; // reader["username"].ToString().TrimEnd();
+            UserParam.Password = ""; // reader["password"].ToString().TrimEnd();
             UserParam.Fullname = reader["fullname"].ToString().TrimEnd();
             UserParam.Role = reader.GetInt32(2);
             reader.Close();

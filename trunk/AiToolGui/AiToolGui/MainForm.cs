@@ -240,11 +240,21 @@ namespace AiToolGui
 
         private void AITool_Shown(object sender, EventArgs e) // событие возникает при первом отображении формы
         {
-            Login FormLogin = new Login();
-            FormLogin.Status += new EventHandler(myForm_Status);
-            FormLogin.ShowDialog(this);
-            if (FormLogin.OpenProgram == false)
-                this.Close();
+            if (cdb.Authorization(Environment.UserDomainName + "\\" + Environment.UserName))
+            {
+                UserParam.StatusText = String.Format(" Имя пользователя:{0}, Полное имя: {1} , Роль: {2}, База данных подключена",
+                    UserParam.Username, UserParam.Fullname, UserParam.Rolename);
+                StatusUserLabel.Text = "";
+                toolStripUser.Text = UserParam.StatusText;
+            }
+            else
+            {
+                Login FormLogin = new Login();
+                FormLogin.Status += new EventHandler(myForm_Status);
+                FormLogin.ShowDialog(this);
+                if (FormLogin.OpenProgram == false)
+                    this.Close();
+            }
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
