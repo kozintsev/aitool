@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piccolo", "Piccolo\Piccolo.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiccoloX", "PiccoloX\PiccoloX.csproj", "{E4079B36-6A5D-42C2-8F20-6C0DD8780192}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community.CsharpSqlite", "Community.CsharpSqlite\Community.CsharpSqlite.csproj", "{F1653F20-D47D-4F29-8C55-3C835542AF5F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community.CsharpSqlite.SQLiteClient", "Community.CsharpSqlite.SQLiteClient\Community.CsharpSqlite.SQLiteClient.csproj", "{7BC68E61-C64C-488C-975F-1E2248383B80}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,30 +53,6 @@ Global
 		{E4079B36-6A5D-42C2-8F20-6C0DD8780192}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E4079B36-6A5D-42C2-8F20-6C0DD8780192}.Release|x86.ActiveCfg = Release|Any CPU
 		{E4079B36-6A5D-42C2-8F20-6C0DD8780192}.Release|x86.Build.0 = Release|x86
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|x86.ActiveCfg = Debug|x86
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|x86.Build.0 = Debug|x86
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Release|Mixed Platforms.Build.0 = Release|x86
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Release|x86.ActiveCfg = Release|x86
-		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Release|x86.Build.0 = Release|x86
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Debug|x86.ActiveCfg = Debug|x86
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Debug|x86.Build.0 = Debug|x86
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Release|Mixed Platforms.Build.0 = Release|x86
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Release|x86.ActiveCfg = Release|x86
-		{7BC68E61-C64C-488C-975F-1E2248383B80}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

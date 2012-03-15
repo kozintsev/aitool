@@ -141,7 +141,7 @@ namespace AiToolGui
             object scal;
             int userCount = 0;
             OleDbCommand command = connLocal.CreateCommand();
-            command.CommandText = "SELECT UserID, fullname, RoleID FROM Users WHERE username=@username AND Password=@password";
+            command.CommandText = "SELECT UserID, fullname, RoleID FROM Users WHERE username=@username AND Password=@password AND windows = False";
             command.Parameters.Add("@username", OleDbType.VarChar).Value = login;
             command.Parameters.Add("@password", OleDbType.VarChar).Value = pwd;
             scal = command.ExecuteScalar();
@@ -167,7 +167,7 @@ namespace AiToolGui
             object scal;
             int userCount = 0;
             OleDbCommand command = connLocal.CreateCommand();
-            command.CommandText = "SELECT UserID, fullname, RoleID FROM Users WHERE username=@username";
+            command.CommandText = "SELECT UserID, fullname, RoleID FROM Users WHERE username=@username AND windows = True";
             command.Parameters.Add("@username", OleDbType.VarChar).Value = login;
             scal = command.ExecuteScalar();
             if (scal != null)
