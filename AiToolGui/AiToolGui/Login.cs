@@ -16,6 +16,8 @@ namespace AiToolGui
         private ConnectDataBase cdb;
         private bool conn = false;
         public event EventHandler Status;
+
+
         public Login()
         {
             InitializeComponent();
@@ -36,6 +38,7 @@ namespace AiToolGui
                 textBoxPwd.Focus();
                 textBoxPwd.Select();
             }
+            
         }
 
         private bool openProgram = false;
