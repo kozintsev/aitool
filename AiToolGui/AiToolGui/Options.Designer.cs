@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.DBPath = new System.Windows.Forms.TextBox();
             this.AddAccess = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.LocalBaseType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.CloseForm = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
@@ -56,8 +56,8 @@
             // 
             // DBPath
             // 
-            this.DBPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DBPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DBPath.Location = new System.Drawing.Point(103, 38);
             this.DBPath.Name = "DBPath";
             this.DBPath.ReadOnly = true;
@@ -75,16 +75,19 @@
             this.AddAccess.UseVisualStyleBackColor = true;
             this.AddAccess.Click += new System.EventHandler(this.AddAccess_Click);
             // 
-            // comboBox1
+            // LocalBaseType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Access"});
-            this.comboBox1.Location = new System.Drawing.Point(103, 13);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
-            this.comboBox1.Text = "Access";
+            this.LocalBaseType.FormattingEnabled = true;
+            this.LocalBaseType.Items.AddRange(new object[] {
+            "Access 2003",
+            "Access 2007",
+            "SQLite"});
+            this.LocalBaseType.Location = new System.Drawing.Point(103, 13);
+            this.LocalBaseType.Name = "LocalBaseType";
+            this.LocalBaseType.Size = new System.Drawing.Size(121, 21);
+            this.LocalBaseType.TabIndex = 3;
+            this.LocalBaseType.Text = "Access 2003";
+            this.LocalBaseType.SelectedIndexChanged += new System.EventHandler(this.LocalBaseType_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -200,7 +203,7 @@
             this.Controls.Add(this.Save);
             this.Controls.Add(this.CloseForm);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.LocalBaseType);
             this.Controls.Add(this.AddAccess);
             this.Controls.Add(this.DBPath);
             this.Controls.Add(this.label1);
@@ -218,7 +221,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox DBPath;
         private System.Windows.Forms.Button AddAccess;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox LocalBaseType;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button CloseForm;
         private System.Windows.Forms.Button Save;

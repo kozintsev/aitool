@@ -46,7 +46,18 @@ namespace AiToolGui
 
 		public bool CreateConnectDataBase()
 		{
-            string ConnectionString;
+            string ConnectionString, Provider = String.Empty;
+            string BaseType = sett.GetDataBaseType();
+            switch (BaseType)
+            {
+                case "Access 2007":
+                    Provider = "Microsoft.ACE.OLEDB.12.0";
+                    break;
+                case "Access 2003":
+                    Provider = "Microsoft.Jet.OLEDB.4.0";
+                    break;
+
+            }
             string FileBD = sett.GetDataBaseLocal();
             if (!File.Exists(FileBD))
             {
@@ -54,7 +65,7 @@ namespace AiToolGui
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + FileBD;
+            ConnectionString = @"Provider=" + Provider + ";" + "Data Source=" + FileBD;
             try
             {
                 connLocal = new OleDbConnection();
