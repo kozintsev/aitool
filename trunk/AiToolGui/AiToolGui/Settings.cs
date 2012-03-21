@@ -68,6 +68,14 @@ namespace AiToolGui
                     ParsingSetting("pathbd", pathdb, true);
             }
         }
+        public string GetDataBaseType()
+        {
+            return ParsingSetting("dblocal", "", false);
+        }
+        public void SetDataBaseType(string typedblocal)
+        {
+                    ParsingSetting("dblocal", typedblocal, true);           
+        }
 
         public string GetLogin()
         {
@@ -79,6 +87,7 @@ namespace AiToolGui
         {
             ParsingSetting("login", login, true);
         }
+
         private string ParsingLangFile(string lng, string nameform)
         {
             XmlDocument doc = new XmlDocument();

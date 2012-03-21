@@ -15,6 +15,7 @@ namespace AiToolGui
             InitializeComponent();
             sett = new Settings();
             DBPath.Text = sett.GetDataBaseLocal();
+            LocalBaseType.Text = sett.GetDataBaseType();
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -28,6 +29,7 @@ namespace AiToolGui
             if (File.Exists(DBPath.Text)) // если файл существует
             {
                 sett.SetDataBaseLocal(DBPath.Text);
+                sett.SetDataBaseType(LocalBaseType.Text);
             }
         }
 
@@ -39,12 +41,28 @@ namespace AiToolGui
         private void AddAccess_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Файлы Microsoft Access 2003 (*.mdb)|*.mdb";
-
+            switch (LocalBaseType.Text)
+            {
+                case "Access 2003":
+                    dlg.Filter = "Файлы Microsoft Access 2003 (*.mdb)|*.mdb";
+                    break;
+                case "Access 2007":
+                    dlg.Filter = "Файлы Microsoft Access 2007 (*.accdb)|*.accdb";
+                    break;
+                case "SQLite":
+                    dlg.Filter = "Файлы SQLite (*.db, *.sqlite)|*.db;*.sqlite";
+                    break;
+            }
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
 
             DBPath.Text = dlg.FileName;
+        }
+
+        private void LocalBaseType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Microsoft.Jet.OLEDB.4.0
+            //
         }
     }
 }
