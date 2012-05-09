@@ -1,0 +1,39 @@
+﻿<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+		<DirectoryRef Id="TARGETDIR">
+			<Directory Id="ProgramFilesFolder" Name="PFiles">
+				<Directory Id="INSTALLDIR" Name="AiTool.NET" ShortName="AiTool">
+					<Component Id="AiToolGuiExe" Guid="6892490D-9785-4E51-9267-C60866C64352" DiskId="1">
+						<File Id="AiToolGui.exe" Name="AiToolGui.exe" Source="..\AiToolGui\bin\AiToolGui.exe" KeyPath="yes" />
+						<File Id="bin.AiToolGui.exe.config" Name="AiToolGui.exe.config" Source="..\AiToolGui\bin\AiToolGui.exe.config" />
+						<File Id="AiToolGui.pdb" Name="AiToolGui.pdb" Source="..\AiToolGui\bin\AiToolGui.pdb" />
+						<File Id="bin.AiToolGui.vshost.exe" Name="AiToolGui.vshost.exe" Source="..\AiToolGui\bin\AiToolGui.vshost.exe" />
+						<File Id="bin.AiToolGui.vshost.exe.config" Name="AiToolGui.vshost.exe.config" Source="..\AiToolGui\bin\AiToolGui.vshost.exe.config" />
+						<File Id="bin.AiToolGui.vshost.exe.manifest" Name="AiToolGui.vshost.exe.manifest" Source="..\AiToolGui\bin\AiToolGui.vshost.exe.manifest" />
+						<File Id="bin.options.xml" Name="options.xml" Source="..\AiToolGui\bin\options.xml" />
+						<File Id="bin.UMD.HCIL.Piccolo.dll" Name="UMD.HCIL.Piccolo.dll" Source="..\AiToolGui\bin\UMD.HCIL.Piccolo.dll" />
+						<File Id="UMD.HCIL.Piccolo.pdb" Name="UMD.HCIL.Piccolo.pdb" Source="..\AiToolGui\bin\UMD.HCIL.Piccolo.pdb" />
+						<File Id="bin.UMD.HCIL.Piccolo.xml" Name="UMD.HCIL.Piccolo.xml" Source="..\AiToolGui\bin\UMD.HCIL.Piccolo.xml" />
+						<File Id="bin.UMD.HCIL.PiccoloX.dll" Name="UMD.HCIL.PiccoloX.dll" Source="..\AiToolGui\bin\UMD.HCIL.PiccoloX.dll" />
+						<File Id="UMD.HCIL.PiccoloX.pdb" Name="UMD.HCIL.PiccoloX.pdb" Source="..\AiToolGui\bin\UMD.HCIL.PiccoloX.pdb" />
+						<File Id="bin.UMD.HCIL.PiccoloX.xml" Name="UMD.HCIL.PiccoloX.xml" Source="..\AiToolGui\bin\UMD.HCIL.PiccoloX.xml" />
+					</Component>
+					<Directory Id="Base" Name="Base">
+						<Component Id="AitoolAccdb" Guid="8A44AA0A-CAA3-48BC-B02F-DEEDD19D9319" DiskId="1">
+							<File Id="aitool.accdb" Name="aitool.accdb" Source="..\AiToolGui\bin\Base\aitool.accdb" KeyPath="yes" />
+						</Component>
+					</Directory>
+					<Directory Id="Languages" Name="Languages">
+						<Component Id="EnglishXml" Guid="59845FF9-FEDF-407E-984A-9C9C0121EB16" DiskId="1">
+							<File Id="English.xml" Name="English.xml" Source="..\AiToolGui\bin\Languages\English.xml" KeyPath="yes" />
+						</Component>
+						<Component Id="RussiaXml" Guid="E615D750-21FD-4C84-8B53-5B5DC1108E0B" DiskId="1">
+							<File Id="Russia.xml" Name="Russia.xml" Source="..\AiToolGui\bin\Languages\Russia.xml" KeyPath="yes" />
+						</Component>
+					</Directory>
+				</Directory>
+			</Directory>
+		</DirectoryRef>
+	</Fragment>
+</Wix>
