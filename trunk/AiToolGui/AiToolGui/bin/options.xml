@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <setting>
-  <login>Oleg</login>
+  <login>ASCON\kov</login>
   <dblocal>Access 2007</dblocal>
   <pathbd>\Base\aitool.accdb</pathbd>
   <Language>Russia</Language>
