@@ -9,10 +9,13 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Net;
+using System.IO;
+
 
 using Microsoft.Office.Interop;
 using Microsoft.Office.Interop.Word;
 using Word = Microsoft.Office.Interop.Word;
+
 
 namespace WordParser
 {
@@ -47,9 +50,15 @@ namespace WordParser
 			this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
 			this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
 			this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            
-            string commandText = "SELECT word FROM Words"; 
-            string ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + pathapp + "\\word.mdb"; ;
+
+
+            //if (File.Exists(dbFilename))
+           // {
+            //}
+
+
+            string commandText = "SELECT word FROM Words";
+            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + pathapp + "\\words.accdb"; 
             wordslist = new List<string>();
 			try{
 			 conn = new OleDbConnection();
@@ -73,8 +82,8 @@ namespace WordParser
 
             
 			}
-			catch{
-				MessageBox.Show("Ошибка подключения к База данных", "Ошибка",
+			catch(Exception ex){
+				MessageBox.Show("Ошибка подключения к База данных: " + ex.Message, "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 				
 			}
@@ -98,8 +107,7 @@ namespace WordParser
                  //backgroundWorker.ReportProgress(i);
 
             //}
-            WordParsing();
-    
+            Parsing();
 
         }
 
@@ -132,13 +140,14 @@ namespace WordParser
         private void openDoc_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Файлы Microsoft Word (*.doc; *.docx)|*.doc;*.docx";
+            dlg.Filter = "Текстовый файл (*.txt)|*.txt|Файлы Microsoft Word (*.doc; *.docx)|*.doc;*.docx";
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
             DocPath = dlg.FileName;
 
             NPDict = NotParDict.Checked;
             Tran = checkTransl.Checked;
+            labelFileName.Text = DocPath;
             
             backgroundWorker.RunWorkerAsync();
             
@@ -156,10 +165,91 @@ namespace WordParser
 
         }
 
+        private void Parsing()
+        {
+        	string e = Path.GetExtension(DocPath);
+        	switch (e)
+        	{
+        		case ".txt":
+        			TextParsing();
+        			break;
+        		case ".doc":
+        			WordParsing();
+        			break;
+        		case ".docx":
+        			WordParsing();
+        			break;
+        			
+        	}
+        }
+        private void TextParsing()
+        {
+        	string [] str;
+        	str = File.ReadAllLines(DocPath);
+        	int i = 0;
+			try
+			{
+  				// read from file or write to file
+  				//str.Count
+  				Dict = new List<string>();
+  				Dict.Clear();
+  				bool FindInDict = false;
+  				bool FindInWordList = false;
+  				string strSaveInDict = String.Empty;
+  				foreach (string s in str)
+  				{
+  					string [] split = s.Split(new Char [] {' ', ',', '.', ':', '\t' });
+
+  					foreach (string s2 in split)
+  					{
+  						if (s2 == "" || s2 == " " || s2.Length <= 3) break;
+  						strSaveInDict = s2;
+  						strSaveInDict = strSaveInDict.Trim(); // убрать пробелы
+                        strSaveInDict = strSaveInDict.ToLower();
+  						foreach (string find in Dict)
+  						{
+  							if (strSaveInDict == find) FindInDict = true; 
+  						}
+  						if (!FindInDict)
+  						{							
+  							
+                            foreach (string word in wordslist)
+                            {
+                            	if (word == strSaveInDict) 
+                            		FindInWordList = true;
+                            }
+                            if (FindInWordList == false)
+  								Dict.Add(strSaveInDict);
+                            FindInWordList = false;
+							i++;  							
+  						}
+  						FindInDict = false;
+  					}
+  					
+  					
+  				}
+  				FileInfo t = new FileInfo(Path.GetDirectoryName(DocPath) + @"Dict.txt");
+  				StreamWriter Tex = t.CreateText();
+  				foreach (string word in Dict)
+  				{
+					Tex.WriteLine(word);
+  				}
+				Tex.Close();
+				backgroundWorker.ReportProgress(100, 1);
+                backgroundWorker.ReportProgress(100, 2);
+				MessageBox.Show("Выполненно! Слов добавленно: " + i.ToString(), "Готово!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+  				
+			}
+			catch(Exception ex)
+            {
+                MessageBox.Show("Ошибка при работе с Текстовым файлом:" +  ex.Message, "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+        }
         private void WordParsing()
         {
-
-            try
+        	try
             {
                 wordapp = new Word.Application();
                 wordapp.Visible = true;
