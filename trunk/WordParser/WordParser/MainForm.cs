@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Net;
 using System.IO;
 
@@ -23,92 +24,70 @@ namespace WordParser
     {
         string Str, DocPath;
         string pathapp = System.Windows.Forms.Application.StartupPath;
-        private OleDbConnection conn;
+        private SQLiteConnection connLite;
         private Word.Application wordapp;
-        //private Word.Documents worddocuments;
-        private Word.Document worddocument, newdocument;
 
+        private Word.Document worddocument, newdocument;
         private Word.Paragraphs wordparagraphs, newParagraphs;
         private Word.Paragraph wordparagraph, newParagraph;
-        //private Word.Words pWords;
 
 
         bool NPDict, Tran;
-        List<string> wordslist;
-        List<string> Dict;
-        //List<char> c;
+        List<string> wordslist; // словарь известных слов
+        List<string> Dict; // формирующийся словарь
 
         public MainForm()
         {
-            InitializeComponent();
-
-            //с = new List<char>();
-            
-            
+            InitializeComponent();       
             this.backgroundWorker.WorkerReportsProgress = true;
 			this.backgroundWorker.WorkerSupportsCancellation = true;
 			this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
 			this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
 			this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
 
-
-            //if (File.Exists(dbFilename))
-           // {
-            //}
-
-
-            string commandText = "SELECT word FROM Words";
-            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + pathapp + "\\words.accdb"; 
             wordslist = new List<string>();
-			try{
-			 conn = new OleDbConnection();
-             conn.ConnectionString = ConnectionString;
-             conn.Open();
-             OleDbCommand myCommand = conn.CreateCommand();
-             myCommand.CommandText = commandText;
-             OleDbDataReader dataReader = myCommand.ExecuteReader();
-             while (dataReader.Read())
+            string commandText = "SELECT word FROM Words";
+            
+            string filedb = pathapp + "\\words.sqlite";
+            if (!File.Exists(filedb))
+            {
+                MessageBox.Show("Отсутствует файл базы данных!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string dbConnection = String.Format("Data Source={0}", filedb);
+			try
+			{
+            	
+            connLite = new SQLiteConnection(dbConnection);
+            connLite.Open();
+            SQLiteCommand comm = connLite.CreateCommand();
+            comm.CommandText = commandText;
+            SQLiteDataReader liteRead = comm.ExecuteReader();
+            while (liteRead.Read())
              {
-                 wordslist.Add(dataReader["word"].ToString());
-                 //Console.WriteLine(dataReader["word"]);
+                 wordslist.Add(liteRead["word"].ToString());
              }
 
-             commandText = "SELECT COUNT (*) FROM Words";
-             OleDbCommand myCommand2 = conn.CreateCommand();
-             myCommand2.CommandText = commandText;
-             //myCommand.ExecuteScalar();
-             CountWordsLabel.Text = Convert.ToString(myCommand2.ExecuteScalar());
-             conn.Close();
-
-            
+            commandText = "SELECT COUNT (*) FROM Words";
+            SQLiteCommand myCommand2 = connLite.CreateCommand();
+            myCommand2.CommandText = commandText;
+            CountWordsLabel.Text = Convert.ToString(myCommand2.ExecuteScalar());
+            connLite.Close();
 			}
 			catch(Exception ex){
 				MessageBox.Show("Ошибка подключения к База данных: " + ex.Message, "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 				
 			}
+            
 		}
 
         
         void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-
         {
-
-            //for (int i = 1; i < 100; i++)
-
-            //{
-
-                //if (backgroundWorker.CancellationPending)
-
-                    //  return;
-
-                 //Thread.Sleep(1000);
-
-                 //backgroundWorker.ReportProgress(i);
-
-            //}
-            Parsing();
-
+           Parsing();
         }
 
         void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -130,11 +109,8 @@ namespace WordParser
         }
 
         void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-
         {
-
             // MessageBox.Show(this, "Hello word!!!");
-
         }
 
         private void openDoc_Click(object sender, EventArgs e)
@@ -150,19 +126,6 @@ namespace WordParser
             labelFileName.Text = DocPath;
             
             backgroundWorker.RunWorkerAsync();
-            
-            //WordParsing(progressBar1, progressBar2);
-
-
-            /*
-            Thread t = new Thread(delegate()
-                        {
-                            WordParsing(progressBar2);
-                        });
-            t.Start();
-            */
-
-
         }
 
         private void Parsing()
@@ -388,14 +351,14 @@ namespace WordParser
             bool addword = true;
             string Str = WorkInDict.Text;
             if (Str == "") return;
-            OleDbCommand myCommand;
-            OleDbDataReader dataReader;
+            SQLiteCommand myCommand;
+            SQLiteDataReader dataReader;
             Str = Str.Trim(); ;
             Str = Str.ToLower();
             string commandText = "SELECT word FROM Words WHERE word = \'" + Str + "\'";
             try{
-             conn.Open();
-             myCommand = conn.CreateCommand();
+             connLite.Open();
+             myCommand = connLite.CreateCommand();
              myCommand.CommandText = commandText;
              dataReader = myCommand.ExecuteReader();
              while (dataReader.Read())
@@ -407,26 +370,22 @@ namespace WordParser
                      addword = false;
 
                  }
-                 //Console.WriteLine(dataReader["word"]);
              }
 
              if (addword)
              {
                  commandText = "INSERT INTO Words (word) VALUES (\'" + Str + "\')";
-                 myCommand = conn.CreateCommand();
+                 myCommand = connLite.CreateCommand();
                  myCommand.CommandText = commandText;
                  myCommand.ExecuteNonQuery();
                  StatusWord.Text = Str;
                  WorkInDict.Text = "";
              }
-              conn.Close();
-
-            
+             connLite.Close();       
 			}
 			catch{
 				MessageBox.Show("Ошибка подключения к База данных", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-				
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);			
 			}
 
         }

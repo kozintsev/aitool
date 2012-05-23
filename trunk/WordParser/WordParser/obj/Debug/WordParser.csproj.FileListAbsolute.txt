@@ -32,4 +32,4 @@ d:\SVN\aitool\WordParser\WordParser\obj\Debug\GenerateResource.write.1.tlog
 d:\SVN\aitool\WordParser\WordParser\bin\WordParser.exe.config
 d:\SVN\aitool\WordParser\WordParser\bin\WordParser.exe
 d:\SVN\aitool\WordParser\WordParser\bin\WordParser.pdb
-D:\svn\aitool\WordParser\WordParser\bin\itextsharp.dll
+D:\svn\aitool\WordParser\WordParser\bin\System.Data.SQLite.dll
