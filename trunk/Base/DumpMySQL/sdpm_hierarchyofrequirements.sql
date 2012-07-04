@@ -30,8 +30,7 @@ CREATE TABLE `hierarchyofrequirements` (
   `isRequirementsEnd` int(11) DEFAULT NULL,
   `Projects_idProjects` int(11) NOT NULL,
   PRIMARY KEY (`idHierarchyOfRequirements`),
-  KEY `fk_HierarchyOfSpecifications_Projects1` (`Projects_idProjects`),
-  CONSTRAINT `fk_HierarchyOfSpecifications_Projects1` FOREIGN KEY (`Projects_idProjects`) REFERENCES `projects` (`idProjects`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_HierarchyOfSpecifications_Projects1` (`Projects_idProjects`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:12
+-- Dump completed on 2012-07-04 15:57:36

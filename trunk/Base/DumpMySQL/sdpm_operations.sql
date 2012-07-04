@@ -33,8 +33,7 @@ CREATE TABLE `operations` (
   `OperationSolidWorks` varchar(45) DEFAULT NULL,
   `TypeOfOperations_idTypeOfOperations` int(11) NOT NULL,
   PRIMARY KEY (`idOperation`),
-  KEY `fk_Operations_TypeOfOperations1` (`TypeOfOperations_idTypeOfOperations`),
-  CONSTRAINT `fk_Operations_TypeOfOperations1` FOREIGN KEY (`TypeOfOperations_idTypeOfOperations`) REFERENCES `typeofoperations` (`idTypeOfOperations`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Operations_TypeOfOperations1` (`TypeOfOperations_idTypeOfOperations`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:10:57
+-- Dump completed on 2012-07-04 15:57:22

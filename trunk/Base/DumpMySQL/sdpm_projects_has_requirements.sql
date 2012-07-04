@@ -30,9 +30,7 @@ CREATE TABLE `projects_has_requirements` (
   `Requirements_idRequirement` int(11) NOT NULL,
   PRIMARY KEY (`idProjectsHasRequirements`),
   KEY `fk_Projects_has_Requirements_Requirements1` (`Requirements_idRequirement`),
-  KEY `fk_Projects_has_Requirements_Projects1` (`Projects_idProjects`),
-  CONSTRAINT `fk_Projects_has_Requirements_Projects1` FOREIGN KEY (`Projects_idProjects`) REFERENCES `projects` (`idProjects`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Projects_has_Requirements_Requirements1` FOREIGN KEY (`Requirements_idRequirement`) REFERENCES `requirements` (`idRequirement`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Projects_has_Requirements_Projects1` (`Projects_idProjects`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:11
+-- Dump completed on 2012-07-04 15:57:35

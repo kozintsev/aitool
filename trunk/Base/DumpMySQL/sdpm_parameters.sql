@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `parameters`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `parameters` (
   `idParameters` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(45) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
   `VarName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idParameters`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:17
+-- Dump completed on 2012-07-04 15:57:42
