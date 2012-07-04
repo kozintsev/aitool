@@ -26,14 +26,13 @@ DROP TABLE IF EXISTS `projects`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `projects` (
   `idProjects` int(11) NOT NULL AUTO_INCREMENT,
-  `ProjectName` varchar(45) DEFAULT NULL,
-  `ProjectNumber` int(11) DEFAULT NULL,
+  `ProjectName` varchar(255) DEFAULT NULL,
+  `ProjectNumber` varchar(255) DEFAULT NULL,
   `ProjectTarget` varchar(255) DEFAULT NULL,
   `ProjectAbstract` varchar(255) DEFAULT NULL,
   `Users_idUsers` int(11) NOT NULL,
   PRIMARY KEY (`idProjects`),
-  KEY `fk_Projects_Users` (`Users_idUsers`),
-  CONSTRAINT `fk_Projects_Users` FOREIGN KEY (`Users_idUsers`) REFERENCES `users` (`idUsers`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Projects_Users` (`Users_idUsers`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:13
+-- Dump completed on 2012-07-04 15:57:37

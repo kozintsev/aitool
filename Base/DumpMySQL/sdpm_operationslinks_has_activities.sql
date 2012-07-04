@@ -30,9 +30,7 @@ CREATE TABLE `operationslinks_has_activities` (
   `OperationStart` int(11) DEFAULT NULL,
   `OperationFinish` int(11) DEFAULT NULL,
   KEY `fk_OperationsRelations_has_Activities_Activities1` (`Activities_idActivities`),
-  KEY `fk_OperationsRelations_has_Activities_OperationsRelations1` (`LinksOperations_idLinksOperations`),
-  CONSTRAINT `fk_OperationsRelations_has_Activities_OperationsRelations1` FOREIGN KEY (`LinksOperations_idLinksOperations`) REFERENCES `linksoperations` (`idLinksOperations`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_OperationsRelations_has_Activities_Activities1` FOREIGN KEY (`Activities_idActivities`) REFERENCES `activities` (`idActivities`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_OperationsRelations_has_Activities_OperationsRelations1` (`LinksOperations_idLinksOperations`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:22
+-- Dump completed on 2012-07-04 15:57:46

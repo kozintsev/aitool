@@ -32,9 +32,7 @@ CREATE TABLE `variables_has_operations` (
   `Number` int(11) DEFAULT NULL,
   PRIMARY KEY (`idVariablesHasOperations`),
   KEY `fk_Variables_has_Operations_Operations1` (`Operations_idOperation`),
-  KEY `fk_Variables_has_Operations_Variables1` (`Variables_idVariables`),
-  CONSTRAINT `fk_Variables_has_Operations_Variables1` FOREIGN KEY (`Variables_idVariables`) REFERENCES `variables` (`idVariables`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Variables_has_Operations_Operations1` FOREIGN KEY (`Operations_idOperation`) REFERENCES `operations` (`idOperation`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Variables_has_Operations_Variables1` (`Variables_idVariables`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:03
+-- Dump completed on 2012-07-04 15:57:27

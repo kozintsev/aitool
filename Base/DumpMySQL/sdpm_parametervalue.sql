@@ -38,11 +38,7 @@ CREATE TABLE `parametervalue` (
   KEY `fk_ParameterValue_Units1` (`Units_idUnits`),
   KEY `fk_ParameterValue_UnitPrefix1` (`UnitPrefix_idUnitPrefix`),
   KEY `fk_ParameterValue_Projects_has_Requirements1` (`Projects_has_Requirements_idProjectsHasRequirements`),
-  KEY `fk_ParameterValue_Parameters1` (`Parameters_idParameters`),
-  CONSTRAINT `fk_ParameterValue_Units1` FOREIGN KEY (`Units_idUnits`) REFERENCES `units` (`idUnits`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ParameterValue_UnitPrefix1` FOREIGN KEY (`UnitPrefix_idUnitPrefix`) REFERENCES `unitprefix` (`idUnitPrefix`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ParameterValue_Projects_has_Requirements1` FOREIGN KEY (`Projects_has_Requirements_idProjectsHasRequirements`) REFERENCES `projects_has_requirements` (`idProjectsHasRequirements`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ParameterValue_Parameters1` FOREIGN KEY (`Parameters_idParameters`) REFERENCES `parameters` (`idParameters`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_ParameterValue_Parameters1` (`Parameters_idParameters`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:05
+-- Dump completed on 2012-07-04 15:57:30

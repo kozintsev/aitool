@@ -28,13 +28,12 @@ CREATE TABLE `users` (
   `idUsers` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `fullname` varchar(45) DEFAULT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
   `windows` tinyint(1) DEFAULT NULL,
   `Roles_idRoles` int(11) NOT NULL,
   PRIMARY KEY (`idUsers`),
-  KEY `fk_Users_Roles1` (`Roles_idRoles`),
-  CONSTRAINT `fk_Users_Roles1` FOREIGN KEY (`Roles_idRoles`) REFERENCES `roles` (`idRoles`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `fk_Users_Roles1` (`Roles_idRoles`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +42,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'Oleg','698D51A19D8A121CE581499D7B701668','Oleg Kozintsev',0,1);
+INSERT INTO `users` VALUES (1,'Oleg','698D51A19D8A121CE581499D7B701668','Oleg Kozintsev',0,1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:01
+-- Dump completed on 2012-07-04 15:57:25

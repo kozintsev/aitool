@@ -32,8 +32,7 @@ CREATE TABLE `arrowsvariables` (
   `Value` varchar(45) DEFAULT NULL,
   `Arrows_has_Projects_idArrowsHasProjects` int(11) NOT NULL,
   PRIMARY KEY (`idArrowsVariables`),
-  KEY `fk_ArrowsVariables_Arrows_has_Projects1` (`Arrows_has_Projects_idArrowsHasProjects`),
-  CONSTRAINT `fk_ArrowsVariables_Arrows_has_Projects1` FOREIGN KEY (`Arrows_has_Projects_idArrowsHasProjects`) REFERENCES `arrows_has_projects` (`idArrowsHasProjects`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_ArrowsVariables_Arrows_has_Projects1` (`Arrows_has_Projects_idArrowsHasProjects`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 11:11:02
+-- Dump completed on 2012-07-04 15:57:26
