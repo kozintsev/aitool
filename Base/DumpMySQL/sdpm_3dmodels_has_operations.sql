@@ -18,27 +18,31 @@ USE `sdpm`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `3dmodel`
+-- Table structure for table `3dmodels_has_operations`
 --
 
-DROP TABLE IF EXISTS `3dmodel`;
+DROP TABLE IF EXISTS `3dmodels_has_operations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `3dmodel` (
-  `id3DModel` int(11) NOT NULL AUTO_INCREMENT,
-  `3DModelName` varchar(45) DEFAULT NULL,
-  `idFilesPDM` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id3DModel`)
+CREATE TABLE `3dmodels_has_operations` (
+  `id3DModelHasOperations` int(11) NOT NULL AUTO_INCREMENT,
+  `3DModel_id3DModel` int(11) NOT NULL,
+  `Operations_idOperation` int(11) NOT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `referenceObject` int(11) DEFAULT NULL COMMENT 'Ссылка на объект',
+  PRIMARY KEY (`id3DModelHasOperations`),
+  KEY `fk_3DModel_has_Operations_Operations1` (`Operations_idOperation`),
+  KEY `fk_3DModel_has_Operations_3DModel1` (`3DModel_id3DModel`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `3dmodel`
+-- Dumping data for table `3dmodels_has_operations`
 --
 
-LOCK TABLES `3dmodel` WRITE;
-/*!40000 ALTER TABLE `3dmodel` DISABLE KEYS */;
-/*!40000 ALTER TABLE `3dmodel` ENABLE KEYS */;
+LOCK TABLES `3dmodels_has_operations` WRITE;
+/*!40000 ALTER TABLE `3dmodels_has_operations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `3dmodels_has_operations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 15:57:50
+-- Dump completed on 2012-07-04 18:25:39
