@@ -32,7 +32,8 @@ CREATE TABLE `projects` (
   `ProjectAbstract` varchar(255) DEFAULT NULL,
   `Users_idUsers` int(11) NOT NULL,
   PRIMARY KEY (`idProjects`),
-  KEY `fk_Projects_Users` (`Users_idUsers`)
+  KEY `fk_Projects_Users` (`Users_idUsers`),
+  CONSTRAINT `fk_Projects_Users` FOREIGN KEY (`Users_idUsers`) REFERENCES `users` (`idUsers`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 18:25:42
+-- Dump completed on 2012-07-05 10:00:33

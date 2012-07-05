@@ -25,10 +25,13 @@ DROP TABLE IF EXISTS `unitprefix`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `unitprefix` (
-  `idUnitPrefix` int(11) NOT NULL,
+  `idUnitPrefix` int(11) NOT NULL AUTO_INCREMENT,
   `UnitPrefix` varchar(45) DEFAULT NULL,
+  `UnitName` varchar(45) DEFAULT NULL,
+  `International` varchar(45) DEFAULT NULL,
+  `value` double DEFAULT NULL,
   PRIMARY KEY (`idUnitPrefix`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +40,7 @@ CREATE TABLE `unitprefix` (
 
 LOCK TABLES `unitprefix` WRITE;
 /*!40000 ALTER TABLE `unitprefix` DISABLE KEYS */;
+INSERT INTO `unitprefix` VALUES (1,'да','дека','da',10),(2,'г','гекто','h',100),(3,'к','кило','k',1000),(4,'М','мега','M',1000000),(5,'д','деци','d',0.1),(6,'см','санти','c',0.01),(7,'мм','мили','m',0.001),(8,'мк','микро','µ',0.000001),(9,'н','нано','n',0.000000001);
 /*!40000 ALTER TABLE `unitprefix` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 18:25:55
+-- Dump completed on 2012-07-05 10:00:48
