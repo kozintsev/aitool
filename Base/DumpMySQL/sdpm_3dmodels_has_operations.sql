@@ -32,7 +32,9 @@ CREATE TABLE `3dmodels_has_operations` (
   `referenceObject` int(11) DEFAULT NULL COMMENT 'Ссылка на объект',
   PRIMARY KEY (`id3DModelHasOperations`),
   KEY `fk_3DModel_has_Operations_Operations1` (`Operations_idOperation`),
-  KEY `fk_3DModel_has_Operations_3DModel1` (`3DModel_id3DModel`)
+  KEY `fk_3DModel_has_Operations_3DModel1` (`3DModel_id3DModel`),
+  CONSTRAINT `fk_3DModel_has_Operations_3DModel1` FOREIGN KEY (`3DModel_id3DModel`) REFERENCES `3dmodels` (`id3DModel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_3DModel_has_Operations_Operations1` FOREIGN KEY (`Operations_idOperation`) REFERENCES `operations` (`idOperation`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 18:25:39
+-- Dump completed on 2012-07-05 10:00:30

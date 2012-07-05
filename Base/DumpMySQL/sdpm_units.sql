@@ -25,10 +25,12 @@ DROP TABLE IF EXISTS `units`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `units` (
-  `idUnits` int(11) NOT NULL,
+  `idUnits` int(11) NOT NULL AUTO_INCREMENT,
   `Units` varchar(45) DEFAULT NULL,
+  `UnitsName` varchar(45) DEFAULT NULL,
+  `International` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idUnits`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +39,7 @@ CREATE TABLE `units` (
 
 LOCK TABLES `units` WRITE;
 /*!40000 ALTER TABLE `units` DISABLE KEYS */;
+INSERT INTO `units` VALUES (1,'В','вольт','V'),(2,'А','ампер','A'),(3,'с','секунда','s');
 /*!40000 ALTER TABLE `units` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 18:25:52
+-- Dump completed on 2012-07-05 10:00:44

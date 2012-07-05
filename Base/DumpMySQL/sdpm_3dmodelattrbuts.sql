@@ -25,11 +25,12 @@ DROP TABLE IF EXISTS `3dmodelattrbuts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `3dmodelattrbuts` (
-  `id3DModelAttrbuts` int(11) NOT NULL,
+  `id3DModelAttrbuts` int(11) NOT NULL AUTO_INCREMENT,
   `3DModel_id3DModel` int(11) NOT NULL,
   `AttributName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id3DModelAttrbuts`),
-  KEY `fk_3DModelAttrbuts_3DModel1` (`3DModel_id3DModel`)
+  KEY `fk_3DModelAttrbuts_3DModel1` (`3DModel_id3DModel`),
+  CONSTRAINT `fk_3DModelAttrbuts_3DModel1` FOREIGN KEY (`3DModel_id3DModel`) REFERENCES `3dmodels` (`id3DModel`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 18:25:49
+-- Dump completed on 2012-07-05 10:00:42

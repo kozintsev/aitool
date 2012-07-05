@@ -34,7 +34,9 @@ CREATE TABLE `arrows_has_projects` (
   `idActivityEndSide` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idArrowsHasProjects`),
   KEY `fk_Arrows_has_Projects_Projects1` (`Projects_idProjects`),
-  KEY `fk_Arrows_has_Projects_Arrows1` (`Arrows_idArrows`)
+  KEY `fk_Arrows_has_Projects_Arrows1` (`Arrows_idArrows`),
+  CONSTRAINT `fk_Arrows_has_Projects_Arrows1` FOREIGN KEY (`Arrows_idArrows`) REFERENCES `arrows` (`idArrows`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Arrows_has_Projects_Projects1` FOREIGN KEY (`Projects_idProjects`) REFERENCES `projects` (`idProjects`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 18:25:35
+-- Dump completed on 2012-07-05 10:00:26

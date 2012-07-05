@@ -32,7 +32,9 @@ CREATE TABLE `activities` (
   `ProjectProcedure_idProjectProcedure1` int(11) NOT NULL,
   PRIMARY KEY (`idActivities`),
   KEY `fk_Activities_Users1` (`Users_idUsers`),
-  KEY `fk_Activities_ProjectProcedure1` (`ProjectProcedure_idProjectProcedure1`)
+  KEY `fk_Activities_ProjectProcedure1` (`ProjectProcedure_idProjectProcedure1`),
+  CONSTRAINT `fk_Activities_Users1` FOREIGN KEY (`Users_idUsers`) REFERENCES `users` (`idUsers`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Activities_ProjectProcedure1` FOREIGN KEY (`ProjectProcedure_idProjectProcedure1`) REFERENCES `projectprocedure` (`idProjectProcedure`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-07-04 18:25:27
+-- Dump completed on 2012-07-05 10:00:17
