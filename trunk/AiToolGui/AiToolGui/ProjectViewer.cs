@@ -47,8 +47,8 @@ namespace AiToolGui
             graphEditor.Anchor = graphEditor.Anchor | AnchorStyles.Right | AnchorStyles.Bottom;
             // нужно добавить спец события вставка блока и.т.д
             graphEditor.eXY += new EventHandler(graphEditor_eXY);
-            cdb = new ConnectDataBase();
-            cdb.CreateConnectDataBase();
+            cdb = new ConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X");
+            //cdb.CreateConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X"); ;
         }
 
         void graphEditor_eXY(object sender, EventArgs e)
@@ -137,7 +137,6 @@ namespace AiToolGui
 
         private void ProjectViewer_FormClosing(object sender, FormClosingEventArgs e)
         {
-            cdb.CloseConnectDataBaseLocal();
             OnStatus(" ");
         }
      

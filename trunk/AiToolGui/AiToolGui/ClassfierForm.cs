@@ -41,8 +41,9 @@ namespace AiToolGui
         {
             InitializeComponent();
             sett = new Settings();
+            /*
             cdb = new ConnectDataBase();
-            cdb.CreateConnectDataBase();
+            cdb.CreateConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X"); ;
             OleDbCommand command = cdb.ConnLocal.CreateCommand();
             command.CommandText = @"SELECT * FROM Classifier";
             OleDbDataAdapter adapter = new OleDbDataAdapter(command);
@@ -55,6 +56,7 @@ namespace AiToolGui
                 if (row[3].ToString() == "0")
                     AddTreeNode(row , null);
             }
+            */
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -64,6 +66,7 @@ namespace AiToolGui
 
         private void tAddTree_Click(object sender, EventArgs e)
         {
+            /*
             string AddText = textNode.Text;
             if (AddText == "")
             {
@@ -105,11 +108,13 @@ namespace AiToolGui
             treeClassfier.Nodes.Add(node);
             node.Expand(); // развернуть дерево
             textNode.Clear();
+            */
         }
 
         private void tAddNode_Click(object sender, EventArgs e)
         {
             // добавить характеристику в дерево child
+            /*
             string AddText = textNode.Text;
             if (AddText == "")
             {
@@ -137,7 +142,8 @@ namespace AiToolGui
             node.Tag = clNode;
             selnode.Nodes.Add(node);
             node.Expand();
-            textNode.Clear();                
+            textNode.Clear();
+            */   
         }
 
         private void tDelNode_Click(object sender, EventArgs e)

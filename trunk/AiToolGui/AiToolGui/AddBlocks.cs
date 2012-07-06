@@ -17,11 +17,9 @@ namespace AiToolGui
         {
             InitializeComponent();
             bool conn = false;
-            cdb = new ConnectDataBase();
-            conn = cdb.CreateConnectDataBase(); // подключились или нет?
-            if (!conn) return;
+            cdb = new ConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X");
+            //conn = cdb.CreateConnectDataBase(); ; // подключились или нет?
             List<CProjectProcedures> list = cdb.GetProjectProcedureList();
-            cdb.CloseConnectDataBaseLocal();
             for (int i = 0; i < list.Count; i++)
             {
                 comboBoxType.Items.Add(list[i].ProcedurName);

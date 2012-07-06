@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace AiToolGui
 {
@@ -27,8 +27,6 @@ namespace AiToolGui
         {
             InitializeComponent();
             pForm = mainForm;
-            cdb = new ConnectDataBase();
-            cdb.CreateConnectDataBase();
             ProjectIDList = new List<int>();
         }
         protected virtual void OnNewProject()
@@ -51,6 +49,7 @@ namespace AiToolGui
             int i = 1;
             ProjectIDList.Clear();
             listViewProject.Items.Clear();
+            /*
             OleDbCommand command = cdb.ConnLocal.CreateCommand();
             if (!curuser)
             {
@@ -73,6 +72,7 @@ namespace AiToolGui
                     i++;
                 }
             } while (reader.NextResult());
+            */
         }
         
 

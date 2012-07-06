@@ -9,8 +9,20 @@ using System.Xml;
 
 namespace AiToolGui
 {
+    [Serializable]
     public class Settings
     {
+        // Настройки
+        public string Host { get; set; }
+        public string Port { get; set; }
+        public string BaseName { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Language { get; set; }
+        public bool WindowsUser { get; set; }
+        public bool SavePass { get; set; }
+        // Настройки
+
         private string appath = Application.StartupPath;
         private string optionspath = Application.StartupPath + "\\options.xml";
 
@@ -19,11 +31,6 @@ namespace AiToolGui
             if (!File.Exists(optionspath)) CreateSetting();            
         }
 
-        public string[] GetLanguagesList()
-        {
-            //temp = temp.Substring(0, temp.LastIndexOf('.'));
-            return Directory.GetFiles(appath + "\\Languages");
-        }
         public string GetLngText(string lng, string nameform)
         {
             return ParsingLangFile(lng, nameform);

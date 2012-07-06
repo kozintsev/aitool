@@ -38,7 +38,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(64, 121);
+            this.buttonOk.Location = new System.Drawing.Point(79, 99);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 1;
@@ -48,7 +48,7 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(160, 121);
+            this.buttonExit.Location = new System.Drawing.Point(160, 99);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 2;
@@ -95,7 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(249, 153);
+            this.ClientSize = new System.Drawing.Size(239, 133);
             this.Controls.Add(this.labelPwd);
             this.Controls.Add(this.labelLogin);
             this.Controls.Add(this.textBoxPwd);
