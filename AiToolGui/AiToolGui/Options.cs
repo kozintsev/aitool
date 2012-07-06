@@ -4,18 +4,28 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace AiToolGui
 {
     public partial class Options : Form
     {
-        private Settings sett;
+        private string optionspath = Application.StartupPath + "\\options2.xml";
         public Options()
         {
             InitializeComponent();
-            sett = new Settings();
-            DBPath.Text = sett.GetDataBaseLocal();
-            LocalBaseType.Text = sett.GetDataBaseType();
+            FileStream fsin = new FileStream(Global.OptionsPath, FileMode.Open, FileAccess.Read);
+            XmlSerializer serializerin = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
+            Settings setting = new Settings();
+            setting = (Settings)serializerin.Deserialize(fsin);
+            txtBoxHost.Text = setting.Host;
+            numericPort.Value = Convert.ToDecimal(setting.Port);
+            txtBoxBaseName.Text = setting.BaseName;
+            txtUserName.Text = setting.UserName;
+            txtBoxPwd.Text = setting.Password;
+            checkWindowsUser.Checked = setting.WindowsUser;
+            checkSavePass.Checked = setting.SavePass;
+            fsin.Close();
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -26,11 +36,20 @@ namespace AiToolGui
         private void Save_Click(object sender, EventArgs e)
         {
             //Сохранить настройки
-            if (File.Exists(DBPath.Text)) // если файл существует
-            {
-                sett.SetDataBaseLocal(DBPath.Text);
-                sett.SetDataBaseType(LocalBaseType.Text);
-            }
+            Settings setting = new Settings();
+            setting.Host = txtBoxHost.Text;
+            setting.Port = numericPort.Value.ToString();
+            setting.BaseName = txtBoxBaseName.Text;
+            setting.UserName = txtUserName.Text;
+            setting.Password = txtBoxPwd.Text;
+            setting.WindowsUser = checkWindowsUser.Checked;
+            setting.SavePass = checkSavePass.Checked;
+
+            FileStream fsout = new FileStream(Global.OptionsPath, FileMode.Create, FileAccess.Write);
+            XmlSerializer serializerout = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
+            serializerout.Serialize(fsout, setting);
+            fsout.Close();
+
         }
 
         private void Options_FormClosed(object sender, FormClosedEventArgs e)
@@ -38,31 +57,15 @@ namespace AiToolGui
        
         }
 
-        private void AddAccess_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dlg = new OpenFileDialog();
-            switch (LocalBaseType.Text)
-            {
-                case "Access 2003":
-                    dlg.Filter = "Файлы Microsoft Access 2003 (*.mdb)|*.mdb";
-                    break;
-                case "Access 2007":
-                    dlg.Filter = "Файлы Microsoft Access 2007 (*.accdb)|*.accdb";
-                    break;
-                case "SQLite":
-                    dlg.Filter = "Файлы SQLite (*.db, *.sqlite)|*.db;*.sqlite";
-                    break;
-            }
-            if (dlg.ShowDialog() != DialogResult.OK)
-                return;
+        //private void AddAccess_Click(object sender, EventArgs e)
+        //{
+            
+        //}
 
-            DBPath.Text = dlg.FileName;
-        }
-
-        private void LocalBaseType_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        //private void LocalBaseType_SelectedIndexChanged(object sender, EventArgs e)
+        //{
             //Microsoft.Jet.OLEDB.4.0
             //
-        }
+        //}
     }
 }

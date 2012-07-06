@@ -24,8 +24,8 @@ namespace AiToolGui
         {
             newscop = true;
             InitializeComponent();
-            cdb = new ConnectDataBase();
-            cdb.CreateConnectDataBase();
+            //cdb = ConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X");
+            //cdb.CreateConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X"); ;
         }
         public CreateSpecification(int _id)
         {
@@ -33,9 +33,10 @@ namespace AiToolGui
             save = true;
             id = _id;
             InitializeComponent();
-            cdb = new ConnectDataBase();
-            cdb.CreateConnectDataBase();
-            OleDbCommand command = cdb.ConnLocal.CreateCommand();
+            //cdb = ConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X");
+            //cdb.CreateConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X");
+            /*
+            OleDbCommand command;
             command.CommandText = "SELECT ProjectName, ProjectNumber  FROM Projects WHERE ProjectID = @ProjectID";
             command.Parameters.Add("@ProjectID", OleDbType.Integer).Value = _id;
             OleDbDataReader reader = command.ExecuteReader();
@@ -44,6 +45,7 @@ namespace AiToolGui
             textBoxNum.Text = reader["ProjectNumber"].ToString();
             reader.Close();
             command.Dispose();
+            */
         }
         protected virtual void OnProjectSave(int id, string num, string name)
         {
@@ -380,8 +382,9 @@ namespace AiToolGui
         private bool ProjectNumDup(string num)
         {
             int coun;
-            OleDbCommand command = cdb.ConnLocal.CreateCommand();
+            OleDbCommand command;
             //SELECT COUNT (*) FROM
+            /*
             command.CommandText = " SELECT COUNT (ProjectNumber) FROM Projects WHERE ProjectNumber = \'" + num + "\'";
             coun = (int)command.ExecuteScalar();
             if (coun > 0)
@@ -390,6 +393,7 @@ namespace AiToolGui
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
             }
+            */
             return false;
         }
 
@@ -411,6 +415,7 @@ namespace AiToolGui
             }
             if (ProjectNumDup(num)) // проверка уникальности номера
                 return;
+            /*
             try
             {
                 OleDbCommand command = cdb.ConnLocal.CreateCommand();
@@ -462,6 +467,7 @@ namespace AiToolGui
                 return;
 
             }
+            */
             save = true;
             MessageBox.Show("Данные сохранены", "Информация",
                  MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -481,7 +487,6 @@ namespace AiToolGui
                 if (reply == DialogResult.Yes)
                     SaveSpecification();
             }
-            cdb.CloseConnectDataBaseLocal();
         }
         //изменение текста
         private void textBoxNum_TextChanged(object sender, EventArgs e)

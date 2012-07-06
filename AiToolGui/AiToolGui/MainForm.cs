@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml.Serialization;
 using System.Data.OleDb;// пространство имён для подключение к БД 
 using System.Globalization; // для локализации
 using System.Threading; // для локализации
@@ -26,18 +27,41 @@ namespace AiToolGui
         //private NewProject np;
         private Settings sett;
         private ConnectDataBase cdb;
+        private string[] GetLanguagesList()
+        {
+            //temp = temp.Substring(0, temp.LastIndexOf('.'));
+            return Directory.GetFiles(Global.LangPath);
+        }
+        private string GetLanguage()
+        {
+            Settings setting = new Settings();
+            return "";
+        }
 
         public AITool()
         {
             InitializeComponent();
-            sett = new Settings();
-            cdb = new ConnectDataBase();
-            cdb.CreateConnectDataBase();
-            StatusUserLabel.Text = "";
+
+            FileStream fsin = new FileStream(Global.OptionsPath, FileMode.Open, FileAccess.Read);
+            XmlSerializer serializerin = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
+            Settings setting = new Settings();
+            sett = setting;
+            setting = (Settings)serializerin.Deserialize(fsin);
+            string lang = setting.Language;
+            Global.Host = setting.Host;
+            Global.Port = setting.Port;
+            Global.BaseName = setting.BaseName;
+            Global.UserName = setting.UserName;
+            Global.Password = setting.Password;
+            Global.WindowsUser = setting.WindowsUser;
+            fsin.Close();
+
+            cdb = new ConnectDataBase(Global.Host, Global.BaseName, Global.UserName, Global.Password);
+             StatusUserLabel.Text = "";
             StatusProjectLabel.Text = "";
             StatusEvent.Text = "";
-            string lang = sett.GetLanguage();
-            string [] langlist = sett.GetLanguagesList();
+            //lang = sett.GetLanguage();
+            string [] langlist = GetLanguagesList();
             string tmp;
             foreach (string lng in langlist)
             {
@@ -241,11 +265,9 @@ namespace AiToolGui
         private void AITool_Shown(object sender, EventArgs e) // событие возникает при первом отображении формы
         {
             string Login = Environment.UserDomainName + "\\" + Environment.UserName;
-            if (cdb.Authorization(Login))
+            if (cdb.Authorization(Login, "", true))
             {
                 sett.SetLogin(Login); // если всё окей сохраняем имя пользователя
-                cdb.GetRoleName();
-                cdb.CloseConnectDataBaseLocal(); // закрыть соединение с базой данных
                 UserParam.StatusText = String.Format(" Имя пользователя:{0}, Полное имя: {1} , Роль: {2}, База данных подключена",
                     UserParam.Username, UserParam.Fullname, UserParam.Rolename);
                 StatusUserLabel.Text = "";

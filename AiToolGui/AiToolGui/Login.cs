@@ -23,8 +23,8 @@ namespace AiToolGui
             InitializeComponent();
             sett = new Settings();
             textBoxLogin.Text = sett.GetLogin();
-            cdb = new ConnectDataBase();
-            conn = cdb.CreateConnectDataBase(); // подключились или нет?
+            //cdb = ConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X"); ;
+            //conn = cdb.CreateConnectDataBase("localhost", "sdpm", "root", "9L37VKNV4X"); ; // подключились или нет?
             string text;
             this.Text = text = sett.GetLngText(UserParam.Language, "Login");
             foreach (Control c in this.Controls)
@@ -75,14 +75,11 @@ namespace AiToolGui
         {
             if (textBoxLogin.Text == "" || textBoxPwd.Text == "")
                 return false;
-            if (!conn) return false;
             string pass = MD5Hash(textBoxPwd.Text.Trim());
-            if (cdb.Authorization(textBoxLogin.Text, pass))
+            if (cdb.Authorization(textBoxLogin.Text, pass, false))
             {
                 openProgram = true; // если пароль и логин верны
                 sett.SetLogin(textBoxLogin.Text); // если всё окей сохраняем имя пользователя
-                cdb.GetRoleName();
-                cdb.CloseConnectDataBaseLocal(); // закрыть соединение с базой данных
                 UserParam.StatusText = String.Format(" Имя пользователя:{0}, Полное имя: {1} , Роль: {2}, База данных подключена",
                     UserParam.Username, UserParam.Fullname, UserParam.Rolename);
                 OnStatus(UserParam.StatusText);

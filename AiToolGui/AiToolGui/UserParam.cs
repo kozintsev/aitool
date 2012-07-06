@@ -65,5 +65,6 @@ namespace AiToolGui
             get { return localbdpath; }
             set { localbdpath = value; }
         }
+        
     }
 }
