@@ -22,6 +22,7 @@ namespace WordParser
 {
     public partial class MainForm : Form
     {
+        int N = 0; 
         string Str, DocPath;
         string pathapp = System.Windows.Forms.Application.StartupPath;
         private SQLiteConnection connLite;
@@ -73,7 +74,8 @@ namespace WordParser
             commandText = "SELECT COUNT (*) FROM Words";
             SQLiteCommand myCommand2 = connLite.CreateCommand();
             myCommand2.CommandText = commandText;
-            CountWordsLabel.Text = Convert.ToString(myCommand2.ExecuteScalar());
+            N = myCommand2.ExecuteScalar();
+            CountWordsLabel.Text = Convert.ToString(N);
             connLite.Close();
 			}
 			catch(Exception ex){
@@ -380,6 +382,9 @@ namespace WordParser
                  myCommand.ExecuteNonQuery();
                  StatusWord.Text = Str;
                  WorkInDict.Text = "";
+                 CountWordsLabel.Text = "";
+                 N++;
+                 CountWordsLabel.Text = Convert.ToString(N);
              }
              connLite.Close();       
 			}
@@ -438,6 +443,11 @@ namespace WordParser
         private void button1_Click(object sender, EventArgs e)
         {
             if (WorkInDict.Text != "") MessageBox.Show(TranslateStr(WorkInDict.Text), "Translate");
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 
