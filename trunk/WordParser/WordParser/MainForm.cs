@@ -74,14 +74,13 @@ namespace WordParser
             commandText = "SELECT COUNT (*) FROM Words";
             SQLiteCommand myCommand2 = connLite.CreateCommand();
             myCommand2.CommandText = commandText;
-            N = myCommand2.ExecuteScalar();
-            CountWordsLabel.Text = Convert.ToString(N);
+            N = Convert.ToInt32(myCommand2.ExecuteScalar());
+            CountWordsLabel.Text = Convert.ToString(myCommand2.ExecuteScalar());
             connLite.Close();
 			}
 			catch(Exception ex){
 				MessageBox.Show("Ошибка подключения к База данных: " + ex.Message, "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-				
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);				
 			}
             
 		}
