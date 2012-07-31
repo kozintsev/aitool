@@ -150,7 +150,7 @@ namespace WordParser
         {
         	string [] str;
         	str = File.ReadAllLines(DocPath);
-        	int i = 0;
+        	int w = 0, i = 0, j = 0;
 			try
 			{
   				// read from file or write to file
@@ -160,10 +160,12 @@ namespace WordParser
   				bool FindInDict = false;
   				bool FindInWordList = false;
   				string strSaveInDict = String.Empty;
+                int m = str.Length;
   				foreach (string s in str)
   				{
   					string [] split = s.Split(new Char [] {' ', ',', '.', ':', '\t' });
-
+                    int n = split.Length;
+                    j = 0;
   					foreach (string s2 in split)
   					{
   						if (s2 == "" || s2 == " " || s2.Length <= 3) break;
@@ -185,12 +187,16 @@ namespace WordParser
                             if (FindInWordList == false)
   								Dict.Add(strSaveInDict);
                             FindInWordList = false;
-							i++;  							
+							w++;  							
   						}
   						FindInDict = false;
+                        j++;
+                        double proc1 = ((j * 100) / n);
+                        backgroundWorker.ReportProgress((int)Math.Ceiling(proc1), 1);
   					}
-  					
-  					
+                    i++;
+                    double proc2 = ((i * 100) / m);
+                    backgroundWorker.ReportProgress((int)Math.Ceiling(proc2), 2);  					
   				}
   				FileInfo t = new FileInfo(Path.GetDirectoryName(DocPath) + @"Dict.txt");
   				StreamWriter Tex = t.CreateText();
@@ -201,7 +207,7 @@ namespace WordParser
 				Tex.Close();
 				backgroundWorker.ReportProgress(100, 1);
                 backgroundWorker.ReportProgress(100, 2);
-				MessageBox.Show("Выполненно! Слов добавленно: " + i.ToString(), "Готово!",
+				MessageBox.Show("Выполненно! Слов добавленно: " + w.ToString(), "Готово!",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
   				
 			}

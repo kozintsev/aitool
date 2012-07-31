@@ -11,3 +11,14 @@ d:\coding\WordParser\WordParser\WordParser\obj\Release\WordParser.exe
 d:\coding\WordParser\WordParser\WordParser\obj\Release\WordParser.pdb
 G:\!\WordParser\WordParser\WordParser\obj\Release\WordParser.exe
 G:\!\WordParser\WordParser\WordParser\obj\Release\WordParser.pdb
+D:\svn\aitool\WordParser\WordParser\bin\WordParser.exe.config
+D:\svn\aitool\WordParser\WordParser\obj\Release\WordParser.exe
+D:\svn\aitool\WordParser\WordParser\obj\Release\WordParser.pdb
+D:\svn\aitool\WordParser\WordParser\bin\WordParser.exe
+D:\svn\aitool\WordParser\WordParser\bin\WordParser.pdb
+D:\svn\aitool\WordParser\WordParser\bin\System.Data.SQLite.dll
+D:\svn\aitool\WordParser\WordParser\obj\Release\ResolveAssemblyReference.cache
+D:\svn\aitool\WordParser\WordParser\obj\Release\WordParser.MainForm.resources
+D:\svn\aitool\WordParser\WordParser\obj\Release\WordParser.Properties.Resources.resources
+D:\svn\aitool\WordParser\WordParser\obj\Release\GenerateResource.read.1.tlog
+D:\svn\aitool\WordParser\WordParser\obj\Release\GenerateResource.write.1.tlog

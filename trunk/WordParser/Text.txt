@@ -1,0 +1,37 @@
+In recent years, the concept of distributed systems has been applied to industries to enable cooperative work and collect distributed information. A distributed geometrical modeling system has been developed 
+tosharethefunctionsamongthesystemsonthenetworkwithapeer-to-peer(P2P)structure.The systems at are linked on the net work can use functions of other systems. Such a network can perform operations concurrently by using other systems, 
+which saves time. The importance of constructing this kind of distributed CAD system is to transfer three-dimensional (3D) CAD model data and access the locations of providers. The developed system has a sharing of functions, which 
+consist of client (requester) and server (provider) as a P2P system, and is constructed by using a CAD kernel and COM/DCOM technology. Simple operations have been performed and tested by the developed system, such as Boolean operation, obtaining properties, triangulation and tessellation. The developed system has been evaluated with stand-alone and client–server systems for simple operations based on two criteria. In the first evaluation, the 
+processing timings have been compared for simple operations among the systems: the stand-alone system is faster than the other systems. In the second evaluation, the systems are overloaded and the processing timings have been 
+compared: the developed system is faster than the other systems.
+
+In terms of global competition, market share and awareness are decided by the market leaders, who reduce the life cycle quickly. It is essential to improve product quality and reduce production time. Using enhanced technologies, 
+industries are designing and producing complex products. The importance of collaboration has increased, because there is the need to transfer much information between workers and systems. In general, a stand-alone CAD system is 
+situated locally to design a product, and on request collaboration is undertaken with an external company to save cost and time. To support cooperative work, the concept of a distributed system has been introduced and computers 
+linked by a network are an important tool to implement collaboration, since they can communicate information remotely. In recent years, the distributed platform has been used in enterprises to design products [1].
+
+Many researchers have been working on developing distributed CAD systems and methodologies. The response time to get the CAD data on the network is an important parameter that needs to be considered all the time; there can be 
+delays due to data size and network traffic. As a result, the working efficiency will be reduced and this interrupts the use of a distributed CAD system. The recent research and development on hardware and network environments have become of high quality and we now need a different CAD system.
+
+In this research, a distributed geometrical modeling system based on a P2P system has been developed to share the functions and it can undertake the role of both stand-alone and server systems. Here, Microsoft’s COM/DCOM technology 
+and an OpenCASCADE kernel are applied to construct the system. The developed system is different and has merits of stand-alone and distributed CAD systems. Many researchers have worked on distributed systems; for example, process 
+planning systems, Web-based systems to support design and manufacturing activities, and Web-based systems to integrate design and process planning are discussed in Section2. The structure and concept ofthe distributed geometric 
+system to share the operations are detailed in Section 3. The developed system has been evaluated with stand-alone and client–server systems for simple operations based on two criteria, and the evaluation is discussed in Section 4.
+
+Li et al. developed a prototype process planning optimization system for distributed design, which can optimize the selection of manufacturing resources based on the Web. A new XML-style feature representation was proposed to carry 
+out some feature-based visualization manipulations in the Web-based system [2]. Chen and Liang proposed a Web-based system to integrate and share engineering information to support design and manufacturing activities such as domain 
+investigation, functional requirement analysis, and system design and modeling. Functional modules in their system are wrapped and supported by CORBA for communication [3]. The CyberCut system developed a Web-based system 
+integrating product design and process planning as a Java Applet program in University of California at Berkeley [4].
+
+The FIPER (Federated Intelligent Product Environment) system funded by NIST developed a new product design and analysis technology. The main objective of this system is to develop a Web-based distributed framework for design 
+analysis and product life-cycle support based on component mechanisms and configurable workflow mechanisms. It can provide open and flexible capabil-ities to incorporate existing analysis and design tools/methods through Java-based 
+wrapping mechanisms including the Java Na-tive Interface (JNI) and the FIPER SDK toolkit [5,6]. Xiao et al. developed the Web-DPR system as an infrastructure to support collaborative design and manufacturing. Based on the Java 
+Remote Method Invocation (RMI) mechanism, agents and an event-based mechanism, the functional modules of the systems can be linked and coordinated effectively [7]. Shyamsundar and Gadh developed a new geometric representation named 
+AREP and a collaborative prototyping system based on this representation to perform real-time geometric modification for components/subassemblies in an assembly model [8,9].
+
+
+In Choi et al.’s work [10], Web service architectures were utilized to establish a new generation of distributed design and manufacturing platforms based on XML schemas and a communication protocol SOAP (Simple Object Access 
+Protocol) to provide a neutral data exchange format and effective capabilities in interoperability, integration and Internet accessibility of services. From this work, some common characteristics can be observed, and an important 
+trend is that application programs in product design, process planning, engineering analysis and simulation are embedded in a Web environment as Application Service Providers (ASPs) for remote invoking and manipulation to support  
+distributed product design and development. This can bring many advantages such as avoiding complicated installations for individual computers, easily upgrading application modules and lowering the acquisition costs for Small and 
+Middle Enterprise (SMEs) through renting services.
