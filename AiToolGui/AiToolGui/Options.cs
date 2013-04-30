@@ -13,7 +13,7 @@ namespace AiToolGui
         private string optionspath = Application.StartupPath + "\\options2.xml";
         public Options()
         {
-            InitializeComponent();
+            InitializeComponent();            
             FileStream fsin = new FileStream(Global.OptionsPath, FileMode.Open, FileAccess.Read);
             XmlSerializer serializerin = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
             Settings setting = new Settings();
@@ -25,7 +25,7 @@ namespace AiToolGui
             txtBoxPwd.Text = setting.Password;
             checkWindowsUser.Checked = setting.WindowsUser;
             checkSavePass.Checked = setting.SavePass;
-            fsin.Close();
+            fsin.Close();            
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -44,6 +44,7 @@ namespace AiToolGui
             setting.Password = txtBoxPwd.Text;
             setting.WindowsUser = checkWindowsUser.Checked;
             setting.SavePass = checkSavePass.Checked;
+            setting.Language = "Russian";
 
             FileStream fsout = new FileStream(Global.OptionsPath, FileMode.Create, FileAccess.Write);
             XmlSerializer serializerout = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
