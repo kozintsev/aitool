@@ -20,7 +20,7 @@ namespace AiToolGui
         public string Password { get; set; }
         public string Language { get; set; }
         public bool WindowsUser { get; set; }
-        public bool SavePass { get; set; }
+        public bool SavePass { get; set; }        
         // Настройки
 
         private string appath = Application.StartupPath;

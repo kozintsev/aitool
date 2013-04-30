@@ -40,21 +40,31 @@ namespace AiToolGui
 
         public AITool()
         {
-            InitializeComponent();
-
-            FileStream fsin = new FileStream(Global.OptionsPath, FileMode.Open, FileAccess.Read);
-            XmlSerializer serializerin = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
-            Settings setting = new Settings();
-            sett = setting;
-            setting = (Settings)serializerin.Deserialize(fsin);
-            string lang = setting.Language;
-            Global.Host = setting.Host;
-            Global.Port = setting.Port;
-            Global.BaseName = setting.BaseName;
-            Global.UserName = setting.UserName;
-            Global.Password = setting.Password;
-            Global.WindowsUser = setting.WindowsUser;
-            fsin.Close();
+            InitializeComponent();            
+            Global.OptionsPath = Application.StartupPath + "\\options.xml";
+            Global.LangPath = Application.StartupPath + "\\Languages\\";
+            string lang = "Russia";
+            try
+            {
+                FileStream fsin = new FileStream(Global.OptionsPath, FileMode.Open, FileAccess.Read);
+                XmlSerializer serializerin = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
+                Settings setting = new Settings();
+                sett = setting;
+                setting = (Settings)serializerin.Deserialize(fsin);
+                lang = setting.Language;
+                Global.Host = setting.Host;
+                Global.Port = setting.Port;
+                Global.BaseName = setting.BaseName;
+                Global.UserName = setting.UserName;
+                Global.Password = setting.Password;
+                Global.WindowsUser = setting.WindowsUser;
+                fsin.Close();
+            }
+            catch
+            {
+                
+            }
+            
 
             cdb = new ConnectDataBase(Global.Host, Global.BaseName, Global.UserName, Global.Password);
              StatusUserLabel.Text = "";
@@ -77,6 +87,7 @@ namespace AiToolGui
                 }
                 this.languageToolStripMenuItem.DropDownItems.Add(lngToolStripMenuItem);
             }
+            
         }
         private void SetLanguageForm(string lng)
         {
@@ -264,6 +275,7 @@ namespace AiToolGui
 
         private void AITool_Shown(object sender, EventArgs e) // событие возникает при первом отображении формы
         {
+            /*
             string Login = Environment.UserDomainName + "\\" + Environment.UserName;
             if (cdb.Authorization(Login, "", true))
             {
@@ -281,6 +293,7 @@ namespace AiToolGui
                 if (FormLogin.OpenProgram == false)
                     this.Close();
             }
+            */
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
