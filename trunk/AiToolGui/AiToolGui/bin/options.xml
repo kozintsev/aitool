@@ -1,7 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<setting>
-  <login>ASCON\kov</login>
-  <dblocal>Access 2007</dblocal>
-  <pathbd>\Base\aitool.accdb</pathbd>
+<?xml version="1.0"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Host>localhost</Host>
+  <Port>3306</Port>
+  <BaseName>sdpm</BaseName>
+  <UserName>root</UserName>
+  <Password>9L37VKNV4X</Password>
   <Language>Russia</Language>
-</setting>
+  <WindowsUser>false</WindowsUser>
+  <SavePass>true</SavePass>
+</Settings>
