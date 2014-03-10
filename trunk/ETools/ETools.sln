@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETools", "ETools\ETools.csproj", "{A9F108DB-E431-4E8C-BD33-127A1A8FE685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2PService", "P2PService\P2PService.csproj", "{DADBCD5B-8E0E-4644-992E-CA7D887B64EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2P", "P2P\P2P.csproj", "{8A8CE68F-4526-4641-9825-11302AD1B48D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9F108DB-E431-4E8C-BD33-127A1A8FE685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F108DB-E431-4E8C-BD33-127A1A8FE685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F108DB-E431-4E8C-BD33-127A1A8FE685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F108DB-E431-4E8C-BD33-127A1A8FE685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DADBCD5B-8E0E-4644-992E-CA7D887B64EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DADBCD5B-8E0E-4644-992E-CA7D887B64EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DADBCD5B-8E0E-4644-992E-CA7D887B64EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DADBCD5B-8E0E-4644-992E-CA7D887B64EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8CE68F-4526-4641-9825-11302AD1B48D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8CE68F-4526-4641-9825-11302AD1B48D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8CE68F-4526-4641-9825-11302AD1B48D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8CE68F-4526-4641-9825-11302AD1B48D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
