@@ -121,7 +121,6 @@
     <Compile Include="CreateSpecification.Designer.cs">
       <DependentUpon>CreateSpecification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global.cs" />
     <Compile Include="GraphEditor.cs">
       <SubType>Component</SubType>
     </Compile>

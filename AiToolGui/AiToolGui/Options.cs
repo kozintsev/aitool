@@ -13,8 +13,8 @@ namespace AiToolGui
         private string optionspath = Application.StartupPath + "\\options2.xml";
         public Options()
         {
-            InitializeComponent();            
-            FileStream fsin = new FileStream(Global.OptionsPath, FileMode.Open, FileAccess.Read);
+            InitializeComponent();
+            FileStream fsin = new FileStream(optionspath, FileMode.Open, FileAccess.Read);
             XmlSerializer serializerin = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
             Settings setting = new Settings();
             setting = (Settings)serializerin.Deserialize(fsin);
@@ -46,7 +46,7 @@ namespace AiToolGui
             setting.SavePass = checkSavePass.Checked;
             setting.Language = "Russian";
 
-            FileStream fsout = new FileStream(Global.OptionsPath, FileMode.Create, FileAccess.Write);
+            FileStream fsout = new FileStream(optionspath, FileMode.Create, FileAccess.Write);
             XmlSerializer serializerout = new XmlSerializer(typeof(Settings), new Type[] { typeof(Settings) });
             serializerout.Serialize(fsout, setting);
             fsout.Close();
