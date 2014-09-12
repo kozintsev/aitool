@@ -24,6 +24,14 @@ namespace ESKDClassifier
         {
             InitializeComponent();
             Uri uri = new Uri(AppDomain.CurrentDomain.BaseDirectory + @"PictureBackground.jpg", UriKind.Relative);
+            ESKDListView.Items.Clear();
+
+            Classifier classifier = new Classifier();
+            classifier.CodESKD = "71";
+            classifier.Description = "sdfsdf";
+
+            ESKDListView.Items.Add(classifier);
+
             //TreeViewItem newItem = new TreeViewItem();
             //newItem.Header = "Привет мир!";
             //ESKDTree.Items.Add(newItem);
@@ -64,6 +72,10 @@ namespace ESKDClassifier
             {
                 //item.SetValue(TreeViewItem.IsSelectedProperty, true);
                 selectedItem = item;
+                if (selectedItem.DataContext is Classifier)
+                {
+
+                }
             }
         }
     }
