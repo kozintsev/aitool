@@ -23,6 +23,15 @@
                 </Grid.ColumnDefinitions>
                 <TreeView Name="ESKDTree" TreeViewItem.Selected="ESKDTree_Selected_Item"  SelectedItemChanged="ESKDTree_ItemChange">
                     <TreeView.Resources>
+                        <DataTemplate DataType="{x:Type self:Classifier}" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/green.png" Margin="0,0,5,0" />
+                            <TextBlock Text="{Binding CodESKD}" />
+                            <TextBlock Text=" - "/>
+                            <TextBlock Text="{Binding Description}" />
+                        </StackPanel>
+                        </DataTemplate>
+                        <!--
                         <HierarchicalDataTemplate DataType="{x:Type self:Classifier}" ItemsSource="{Binding SubClasses}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="Images/green.png" Margin="0,0,5,0" />
@@ -36,21 +45,21 @@
                                 <Image Source="Images/green.png" Margin="0,0,5,0" />
                                 <TextBlock Text="{Binding Name}" />
                             </StackPanel>
-                        </DataTemplate>
+                        </DataTemplate> -->
                     </TreeView.Resources>
                 </TreeView>
 
-                <ListView Grid.Column="2" Name="ESKDListView" Width="auto"
-              ItemsSource="{Binding ElementName=myWindow, Path=Games}">
+                <ListView Grid.Column="2" Name="ESKDListView" Width="auto" ItemsSource="{Binding Classifier}">
+              <!-- temsSource="{Binding ElementName=ESKDClassifier, Path=ESKDList}" --> 
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Title" DisplayMemberBinding="{Binding CodESKD}" />
                             <GridViewColumn Header="Image">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
-                                            <Image Source="{Binding Image}" />
-                                        </Grid>
+                                            <!--<Image Source="{Binding Image}" />
+-->                                        </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
