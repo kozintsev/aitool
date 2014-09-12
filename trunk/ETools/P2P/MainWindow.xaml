@@ -62,7 +62,7 @@
         <Button Name="RefreshButton" Click="RefreshButton_Click">Обновить</Button>
         <ListBox x:Name="myListBox" Height="344"/>
         <TextBox x:Name="MsgBox" Height="23" TextWrapping="Wrap" Text=""/>
-        <ListBox x:Name="PeerList" ItemTemplate="{DynamicResource PeerEntryDataTemplate}" ButtonBase.Click="PeerList_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="91">
+        <ListBox x:Name="PeerList" ItemTemplate="{DynamicResource PeerEntryDataTemplate}" ButtonBase.Click="PeerList_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="91" SelectionChanged="PeerList_SelectionChanged">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Margin" Value="10" />

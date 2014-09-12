@@ -1,0 +1,74 @@
+﻿<Window x:Name="ESKDClassifier" x:Class="ESKDClassifier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:self="clr-namespace:ESKDClassifier"
+        Title="Классификатор ЕСКД" Height="592" Width="1089" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+
+        <DockPanel LastChildFill="True" Margin="10">
+            <ToolBar DockPanel.Dock="Top" Height="44" VerticalAlignment="Top" Margin="0,0,0,0">
+                <Button x:Name="AddClass" Content="Добавить" Height="39" VerticalAlignment="Top" Click="AddClass_Click"/>
+                <Button x:Name="DelClass" Content="Удалить" Height="39" VerticalAlignment="Top" Click="DelClass_Click"/>
+            </ToolBar>
+            <StatusBar DockPanel.Dock="Bottom" Height="54" Margin="0,0,10,0" VerticalAlignment="Bottom"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TreeView Name="ESKDTree" TreeViewItem.Selected="ESKDTree_Selected_Item"  SelectedItemChanged="ESKDTree_ItemChange">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type self:Classifier}" ItemsSource="{Binding SubClasses}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/green.png" Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding CodESKD}" />
+                                <TextBlock Text=" - "/>
+                                <TextBlock Text="{Binding Description}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type self:SubClass}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/green.png" Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+
+                <ListView Grid.Column="2" Name="ESKDListView" Width="auto"
+              ItemsSource="{Binding ElementName=myWindow, Path=Games}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Image">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Image Source="{Binding Image}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBox Name="FindTree" Grid.Row="1" Text="Поиск" />
+                <TextBox Name="FindList" Grid.Row="1" Grid.Column="2" Text="Поиск 2" />
+                <GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="5"
+                      VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+            </Grid>
+            
+ 
+                
+
+        </DockPanel>
+
+
+    </Grid>
+</Window>

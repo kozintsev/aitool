@@ -213,5 +213,10 @@ namespace P2P
             //    MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        private void PeerList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
     }
 }
