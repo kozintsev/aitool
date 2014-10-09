@@ -10,7 +10,9 @@
                 <Button x:Name="AddClass" Content="Добавить" Height="39" VerticalAlignment="Top" Click="AddClass_Click"/>
                 <Button x:Name="DelClass" Content="Удалить" Height="39" VerticalAlignment="Top" Click="DelClass_Click"/>
             </ToolBar>
-            <StatusBar DockPanel.Dock="Bottom" Height="54" Margin="0,0,10,0" VerticalAlignment="Bottom"/>
+            <StatusBar DockPanel.Dock="Bottom" Height="54" Margin="0,0,10,0" VerticalAlignment="Bottom">
+                <Label Name = "labelInfoForUser" Content="Готово!"/>
+            </StatusBar>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -23,16 +25,7 @@
                 </Grid.ColumnDefinitions>
                 <TreeView Name="ESKDTree" TreeViewItem.Selected="ESKDTree_Selected_Item"  SelectedItemChanged="ESKDTree_ItemChange">
                     <TreeView.Resources>
-                        <DataTemplate DataType="{x:Type self:Classifier}" >
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/green.png" Margin="0,0,5,0" />
-                            <TextBlock Text="{Binding CodESKD}" />
-                            <TextBlock Text=" - "/>
-                            <TextBlock Text="{Binding Description}" />
-                        </StackPanel>
-                        </DataTemplate>
-                        <!--
-                        <HierarchicalDataTemplate DataType="{x:Type self:Classifier}" ItemsSource="{Binding SubClasses}">
+                        <HierarchicalDataTemplate DataType="{x:Type self:ESKDClass}" ItemsSource="{Binding eskdViews}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="Images/green.png" Margin="0,0,5,0" />
                                 <TextBlock Text="{Binding CodESKD}" />
@@ -40,16 +33,18 @@
                                 <TextBlock Text="{Binding Description}" />
                             </StackPanel>
                         </HierarchicalDataTemplate>
-                        <DataTemplate DataType="{x:Type self:SubClass}">
+                        <!--
+                        <DataTemplate DataType="{x:Type self:ESKDView}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="Images/green.png" Margin="0,0,5,0" />
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding CodESKD}" />
                             </StackPanel>
-                        </DataTemplate> -->
+                        </DataTemplate>
+                         -->
                     </TreeView.Resources>
                 </TreeView>
 
-                <ListView Grid.Column="2" Name="ESKDListView" Width="auto" ItemsSource="{Binding Classifier}">
+                <ListView Grid.Column="2" Name="ESKDListView" Width="auto" ItemsSource="{Binding ESKDClass}">
               <!-- temsSource="{Binding ElementName=ESKDClassifier, Path=ESKDList}" --> 
                     <ListView.View>
                         <GridView>
