@@ -24,9 +24,9 @@ namespace ESKDClassifier
             InitializeComponent();
         }
 
-        private Classifier classifier;
+        private ESKDClass classifier;
 
-        public Classifier GetClassifier()
+        public ESKDClass GetClassifier()
         {
             return classifier;
         }
@@ -40,10 +40,10 @@ namespace ESKDClassifier
         {
             // Блок проперок
 
-            classifier = new Classifier();
+            classifier = new ESKDClass();
             classifier.CodESKD = this.CodeESKD.Text;
             classifier.Description = this.DescESKD.Text;
-            classifier.Image = this.ImageESKD.Text;
+            //classifier.Image = this.ImageESKD.Text;
             this.Close();
         }
     }

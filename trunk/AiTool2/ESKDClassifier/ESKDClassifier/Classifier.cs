@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace ESKDClassifier
+    //Класс:
+    //42 - устройства и системы контроля и регулирования парамметрами технолоогического процесса
+    //75 - детали-тела вращения
+    //74 - детали-не тела вращения
 {
-    public class Classifier
+    [Serializable]
+    public class ESKDClass
     {
-        public Classifier()
+        public ESKDClass() 
         {
-            this.SubClasses = new ObservableCollection<Classifier>();
+            this.eskdViews = new ObservableCollection<ESKDClass>();
         }
 
-        public ObservableCollection<Classifier> SubClasses { get; set; }
+        public ObservableCollection<ESKDClass> eskdViews { get; set; }
 
         public string CodESKD
         {
@@ -26,17 +32,36 @@ namespace ESKDClassifier
             set;
         }
 
-        public string Image
+        public bool View = false;
+
+        public string PathPicture
         {
             get;
             set;
         }
 
-        public Classifier Parent
+    }
+    // под класс
+    //public class SubClass : Classifier
+    //{
+    //    public string Name
+    //    {
+    //        get;
+    //        set;
+    //    }
+    //}
+    //Группа
+
+
+    // Подгруппа
+
+    //Вид
+    public class ESKDView
+    {
+        public string CodESKD
         {
             get;
             set;
         }
-
     }
 }

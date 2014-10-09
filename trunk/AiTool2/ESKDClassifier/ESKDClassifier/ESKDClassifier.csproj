@@ -60,7 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SubClass.cs" />
     <Page Include="AddClassifier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
