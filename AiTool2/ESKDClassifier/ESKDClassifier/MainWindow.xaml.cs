@@ -28,7 +28,6 @@ namespace ESKDClassifier
     {
         public string pathFileXML = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\ESKDClassifier\\ESKDClassifier.xml";
         ESKDClass eskdClass;
-        //ObservableCollection<ESKDClass> collectionClassifier;
         List<ESKDClass> Classifier;
 
 
@@ -38,96 +37,6 @@ namespace ESKDClassifier
             string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
         }
 
-        //void LoadToXML()
-        //{
-        //    XmlDocument d = new XmlDocument();
-        //    d.Load(pathFileXML);
-        //    XmlNodeList list = d.DocumentElement.ChildNodes;
-        //    foreach (XmlNode node in list)
-        //    {
-        //        string CodESKD =  node.Attributes["CodESKD"].Value;
-        //        string Description = node.Attributes["Description"].Value;
-                
-        //        Classifier eskd = new Classifier();
-        //        eskd.CodESKD = CodESKD;
-        //        eskd.Description = Description;
-        //        eskd.SubClasses = getXmlNodes(node.ChildNodes);
-                
-        //        collectionClassifier.Add(eskd);
-        //        //string ESKDClass = node.SelectSingleNode("ESKDClass").InnerText;
-        //        //string last = node.SelectSingleNode("last").InnerText;
-        //    }
-        //}
-
-        //ObservableCollection<ESKDClass> getXmlNodes(XmlNodeList nodes)
-        //{
-        //    ObservableCollection<Classifier> coll = new ObservableCollection<Classifier>();
-        //    foreach (XmlNode node in nodes)
-        //    {
-        //        string CodESKD = node.Attributes["CodESKD"].Value;
-        //        string Description = node.Attributes["Description"].Value;
-        //        ESKDClass eskd = new ESKDClass();
-        //        eskd.CodESKD = CodESKD;
-        //        eskd.Description = Description;
-        //        eskd.SubClasses = getXmlNodes(node.ChildNodes);
-        //        coll.Add(eskd);
-                
-        //    }
-        //    return coll;
-        //}
-        //void SaveToXml(List<ESKDClass> list)
-        //{
-        //    XmlDocument d = new XmlDocument();
-        //    XmlNode root = d.CreateNode(XmlNodeType.Element, "ESKDClassifier", "");
-        //    d.AppendChild(root);
-        //    try
-        //    {
-        //        for (int i = 0; i < list.Count; i++)
-        //        {
-
-        //            //XmlNode n2 = 
-        //            XmlNode n = d.CreateNode(XmlNodeType.Element, "ESKDClass", " ");
-        //            n.Attributes.Append(d.CreateAttribute("CodESKD"));
-        //            n.Attributes.Append(d.CreateAttribute("Description"));
-        //            n.Attributes.Append(d.CreateAttribute("Image"));
-        //            n.Attributes["CodESKD"].Value = list[i].CodESKD;
-        //            n.Attributes["Description"].Value = list[i].Description;
-        //            n.Attributes["PathPicture"].Value = list[i].PathPicture;
-        //            XmlNode n2 = root.AppendChild(n);
-        //            if (list[i].eskdViews.Count > 0)
-        //                n2.AppendChild(setXmlNode(list[i].eskdViews, d));
-
-        //        }
-
-
-        //        d.Save(pathFileXML);
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        //}
-
-        //private XmlNode setXmlNode(ObservableCollection<ESKDClass> collection, XmlDocument d)
-        //{
-
-        //    XmlNode n = d.CreateNode(XmlNodeType.Element, "ESKDClass", " ");
-
-        //    n.Attributes.Append(d.CreateAttribute("CodESKD"));
-        //    n.Attributes.Append(d.CreateAttribute("Description"));
-        //    n.Attributes.Append(d.CreateAttribute("Image"));
-
-        //    for (int j = 0; j < collection.Count; j++)
-        //    {
-        //        n.Attributes["CodESKD"].Value = collection[j].CodESKD;
-        //        n.Attributes["Description"].Value = collection[j].Description;
-        //        n.Attributes["PathPicture"].Value = collection[j].PathPicture;
-        //        if (collection[j].eskdViews.Count > 0)
-        //            n.AppendChild(setXmlNode(collection[j].eskdViews, d));
-        //    }
-        //    return n;
-        //}
-
 
         public MainWindow()
         {
@@ -136,33 +45,36 @@ namespace ESKDClassifier
             Classifier = new List<ESKDClass>();
 
            
-            ESKDClass root = new ESKDClass();
-            root.CodESKD = "42";
-            root.Description = "устройства и системы контроля и регулирования парамметрами технолоогического процесса";
+            //ESKDClass root = new ESKDClass();
+            //root.CodESKD = "42";
+            //root.Description = "устройства и системы контроля и регулирования парамметрами технолоогического процесса";
 
-            ESKDClass child = new ESKDClass();
-            child.CodESKD = "421111";
-            child.Description = "устройства и системы контроля и регулирования параметров технологических процессов электрические, преобразователи пневмоэлектрические, аналоговые, постоянного тока ";
+            //ESKDClass child = new ESKDClass();
+            //child.CodESKD = "421111";
+            //child.Description = "устройства и системы контроля и регулирования параметров технологических процессов электрические, преобразователи пневмоэлектрические, аналоговые, постоянного тока ";
 
-            root.eskdViews.Add(child);
+            //root.eskdViews.Add(child);
 
-            Classifier.Add(root);
-            Classifier.Add(new ESKDClass() { CodESKD = "75", Description = "детали-тела вращения" });
-            Classifier.Add(new ESKDClass() { CodESKD = "74", Description = "детали-не тела вращения" });
+            //Classifier.Add(root);
+            //Classifier.Add(new ESKDClass() { CodESKD = "75", Description = "детали-тела вращения" });
+            //Classifier.Add(new ESKDClass() { CodESKD = "74", Description = "детали-не тела вращения" });
+
+            
+           
+            ////создаём файл сериализации
+            //FileStream fsout = new FileStream(pathFileXML, FileMode.Create, FileAccess.Write);
+            //XmlSerializer serializerout = new XmlSerializer(typeof(List<ESKDClass>), new Type[] { typeof(ESKDClass) });
+            //serializerout.Serialize(fsout, Classifier);
+            //fsout.Close();
+
+            //загрузка данных
+            FileStream fsin = new FileStream(pathFileXML, FileMode.Open, FileAccess.Read);
+            XmlSerializer serializerin = new XmlSerializer(typeof(List<ESKDClass>), new Type[] { typeof(ESKDClass) });
+            Classifier = (List<ESKDClass>)serializerin.Deserialize(fsin);
+            fsin.Close();
 
             ESKDListView.ItemsSource = Classifier;
             ESKDTree.ItemsSource = Classifier;
-           
-            //создаём файл сериализации
-            FileStream fsout = new FileStream(pathFileXML, FileMode.Create, FileAccess.Write);
-            XmlSerializer serializerout = new XmlSerializer(typeof(List<ESKDClass>), new Type[] { typeof(ESKDClass) });
-            serializerout.Serialize(fsout, Classifier);
-            fsout.Close();
-
-
-            //LoadToXML();
-            //ESKDListView.Items.Add(root);
-            //ESKDListView.Items.Clear();
 
         }
 
