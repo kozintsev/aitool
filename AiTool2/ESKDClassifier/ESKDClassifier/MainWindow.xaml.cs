@@ -29,12 +29,15 @@ namespace ESKDClassifier
         public string pathFileXML = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\ESKDClassifier\\ESKDClassifier.xml";
         ESKDClass eskdClass;
         List<ESKDClass> Classifier;
+        List<ESKDClass> classList;
 
-
-
-        private void LoadData()
+        private void Serialization()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            ////создаём файл сериализации
+            FileStream fsout = new FileStream(pathFileXML, FileMode.Create, FileAccess.Write);
+            XmlSerializer serializerout = new XmlSerializer(typeof(List<ESKDClass>), new Type[] { typeof(ESKDClass) });
+            serializerout.Serialize(fsout, Classifier);
+            fsout.Close();
         }
 
 
@@ -43,6 +46,8 @@ namespace ESKDClassifier
             InitializeComponent();
 
             Classifier = new List<ESKDClass>();
+            classList = new List<ESKDClass>();
+            classList.Clear();
 
            
             //ESKDClass root = new ESKDClass();
@@ -73,8 +78,9 @@ namespace ESKDClassifier
             Classifier = (List<ESKDClass>)serializerin.Deserialize(fsin);
             fsin.Close();
 
-            ESKDListView.ItemsSource = Classifier;
+            
             ESKDTree.ItemsSource = Classifier;
+            ESKDListView.ItemsSource = classList;
 
         }
 
@@ -95,9 +101,11 @@ namespace ESKDClassifier
                 ESKDClass parentclass = selectedItem.DataContext as ESKDClass;
                 parentclass.eskdViews.Add(eskdClass);
             }
-            ESKDTree.Items.Refresh();
+            //ESKDTree.Items.Refresh();
+            selectedItem.Items.Refresh();
+            //selectedItem.IsExpanded = true;
 
-            //SaveToXml(collectionClassifier);
+            Serialization();
 
             
         }
@@ -118,9 +126,27 @@ namespace ESKDClassifier
             var item = e.OriginalSource as TreeViewItem;
             if (item != null)
             {
-                //item.SetValue(TreeViewItem.IsSelectedProperty, true);
+                classList.Clear();
+                ESKDClass selectedClass = item.DataContext as ESKDClass;
+                ObservableCollection<ESKDClass> childClasses = selectedClass.eskdViews;
+
+                for (int i = 0; i < childClasses.Count; i++ )
+                    classList.Add(childClasses[i]);
+                ESKDListView.Items.Refresh();               
+
                 selectedItem = item;
             }
+        }
+
+        private void ESKDClassifier_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Serialization();
+        }
+
+        private void ESKDTree_Collapsed(object sender, RoutedEventArgs e)
+        {
+            //if (selectedItem != null)
+            //    selectedItem.IsExpanded = true;
         }
     }
 }
