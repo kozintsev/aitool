@@ -27,6 +27,8 @@ namespace ESKDClassifier
     public partial class MainWindow : Window
     {
         public string pathFileXML = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\ESKDClassifier\\ESKDClassifier.xml";
+        public string DirFromFiles = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\ESKDClassifier\\Files\\";
+
         ESKDClass eskdClass;
         List<ESKDClass> Classifier;
         List<ESKDClass> classList;
@@ -91,6 +93,8 @@ namespace ESKDClassifier
             AddClassifier addClass = new AddClassifier();
             addClass.ShowDialog();
             eskdClass = addClass.GetClassifier();
+            if (addClass.Cancel)
+                return;
 
             if (selectedItem == null)
             {
@@ -102,7 +106,8 @@ namespace ESKDClassifier
                 parentclass.eskdViews.Add(eskdClass);
             }
             //ESKDTree.Items.Refresh();
-            selectedItem.Items.Refresh();
+            if (selectedItem != null)
+                selectedItem.Items.Refresh();
             //selectedItem.IsExpanded = true;
 
             Serialization();
@@ -130,8 +135,11 @@ namespace ESKDClassifier
                 ESKDClass selectedClass = item.DataContext as ESKDClass;
                 ObservableCollection<ESKDClass> childClasses = selectedClass.eskdViews;
 
-                for (int i = 0; i < childClasses.Count; i++ )
+                for (int i = 0; i < childClasses.Count; i++)
+                {
+                    childClasses[i].FullPathPictures = DirFromFiles + childClasses[i].PathPicture;
                     classList.Add(childClasses[i]);
+                }
                 ESKDListView.Items.Refresh();               
 
                 selectedItem = item;
