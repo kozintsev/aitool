@@ -90,8 +90,9 @@ namespace ESKDClassifier
 
         private void AddClass_Click(object sender, RoutedEventArgs e)
         {
-            AddClassifier addClass = new AddClassifier();
+            AddClassifier addClass = new AddClassifier(this);            
             addClass.ShowDialog();
+
             eskdClass = addClass.GetClassifier();
             if (addClass.Cancel)
                 return;

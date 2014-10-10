@@ -21,9 +21,10 @@ namespace ESKDClassifier
     /// </summary>
     public partial class AddClassifier : Window
     {
-        public AddClassifier()
+        public AddClassifier(Window win)
         {
             InitializeComponent();
+            this.Owner = win;
         }
 
         private string filename = string.Empty;
