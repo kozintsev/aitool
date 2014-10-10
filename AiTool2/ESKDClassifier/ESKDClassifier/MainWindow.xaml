@@ -47,7 +47,16 @@
                 </TreeView>
 
                 <ListView Grid.Column="2" Name="ESKDListView" Width="auto" ItemsSource="{Binding ESKDClass}" SelectionChanged="ESKDListView_SelectionChanged">
-              <!-- temsSource="{Binding ElementName=ESKDClassifier, Path=ESKDList}" --> 
+              <!-- temsSource="{Binding ElementName=ESKDClassifier, Path=ESKDList}" -->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="150" VerticalAlignment="Top">
+                                <Image Source="{Binding FullPathPictures}"></Image>
+                                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center"  Text="{Binding CodESKD}" ></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <!--
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Код" Width="100" DisplayMemberBinding="{Binding CodESKD}" />
@@ -62,6 +71,7 @@
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
+                    -->
                 </ListView>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Label Content="Поиск:"></Label>
