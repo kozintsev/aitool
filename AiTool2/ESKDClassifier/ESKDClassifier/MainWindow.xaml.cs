@@ -156,5 +156,13 @@ namespace ESKDClassifier
             //if (selectedItem != null)
             //    selectedItem.IsExpanded = true;
         }
+
+        private void ESKDListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListView lv = e.OriginalSource as ListView;
+
+            ESKDClass lvi = lv.SelectedItem as ESKDClass;
+            txtBxCode.Text = lvi.CodESKD;
+        }
     }
 }
