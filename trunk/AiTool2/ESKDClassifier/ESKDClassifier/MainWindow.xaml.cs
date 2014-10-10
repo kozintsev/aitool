@@ -161,9 +161,12 @@ namespace ESKDClassifier
         private void ESKDListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListView lv = e.OriginalSource as ListView;
-
-            ESKDClass lvi = lv.SelectedItem as ESKDClass;
-            txtBxCode.Text = lvi.CodESKD;
+            if (lv != null)
+            {
+                ESKDClass lvi = lv.SelectedItem as ESKDClass;
+                if (lvi != null)
+                    txtBxCode.Text = lvi.CodESKD;
+            }
         }
     }
 }
