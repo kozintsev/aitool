@@ -63,9 +63,14 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-
-                <TextBox Name="FindTree" Grid.Row="1" Text="Поиск" />
-                <TextBox Name="FindList" Grid.Row="1" Grid.Column="2" Text="Поиск 2" />
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Label Content="Поиск:"></Label>
+                    <TextBox Name="FindTree" Width="250" Height="28" Text="" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                    <Label Content="Поиск:"></Label>
+                    <TextBox Name="FindList"  Width="250" Height="28" Text="" />
+                </StackPanel>                
                 <GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="5"
                       VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
             </Grid>
