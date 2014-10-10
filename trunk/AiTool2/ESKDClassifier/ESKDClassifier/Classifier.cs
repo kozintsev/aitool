@@ -26,10 +26,11 @@ namespace ESKDClassifier
             set;
         }
 
+        private string description;
         public string Description
         {
-            get;
-            set;
+            get { return description; }
+            set {description = value; }
         }
 
         //public bool view = false;
@@ -45,6 +46,21 @@ namespace ESKDClassifier
         {
             get { return fullPathPictures; }
             set { fullPathPictures = value; }
+        }
+
+        [NonSerialized]
+        private string hyphen;
+        public string Hyphen
+        {
+            get 
+            {
+                if (String.IsNullOrEmpty(description))
+                    hyphen = "";
+                else
+                    hyphen = " - ";
+
+                return hyphen;
+            }
         }
 
     }
