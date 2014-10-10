@@ -23,11 +23,11 @@
             <Label Grid.Row="1" Padding="5" Margin="5">Описание:</Label>
             <Label Grid.Row="2" Padding="5" Margin="5">Изображение:</Label>
             <TextBox x:Name="CodeESKD" Grid.Row="0" Grid.Column="1" Margin="3" Height="auto"
-                 VerticalAlignment="Center">123456</TextBox>
+                 VerticalAlignment="Center"></TextBox>
             <TextBox x:Name="DescESKD" Grid.Row="1" Grid.Column="1" Margin="3" Height="150"
-                 VerticalAlignment="Center" TextWrapping = "Wrap" >Описание ...</TextBox>
+                 VerticalAlignment="Center" TextWrapping = "Wrap" ></TextBox>
             <TextBox x:Name="ImageESKD" Grid.Row="2" Grid.Column="1" Margin="3" Height="auto"
-                 VerticalAlignment="Center">C:\Web</TextBox>
+                 VerticalAlignment="Center"></TextBox>
             <Button Grid.Row="2" Grid.Column="2" Margin="0,0,0,5" Padding="5">Обзор</Button>
 
         </Grid>
