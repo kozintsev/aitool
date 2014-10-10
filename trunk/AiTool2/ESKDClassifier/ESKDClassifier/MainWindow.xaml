@@ -48,13 +48,13 @@
               <!-- temsSource="{Binding ElementName=ESKDClassifier, Path=ESKDList}" --> 
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Title" DisplayMemberBinding="{Binding CodESKD}" />
-                            <GridViewColumn Header="Image">
+                            <GridViewColumn Header="Код" Width="100" DisplayMemberBinding="{Binding CodESKD}" />
+                            <GridViewColumn Header="Изображение" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
-                                            <!--<Image Source="{Binding Image}" />
--->                                        </Grid>
+                                            <Image Source="{Binding FullPathPictures}" />
+                                        </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

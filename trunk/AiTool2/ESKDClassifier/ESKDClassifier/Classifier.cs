@@ -32,12 +32,19 @@ namespace ESKDClassifier
             set;
         }
 
-        public bool View = false;
+        //public bool view = false;
 
         public string PathPicture
         {
             get;
             set;
+        }
+        [NonSerialized]
+        private string fullPathPictures;
+        public string FullPathPictures
+        {
+            get { return fullPathPictures; }
+            set { fullPathPictures = value; }
         }
 
     }
