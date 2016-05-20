@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.OleDb;
 using System.Data.SQLite;
 using System.Net;
 using System.IO;
-
-
-using Microsoft.Office.Interop;
-using Microsoft.Office.Interop.Word;
 using Word = Microsoft.Office.Interop.Word;
 
 
@@ -22,77 +13,73 @@ namespace WordParser
 {
     public partial class MainForm : Form
     {
-        int N = 0; 
-        string Str, DocPath;
-        string pathapp = System.Windows.Forms.Application.StartupPath;
-        private SQLiteConnection connLite;
-        private Word.Application wordapp;
+        private int _n;
+        private string _str, _docPath;
+        private readonly string _pathapp = Application.StartupPath;
+        private readonly SQLiteConnection _connLite;
+        private Word.Application _wordapp;
 
-        private Word.Document worddocument, newdocument;
-        private Word.Paragraphs wordparagraphs, newParagraphs;
-        private Word.Paragraph wordparagraph, newParagraph;
+        private Word.Document _worddocument, _newdocument;
+        private Word.Paragraphs _wordparagraphs, _newParagraphs;
+        private Word.Paragraph _wordparagraph, _newParagraph;
 
 
-        bool NPDict, Tran;
-        List<string> wordslist; // словарь известных слов
-        List<string> Dict; // формирующийся словарь
+        private bool _npDict, _tran;
+        private readonly List<string> _wordslist; // словарь известных слов
+        private List<string> _dict; // формирующийся словарь
 
         public MainForm()
         {
-            InitializeComponent();       
-            this.backgroundWorker.WorkerReportsProgress = true;
-			this.backgroundWorker.WorkerSupportsCancellation = true;
-			this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-			this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-			this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-
-            wordslist = new List<string>();
-            string commandText = "SELECT word FROM Words";
-            
-            string filedb = pathapp + "\\words.sqlite";
+            InitializeComponent();
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
+            backgroundWorker.DoWork += backgroundWorker_DoWork;
+            backgroundWorker.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
+            backgroundWorker.ProgressChanged += backgroundWorker_ProgressChanged;
+            _n = 0;
+            _wordslist = new List<string>();
+            var commandText = "SELECT word FROM Words";
+            var filedb = _pathapp + "\\words.sqlite";
             if (!File.Exists(filedb))
             {
-                MessageBox.Show("Отсутствует файл базы данных!", "Ошибка",
+                MessageBox.Show(@"Отсутствует файл базы данных!", @"Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            var dbConnection = string.Format("Data Source={0}", filedb);
+            try
+            {
 
-            string dbConnection = String.Format("Data Source={0}", filedb);
-			try
-			{
-            	
-            connLite = new SQLiteConnection(dbConnection);
-            connLite.Open();
-            SQLiteCommand comm = connLite.CreateCommand();
-            comm.CommandText = commandText;
-            SQLiteDataReader liteRead = comm.ExecuteReader();
-            while (liteRead.Read())
-             {
-                 wordslist.Add(liteRead["word"].ToString());
-             }
+                _connLite = new SQLiteConnection(dbConnection);
+                _connLite.Open();
+                var comm = _connLite.CreateCommand();
+                comm.CommandText = commandText;
+                var liteRead = comm.ExecuteReader();
+                while (liteRead.Read())
+                {
+                    _wordslist.Add(liteRead["word"].ToString());
+                }
 
-            commandText = "SELECT COUNT (*) FROM Words";
-            SQLiteCommand myCommand2 = connLite.CreateCommand();
-            myCommand2.CommandText = commandText;
-            N = Convert.ToInt32(myCommand2.ExecuteScalar());
-            CountWordsLabel.Text = Convert.ToString(myCommand2.ExecuteScalar());
-            connLite.Close();
-			}
-			catch(Exception ex){
-				MessageBox.Show("Ошибка подключения к База данных: " + ex.Message, "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);				
-			}
-            
-		}
+                commandText = "SELECT COUNT (*) FROM Words";
+                var myCommand2 = _connLite.CreateCommand();
+                myCommand2.CommandText = commandText;
+                _n = Convert.ToInt32(myCommand2.ExecuteScalar());
+                CountWordsLabel.Text = Convert.ToString(myCommand2.ExecuteScalar());
+                _connLite.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"Ошибка подключения к База данных: " + ex.Message, @"Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-        
         void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-           Parsing();
+            Parsing();
         }
 
         void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-
         {
 
             switch (e.UserState.ToString())
@@ -106,7 +93,6 @@ namespace WordParser
 
             }
             //progressBar2.Value = e.ProgressPercentage;
-
         }
 
         void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -116,208 +102,210 @@ namespace WordParser
 
         private void openDoc_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Текстовый файл (*.txt)|*.txt|Файлы Microsoft Word (*.doc; *.docx)|*.doc;*.docx";
+            var dlg = new OpenFileDialog
+            {
+                Filter = @"Текстовый файл (*.txt)|*.txt|Файлы Microsoft Word (*.doc; *.docx)|*.doc;*.docx"
+            };
             if (dlg.ShowDialog() != DialogResult.OK)
                 return;
-            DocPath = dlg.FileName;
+            _docPath = dlg.FileName;
 
-            NPDict = NotParDict.Checked;
-            Tran = checkTransl.Checked;
-            labelFileName.Text = DocPath;
-            
+            _npDict = NotParDict.Checked;
+            _tran = checkTransl.Checked;
+            labelFileName.Text = _docPath;
+
             backgroundWorker.RunWorkerAsync();
         }
 
         private void Parsing()
         {
-        	string e = Path.GetExtension(DocPath);
-        	switch (e)
-        	{
-        		case ".txt":
-        			TextParsing();
-        			break;
-        		case ".doc":
-        			WordParsing();
-        			break;
-        		case ".docx":
-        			WordParsing();
-        			break;
-        			
-        	}
+            var e = Path.GetExtension(_docPath);
+            switch (e)
+            {
+                case ".txt":
+                    TextParsing();
+                    break;
+                case ".doc":
+                    WordParsing();
+                    break;
+                case ".docx":
+                    WordParsing();
+                    break;
+
+            }
         }
         private void TextParsing()
         {
-        	string [] str;
-        	str = File.ReadAllLines(DocPath);
-        	int w = 0, i = 0, j = 0;
-			try
-			{
-  				// read from file or write to file
-  				//str.Count
-  				Dict = new List<string>();
-  				Dict.Clear();
-  				bool FindInDict = false;
-  				bool FindInWordList = false;
-  				string strSaveInDict = String.Empty;
-                int m = str.Length;
-  				foreach (string s in str)
-  				{
-  					string [] split = s.Split(new Char [] {' ', ',', '.', ':', '\t' });
-                    int n = split.Length;
-                    j = 0;
-  					foreach (string s2 in split)
-  					{
-  						if (s2 == "" || s2 == " " || s2.Length <= 3) break;
-  						strSaveInDict = s2;
-  						strSaveInDict = strSaveInDict.Trim(); // убрать пробелы
-                        strSaveInDict = strSaveInDict.ToLower();
-  						foreach (string find in Dict)
-  						{
-  							if (strSaveInDict == find) FindInDict = true; 
-  						}
-  						if (!FindInDict)
-  						{							
-  							
-                            foreach (string word in wordslist)
-                            {
-                            	if (word == strSaveInDict) 
-                            		FindInWordList = true;
-                            }
-                            if (FindInWordList == false)
-  								Dict.Add(strSaveInDict);
-                            FindInWordList = false;
-							w++;  							
-  						}
-  						FindInDict = false;
-                        j++;
-                        double proc1 = ((j * 100) / n);
-                        backgroundWorker.ReportProgress((int)Math.Ceiling(proc1), 1);
-  					}
-                    i++;
-                    double proc2 = ((i * 100) / m);
-                    backgroundWorker.ReportProgress((int)Math.Ceiling(proc2), 2);  					
-  				}
-  				FileInfo t = new FileInfo(Path.GetDirectoryName(DocPath) + @"Dict.txt");
-  				StreamWriter Tex = t.CreateText();
-  				foreach (string word in Dict)
-  				{
-					Tex.WriteLine(word);
-  				}
-				Tex.Close();
-				backgroundWorker.ReportProgress(100, 1);
-                backgroundWorker.ReportProgress(100, 2);
-				MessageBox.Show("Выполненно! Слов добавленно: " + w.ToString(), "Готово!",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-  				
-			}
-			catch(Exception ex)
+            var str = File.ReadAllLines(_docPath);
+            int w = 0, i = 0, j = 0;
+            try
             {
-                MessageBox.Show("Ошибка при работе с Текстовым файлом:" +  ex.Message, "Ошибка",
+                // read from file or write to file
+                //str.Count
+                _dict = new List<string>();
+                _dict.Clear();
+                var findInDict = false;
+                var findInWordList = false;
+                var m = str.Length;
+                if (m == 0) return;
+                foreach (var s in str)
+                {
+                    var split = s.Split(' ', ',', '.', ':', '\t');
+                    var n = split.Length;
+                    if (n == 0) continue;
+                    j = 0;
+                    foreach (var s2 in split)
+                    {
+                        if (s2 == "" || s2 == " " || s2.Length <= 3) break;
+                        var strSaveInDict = s2;
+                        strSaveInDict = strSaveInDict.Trim(); // убрать пробелы
+                        strSaveInDict = strSaveInDict.ToLower();
+                        foreach (var find in _dict)
+                        {
+                            if (strSaveInDict == find) findInDict = true;
+                        }
+                        if (!findInDict)
+                        {
+
+                            foreach (var word in _wordslist)
+                            {
+                                if (word == strSaveInDict)
+                                    findInWordList = true;
+                            }
+                            if (findInWordList == false)
+                                _dict.Add(strSaveInDict);
+                            findInWordList = false;
+                            w++;
+                        }
+                        findInDict = false;
+                        j++;
+                        double proc1 = ((100 * j) / n);
+                        backgroundWorker.ReportProgress((int)Math.Ceiling(proc1), 1);
+                    }
+                    i++;
+                    double proc2 = ((100 * i) / m);
+                    backgroundWorker.ReportProgress((int)Math.Ceiling(proc2), 2);
+                }
+                var t = new FileInfo(Path.GetDirectoryName(_docPath) + @"Dict.txt");
+                var tex = t.CreateText();
+                foreach (var word in _dict)
+                {
+                    tex.WriteLine(word);
+                }
+                tex.Close();
+                backgroundWorker.ReportProgress(100, 1);
+                backgroundWorker.ReportProgress(100, 2);
+                MessageBox.Show(@"Выполненно! Слов добавленно: " + w.ToString(), @"Готово!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при работе с Текстовым файлом:" + ex.Message, "Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+            }
         }
         private void WordParsing()
         {
-        	try
+            try
             {
-                wordapp = new Word.Application();
-                wordapp.Visible = true;
-                Object filename = DocPath;
-                Object confirmConversions = true;
-                Object readOnly = false;
-                Object addToRecentFiles = true;
-                Object passwordDocument = Type.Missing;
-                Object passwordTemplate = Type.Missing;
-                Object revert = false;
-                Object writePasswordDocument = Type.Missing;
-                Object writePasswordTemplate = Type.Missing;
-                Object format = Type.Missing;
-                Object encoding = Type.Missing; ;
-                Object oVisible = Type.Missing;
-                Object openConflictDocument = Type.Missing;
-                Object openAndRepair = Type.Missing;
-                Object documentDirection = Type.Missing;
-                Object noEncodingDialog = false;
-                Object xmlTransform = Type.Missing;
+                _wordapp = new Word.Application();
+                _wordapp.Visible = true;
+                object filename = _docPath;
+                object confirmConversions = true;
+                object readOnly = false;
+                object addToRecentFiles = true;
+                var passwordDocument = Type.Missing;
+                var passwordTemplate = Type.Missing;
+                object revert = false;
+                var writePasswordDocument = Type.Missing;
+                var writePasswordTemplate = Type.Missing;
+                var format = Type.Missing;
+                var encoding = Type.Missing; ;
+                var oVisible = Type.Missing;
+                var openConflictDocument = Type.Missing;
+                var openAndRepair = Type.Missing;
+                var documentDirection = Type.Missing;
+                object noEncodingDialog = false;
+                var xmlTransform = Type.Missing;
 
-                worddocument = wordapp.Documents.Open(ref filename,
+                _worddocument = _wordapp.Documents.Open(ref filename,
                 ref confirmConversions, ref readOnly, ref addToRecentFiles,
                 ref passwordDocument, ref passwordTemplate, ref revert,
                 ref writePasswordDocument, ref writePasswordTemplate,
                 ref format, ref encoding, ref oVisible,
                 ref openAndRepair, ref documentDirection, ref noEncodingDialog, ref xmlTransform);
 
-                wordparagraphs = worddocument.Paragraphs;
+                _wordparagraphs = _worddocument.Paragraphs;
 
 
-                Object template = Type.Missing;
+                var template = Type.Missing;
                 //Object template = pathapp + @"template.docx";
-                Object newTemplate = false;
-                Object documentType = Word.WdNewDocumentType.wdNewBlankDocument;
-                Object visible = true;
-                newdocument = wordapp.Documents.Add(ref template, ref newTemplate, ref documentType, ref visible);
-                newParagraphs = newdocument.Paragraphs;
+                object newTemplate = false;
+                object documentType = Word.WdNewDocumentType.wdNewBlankDocument;
+                object visible = true;
+                _newdocument = _wordapp.Documents.Add(ref template, ref newTemplate, ref documentType, ref visible);
+                _newParagraphs = _newdocument.Paragraphs;
 
                 object oMissing = System.Reflection.Missing.Value;
-                int g = 1;
-                int m = wordparagraphs.Count;
+                var g = 1;
+                int m = _wordparagraphs.Count;
 
-                Dict = new List<string>();
-       
+                _dict = new List<string>();
 
-                for (int i = 1; i < m; i++)
+
+                for (var i = 1; i < m; i++)
                 {
-                    wordparagraph = wordparagraphs[i];
-                    Str = wordparagraph.Range.Text;
-                    int n = wordparagraph.Range.Words.Count;
+                    _wordparagraph = _wordparagraphs[i];
+                    _str = _wordparagraph.Range.Text;
+                    int n = _wordparagraph.Range.Words.Count;
                     //progBar2.Value = 0;
                     //progBar2.Maximum = n;
-                    if (!NPDict)
+                    if (!_npDict)
                     {
                         g++;
-                        Dict.Clear();
-                        newdocument.Paragraphs.Add(ref oMissing);
-                        newParagraph = newParagraphs[g];
-                        newParagraph.Range.Font.Bold = 1;
-                        newParagraph.Range.Text = " ------------ " + i.ToString() + " -------------- ";
+                        _dict.Clear();
+                        _newdocument.Paragraphs.Add(ref oMissing);
+                        _newParagraph = _newParagraphs[g];
+                        _newParagraph.Range.Font.Bold = 1;
+                        _newParagraph.Range.Text = " ------------ " + i.ToString() + " -------------- ";
                     }
-                    
 
 
-                    for (int j = 1; j < n; j++)
+
+                    for (var j = 1; j < n; j++)
                     {
-                        bool found = false;
-                        Str = wordparagraph.Range.Words[j].Text;
-                        Str = Str.Trim();;
-                        Str = Str.ToLower();
+                        var found = false;
+                        _str = _wordparagraph.Range.Words[j].Text;
+                        _str = _str.Trim(); ;
+                        _str = _str.ToLower();
                         //Str.Length
-                        foreach (string st in wordslist)
+                        foreach (var st in _wordslist)
                         {
                             string st1;
                             st1 = st.Trim(); // убрать пробелы
                             st1 = st.ToLower();//в нижний регистр
-                            if (( Str == st1) || (Str == "") ) found = true;
+                            if ((_str == st1) || (_str == "")) found = true;
                         }
                         if (!found)
-                        {              
-                            bool diff = false;
-                            if (Dict.Count > 0)
+                        {
+                            var diff = false;
+                            if (_dict.Count > 0)
                             {
-                                foreach (string s in Dict)
+                                foreach (var s in _dict)
                                 {
-                                     if (Str == s) diff = true;
+                                    if (_str == s) diff = true;
                                 }
                             }
                             if (!diff)
                             {
                                 g++;
-                                Dict.Add(Str);
-                                newdocument.Paragraphs.Add(ref oMissing);
-                                newParagraph = newParagraphs[g];
-                                newParagraph.Range.Font.Bold = 0;
-                                if (Tran) newParagraph.Range.Text = Str + " - " + TranslateStr(Str);
-                                else newParagraph.Range.Text = Str;
+                                _dict.Add(_str);
+                                _newdocument.Paragraphs.Add(ref oMissing);
+                                _newParagraph = _newParagraphs[g];
+                                _newParagraph.Range.Font.Bold = 0;
+                                if (_tran) _newParagraph.Range.Text = _str + " - " + TranslateStr(_str);
+                                else _newParagraph.Range.Text = _str;
                             }
                         }
                         double proc1 = ((j * 100) / n);
@@ -330,18 +318,18 @@ namespace WordParser
                     //progBar1.Value = i;
                     //MessageBox.Show(Str);
                 }
-                Dict.Clear();
+                _dict.Clear();
                 backgroundWorker.ReportProgress(100, 1);
                 backgroundWorker.ReportProgress(100, 2);
                 //Str = Convert.ToString(wordparagraphs.Count);
                 //MessageBox.Show(Str);
-                
+
             }
 
             catch (Exception ex)
             {
-                Str = ex.Message;
-                MessageBox.Show("Ошибка при работе с MS Word:" + Str, "Ошибка",
+                _str = ex.Message;
+                MessageBox.Show(@"Ошибка при работе с MS Word:" + _str, @"Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -355,105 +343,90 @@ namespace WordParser
 
         private void AddWorkInDict_Click(object sender, EventArgs e)
         {
-            bool addword = true;
-            string Str = WorkInDict.Text;
-            if (Str == "") return;
-            SQLiteCommand myCommand;
-            SQLiteDataReader dataReader;
-            Str = Str.Trim(); ;
-            Str = Str.ToLower();
-            string commandText = "SELECT word FROM Words WHERE word = \'" + Str + "\'";
-            try{
-             connLite.Open();
-             myCommand = connLite.CreateCommand();
-             myCommand.CommandText = commandText;
-             dataReader = myCommand.ExecuteReader();
-             while (dataReader.Read())
-             {
-                 if (Str == dataReader["word"].ToString())
-                 {
-                     MessageBox.Show("Такое слово уже есть в базе", "Слово найдено",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                     addword = false;
+            var addword = true;
+            var str = WorkInDict.Text;
+            if (str == "") return;
+            str = str.Trim(); ;
+            str = str.ToLower();
+            var commandText = "SELECT word FROM Words WHERE word = \'" + str + "\'";
+            try
+            {
+                _connLite.Open();
+                var myCommand = _connLite.CreateCommand();
+                myCommand.CommandText = commandText;
+                var dataReader = myCommand.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    if (str != dataReader["word"].ToString()) continue;
+                    MessageBox.Show(@"Такое слово уже есть в базе", @"Слово найдено",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    addword = false;
+                }
 
-                 }
-             }
-
-             if (addword)
-             {
-                 commandText = "INSERT INTO Words (word) VALUES (\'" + Str + "\')";
-                 myCommand = connLite.CreateCommand();
-                 myCommand.CommandText = commandText;
-                 myCommand.ExecuteNonQuery();
-                 StatusWord.Text = Str;
-                 WorkInDict.Text = "";
-                 CountWordsLabel.Text = "";
-                 N++;
-                 CountWordsLabel.Text = Convert.ToString(N);
-             }
-             connLite.Close();       
-			}
-			catch{
-				MessageBox.Show("Ошибка подключения к База данных", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);			
-			}
+                if (addword)
+                {
+                    commandText = "INSERT INTO Words (word) VALUES (\'" + str + "\')";
+                    myCommand = _connLite.CreateCommand();
+                    myCommand.CommandText = commandText;
+                    myCommand.ExecuteNonQuery();
+                    StatusWord.Text = str;
+                    WorkInDict.Text = "";
+                    CountWordsLabel.Text = "";
+                    _n++;
+                    CountWordsLabel.Text = Convert.ToString(_n);
+                }
+                _connLite.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка подключения к База данных", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
         private void checkTopWindow_CheckedChanged(object sender, EventArgs e)
         {
-            this.TopMost = checkTopWindow.Checked;
+            TopMost = checkTopWindow.Checked;
         }
 
-        private string TranslateStr(string Str)
+        private string TranslateStr(string str)
         {
             //Str = @"can";
-            string URI = @"http://lingvo.yandex.ru/" + Str + @"/с английского/";
-            string GetHTML, Transl;
-            Transl = "";
+            var uri = @"http://lingvo.yandex.ru/" + str + @"/с английского/";
+            var transl = "";
 
-            bool b = true;
+            var b = true;
             try
             {
-                WebClient client = new WebClient();
-                byte[] response = client.DownloadData(URI);
-                GetHTML = Encoding.UTF8.GetString(response);
+                var client = new WebClient();
+                var response = client.DownloadData(uri);
+                var getHtml = Encoding.UTF8.GetString(response);
 
-                int result = GetHTML.IndexOf("<strong>1)</strong>");
+                var result = getHtml.IndexOf("<strong>1)</strong>", StringComparison.Ordinal);
                 result = result + 29;
-                
+
                 while (b)
                 {
                     result++;
-                    if (GetHTML[result] == '/')
+                    if (getHtml[result] == '/')
                         b = false;
                     else
-                        Transl += GetHTML[result].ToString();
+                        transl += getHtml[result].ToString();
                 }
-                
-                
-   
-                //MessageBox.Show(test1, "Тест");
-                //x = String.Compare(GetHTML, );
-                //x = x + 11;
-                //test1.CopyTo(x, GetHTML.ToCharArray(), 0, 15);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error!");
+                MessageBox.Show(ex.Message, @"Error!");
             }
-            return Transl;
+            return transl;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (WorkInDict.Text != "") MessageBox.Show(TranslateStr(WorkInDict.Text), "Translate");
+            if (WorkInDict.Text != "") MessageBox.Show(TranslateStr(WorkInDict.Text), @"Translate");
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }
