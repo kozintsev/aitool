@@ -107,7 +107,7 @@ namespace P2P
             resolver.ResolveAsync(new PeerName("0.P2P Sample"), 1);
         }
 
-        void resolver_ResolveCompleted(object sender, ResolveCompletedEventArgs e)
+        private void resolver_ResolveCompleted(object sender, ResolveCompletedEventArgs e)
         {
             // Сообщение об ошибке, если в облаке не найдены пиры
             if (PeerList.Items.Count == 0)
@@ -123,7 +123,7 @@ namespace P2P
             RefreshButton.IsEnabled = true;
         }
 
-        void resolver_ResolveProgressChanged(object sender, ResolveProgressChangedEventArgs e)
+        private void resolver_ResolveProgressChanged(object sender, ResolveProgressChangedEventArgs e)
         {
             var peer = e.PeerNameRecord;
 
@@ -133,8 +133,10 @@ namespace P2P
                 try
                 {
                     var endpointUrl = string.Format("net.tcp://{0}:{1}/P2PService", ep.Address, ep.Port);
-                    var binding = new NetTcpBinding();
-                    binding.Security.Mode = SecurityMode.None;
+                    var binding = new NetTcpBinding
+                    {
+                        Security = {Mode = SecurityMode.None}
+                    };
                     var serviceProxy = ChannelFactory<IP2PService>.CreateChannel(
                         binding, new EndpointAddress(endpointUrl));
                     PeerList.Items.Add(
@@ -162,9 +164,11 @@ namespace P2P
         private void PeerList_Click(object sender, RoutedEventArgs e)
         {
             // Убедимся, что пользователь щелкнул по кнопке с именем MessageButton
-            if (((Button) e.OriginalSource).Name != "MessageButton") return;
+            var button = e.OriginalSource as Button;
+            if (button != null && button.Name != "MessageButton") return;
             // Получение пира и прокси, для отправки сообщения
-            var peerEntry = ((Button)e.OriginalSource).DataContext as PeerEntry;
+            if (button == null) return;
+            var peerEntry = button.DataContext as PeerEntry;
             if (peerEntry == null || peerEntry.ServiceProxy == null) return;
             try
             {
@@ -184,14 +188,7 @@ namespace P2P
         {
             // Показать полученное сообщение (вызывается из службы WCF)
             MyListBox.Items.Add("Сообщение от " + from + ": " + message);
-            //MessageBox.Show(this, message, string.Format("Сообщение от {0}", from),
-            //    MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
-        private void PeerList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+      
     }
 }
