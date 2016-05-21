@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 using System.Net;
 using System.Net.PeerToPeer;
 using System.ServiceModel;
@@ -41,15 +29,11 @@ namespace P2P
             // Получение конфигурационной информации из app.config
             var port = ConfigurationManager.AppSettings["port"];
             var username = ConfigurationManager.AppSettings["username"];
-            var machineName = Environment.MachineName;
             string serviceUrl = null;
-
             StatusPort.Content = "Порт: " + port;
             StatusUsername.Content = "Имя пользователя: " + username;
-
             // Установка заголовка окна
-            this.Title = string.Format("P2P приложение - {0}", username);
-
+            Title = string.Format("P2P приложение - {0}", username);
             //  Получение URL-адреса службы с использованием адресаIPv4 
             //  и порта из конфигурационного файла
             foreach (var address in Dns.GetHostAddresses(Dns.GetHostName()))
@@ -60,7 +44,6 @@ namespace P2P
                     break;
                 }
             }
-
             // Выполнение проверки, не является ли адрес null
             if (serviceUrl == null)
             {
@@ -70,7 +53,6 @@ namespace P2P
                 Application.Current.Shutdown();
                 return;
             }
-
             // Регистрация и запуск службы WCF
             _localService = new P2PService(this, username);
             _host = new ServiceHost(_localService, new Uri(serviceUrl));
@@ -91,16 +73,13 @@ namespace P2P
                 Application.Current.Shutdown();
                 return;
             }
-
             // Создание имени равноправного участника (пира)
             _peerName = new PeerName("P2P Sample", PeerNameType.Unsecured);
-
             // Подготовка процесса регистрации имени равноправного участника в локальном облаке
             _peerNameRegistration = new PeerNameRegistration(_peerName, int.Parse(port))
             {
                 Cloud = Cloud.AllLinkLocal
             };
-
             // Запуск процесса регистрации
             _peerNameRegistration.Start();
         }
@@ -109,7 +88,6 @@ namespace P2P
         {
             // Остановка регистрации
             _peerNameRegistration.Stop();
-
             // Остановка WCF-сервиса
             _host.Close();
         }
@@ -151,34 +129,32 @@ namespace P2P
 
             foreach (var ep in peer.EndPointCollection)
             {
-                if (ep.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                if (ep.Address.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork) continue;
+                try
                 {
-                    try
-                    {
-                        var endpointUrl = string.Format("net.tcp://{0}:{1}/P2PService", ep.Address, ep.Port);
-                        var binding = new NetTcpBinding();
-                        binding.Security.Mode = SecurityMode.None;
-                        var serviceProxy = ChannelFactory<IP2PService>.CreateChannel(
-                            binding, new EndpointAddress(endpointUrl));
-                        PeerList.Items.Add(
-                           new PeerEntry
-                           {
-                               PeerName = peer.PeerName,
-                               ServiceProxy = serviceProxy,
-                               DisplayString = serviceProxy.GetName(),
-                               ButtonsEnabled = true
-                           });
-                    }
-                    catch (EndpointNotFoundException)
-                    {
-                        PeerList.Items.Add(
-                           new PeerEntry
-                           {
-                               PeerName = peer.PeerName,
-                               DisplayString = "Неизвестный пир",
-                               ButtonsEnabled = false
-                           });
-                    }
+                    var endpointUrl = string.Format("net.tcp://{0}:{1}/P2PService", ep.Address, ep.Port);
+                    var binding = new NetTcpBinding();
+                    binding.Security.Mode = SecurityMode.None;
+                    var serviceProxy = ChannelFactory<IP2PService>.CreateChannel(
+                        binding, new EndpointAddress(endpointUrl));
+                    PeerList.Items.Add(
+                        new PeerEntry
+                        {
+                            PeerName = peer.PeerName,
+                            ServiceProxy = serviceProxy,
+                            DisplayString = serviceProxy.GetName(),
+                            ButtonsEnabled = true
+                        });
+                }
+                catch (EndpointNotFoundException)
+                {
+                    PeerList.Items.Add(
+                        new PeerEntry
+                        {
+                            PeerName = peer.PeerName,
+                            DisplayString = "Неизвестный пир",
+                            ButtonsEnabled = false
+                        });
                 }
             }
         }
@@ -186,25 +162,21 @@ namespace P2P
         private void PeerList_Click(object sender, RoutedEventArgs e)
         {
             // Убедимся, что пользователь щелкнул по кнопке с именем MessageButton
-            if (((Button)e.OriginalSource).Name == "MessageButton")
+            if (((Button) e.OriginalSource).Name != "MessageButton") return;
+            // Получение пира и прокси, для отправки сообщения
+            var peerEntry = ((Button)e.OriginalSource).DataContext as PeerEntry;
+            if (peerEntry == null || peerEntry.ServiceProxy == null) return;
+            try
             {
-                // Получение пира и прокси, для отправки сообщения
-                var peerEntry = ((Button)e.OriginalSource).DataContext as PeerEntry;
-                if (peerEntry != null && peerEntry.ServiceProxy != null)
-                {
-                    try
-                    {
-                        if (MsgBox.Text != "")
-                        {
-                            MyListBox.Items.Add("Сообщение от Вас: " + MsgBox.Text);
-                            peerEntry.ServiceProxy.SendMessage(MsgBox.Text, ConfigurationManager.AppSettings["username"]);
-                        }
-                    }
-                    catch (CommunicationException)
-                    {
-
-                    }
-                }
+                if (string.IsNullOrEmpty(MsgBox.Text)) return;
+                MyListBox.Items.Add("Сообщение от Вас: " + MsgBox.Text);
+                peerEntry.ServiceProxy.SendMessage(MsgBox.Text, ConfigurationManager.AppSettings["username"]);
+                MsgBox.Text = string.Empty;
+            }
+            catch (CommunicationException exception)
+            {
+                MessageBox.Show(this, exception.Message, @"Error!",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
