@@ -26,11 +26,10 @@ namespace P2P
     public partial class MainWindow : Window
     {
 
-        private P2PService localService;
-        private string serviceUrl;
-        private ServiceHost host;
-        private PeerName peerName;
-        private PeerNameRegistration peerNameRegistration;
+        private P2PService _localService;
+        private ServiceHost _host;
+        private PeerName _peerName;
+        private PeerNameRegistration _peerNameRegistration;
 
         public MainWindow()
         {
@@ -40,20 +39,20 @@ namespace P2P
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Получение конфигурационной информации из app.config
-            string port = ConfigurationManager.AppSettings["port"];
-            string username = ConfigurationManager.AppSettings["username"];
-            string machineName = Environment.MachineName;
+            var port = ConfigurationManager.AppSettings["port"];
+            var username = ConfigurationManager.AppSettings["username"];
+            var machineName = Environment.MachineName;
             string serviceUrl = null;
 
-            statusPort.Content = "Порт: " + port;
-            statusUsername.Content = "Имя пользователя: " + username;
+            StatusPort.Content = "Порт: " + port;
+            StatusUsername.Content = "Имя пользователя: " + username;
 
             // Установка заголовка окна
             this.Title = string.Format("P2P приложение - {0}", username);
 
             //  Получение URL-адреса службы с использованием адресаIPv4 
             //  и порта из конфигурационного файла
-            foreach (IPAddress address in Dns.GetHostAddresses(Dns.GetHostName()))
+            foreach (var address in Dns.GetHostAddresses(Dns.GetHostName()))
             {
                 if (address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
@@ -69,17 +68,20 @@ namespace P2P
                 MessageBox.Show(this, "Не удается определить адрес конечной точки WCF.", "Networking Error",
                     MessageBoxButton.OK, MessageBoxImage.Stop);
                 Application.Current.Shutdown();
+                return;
             }
 
             // Регистрация и запуск службы WCF
-            localService = new P2PService(this, username);
-            host = new ServiceHost(localService, new Uri(serviceUrl));
-            NetTcpBinding binding = new NetTcpBinding();
-            binding.Security.Mode = SecurityMode.None;
-            host.AddServiceEndpoint(typeof(IP2PService), binding, serviceUrl);
+            _localService = new P2PService(this, username);
+            _host = new ServiceHost(_localService, new Uri(serviceUrl));
+            var binding = new NetTcpBinding
+            {
+                Security = {Mode = SecurityMode.None}
+            };
+            _host.AddServiceEndpoint(typeof(IP2PService), binding, serviceUrl);
             try
             {
-                host.Open();
+                _host.Open();
             }
             catch (AddressAlreadyInUseException)
             {
@@ -87,36 +89,37 @@ namespace P2P
                 MessageBox.Show(this, "Не удается начать прослушивание, порт занят.", "WCF Error",
                    MessageBoxButton.OK, MessageBoxImage.Stop);
                 Application.Current.Shutdown();
+                return;
             }
 
             // Создание имени равноправного участника (пира)
-            peerName = new PeerName("P2P Sample", PeerNameType.Unsecured);
+            _peerName = new PeerName("P2P Sample", PeerNameType.Unsecured);
 
             // Подготовка процесса регистрации имени равноправного участника в локальном облаке
-            peerNameRegistration = new PeerNameRegistration(peerName, int.Parse(port));
-            peerNameRegistration.Cloud = Cloud.AllLinkLocal;
+            _peerNameRegistration = new PeerNameRegistration(_peerName, int.Parse(port))
+            {
+                Cloud = Cloud.AllLinkLocal
+            };
 
             // Запуск процесса регистрации
-            peerNameRegistration.Start();
+            _peerNameRegistration.Start();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Остановка регистрации
-            peerNameRegistration.Stop();
+            _peerNameRegistration.Stop();
 
             // Остановка WCF-сервиса
-            host.Close();
+            _host.Close();
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             // Создание распознавателя и добавление обработчиков событий
-            PeerNameResolver resolver = new PeerNameResolver();
-            resolver.ResolveProgressChanged +=
-                new EventHandler<ResolveProgressChangedEventArgs>(resolver_ResolveProgressChanged);
-            resolver.ResolveCompleted +=
-                new EventHandler<ResolveCompletedEventArgs>(resolver_ResolveCompleted);
+            var resolver = new PeerNameResolver();
+            resolver.ResolveProgressChanged += resolver_ResolveProgressChanged;
+            resolver.ResolveCompleted += resolver_ResolveCompleted;
 
             // Подготовка к добавлению новых пиров
             PeerList.Items.Clear();
@@ -144,18 +147,18 @@ namespace P2P
 
         void resolver_ResolveProgressChanged(object sender, ResolveProgressChangedEventArgs e)
         {
-            PeerNameRecord peer = e.PeerNameRecord;
+            var peer = e.PeerNameRecord;
 
-            foreach (IPEndPoint ep in peer.EndPointCollection)
+            foreach (var ep in peer.EndPointCollection)
             {
                 if (ep.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
                     try
                     {
-                        string endpointUrl = string.Format("net.tcp://{0}:{1}/P2PService", ep.Address, ep.Port);
-                        NetTcpBinding binding = new NetTcpBinding();
+                        var endpointUrl = string.Format("net.tcp://{0}:{1}/P2PService", ep.Address, ep.Port);
+                        var binding = new NetTcpBinding();
                         binding.Security.Mode = SecurityMode.None;
-                        IP2PService serviceProxy = ChannelFactory<IP2PService>.CreateChannel(
+                        var serviceProxy = ChannelFactory<IP2PService>.CreateChannel(
                             binding, new EndpointAddress(endpointUrl));
                         PeerList.Items.Add(
                            new PeerEntry
@@ -186,14 +189,14 @@ namespace P2P
             if (((Button)e.OriginalSource).Name == "MessageButton")
             {
                 // Получение пира и прокси, для отправки сообщения
-                PeerEntry peerEntry = ((Button)e.OriginalSource).DataContext as PeerEntry;
+                var peerEntry = ((Button)e.OriginalSource).DataContext as PeerEntry;
                 if (peerEntry != null && peerEntry.ServiceProxy != null)
                 {
                     try
                     {
                         if (MsgBox.Text != "")
                         {
-                            myListBox.Items.Add("Сообщение от Вас: " + MsgBox.Text);
+                            MyListBox.Items.Add("Сообщение от Вас: " + MsgBox.Text);
                             peerEntry.ServiceProxy.SendMessage(MsgBox.Text, ConfigurationManager.AppSettings["username"]);
                         }
                     }
@@ -208,7 +211,7 @@ namespace P2P
         internal void DisplayMessage(string message, string from)
         {
             // Показать полученное сообщение (вызывается из службы WCF)
-            myListBox.Items.Add("Сообщение от " + from + ": " + message);
+            MyListBox.Items.Add("Сообщение от " + from + ": " + message);
             //MessageBox.Show(this, message, string.Format("Сообщение от {0}", from),
             //    MessageBoxButton.OK, MessageBoxImage.Information);
         }
