@@ -55,6 +55,7 @@ namespace P2P
             }
             // Регистрация и запуск службы WCF
             _localService = new P2PService(this, username);
+            _localService.GettingMessage += LocalServiceGettingMessage;
             _host = new ServiceHost(_localService, new Uri(serviceUrl));
             var binding = new NetTcpBinding
             {
@@ -82,6 +83,12 @@ namespace P2P
             };
             // Запуск процесса регистрации
             _peerNameRegistration.Start();
+        }
+
+        private void LocalServiceGettingMessage(string message, string from)
+        {
+            //
+            MessageBox.Show(message + from);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
