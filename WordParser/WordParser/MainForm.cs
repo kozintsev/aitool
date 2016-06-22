@@ -92,12 +92,10 @@ namespace WordParser
                     break;
 
             }
-            //progressBar2.Value = e.ProgressPercentage;
         }
 
-        void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        static void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // MessageBox.Show(this, "Hello word!!!");
         }
 
         private void openDoc_Click(object sender, EventArgs e)
@@ -131,17 +129,15 @@ namespace WordParser
                 case ".docx":
                     WordParsing();
                     break;
-
             }
         }
+
         private void TextParsing()
         {
             var str = File.ReadAllLines(_docPath);
-            int w = 0, i = 0, j = 0;
+            int w = 0, i = 0;
             try
             {
-                // read from file or write to file
-                //str.Count
                 _dict = new List<string>();
                 _dict.Clear();
                 var findInDict = false;
@@ -153,12 +149,12 @@ namespace WordParser
                     var split = s.Split(' ', ',', '.', ':', '\t');
                     var n = split.Length;
                     if (n == 0) continue;
-                    j = 0;
+                    var j = 0;
                     foreach (var s2 in split)
                     {
                         if (s2 == "" || s2 == " " || s2.Length <= 3) break;
                         var strSaveInDict = s2;
-                        strSaveInDict = strSaveInDict.Trim(); // убрать пробелы
+                        strSaveInDict = strSaveInDict.Trim(); 
                         strSaveInDict = strSaveInDict.ToLower();
                         foreach (var find in _dict)
                         {
@@ -195,13 +191,13 @@ namespace WordParser
                 tex.Close();
                 backgroundWorker.ReportProgress(100, 1);
                 backgroundWorker.ReportProgress(100, 2);
-                MessageBox.Show(@"Выполненно! Слов добавленно: " + w.ToString(), @"Готово!",
+                MessageBox.Show(@"Выполненно! Слов добавленно: " + w, @"Готово!",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при работе с Текстовым файлом:" + ex.Message, "Ошибка",
+                MessageBox.Show(@"Ошибка при работе с Текстовым файлом:" + ex.Message, @"Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -209,8 +205,7 @@ namespace WordParser
         {
             try
             {
-                _wordapp = new Word.Application();
-                _wordapp.Visible = true;
+                _wordapp = new Word.Application {Visible = true};
                 object filename = _docPath;
                 object confirmConversions = true;
                 object readOnly = false;
@@ -223,7 +218,6 @@ namespace WordParser
                 var format = Type.Missing;
                 var encoding = Type.Missing; ;
                 var oVisible = Type.Missing;
-                var openConflictDocument = Type.Missing;
                 var openAndRepair = Type.Missing;
                 var documentDirection = Type.Missing;
                 object noEncodingDialog = false;
@@ -240,7 +234,6 @@ namespace WordParser
 
 
                 var template = Type.Missing;
-                //Object template = pathapp + @"template.docx";
                 object newTemplate = false;
                 object documentType = Word.WdNewDocumentType.wdNewBlankDocument;
                 object visible = true;
@@ -249,7 +242,7 @@ namespace WordParser
 
                 object oMissing = System.Reflection.Missing.Value;
                 var g = 1;
-                int m = _wordparagraphs.Count;
+                var m = _wordparagraphs.Count;
 
                 _dict = new List<string>();
 
@@ -258,9 +251,7 @@ namespace WordParser
                 {
                     _wordparagraph = _wordparagraphs[i];
                     _str = _wordparagraph.Range.Text;
-                    int n = _wordparagraph.Range.Words.Count;
-                    //progBar2.Value = 0;
-                    //progBar2.Maximum = n;
+                    var n = _wordparagraph.Range.Words.Count;
                     if (!_npDict)
                     {
                         g++;
@@ -268,7 +259,7 @@ namespace WordParser
                         _newdocument.Paragraphs.Add(ref oMissing);
                         _newParagraph = _newParagraphs[g];
                         _newParagraph.Range.Font.Bold = 1;
-                        _newParagraph.Range.Text = " ------------ " + i.ToString() + " -------------- ";
+                        _newParagraph.Range.Text = " ------------ " + i + " -------------- ";
                     }
 
 
@@ -279,12 +270,9 @@ namespace WordParser
                         _str = _wordparagraph.Range.Words[j].Text;
                         _str = _str.Trim(); ;
                         _str = _str.ToLower();
-                        //Str.Length
                         foreach (var st in _wordslist)
                         {
-                            string st1;
-                            st1 = st.Trim(); // убрать пробелы
-                            st1 = st.ToLower();//в нижний регистр
+                            var st1 = st.Trim().ToLower();
                             if ((_str == st1) || (_str == "")) found = true;
                         }
                         if (!found)
@@ -310,20 +298,13 @@ namespace WordParser
                         }
                         double proc1 = ((j * 100) / n);
                         backgroundWorker.ReportProgress((int)Math.Ceiling(proc1), 2);
-                        //progBar2.Value = j;
-                        //MessageBox.Show(Str);
                     }
                     double proc2 = ((i * 100) / m);
                     backgroundWorker.ReportProgress((int)Math.Ceiling(proc2), 1);
-                    //progBar1.Value = i;
-                    //MessageBox.Show(Str);
                 }
                 _dict.Clear();
                 backgroundWorker.ReportProgress(100, 1);
                 backgroundWorker.ReportProgress(100, 2);
-                //Str = Convert.ToString(wordparagraphs.Count);
-                //MessageBox.Show(Str);
-
             }
 
             catch (Exception ex)
@@ -337,7 +318,6 @@ namespace WordParser
 
         private void CloseForm_Click(object sender, EventArgs e)
         {
-            //this.backgroundWorker.CancelAsync();
             Close();
         }
 
@@ -379,7 +359,7 @@ namespace WordParser
             }
             catch
             {
-                MessageBox.Show("Ошибка подключения к База данных", "Ошибка",
+                MessageBox.Show(@"Ошибка подключения к База данных", @"Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -390,9 +370,8 @@ namespace WordParser
             TopMost = checkTopWindow.Checked;
         }
 
-        private string TranslateStr(string str)
+        private static string TranslateStr(string str)
         {
-            //Str = @"can";
             var uri = @"http://lingvo.yandex.ru/" + str + @"/с английского/";
             var transl = "";
 
