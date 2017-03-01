@@ -7,7 +7,7 @@ using System.Data.SQLite;
 using System.Net;
 using System.IO;
 using Word = Microsoft.Office.Interop.Word;
-
+// ReSharper disable PossibleLossOfFraction
 
 namespace WordParser
 {
@@ -27,6 +27,12 @@ namespace WordParser
         private bool _npDict, _tran;
         private readonly List<string> _wordslist; // словарь известных слов
         private List<string> _dict; // формирующийся словарь
+
+        private enum NumberProgressBar
+        {
+            ProgressBar1 = 1,
+            ProgressBar2 = 2
+        }
 
         public MainForm()
         {
@@ -74,27 +80,31 @@ namespace WordParser
             }
         }
 
-        void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             Parsing();
         }
 
-        void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
 
-            switch (e.UserState.ToString())
+            switch ((NumberProgressBar)e.UserState)
             {
-                case "1":
+                case NumberProgressBar.ProgressBar1:
                     progressBar1.Value = e.ProgressPercentage;
                     break;
-                case "2":
+                case NumberProgressBar.ProgressBar2:
                     progressBar2.Value = e.ProgressPercentage;
+                    break;
+                default:
+                    MessageBox.Show(@"Ошибка при выводе прогресса", @"Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
 
             }
         }
 
-        static void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private static void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
         }
 
@@ -128,6 +138,10 @@ namespace WordParser
                     break;
                 case ".docx":
                     WordParsing();
+                    break;
+                default:
+                    MessageBox.Show(@"Ошибка при выборе файла. Не зарегистрированное расширение.", @"Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }
@@ -176,11 +190,11 @@ namespace WordParser
                         findInDict = false;
                         j++;
                         double proc1 = ((100 * j) / n);
-                        backgroundWorker.ReportProgress((int)Math.Ceiling(proc1), 1);
+                        backgroundWorker.ReportProgress((int)Math.Ceiling(proc1), NumberProgressBar.ProgressBar1);
                     }
                     i++;
                     double proc2 = ((100 * i) / m);
-                    backgroundWorker.ReportProgress((int)Math.Ceiling(proc2), 2);
+                    backgroundWorker.ReportProgress((int)Math.Ceiling(proc2), NumberProgressBar.ProgressBar2);
                 }
                 var t = new FileInfo(Path.GetDirectoryName(_docPath) + @"Dict.txt");
                 var tex = t.CreateText();
@@ -328,7 +342,7 @@ namespace WordParser
             if (str == "") return;
             str = str.Trim(); ;
             str = str.ToLower();
-            var commandText = "SELECT word FROM Words WHERE word = \'" + str + "\'";
+            var commandText = "SELECT old, new FROM rowscomparsion";
             try
             {
                 _connLite.Open();
