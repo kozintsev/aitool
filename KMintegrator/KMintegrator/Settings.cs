@@ -55,7 +55,7 @@ namespace KMintegrator
             try
             {
                 // создаем класс для сохранения XML
-                writer = new XmlTextWriter(optionspath, System.Text.Encoding.UTF8);
+                writer = new XmlTextWriter(optionspath, Encoding.UTF8);
                 // форматирование, чтобы файл не был вытянут в одну линию
                 writer.Formatting = Formatting.Indented;
 
