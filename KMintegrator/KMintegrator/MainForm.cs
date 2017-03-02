@@ -409,8 +409,6 @@ namespace KMintegrator
 
         #endregion
 
-
-
         #region Exit_Close functions
 
         private void Exit_Kompas()
@@ -663,8 +661,6 @@ namespace KMintegrator
         }   // MainForm_FormClosing   
 
         #endregion
-
-
 
         private void AddKompas_Click(object sender, EventArgs e)
         {
