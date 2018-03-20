@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Xml;
 
 using System.IO;
-using Mathcad;
 
 using Kompas6Constants;
 using Kompas6API5;
@@ -29,29 +28,26 @@ namespace KMintegrator
         private string _lastMathCadPath = "";
         private string _lastProjectPath = "";
 
-        Mathcad.Application _mc;
-        Worksheets _wk;
-        Worksheet _ws;
-        bool _save = false;
+        private bool _save;
 
-        class VarTopTable
+        private class VarTopTable
         {
-            public string name;
-            public string nameval;
-            public string type;
-            public string val;
+            public string Name;
+            public string Nameval;
+            public string Type;
+            public string Val;
 
         }
 
-        class VarBotTable
+        private class VarBotTable
         {
-            public string name;
-            public string nameval;
-            public string val;
+            public string Name;
+            public string Nameval;
+            public string Val;
         }
 
-        List<VarTopTable> VarTop;
-        List<VarBotTable> VarBot;
+        private List<VarTopTable> _varTop;
+        private List<VarBotTable> _varBot;
         #endregion
 
         #region Custom functions
@@ -115,9 +111,8 @@ namespace KMintegrator
             }
             //doc3D.GetPart
             var part = (ksPart)_doc3D.GetPart(-1);	// Выбор компонента: -1 главный(сборка), 0 первый(деталь)
-            if (part == null) return;
             // Работа с массивом внешних переменных
-            var varCol = (ksVariableCollection)part.VariableCollection();
+            var varCol = (ksVariableCollection) part?.VariableCollection();
             if (varCol == null) return;
             var var = (ksVariable)_kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
             if (var == null) return;
@@ -129,62 +124,7 @@ namespace KMintegrator
             }
         }
 
-        private Mathcad.Application InitMathCad()
-        {
-            try
-            {
-                if (_mc == null) _mc = new Mathcad.Application();
-            }
-            catch
-            {
-                MessageBox.Show(@"MathCAD не установлен. Пересчёт не возможен.", @"Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _mc = null;
-            }
-            return _mc;
-
-        }
-        private bool OpenMathCad(string path, bool recal)
-        {
-            if (_mc != null)
-            {
-                _wk = _mc.Worksheets;
-                //WK.Count
-                for (var i = 0; i < _wk.Count; i++)
-                {
-                    _ws = _wk.Item(i);
-                    if (_ws.FullName == path)
-                        _ws.Close(MCSaveOption.mcSaveChanges);
-                }
-                _ws = _wk.Open(path);
-                _mc.Visible = true;//recal;
-                if (recal == true)
-                {
-                    _ws.Recalculate();
-                    _ws.Save();
-
-                    for (var j = 0; j < TableMathCad.Rows.Count; j++)
-                    {
-                        if (TableMathCad.Rows[j].Cells[4].Value.ToString() == "eval")
-                        {
-                            var numericValue = _ws.GetValue(TableMathCad.Rows[j].Cells[0].Value.ToString()) as NumericValue;
-                            if (numericValue != null)
-                                TableMathCad.Rows[j].Cells[1].Value =
-                                    numericValue.Real.ToString(CultureInfo.CurrentCulture);
-                        }
-                    }
-                    _ws.Save();
-
-                    _ws.Close(MCSaveOption.mcSaveChanges);
-                }
-            }
-            else
-            {
-                MessageBox.Show(this, @"Объект не захвачен", @"Сообщение");
-                return false;
-            }
-            return true;
-        }
+        
         // удалось распарсить файл SMathStudio версии 0.89
         // пока только чтение
         private void SMathStudioParser(string mathPath, bool save)
@@ -218,15 +158,14 @@ namespace KMintegrator
                         if (xnl[i].Name == "input")
                         {
                             var inputs = xnl[i].ChildNodes;
-                            XmlNode e;
                             for (var j = 0; j < inputs.Count; j++)
                             {
-                                e = inputs[j];
-                                if (j == 0 && e.Attributes[0].Value == "operand")
+                                var e = inputs[j];
+                                if (e.Attributes != null && (j == 0 && e.Attributes[0].Value == "operand"))
                                 {
                                     s1 = e.InnerText;
                                 }
-                                if (j == 1 && e.Attributes[0].Value == "operand")
+                                if (e.Attributes != null && (j == 1 && e.Attributes[0].Value == "operand"))
                                 {
                                     s2 = e.InnerText;
                                     var a = s2.Replace('.', ',');
@@ -289,45 +228,43 @@ namespace KMintegrator
                     if (xn.Name == "regions")
                         foreach (XmlNode region in xn.ChildNodes)
                         {
-                            if (region.Attributes != null)
+                            if (region.Attributes == null) continue;
+                            var regionId = region.Attributes[0].Value;
+                            foreach (XmlNode math in region.ChildNodes)
+                            foreach (XmlNode mlDefine in math.ChildNodes)
                             {
-                                var regionId = region.Attributes[0].Value;
-                                foreach (XmlNode math in region.ChildNodes)
-                                    foreach (XmlNode mlDefine in math.ChildNodes)
+                                XmlNode mlId;
+                                XmlNode mlReal;
+                                if (mlDefine.Name == "ml:define") // определения
+                                {
+                                    mlId = mlDefine.FirstChild;
+                                    mlReal = mlDefine.LastChild;
+                                    if (mlReal.Name == "ml:real")
                                     {
-                                        XmlNode mlId;
-                                        XmlNode mlReal;
-                                        if (mlDefine.Name == "ml:define") // определения
-                                        {
-                                            mlId = mlDefine.FirstChild;
-                                            mlReal = mlDefine.LastChild;
-                                            if (mlReal.Name == "ml:real")
-                                            {
-                                                if (save == true)
-                                                    mlReal.InnerText = TableMathCad.Rows[i].Cells[1].Value.ToString();
-                                                else
-                                                    TableMathCad.Rows.Add(mlId.InnerText, mlReal.InnerText, "Присвоенная", regionId, "define");
+                                        if (save == true)
+                                            mlReal.InnerText = TableMathCad.Rows[i].Cells[1].Value.ToString();
+                                        else
+                                            TableMathCad.Rows.Add(mlId.InnerText, mlReal.InnerText, "Присвоенная", regionId, "define");
 
-                                                i++;
-                                            }
-                                        }
-                                        if (mlDefine.Name == "ml:eval") // вычисления
-                                        {
-                                            mlId = mlDefine.FirstChild;
-                                            foreach (XmlNode result in mlDefine.ChildNodes)
-                                                if (result.Name == "result")
-                                                {
-                                                    mlReal = result.FirstChild;
-                                                    if (save == true)
-                                                        mlReal.InnerText = TableMathCad.Rows[i].Cells[1].Value.ToString();
-                                                    else
-                                                        TableMathCad.Rows.Add(mlId.InnerText, mlReal.InnerText, "Вычисленная", regionId, "eval");
-                                                }
-
-                                            i++;
-                                        }
-
+                                        i++;
                                     }
+                                }
+                                if (mlDefine.Name == "ml:eval") // вычисления
+                                {
+                                    mlId = mlDefine.FirstChild;
+                                    foreach (XmlNode result in mlDefine.ChildNodes)
+                                        if (result.Name == "result")
+                                        {
+                                            mlReal = result.FirstChild;
+                                            if (save == true)
+                                                mlReal.InnerText = TableMathCad.Rows[i].Cells[1].Value.ToString();
+                                            else
+                                                TableMathCad.Rows.Add(mlId.InnerText, mlReal.InnerText, "Вычисленная", regionId, "eval");
+                                        }
+
+                                    i++;
+                                }
+
                             }
                         }
             }
@@ -440,40 +377,16 @@ namespace KMintegrator
             }
         }
 
-        private void Exit_MathCad()
-        {
-            if (_mc == null) return;
-            try
-            {
-                var reply = DialogResult.No;
-                if (_mc.Visible) reply = MessageBox.Show(@"Закрыть MathCAD?",
-                    @"Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                else
-                {
-                    _mc.Quit(MCSaveOption.mcDiscardChanges);
-                    Marshal.ReleaseComObject(_mc);
-                }
-                if (reply == DialogResult.Yes)
-                {
-                    _mc.Quit(MCSaveOption.mcSaveChanges);
-                    Marshal.ReleaseComObject(_mc);
-                }
-            }
-            catch
-            {
-                MessageBox.Show(@"MathCAD уже закрыт или не может быть закрыт", @"Сообщение",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+       
 
         private bool OpenProject(string path)
         {
             var fileproject = new FileInfo(path);
             var dirpath = fileproject.DirectoryName + "\\";
-            VarTop = new List<VarTopTable>();
-            VarBot = new List<VarBotTable>();
-            VarTop.Clear();
-            VarBot.Clear();
+            _varTop = new List<VarTopTable>();
+            _varBot = new List<VarBotTable>();
+            _varTop.Clear();
+            _varBot.Clear();
             var xd = new XmlDocument();
             try
             {
@@ -499,12 +412,12 @@ namespace KMintegrator
                                     {
                                         var varT = new VarTopTable
                                         {
-                                            name = xnc.Attributes[1].Value,
-                                            type = xnc.Attributes[2].Value,
-                                            nameval = xnc.Attributes[3].Value,
-                                            val = xnc.InnerText
+                                            Name = xnc.Attributes[1].Value,
+                                            Type = xnc.Attributes[2].Value,
+                                            Nameval = xnc.Attributes[3].Value,
+                                            Val = xnc.InnerText
                                         };
-                                        VarTop.Add(varT);
+                                        _varTop.Add(varT);
                                     }
                                     break;
                                 case "TableBottom":
@@ -512,11 +425,11 @@ namespace KMintegrator
                                     {
                                         var varB = new VarBotTable
                                         {
-                                            name = xnc.Attributes[1].Value,
-                                            nameval = xnc.Attributes[2].Value,
-                                            val = xnc.InnerText
+                                            Name = xnc.Attributes[1].Value,
+                                            Nameval = xnc.Attributes[2].Value,
+                                            Val = xnc.InnerText
                                         };
-                                        VarBot.Add(varB);
+                                        _varBot.Add(varB);
                                     }
                                     break;
                             }
@@ -549,7 +462,6 @@ namespace KMintegrator
 
         private bool SaveProject(string path)
         {
-            string str1, str2, str3, str4;
             if (!File.Exists(path))
             {
                 var saveFileDialog = new SaveFileDialog { Filter = @"Документ XML (*.xml)|*.xml;" };
@@ -566,9 +478,11 @@ namespace KMintegrator
             try
             {
                 // создаем класс для сохранения XML
-                writer = new XmlTextWriter(path, System.Text.Encoding.UTF8);
-                // форматирование, чтобы файл не был вытянут в одну линию
-                writer.Formatting = Formatting.Indented;
+                writer = new XmlTextWriter(path, System.Text.Encoding.UTF8)
+                {
+                    // форматирование, чтобы файл не был вытянут в одну линию
+                    Formatting = Formatting.Indented
+                };
                 // пишем заголовок и корневой элемент
                 writer.WriteStartDocument();
                 writer.WriteStartElement("project");
@@ -588,12 +502,15 @@ namespace KMintegrator
                 writer.WriteEndElement(); // Конец file
 
                 writer.WriteStartElement("table");
+                string str1;
+                string str2;
+                string str3;
                 for (var i = 0; i < TableMathCad.Rows.Count; i++)
                 {
                     str1 = TableMathCad.Rows[i].Cells[0].Value.ToString();
                     str2 = TableMathCad.Rows[i].Cells[5].Value.ToString();
                     str3 = TableMathCad.Rows[i].Cells[4].Value.ToString();
-                    str4 = TableMathCad.Rows[i].Cells[1].Value.ToString();
+                    var str4 = TableMathCad.Rows[i].Cells[1].Value.ToString();
                     writer.WriteStartElement("TableTop");
                     writer.WriteAttributeString("id", Convert.ToString(i + 1));
                     writer.WriteAttributeString("name", str1);
@@ -633,7 +550,7 @@ namespace KMintegrator
             finally
             {
                 // закрываем файл
-                if (writer != null) writer.Close();
+                writer?.Close();
             }
             _save = true;
             MessageBox.Show(@"Проект сохранён!",
@@ -649,15 +566,12 @@ namespace KMintegrator
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_lastPathKompas.Length > 2) Exit_Kompas();
-            if (_lastMathCadPath.Length > 2) Exit_MathCad();
             //(this.LastPathKompas.Count == 1) & (this.LastMathCadPath.Count == 1)
-            if ((_lastPathKompas.Length > 2) && (_lastMathCadPath.Length > 2) && _save == false)
-            {
-                var reply = MessageBox.Show(@"Сохранить проект?",
-                            @"Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (reply == DialogResult.Yes)
-                    SaveProject(_lastProjectPath);
-            }
+            if ((_lastPathKompas.Length <= 2) || (_lastMathCadPath.Length <= 2) || _save != false) return;
+            var reply = MessageBox.Show(@"Сохранить проект?",
+                @"Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (reply == DialogResult.Yes)
+                SaveProject(_lastProjectPath);
         }   // MainForm_FormClosing   
 
         #endregion
@@ -668,20 +582,18 @@ namespace KMintegrator
             {
                 Filter = @"КОМПАС-3D Сборки (*.a3d)|*.a3d"
             };
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                _save = false;
-                // Активируем Компас-3D
-                if (!InitKompas()) return;
-                KompasPath.Text = openFileDialog.FileName;
-                _lastPathKompas = KompasPath.Text;
-                // Открываем файл Компас-3D
-                if (!OpenFileKompas(_lastPathKompas))
-                    return;
-                KompasRefresh();
-                AddMathCadCombo();
-                AddKompasCombo();
-            }
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            _save = false;
+            // Активируем Компас-3D
+            if (!InitKompas()) return;
+            KompasPath.Text = openFileDialog.FileName;
+            _lastPathKompas = KompasPath.Text;
+            // Открываем файл Компас-3D
+            if (!OpenFileKompas(_lastPathKompas))
+                return;
+            KompasRefresh();
+            AddMathCadCombo();
+            AddKompasCombo();
 
         }
 
@@ -693,84 +605,63 @@ namespace KMintegrator
                 Filter =
                     @"All supported(*.xmcd;*.sm)|*.xmcd;*.sm|Файлы MathCAD 14 (*.xmcd)|*.xmcd|Файлы SMath Studio (*.sm)|*.sm|All Files|*.*"
             };
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            _save = false;
+            MathCadPath.Text = openFileDialog.FileName;
+            _lastMathCadPath = MathCadPath.Text;
+            var s = Path.GetExtension(openFileDialog.SafeFileName);
+            switch (s)
             {
-                _save = false;
-                MathCadPath.Text = openFileDialog.FileName;
-                _lastMathCadPath = MathCadPath.Text;
-                var s = Path.GetExtension(openFileDialog.SafeFileName);
-                switch (s)
-                {
-                    case ".xmcd":
-                        MathCadParser(_lastMathCadPath, false);
-                        break;
-                    case ".sm":
-                        SMathStudioParser(_lastMathCadPath, false);
-                        var st = new Settings();
-                        var programstart = st.GetSMathPath();
-                        if (programstart != "")
-                            //programstart +=   "\"" + LastMathCadPath + "\"";
-                            System.Diagnostics.Process.Start(programstart, _lastMathCadPath);
-                        else
-                            MessageBox.Show(@"Не указан путь к SMathStudio Запуск не возможен", @"Информация",
-                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                }
-
-                AddMathCadCombo();
-                AddKompasCombo();
+                case ".xmcd":
+                    MathCadParser(_lastMathCadPath, false);
+                    break;
+                case ".sm":
+                    SMathStudioParser(_lastMathCadPath, false);
+                    var st = new Settings();
+                    var programstart = st.GetSMathPath();
+                    if (programstart != "")
+                        //programstart +=   "\"" + LastMathCadPath + "\"";
+                        System.Diagnostics.Process.Start(programstart, _lastMathCadPath);
+                    else
+                        MessageBox.Show(@"Не указан путь к SMathStudio Запуск не возможен", @"Информация",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
             }
 
+            AddMathCadCombo();
+            AddKompasCombo();
         }
 
         private void Apply_Kompas_Click(object sender, EventArgs e)
         {
             _save = false;
             TableKompas3D.Update();
-
             // Записываем изменения из таблицы в файл Компас-3D, перестраиваем сборку
-            if (_kompas != null)
+            if (_kompas == null) return;
+            if (_doc3D == null) return;
+            if (_doc3D.IsDetail())
             {
-                if (_doc3D != null)
-                {
-                    if (_doc3D.IsDetail())
-                    {
-                        _kompas.ksError("Текущий документ должен быть сборкой");
-                        return;
-                    }
-                    var part = (ksPart)_doc3D.GetPart(-1);    // Выбор компонента: -1 главный(сборка), 0 первый(деталь)
-                    if (part != null)
-                    {
-                        // Работа с массивом внешних переменных
-                        var varCol = (ksVariableCollection)part.VariableCollection();
-                        if (varCol != null)
-                        {
-                            // Запись внешних переменных в Компас-3D
-                            var variable = (ksVariable)_kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
-                            if (variable == null) return;
-                            double g;
-                            for (var i = 0; i < varCol.GetCount(); i++)
-                            {
-                                variable = (ksVariable)varCol.GetByIndex(i);
-                                var d = TableKompas3D.Rows[i].Cells[1].Value.ToString();
-                                g = ConverToDouble(d);
-                                variable.value = g;
-                                // Запись комментария в Компас-3D, проблемы с конвертацией форматов, на данный момент не работает
-                                //variable.note = this.TableKompas3D.Rows[i].Cells[2].Value.ToString();
-                            }
-
-                            // Простое перестроение сборки, на данный момент не работает
-                            part.RebuildModel();
-                            // Перестроение сборки хитрым способом
-                            //_doc3D.Save();
-                            //_doc3D.close();
-                            //_doc3D = (ksDocument3D)_kompas.Document3D();
-                            //if (_doc3D != null) _doc3D.Open(_lastPathKompas);
-
-                        }
-                    }
-                }
+                _kompas.ksError("Текущий документ должен быть сборкой");
+                return;
             }
+            var part = (ksPart)_doc3D.GetPart(-1);    // Выбор компонента: -1 главный(сборка), 0 первый(деталь)
+            // Работа с массивом внешних переменных
+            var varCol = (ksVariableCollection) part?.VariableCollection();
+            if (varCol == null) return;
+            // Запись внешних переменных в Компас-3D
+            var variable = (ksVariable)_kompas.GetParamStruct((short)StructType2DEnum.ko_VariableParam);
+            if (variable == null) return;
+            for (var i = 0; i < varCol.GetCount(); i++)
+            {
+                variable = (ksVariable)varCol.GetByIndex(i);
+                var d = TableKompas3D.Rows[i].Cells[1].Value.ToString();
+                var g = ConverToDouble(d);
+                variable.value = g;
+                // Запись комментария в Компас-3D, проблемы с конвертацией форматов, на данный момент не работает
+                //variable.note = this.TableKompas3D.Rows[i].Cells[2].Value.ToString();
+            }
+            // Простое перестроение сборки, на данный момент не работает
+            part.RebuildModel();
         }
 
         private void Apply_MathCadClick(object sender, EventArgs e)
@@ -795,19 +686,14 @@ namespace KMintegrator
                 return;
             // Инициализация маткада выполняется если маткад еще не запущен
             // Это функциия возвражает значение
-            if (InitMathCad() == null) return;
-
-            // Открываем файл маткада, пересчитываем, заносим в таблицу вычисленные, закрываем
-            if (!OpenMathCad(_lastMathCadPath, true))
-                return;
+            
 
             // Считываем значение из файла маткада в таблицу
             if (!MathCadParser(_lastMathCadPath, true)) return;
             if (!MathCadParser(_lastMathCadPath, false)) return;
 
             AddKompasCombo();
-            // Просто открываем файл маткада
-            OpenMathCad(_lastMathCadPath, false);
+            // Просто открываем файл маткада  OpenMathCad(_lastMathCadPath, false);
         }
 
 
@@ -817,7 +703,7 @@ namespace KMintegrator
             // Проверяеме открыт ли файл Маткада
             if (_lastMathCadPath == "")
             {
-                MessageBox.Show("Откройте файл Маткада", "Внимание",
+                MessageBox.Show(@"Откройте файл Маткада", @"Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
@@ -825,7 +711,7 @@ namespace KMintegrator
             // Проверяеме открыт ли файл Маткада
             if (_lastPathKompas == "")
             {
-                MessageBox.Show("Откройте файл Компас-3D", "Внимание",
+                MessageBox.Show(@"Откройте файл Компас-3D", @"Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
@@ -844,107 +730,102 @@ namespace KMintegrator
         }
 
 
-
-        void Open_ProjectClick(object sender, EventArgs e)
+        private void Open_ProjectClick(object sender, EventArgs e)
         {
-            var OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Filter = "Документ XML (*.xml)|*.xml;";
-            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                _lastProjectPath = OpenFileDialog.FileName;
-                var file = new FileInfo(_lastProjectPath);
-                var filepath = file.DirectoryName;
-                ProjectPath.Text = _lastProjectPath;
-                if (!OpenProject(_lastProjectPath)) return;
+            var openFileDialog = new OpenFileDialog {Filter = @"Документ XML (*.xml)|*.xml;"};
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            _lastProjectPath = openFileDialog.FileName;
+            var file = new FileInfo(_lastProjectPath);
+            var filepath = file.DirectoryName;
+            ProjectPath.Text = _lastProjectPath;
+            if (!OpenProject(_lastProjectPath)) return;
 
-                // Активируем Компас-3D
-                if (!InitKompas()) return;
-                // Открываем файл Компас-3D
-                if (!OpenFileKompas(_lastPathKompas))
-                    return;
-                KompasRefresh();
-                if (!MathCadParser(_lastMathCadPath, false))
-                    return;
-                AddMathCadCombo();
-                AddKompasCombo();
-                _save = true;
-                // устанавливаем значения в верхней таблицы
-                if (TableMathCad.RowCount != VarTop.Count)
-                    return;
-                if (TableKompas3D.RowCount != VarBot.Count)
-                    return;
-                try
+            // Активируем Компас-3D
+            if (!InitKompas()) return;
+            // Открываем файл Компас-3D
+            if (!OpenFileKompas(_lastPathKompas))
+                return;
+            KompasRefresh();
+            if (!MathCadParser(_lastMathCadPath, false))
+                return;
+            AddMathCadCombo();
+            AddKompasCombo();
+            _save = true;
+            // устанавливаем значения в верхней таблицы
+            if (TableMathCad.RowCount != _varTop.Count)
+                return;
+            if (TableKompas3D.RowCount != _varBot.Count)
+                return;
+            try
+            {
+                //верхная таблица
+                for (var i = 0; i < TableMathCad.RowCount; i++)
                 {
-                    //верхная таблица
-                    for (var i = 0; i < TableMathCad.RowCount; i++)
-                    {
-                        TableMathCad.Rows[i].Cells[1].Value = VarTop[i].nameval;
-                        KompasName_ComboBox.DataGridView.Rows[i].Cells[5].Value = VarTop[i].val;
-                    }
-                    //нижная таблица
-                    for (var j = 0; j < TableKompas3D.RowCount; j++)
-                    {
-                        //if (this.TableKompas3D.Rows[j].Cells[1].Value.ToString() == VarBot[j].name) // если имена совпадают
-                        //{
-                        TableKompas3D.Rows[j].Cells[1].Value = VarBot[j].nameval;
-                        MathCadName_ComboBox.DataGridView.Rows[j].Cells[3].Value = VarBot[j].val;
-                        //}
-                    }
+                    TableMathCad.Rows[i].Cells[1].Value = _varTop[i].Nameval;
+                    KompasName_ComboBox.DataGridView.Rows[i].Cells[5].Value = _varTop[i].Val;
                 }
-                catch
+                //нижная таблица
+                for (var j = 0; j < TableKompas3D.RowCount; j++)
                 {
-                    MessageBox.Show("Ошибка при востановлении связей", "Ошибка",
+                    //if (this.TableKompas3D.Rows[j].Cells[1].Value.ToString() == VarBot[j].name) // если имена совпадают
+                    //{
+                    TableKompas3D.Rows[j].Cells[1].Value = _varBot[j].Nameval;
+                    MathCadName_ComboBox.DataGridView.Rows[j].Cells[3].Value = _varBot[j].Val;
+                    //}
+                }
+            }
+            catch
+            {
+                MessageBox.Show(@"Ошибка при востановлении связей", @"Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
 
         }
 
-        void Save_ProjectClick(object sender, EventArgs e)
+        private void Save_ProjectClick(object sender, EventArgs e)
         {
             if ((_lastPathKompas.Length > 2) && (_lastMathCadPath.Length > 2))
             {
                 SaveProject(_lastProjectPath);
             }
             else
-                MessageBox.Show("Нет данных для сохранения", "Информация",
+                MessageBox.Show(@"Нет данных для сохранения", @"Информация",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         } //     Save_ProjectClick  
 
-        void SaveAsClick(object sender, EventArgs e)
+        private void SaveAsClick(object sender, EventArgs e)
         {
             if ((_lastPathKompas.Length > 2) && (_lastMathCadPath.Length > 2))
             {
                 SaveProject("");
             }
             else
-                MessageBox.Show("Нет данных для сохранения", "Информация",
+                MessageBox.Show(@"Нет данных для сохранения", @"Информация",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
-
-        void LinkLabel1LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
             {
                 System.Diagnostics.Process.Start("mailto:o.kozintsev@googlemail.com");
             }
-            catch { };
+            catch
+            {
+                // ignored
+            }
         }
 
         private void EndEdit_TableKompas3D(object sender, DataGridViewCellEventArgs e)
         {
-            object obj;
-            int i;
-
             if (e.ColumnIndex == 3)
             {
-                obj = TableKompas3D.Rows[e.RowIndex].Cells[3].Value;
+                var obj = TableKompas3D.Rows[e.RowIndex].Cells[3].Value;
                 if (obj == null)
                     return;
-                i = MathCadName_ComboBox.Items.IndexOf(obj) - 1;
+                var i = MathCadName_ComboBox.Items.IndexOf(obj) - 1;
                 if (i == -1)
                     return;
                 TableKompas3D.Rows[e.RowIndex].Cells[1].Value =
@@ -953,16 +834,14 @@ namespace KMintegrator
             TableKompas3D.Update();
         }
 
-        void TableMathCadCellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void TableMathCadCellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            object obj;
-            int i;
             if (e.ColumnIndex == 5)
             {
-                obj = TableMathCad.Rows[e.RowIndex].Cells[5].Value;
+                var obj = TableMathCad.Rows[e.RowIndex].Cells[5].Value;
                 if (obj == null)
                     return;
-                i = KompasName_ComboBox.Items.IndexOf(obj) - 1;
+                var i = KompasName_ComboBox.Items.IndexOf(obj) - 1;
                 if (i == -1)
                     return;
                 TableMathCad.Rows[e.RowIndex].Cells[1].Value =
